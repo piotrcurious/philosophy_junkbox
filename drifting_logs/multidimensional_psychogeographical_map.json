@@ -1,0 +1,292 @@
+{
+  "title": "Multidimensional Psychogeographical & Epistemic Map of Drifting Logs",
+  "etiological_diagnosis": {
+    "title": "Etiological Listening Center Diagnosis (Ośrodek Etiologicznego Słuchania)",
+    "agent_perspectives": {
+      "Kępiński Metabolism Agent": {
+        "model_name": "Kępiński Information Metabolism",
+        "metabolic_state": "High entropy / Overload without value-integration capacity",
+        "information_input_rate": "High",
+        "value_hierarchy_status": "Fragmented under informational pressure",
+        "key_signals": [
+          "Stimulus overload without metabolic integration"
+        ],
+        "diagnostic": "The system receives massive data inputs but lacks shared value-metabolism channels to convert signals into goal revision."
+      },
+      "Ashby Variety Agent": {
+        "model_name": "Ashby Requisite Variety",
+        "environmental_variety": "Extremely High (unpredictable urban/rural spatial dynamics, supply chain, weather, digital noise)",
+        "regulator_variety": "Low / Monolithic (single-dimensional optimization: speed, throughput, revenue)",
+        "requisite_variety_gap": "Critical gap: Regulator cannot control system without inflating local noise or failing at edges",
+        "feedback_loops": [
+          "Closed positive feedback loop: housing dispersion -> road construction -> car dependency"
+        ],
+        "recommendation": "Increase meta-regulator variety; introduce epistemic brakes to interrupt closed feedback loops."
+      },
+      "Girardian Mimesis Agent": {
+        "model_name": "Girardian Mimetic Desire",
+        "triangular_model_sources": [
+          "Marketing/Advertising",
+          "Algorithmic recommendation",
+          "Neighbor/Peer mimesis"
+        ],
+        "copied_desires": [
+          "SUV ownership",
+          "Suburban house far from work",
+          "Subscription-based autonomy"
+        ],
+        "mimetic_conflict_points": [
+          "Resource competition on highways (A75)",
+          "Healthcare access bottlenecks"
+        ],
+        "landscape_effect": "Landscape becomes physical embodiment of copied desires (suburbs, parking lots, dealerships)."
+      },
+      "Debordian Spectacle Agent": {
+        "model_name": "Debordian Spectacle & Genealogy",
+        "spectacle_illusions": [
+          "Infrastructure presented as 'natural necessity'",
+          "Car dependency framed as individual freedom/choice",
+          "Automated systems presented as neutral optimization"
+        ],
+        "uncovered_genealogy": [
+          "Saint-Saturnin / A75 separation of residence and production",
+          "Historical urban planning choices favoring highway corridors over rail/transit",
+          "Monopolistic shift from car ownership to software subscription/control"
+        ],
+        "alienation_type": "Maximization of micro-decisions (wipers, route) while minimizing macro-control over life direction."
+      },
+      "Cybernetic Infrastructure Agent": {
+        "model_name": "Cybernetic Infrastructure & Connected Systems",
+        "nodes_identified": [
+          "Vehicle ECU / Firmware / OTA Updates",
+          "Road network / A75 corridor",
+          "Software platforms & paywalled feature subscriptions (e.g. heated seats)",
+          "Medical distribution networks (Haute-Garonne, Puy-de-Dôme)"
+        ],
+        "control_sources": [
+          "Cloud platform providers",
+          "OEM feature lock-in",
+          "Regional transit authorities"
+        ],
+        "system_shift": "Shift from vehicle as user tool to vehicle as active node in cloud economic platform."
+      },
+      "Anomaly Collector Agent": {
+        "model_name": "Anomaly & Counter-Model Collector",
+        "anomalies_detected": [
+          "89.6% car commuting in Saint-Saturnin despite proximity to nature",
+          "Time spent driving in rural areas increased by 45-47 min daily (2008-2019)",
+          "BMW seat heating subscription rejected by users as anomalous monetization",
+          "Closing psychiatric units due to lack of staff while mental health demand spikes"
+        ],
+        "counter_examples": [
+          "Local mobility demand (Mond'Arverne mobility plan) contradicting current highway routing"
+        ],
+        "rule": "Do not synthesize prematurely. Hold anomalies open until model adapts."
+      }
+    },
+    "voices_identified": {
+      "Engine / Infrastructure": "A75 Corridor, road networks, commuting distance requirements (18.6km avg)",
+      "Market / Platform": "Subscription features (BMW seats), dynamic pricing, platform lock-in",
+      "Mimesis / Advertising": "Desire for suburban housing & SUV lifestyle, copied consumption models",
+      "Algorithm / Cloud": "Objective function optimization (maximizing throughput, engagement, speed)",
+      "Metabolic Strain": "Psychiatric overburden, medical deserts (Haute-Garonne, Clermont region), burnout",
+      "Anomalies / Counter-signals": "Public transport demand in Mond'Arverne mobility plan, user pushback on sub models"
+    },
+    "anti_autofac_meta_regulator": {
+      "current_pipeline": "Goal -> Optimization -> Observation -> Value Assessment -> Goal Revision",
+      "metric_vs_goal_confusions": [
+        "Confusing 'number of kilometers driven / road capacity' with 'quality of mobility'",
+        "Confusing 'number of medical consultations / throughput' with 'population mental health'",
+        "Confusing 'data transmission speed & connectedness' with 'richness of information metabolism'"
+      ],
+      "epistemic_brake_status": "ENGAGED",
+      "epistemic_brake_reasons": [
+        "Second-order side effects (spatial fragmentation, isolation, medical shortages) exceed primary optimization gains.",
+        "Goal function was inherited from historic infrastructure choices rather than deliberately chosen.",
+        "Siloed specialists lack a common cockpit / meta-metabolism."
+      ],
+      "meta_goal_revision_proposal": "Shift goal function from maximizing throughput/mobility to maximizing local information metabolism capacity, spatial autonomy, and ecological feedback resolution."
+    },
+    "summary_conclusion": "The system is not a ship of fools, but a ship of specialists without a shared cockpit. The Etiological Listening Center reconstructs the genealogy of forces and applies an epistemic brake to prevent optimizing in the wrong direction."
+  },
+  "multidimensional_axes": {
+    "1_Spatial_Axis": [
+      "Saint-Saturnin (544 workers, 462 commuters out, 89.6% car dependency)",
+      "A75 Highway Corridor (Clermont-Ferrand metropolitan flow, 32km avg daily driving)",
+      "Montceau-les-Mines (Post-industrial transition node)",
+      "Belfort - Lure Corridor (Eastern industrial/rural nexus)",
+      "Aire de la Guye (Ecological drought/feedback observation)"
+    ],
+    "2_Temporal_Genealogy_Axis": [
+      "1941 Chantiers de la Jeunesse (Theix discipline heritage)",
+      "2008-2019 Rural Commuting Shift (+45-47 mins daily driving)",
+      "Present OTA / Subscription platform capitalism"
+    ],
+    "3_Mimetic_Spectacular_Axis": [
+      "Girardian copied desires (suburban sprawl, SUV mimesis)",
+      "Debordian spectacle illusion (framing forced motorization as individual freedom)"
+    ],
+    "4_Information_Metabolism_Axis": [
+      "Kępiński metabolic strain (high input speed, low value-integration capacity)",
+      "Psychiatric deserts (loss of societal metabolic resolution in Haute-Garonne & Puy-de-Dôme)"
+    ],
+    "5_Cybernetic_Control_Axis": [
+      "Anti-Autofac epistemic brake engaged",
+      "Requisite variety gap identified (Ashby law)",
+      "Shift from human tool to cloud platform node"
+    ]
+  },
+  "extracted_drift_nodes": [
+    {
+      "id": "Saint-Saturnin",
+      "category": "Spatial Node",
+      "stats": {
+        "workers_living": 544,
+        "workers_commuting_out": 462,
+        "local_jobs": 223,
+        "car_dependency_pct": 89.6,
+        "transit_pct": 0.7
+      },
+      "metabolic_phenomenon": "Spatial separation of living and production; mandatory returning to work system via highway.",
+      "control_source": "Highway Infrastructure & Spatial Planning"
+    },
+    {
+      "id": "A75 Highway Corridor",
+      "category": "Spatial / Cybernetic Corridor",
+      "stats": {
+        "daily_driving_km_avg": 32,
+        "rural_driving_increase_min": "45-47 min daily (2008-2019)",
+        "commute_dist_increase_km": "15.5 to 18.6km"
+      },
+      "metabolic_phenomenon": "Not a boundary between nature and city, but an information & labor conduit connecting two sides of same system.",
+      "control_source": "Positive feedback loop: Housing dispersion <-> Road construction <-> Car dependency"
+    },
+    {
+      "id": "Montceau-les-Mines",
+      "category": "Spatial Node",
+      "stats": {
+        "context": "Post-industrial mining basin & memory node"
+      },
+      "metabolic_phenomenon": "Deindustrialization memory -> systemic transformation -> transition to automated/connected economy.",
+      "control_source": "Historical industrial trajectory"
+    },
+    {
+      "id": "Belfort-Lure Drift",
+      "category": "Spatial Node / Route",
+      "stats": {
+        "context": "Eastern France industrial/rural nexus"
+      },
+      "metabolic_phenomenon": "Intersection of industrial decay, rural commuting, and technological dependence.",
+      "control_source": "Regional logistics and industrial infrastructure"
+    },
+    {
+      "id": "Aire de la Guye",
+      "category": "Spatial / Environmental Node",
+      "stats": {
+        "context": "Highway service & ecological observation point"
+      },
+      "metabolic_phenomenon": "Drought & environmental stress triggering feedback correction loops.",
+      "control_source": "Climatic & ecological constraints"
+    },
+    {
+      "id": "Connected Car / Subscription Economy",
+      "category": "Cybernetic / Platform Node",
+      "stats": {
+        "examples": [
+          "BMW heated seat subscription rejection",
+          "OTA firmware updates",
+          "Paywalled ECU features"
+        ]
+      },
+      "metabolic_phenomenon": "Vehicle shifts from human tool to active node in cloud economic platform.",
+      "control_source": "Cloud Platforms & Digital Monopolies"
+    },
+    {
+      "id": "Psychiatric & Medical Deserts",
+      "category": "Metabolic / Healthcare Strain Node",
+      "stats": {
+        "regions": [
+          "Haute-Garonne",
+          "Puy-de-Dôme"
+        ],
+        "symptom": "Lack of doctors/psychiatrists causing closed emergency units"
+      },
+      "metabolic_phenomenon": "Loss of societal metabolic resolution; inability to diagnose/process systemic stress.",
+      "control_source": "Resource allocation & administrative silos"
+    },
+    {
+      "id": "Youth / Counterculture Inertia",
+      "category": "Social / Mimetic Node",
+      "stats": {
+        "youth_anhedonia_fatigue": "58% lack of energy, 44% concentration difficulty"
+      },
+      "metabolic_phenomenon": "Energy captured by digital platforms; absence of counter-cultural physical density.",
+      "control_source": "Attention economy & mimetic digital media"
+    }
+  ],
+  "extracted_feedback_edges": [
+    [
+      "Saint-Saturnin",
+      "A75 Highway Corridor",
+      {
+        "label": "Feeds 89.6% commuters into"
+      }
+    ],
+    [
+      "A75 Highway Corridor",
+      "Connected Car / Subscription Economy",
+      {
+        "label": "Requires automated/connected transit"
+      }
+    ],
+    [
+      "Connected Car / Subscription Economy",
+      "Youth / Counterculture Inertia",
+      {
+        "label": "Extracts attention & subscription capital"
+      }
+    ],
+    [
+      "Psychiatric & Medical Deserts",
+      "Saint-Saturnin",
+      {
+        "label": "Reduces regional metabolic support"
+      }
+    ],
+    [
+      "Montceau-les-Mines",
+      "Belfort-Lure Drift",
+      {
+        "label": "Historical industrial continuum"
+      }
+    ],
+    [
+      "Aire de la Guye",
+      "A75 Highway Corridor",
+      {
+        "label": "Ecological anomaly checkpoint on highway"
+      }
+    ],
+    [
+      "Youth / Counterculture Inertia",
+      "Psychiatric & Medical Deserts",
+      {
+        "label": "Signals burnout & fatigue"
+      }
+    ]
+  ],
+  "completed_missing_feedback_loops": [
+    {
+      "loop_name": "Spatial Dispersion Feedback",
+      "description": "Housing dispersion -> Distance increase -> Car requirement -> Public transit deficit -> Highway expansion justification -> Further housing dispersion."
+    },
+    {
+      "loop_name": "Attention & Metabolic Exhaustion Feedback",
+      "description": "Digital stimulus overload -> Decreased metabolic value-integration -> Increased exhaustion/anhedonia -> Reliance on automated platforms -> Medical desert incapacity to diagnose."
+    },
+    {
+      "loop_name": "Anti-Autofac Epistemic Brake",
+      "description": "Goal Optimization -> Observation -> Value Assessment -> Epistemic Brake -> Target Function Revision."
+    }
+  ]
+}
