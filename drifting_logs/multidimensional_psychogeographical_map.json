@@ -9,15 +9,15 @@
         "information_input_rate": "High",
         "value_hierarchy_status": "Fragmented under informational pressure",
         "key_signals": [
-          "Stimulus overload without metabolic integration"
+          "Automotive mobility as externalized information metabolism"
         ],
         "diagnostic": "The system receives massive data inputs but lacks shared value-metabolism channels to convert signals into goal revision."
       },
       "Ashby Variety Agent": {
         "model_name": "Ashby Requisite Variety",
-        "environmental_variety": "Extremely High (unpredictable urban/rural spatial dynamics, supply chain, weather, digital noise)",
-        "regulator_variety": "Low / Monolithic (single-dimensional optimization: speed, throughput, revenue)",
-        "requisite_variety_gap": "Critical gap: Regulator cannot control system without inflating local noise or failing at edges",
+        "environmental_variety": "Extremely High (unpredictable spatial dynamics, supply chain, weather)",
+        "regulator_variety": "Low / Monolithic (single-dimensional optimization: speed, throughput)",
+        "requisite_variety_gap": "Critical gap: Regulator cannot control system without inflating local noise",
         "feedback_loops": [
           "Closed positive feedback loop: housing dispersion -> road construction -> car dependency"
         ],
@@ -28,7 +28,7 @@
         "triangular_model_sources": [
           "Marketing/Advertising",
           "Algorithmic recommendation",
-          "Neighbor/Peer mimesis"
+          "Peer mimesis"
         ],
         "copied_desires": [
           "SUV ownership",
@@ -39,34 +39,30 @@
           "Resource competition on highways (A75)",
           "Healthcare access bottlenecks"
         ],
-        "landscape_effect": "Landscape becomes physical embodiment of copied desires (suburbs, parking lots, dealerships)."
+        "landscape_effect": "Landscape becomes physical embodiment of copied desires."
       },
       "Debordian Spectacle Agent": {
         "model_name": "Debordian Spectacle & Genealogy",
         "spectacle_illusions": [
           "Infrastructure presented as 'natural necessity'",
-          "Car dependency framed as individual freedom/choice",
-          "Automated systems presented as neutral optimization"
+          "Car dependency framed as individual freedom/choice"
         ],
         "uncovered_genealogy": [
           "Saint-Saturnin / A75 separation of residence and production",
-          "Historical urban planning choices favoring highway corridors over rail/transit",
-          "Monopolistic shift from car ownership to software subscription/control"
+          "Historical urban planning choices favoring highway corridors over rail"
         ],
-        "alienation_type": "Maximization of micro-decisions (wipers, route) while minimizing macro-control over life direction."
+        "alienation_type": "Maximization of micro-decisions while minimizing macro-control over life direction."
       },
       "Cybernetic Infrastructure Agent": {
         "model_name": "Cybernetic Infrastructure & Connected Systems",
         "nodes_identified": [
-          "Vehicle ECU / Firmware / OTA Updates",
-          "Road network / A75 corridor",
-          "Software platforms & paywalled feature subscriptions (e.g. heated seats)",
-          "Medical distribution networks (Haute-Garonne, Puy-de-Dôme)"
+          "Vehicle ECU / OTA",
+          "A75 Corridor",
+          "Paywalled feature subscriptions"
         ],
         "control_sources": [
           "Cloud platform providers",
-          "OEM feature lock-in",
-          "Regional transit authorities"
+          "OEM feature lock-in"
         ],
         "system_shift": "Shift from vehicle as user tool to vehicle as active node in cloud economic platform."
       },
@@ -74,12 +70,10 @@
         "model_name": "Anomaly & Counter-Model Collector",
         "anomalies_detected": [
           "89.6% car commuting in Saint-Saturnin despite proximity to nature",
-          "Time spent driving in rural areas increased by 45-47 min daily (2008-2019)",
-          "BMW seat heating subscription rejected by users as anomalous monetization",
-          "Closing psychiatric units due to lack of staff while mental health demand spikes"
+          "BMW seat heating subscription rejected by users as anomalous monetization"
         ],
         "counter_examples": [
-          "Local mobility demand (Mond'Arverne mobility plan) contradicting current highway routing"
+          "Local mobility demand contradicting current highway routing"
         ],
         "rule": "Do not synthesize prematurely. Hold anomalies open until model adapts."
       }
