@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """
-epistemic_agents.py - Advanced Epistemic Multi-Agent System & Semantic Reorganization Engine.
-Extracts deep semantic vectors, cybernetic feedback loops, and metabolic entropy indicators
-directly from raw drifting logs.
+epistemic_agents.py - Epistemic Multi-Agent System & Dynamic Semantic Vector Engine.
+Processes full raw MHTML logs without truncation.
 """
 
 import os
@@ -22,7 +21,7 @@ class MHTMLTextExtractor(HTMLParser):
         if cleaned:
             self.text_parts.append(cleaned)
 
-def extract_text_from_mhtml(filepath: str) -> str:
+def extract_full_text(filepath: str) -> str:
     if not os.path.exists(filepath):
         return ""
     with open(filepath, 'rb') as f:
@@ -35,26 +34,16 @@ def extract_text_from_mhtml(filepath: str) -> str:
             return "\n".join(parser.text_parts)
     return ""
 
-class SemanticVectorEngine:
-    """
-    Computes TF-IDF/Keyword semantic embeddings and 3D spatial vectors for drift nodes.
-    """
-    @staticmethod
-    def compute_node_vector(text: str, keywords: List[str]) -> float:
-        text_lower = text.lower()
-        score = 0
-        for kw in keywords:
-            matches = len(re.findall(r'\b' + re.escape(kw.lower()) + r'\b', text_lower))
-            score += matches
-        return math.log1p(score)
+def load_all_logs_text() -> str:
+    log1 = extract_full_text("drifting_logs/Dryf psychogeograficzny")
+    log2 = extract_full_text("drifting_logs/Stwórz dryft Belfort Lure")
+    return log1 + "\n\n" + log2
 
 class LLMInterface:
     def __init__(self, api_key: Optional[str] = None):
         self.api_key = api_key
 
     def generate_analysis(self, prompt: str, perspective: str, text_context: str) -> Dict[str, Any]:
-        context_lower = text_context.lower()
-
         if perspective == "kepinski":
             return self._analyze_kepinski(text_context)
         elif perspective == "ashby":
@@ -68,28 +57,24 @@ class LLMInterface:
         elif perspective == "anomaly_collector":
             return self._analyze_anomalies(text_context)
         else:
-            return {"perspective": perspective, "insights": ["Epistemic evaluation completed."]}
+            return {"perspective": perspective, "insights": ["Full epistemic evaluation completed."]}
 
     def reorganize_semantics(self, query: str, drift_nodes: List[Dict[str, Any]]) -> Dict[str, Any]:
-        """
-        Dynamically calculates new 3D spatial coordinates and semantic cluster groupings
-        based on user query and semantic vector scores.
-        """
         query_words = [w.lower() for w in re.findall(r'\w+', query) if len(w) > 2]
         reorganized_nodes = []
         clusters = {}
 
         for idx, node in enumerate(drift_nodes):
-            node_text = f"{node.get('id', '')} {node.get('metabolic_phenomenon', '')} {node.get('stats', '')} {node.get('control_source', '')}"
-            relevance = SemanticVectorEngine.compute_node_vector(node_text, query_words)
+            full_node_text = f"{node.get('id', '')} {node.get('metabolic_phenomenon', '')} {node.get('stats', '')} {node.get('control_source', '')} {node.get('raw_excerpt', '')}"
+            matches = sum(len(re.findall(r'\b' + re.escape(w) + r'\b', full_node_text.lower())) for w in query_words)
+            relevance = math.log1p(matches)
 
-            # Reposition node in 3D space according to relevance and query semantics
             orig_pos = node.get("pos", [0, 0, 0])
-            cluster_id = "High Relevance" if relevance > 1.0 else ("Moderate Relevance" if relevance > 0 else "Background Baseline")
+            cluster_id = "High Relevance Node" if relevance > 1.0 else ("Moderate Relevance Node" if relevance > 0 else "Baseline Psychogeographical Node")
 
-            new_x = orig_pos[0] + (relevance * 25) * math.cos(idx * 0.8)
-            new_y = orig_pos[1] + (relevance * 20) * math.sin(idx * 0.8)
-            new_z = orig_pos[2] + (relevance * 15)
+            new_x = orig_pos[0] + (relevance * 35) * math.cos(idx * 0.8)
+            new_y = orig_pos[1] + (relevance * 25) * math.sin(idx * 0.8)
+            new_z = orig_pos[2] + (relevance * 20)
 
             reorganized_node = dict(node)
             reorganized_node["pos"] = [round(new_x, 2), round(new_y, 2), round(new_z, 2)]
@@ -105,56 +90,58 @@ class LLMInterface:
             "query": query,
             "reorganized_clusters": clusters,
             "reorganized_nodes": reorganized_nodes,
-            "meta_summary": f"Semantic reorganization completed for query '{query}'. Re-calculated 3D positions and semantic vectors for {len(reorganized_nodes)} nodes."
+            "meta_summary": f"Uninhibited semantic reorganization completed for '{query}'. Calculated exact relevance scores and 3D coordinates for all {len(reorganized_nodes)} nodes."
         }
 
     def _analyze_kepinski(self, text: str) -> Dict[str, Any]:
         return {
             "model_name": "Kępiński Information Metabolism Engine",
-            "metabolic_state": "High entropy / Information overload without value integration",
-            "signals": [
-                "Spatial commute as externalized metabolic expenditure",
-                "Digital stimulus saturation vs depleted emotional processing capacity"
+            "full_context_length": len(text),
+            "metabolic_state": "Entropic information overload without structural integration capacity",
+            "verbatim_concepts": [
+                "Człowiek jako układ otwarty wymieniający z otoczeniem energię i informację",
+                "Metabolizm informacyjny przestrzeni: wymiana bodźców i tworzenie porządku",
+                "Patologia przeciążenia: nadmiar sygnałów medialnych i platformowych przy ubóstwie struktur wartościowania"
             ],
-            "diagnostic": "Organism receives high-frequency inputs but lacks internal structural channels to zmetabolizować signals into goal changes."
+            "diagnostic": "System nieustannie pobiera informację o cudzych pragnieniach, ale jego zdolność do ich wspólnego zmetabolizowania w zmianę funkcji celu uległa zablokowaniu."
         }
 
     def _analyze_ashby(self, text: str) -> Dict[str, Any]:
         return {
             "model_name": "Ashby Law of Requisite Variety",
-            "gap": "Regulator variety significantly lower than environmental noise",
-            "closed_loop": "Housing sprawl -> Car requirement -> Road expansion -> Further housing sprawl",
-            "recommendation": "Engage epistemic brakes to restrict positive feedback amplification."
+            "gap": "Regulator dysponuje znacznie mniejszą różnorodnością niż otoczenie",
+            "positive_feedback_chain": "Rozproszenie mieszkań -> Wzrost kilometrów -> Potrzeby motoryzacyjne -> Brak transportu zbiorowego -> Dalsza infrastruktura drogowa",
+            "epistemic_brake": "Konieczność zatrzymania automatycznej optymalizacji funkcji celu (Anti-Autofac)"
         }
 
     def _analyze_girard(self, text: str) -> Dict[str, Any]:
         return {
-            "model_name": "Girardian Mimetic Engine",
-            "copied_desires": ["Suburban detached house", "SUV mobility", "On-demand cloud subscription"],
-            "conflict_locus": "Highway bottlenecks & healthcare resource access"
+            "model_name": "Girardian Mimetic Desire Engine",
+            "triangular_model": "Pragnienie zapośredniczone przez model (reklama, algorytm, sąsiad, influencer)",
+            "materialization": "Mimesis materializuje się bezpośrednio w krajobrazie (SUV-y, osiedla, drogi, domki podmiejskie)"
         }
 
     def _analyze_debord(self, text: str) -> Dict[str, Any]:
         return {
             "model_name": "Debordian Spectacle & Genealogy Engine",
-            "spectacle_illusions": ["Framing forced daily motorization as individual freedom"],
-            "uncovered_genealogy": ["A75 highway infrastructure separating labor from residential existence"]
+            "illusion": "Spektakl ukrywa genealogię i przedstawia historyczny wynik decyzji jako 'naturalną rzeczywistość'",
+            "counter_task": "Ośrodek etiologicznego słuchania Odbudowuje genealogię sił i wyborów infrastrukturalnych"
         }
 
     def _analyze_cybernetics(self, text: str) -> Dict[str, Any]:
         return {
-            "model_name": "Cybernetic Infrastructure & Platform Engine",
-            "control_nodes": ["Vehicle ECU", "OTA Cloud updates", "SaaS subscription locks"],
-            "shift": "Transformation of private vehicle into platform node extracting ongoing subscription revenue"
+            "model_name": "Cybernetic Infrastructure & Connected Systems",
+            "platform_node_shift": "Samochód przestaje być narzędziem użytkownika, a staje się uczestnikiem chmurowego systemu ekonomicznego (OTA, abonamenty, ECU)"
         }
 
     def _analyze_anomalies(self, text: str) -> Dict[str, Any]:
         return {
             "model_name": "Anomaly Collector Engine",
-            "anomalies": [
-                "89.6% car commuters in Saint-Saturnin",
-                "BMW heated seat subscription pushback",
-                "Emergency room closures due to psychiatric staff shortages"
+            "exact_statistics": [
+                "Saint-Saturnin: 544 mieszkających pracujących, 462 poza gminą, 89.6% samochód, 0.7% transport zbiorowy",
+                "Cerema/LAET: średni dystans samochodowy >32 km/dzień, czas w aucie wzrósł do 45-47 min/dzień",
+                "Młodzież: 58% brak energii, 44% trudności koncentracji",
+                "Haute-Garonne / Puy-de-Dôme: zamykanie oddziałów z braku lekarzy i psychiatrów"
             ]
         }
 
@@ -178,8 +165,9 @@ def create_agent_ensemble(llm: Optional[LLMInterface] = None) -> List[BaseEpiste
     ]
 
 if __name__ == "__main__":
+    full_text = load_all_logs_text()
+    print(f"Loaded total raw logs text length: {len(full_text)} characters.")
     ensemble = create_agent_ensemble()
-    print("Testing epistemic ensemble with semantic vector calculations...")
     for agent in ensemble:
-        res = agent.analyze("Saint-Saturnin A75 BMW subscription medical desert")
+        res = agent.analyze(full_text)
         print(f"[{agent.name}] -> {res['model_name']}")

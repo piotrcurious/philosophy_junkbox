@@ -101,7 +101,7 @@
         #inspector-panel {
             top: 20px;
             right: 20px;
-            width: 380px;
+            width: 420px;
             max-height: calc(100vh - 240px);
             overflow-y: auto;
         }
@@ -124,6 +124,10 @@
             margin-bottom: 10px;
             border-left: 3px solid #38bdf8;
         }
+        .data-card.excerpt-card {
+            border-left-color: #f59e0b;
+            background: rgba(120, 53, 15, 0.2);
+        }
         .data-card h3 {
             font-size: 0.9rem;
             color: #f1f5f9;
@@ -131,13 +135,19 @@
         }
         .data-card p {
             font-size: 0.8rem;
-            color: #94a3b8;
-            line-height: 1.3;
+            color: #cbd5e1;
+            line-height: 1.4;
+        }
+        .data-card blockquote {
+            font-style: italic;
+            font-size: 0.8rem;
+            color: #fcd34d;
+            line-height: 1.4;
         }
         #llm-panel {
             bottom: 20px;
             right: 20px;
-            width: 380px;
+            width: 420px;
         }
         #llm-output {
             font-size: 0.8rem;
@@ -146,7 +156,7 @@
             border: 1px solid #1e293b;
             border-radius: 6px;
             padding: 10px;
-            max-height: 120px;
+            max-height: 140px;
             overflow-y: auto;
             margin-top: 8px;
             white-space: pre-wrap;
@@ -221,7 +231,7 @@
     <div id="inspector-panel" class="ui-panel">
         <h2 style="font-size:1rem; color:#f8fafc; margin-bottom:8px;" id="inspector-title">Node Inspector</h2>
         <div id="inspector-content">
-            <p style="font-size:0.8rem; color:#64748b;">Click on any 3D node sphere or select from list below to inspect its properties, statistics, and control genealogy.</p>
+            <p style="font-size:0.8rem; color:#64748b;">Click on any 3D node sphere or select from list below to inspect its full properties, verbatim excerpts, and control genealogy.</p>
             <div id="node-buttons-list" style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px;"></div>
         </div>
     </div>
@@ -241,72 +251,80 @@
                     category: "Spatial Node",
                     pos: [-180, 60, 40],
                     color: "#38bdf8",
-                    stats: "544 workers living, 462 commuting out, 89.6% car dependency, 0.7% transit",
-                    metabolic: "Spatial separation of living and production; forced return to work via highway.",
-                    genealogy: "Post-war suburbanization & A75 corridor development."
+                    stats: "2023: 544 workers living in commune, 462 commuting outside. Local jobs: 223. Car dependency: 89.6%, Public Transit: 0.7%",
+                    metabolic: "Spatial separation of living and production; mandatory returning to work system via highway.",
+                    genealogy: "Post-war suburbanization & A75 corridor development.",
+                    excerpt: "W Saint-Saturnin pierwszy szczegół, który zmienia cały układ kalejdoskopu, jest banalny: 2023: 544 osoby mieszkające tutaj pracują. 462 pracują poza gminą. W samej gminie jest 223 miejsc pracy. Do pracy 89.6% z nich wybiera samochód, 0.7% transport zbiorowy."
                 },
                 {
                     id: "A75 Highway Corridor",
                     category: "Spatial Node",
                     pos: [-60, 140, -10],
                     color: "#38bdf8",
-                    stats: "32km avg daily driving, +45-47 min rural driving increase (2008-2019)",
+                    stats: "Cerema/LAET study: Rural car travel >80% trips, >90% km. Avg daily driving >32km. Driving time increased to 45-47 min daily (2008-2019). Commute dist: 15.5 to 18.6km.",
                     metabolic: "Labor & energy conduit connecting divided life zones.",
-                    genealogy: "1970s highway expansion masterplan."
+                    genealogy: "1970s highway expansion masterplan.",
+                    excerpt: "Szum A75 nie jest granicą pomiędzy cywilizacją i naturą. Jest kanałem łączącym dwie części tej samej organizacji życia. Cerema: średni dystans samochodowy przekracza 32 km dziennie na osobę, a czas w samochodzie na terenach wiejskich wzrósł do 45-47 minut dziennie."
                 },
                 {
                     id: "Montceau-les-Mines",
                     category: "Spatial Node",
                     pos: [120, 40, -80],
                     color: "#38bdf8",
-                    stats: "Post-industrial mining basin & memory node",
-                    metabolic: "Industrial memory shifting into automated regional logistics.",
-                    genealogy: "19th-century coal basin to modern logistics network."
+                    stats: "Post-industrial mining basin & memory node transition point",
+                    metabolic: "Industrial memory shifting into automated regional logistics and digital platform management.",
+                    genealogy: "19th-century coal basin to modern logistics network.",
+                    excerpt: "Montceau-les-Mines -> dalej: 'Metabolizm informacyjny statku szaleńców'. Kępiński pozwala przesunąć pytanie z 'co system robi?' na 'jak system metabolizuje informację o tym, co robi?'"
                 },
                 {
                     id: "Belfort-Lure Drift",
                     category: "Spatial Node",
                     pos: [200, -30, -20],
                     color: "#38bdf8",
-                    stats: "Eastern industrial/rural nexus",
-                    metabolic: "Intersection of industrial decay and car-dependent rural commuting.",
-                    genealogy: "Alstom/industrial belt regional shift."
+                    stats: "Eastern France industrial/rural nexus corridor",
+                    metabolic: "Intersection of industrial decay, rural commuting, and technological dependence.",
+                    genealogy: "Alstom/industrial belt regional shift.",
+                    excerpt: "Wyobraź sobie człowieka na schodach wiejskiego domu. Do jego układu nerwowego w ciągu kilku minut wchodzi: wojna, reklama, seks, katastrofa klimatyczna, polityk, bitcoin..."
                 },
                 {
                     id: "Aire de la Guye",
                     category: "Spatial Node",
                     pos: [40, 160, -40],
                     color: "#38bdf8",
-                    stats: "Highway service area & ecological observation point",
+                    stats: "Highway service area & ecological anomaly observation point",
                     metabolic: "Drought and environmental stress anomaly checkpoint.",
-                    genealogy: "A6/A75 service stop infrastructure."
+                    genealogy: "A6/A75 service stop infrastructure.",
+                    excerpt: "Aire de la Guye: susza -> korekta. Szukaj miejsc, w których system dowiaduje się czegoś o sobie."
                 },
                 {
                     id: "Connected Car / Platform",
                     category: "Cybernetic / Platform Node",
                     pos: [-100, -120, 80],
                     color: "#f97316",
-                    stats: "Paywalled ECU features, BMW heated seat sub rejection, OTA updates",
-                    metabolic: "Vehicle transformed from user tool into active node in cloud revenue platform.",
-                    genealogy: "SaaS monetization applied to physical transport."
+                    stats: "BMW heated seat subscription pushback, OTA firmware updates, paywalled ECU functions",
+                    metabolic: "Vehicle shifts from human tool to active node in cloud revenue platform.",
+                    genealogy: "SaaS monetization applied to physical transport.",
+                    excerpt: "BMW próbowało sprzedawać w modelu subskrypcyjnym podgrzewanie siedzeń. W którym momencie samochód przestaje być narzędziem użytkownika, a staje się uczestnikiem systemu?"
                 },
                 {
                     id: "Psychiatric & Medical Deserts",
                     category: "Metabolic / Healthcare Strain Node",
                     pos: [80, -140, 40],
                     color: "#22c55e",
-                    stats: "Haute-Garonne & Puy-de-Dôme: closed emergency units due to doctor shortage",
-                    metabolic: "Loss of societal metabolic resolution; inability to process systemic strain.",
-                    genealogy: "Administrative austerity & rural medical desertification."
+                    stats: "Haute-Garonne & Puy-de-Dôme IGAS report: Emergency units closed due to doctor shortages",
+                    metabolic: "Loss of societal metabolic resolution; inability to diagnose/process systemic stress.",
+                    genealogy: "Administrative austerity & rural medical desertification.",
+                    excerpt: "Raport IGAS dotyczący Haute-Garonne dokumentował sytuacje, w których brakowało lekarzy. W tym miejscu 'brak psychiatry' okazuje się problemem cybernetycznym."
                 },
                 {
                     id: "Youth / Counterculture Inertia",
                     category: "Social / Mimetic Node",
                     pos: [160, -80, 100],
                     color: "#e11d48",
-                    stats: "58% lack of energy, 44% concentration difficulty",
-                    metabolic: "Energy captured by digital platforms; lack of physical counter-cultural density.",
-                    genealogy: "Attention economy saturation."
+                    stats: "Youth symptoms: 58% lack of energy, 44% concentration difficulty",
+                    metabolic: "Energy captured by digital platforms; absence of physical counter-cultural density.",
+                    genealogy: "Attention economy saturation.",
+                    excerpt: "Najczęściej zgłaszanymi objawami są brak energii (58%) i trudności koncentracji (44%). Energii nie brakuje w ogóle, ale trafia w kanały platform cyfrowych."
                 }
             ],
             edges: [
@@ -337,7 +355,6 @@
         let lastMouseX = 0;
         let lastMouseY = 0;
 
-        // Attempt fetching dynamic node data from backend server if available
         async function fetchBackendData() {
             try {
                 const res = await fetch('/api/data');
@@ -347,9 +364,7 @@
                         console.log("Loaded dynamic node data from API server.");
                     }
                 }
-            } catch (err) {
-                console.log("Using baseline dynamic data buffer.");
-            }
+            } catch (err) {}
         }
         fetchBackendData();
 
@@ -375,7 +390,6 @@
             ctx.fillStyle = "#0b0f19";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Draw grid background lines
             ctx.strokeStyle = "rgba(51, 65, 85, 0.3)";
             ctx.lineWidth = 1;
             for (let i = -400; i <= 400; i += 80) {
@@ -390,7 +404,6 @@
             const visibleNodes = driftData.nodes.filter(n => activeFilter === "all" || n.category === activeFilter);
             const visibleIds = new Set(visibleNodes.map(n => n.id));
 
-            // Draw connections
             driftData.edges.forEach(edge => {
                 if (visibleIds.has(edge.source) && visibleIds.has(edge.target)) {
                     let sNode = driftData.nodes.find(n => n.id === edge.source);
@@ -408,18 +421,15 @@
                 }
             });
 
-            // Sort nodes by Z depth for realistic 3D occlusion
             const projectedNodes = visibleNodes.map(node => {
                 let proj = project3D(...node.pos);
                 return { ...node, proj: proj };
             }).sort((a, b) => b.proj.z - a.proj.z);
 
-            // Draw 3D Spheres & Labels
             projectedNodes.forEach(node => {
                 let p = node.proj;
                 let radius = Math.max(14, 20 * p.scale);
 
-                // Glow ring
                 let grad = ctx.createRadialGradient(p.x, p.y, radius * 0.2, p.x, p.y, radius * 2.0);
                 grad.addColorStop(0, node.color);
                 grad.addColorStop(1, "transparent");
@@ -428,13 +438,11 @@
                 ctx.arc(p.x, p.y, radius * 2.0, 0, Math.PI * 2);
                 ctx.fill();
 
-                // Solid Sphere
                 ctx.fillStyle = node.color;
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
                 ctx.fill();
 
-                // Text Label
                 ctx.fillStyle = "#ffffff";
                 ctx.font = `bold ${Math.max(11, 13 * p.scale)}px sans-serif`;
                 ctx.fillText(node.id, p.x + radius + 8, p.y + 4);
@@ -469,6 +477,10 @@
                 <div class="data-card">
                     <h3>Genealogy & Historical Root</h3>
                     <p>${node.genealogy}</p>
+                </div>
+                <div class="data-card excerpt-card">
+                    <h3>Verbatim Drift Log Excerpt</h3>
+                    <blockquote>"${node.excerpt || node.raw_excerpt}"</blockquote>
                 </div>
                 <div id="node-buttons-list" style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px;"></div>
             `;
@@ -537,7 +549,7 @@
         });
 
         document.getElementById('extract-data-btn').addEventListener('click', () => {
-            alert(`Extracted data for ${driftData.nodes.length} nodes to research buffer.`);
+            alert(`Extracted full unedited data for ${driftData.nodes.length} nodes to research buffer.`);
         });
 
         document.getElementById('llm-reorganize-btn').addEventListener('click', async () => {
@@ -567,7 +579,6 @@
                 }
             } catch (err) {}
 
-            // Client-side fallback if server offline
             setTimeout(() => {
                 outputEl.textContent = `[Etiological Meta-Regulator Agent]: Reorganized node semantics according to '${prompt}'.\n\n- Re-grouped Saint-Saturnin & A75 under 'Corridor Entrapment'.\n- Re-aligned Connected Car & Medical Desert under 'Metabolic Deficit Axis'.\n- 3D spatial node coordinates updated.`;
                 driftData.nodes.forEach(node => {
