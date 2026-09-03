@@ -4,78 +4,54 @@
     "title": "Etiological Listening Center Diagnosis (Ośrodek Etiologicznego Słuchania)",
     "agent_perspectives": {
       "Kępiński Metabolism Agent": {
-        "model_name": "Kępiński Information Metabolism",
-        "metabolic_state": "High entropy / Overload without value-integration capacity",
-        "information_input_rate": "High",
-        "value_hierarchy_status": "Fragmented under informational pressure",
-        "key_signals": [
-          "Automotive mobility as externalized information metabolism"
+        "model_name": "Kępiński Information Metabolism Engine",
+        "metabolic_state": "High entropy / Information overload without value integration",
+        "signals": [
+          "Spatial commute as externalized metabolic expenditure",
+          "Digital stimulus saturation vs depleted emotional processing capacity"
         ],
-        "diagnostic": "The system receives massive data inputs but lacks shared value-metabolism channels to convert signals into goal revision."
+        "diagnostic": "Organism receives high-frequency inputs but lacks internal structural channels to zmetabolizować signals into goal changes."
       },
       "Ashby Variety Agent": {
-        "model_name": "Ashby Requisite Variety",
-        "environmental_variety": "Extremely High (unpredictable spatial dynamics, supply chain, weather)",
-        "regulator_variety": "Low / Monolithic (single-dimensional optimization: speed, throughput)",
-        "requisite_variety_gap": "Critical gap: Regulator cannot control system without inflating local noise",
-        "feedback_loops": [
-          "Closed positive feedback loop: housing dispersion -> road construction -> car dependency"
-        ],
-        "recommendation": "Increase meta-regulator variety; introduce epistemic brakes to interrupt closed feedback loops."
+        "model_name": "Ashby Law of Requisite Variety",
+        "gap": "Regulator variety significantly lower than environmental noise",
+        "closed_loop": "Housing sprawl -> Car requirement -> Road expansion -> Further housing sprawl",
+        "recommendation": "Engage epistemic brakes to restrict positive feedback amplification."
       },
       "Girardian Mimesis Agent": {
-        "model_name": "Girardian Mimetic Desire",
-        "triangular_model_sources": [
-          "Marketing/Advertising",
-          "Algorithmic recommendation",
-          "Peer mimesis"
-        ],
+        "model_name": "Girardian Mimetic Engine",
         "copied_desires": [
-          "SUV ownership",
-          "Suburban house far from work",
-          "Subscription-based autonomy"
+          "Suburban detached house",
+          "SUV mobility",
+          "On-demand cloud subscription"
         ],
-        "mimetic_conflict_points": [
-          "Resource competition on highways (A75)",
-          "Healthcare access bottlenecks"
-        ],
-        "landscape_effect": "Landscape becomes physical embodiment of copied desires."
+        "conflict_locus": "Highway bottlenecks & healthcare resource access"
       },
       "Debordian Spectacle Agent": {
-        "model_name": "Debordian Spectacle & Genealogy",
+        "model_name": "Debordian Spectacle & Genealogy Engine",
         "spectacle_illusions": [
-          "Infrastructure presented as 'natural necessity'",
-          "Car dependency framed as individual freedom/choice"
+          "Framing forced daily motorization as individual freedom"
         ],
         "uncovered_genealogy": [
-          "Saint-Saturnin / A75 separation of residence and production",
-          "Historical urban planning choices favoring highway corridors over rail"
-        ],
-        "alienation_type": "Maximization of micro-decisions while minimizing macro-control over life direction."
+          "A75 highway infrastructure separating labor from residential existence"
+        ]
       },
       "Cybernetic Infrastructure Agent": {
-        "model_name": "Cybernetic Infrastructure & Connected Systems",
-        "nodes_identified": [
-          "Vehicle ECU / OTA",
-          "A75 Corridor",
-          "Paywalled feature subscriptions"
+        "model_name": "Cybernetic Infrastructure & Platform Engine",
+        "control_nodes": [
+          "Vehicle ECU",
+          "OTA Cloud updates",
+          "SaaS subscription locks"
         ],
-        "control_sources": [
-          "Cloud platform providers",
-          "OEM feature lock-in"
-        ],
-        "system_shift": "Shift from vehicle as user tool to vehicle as active node in cloud economic platform."
+        "shift": "Transformation of private vehicle into platform node extracting ongoing subscription revenue"
       },
       "Anomaly Collector Agent": {
-        "model_name": "Anomaly & Counter-Model Collector",
-        "anomalies_detected": [
-          "89.6% car commuting in Saint-Saturnin despite proximity to nature",
-          "BMW seat heating subscription rejected by users as anomalous monetization"
-        ],
-        "counter_examples": [
-          "Local mobility demand contradicting current highway routing"
-        ],
-        "rule": "Do not synthesize prematurely. Hold anomalies open until model adapts."
+        "model_name": "Anomaly Collector Engine",
+        "anomalies": [
+          "89.6% car commuters in Saint-Saturnin",
+          "BMW heated seat subscription pushback",
+          "Emergency room closures due to psychiatric staff shortages"
+        ]
       }
     },
     "voices_identified": {

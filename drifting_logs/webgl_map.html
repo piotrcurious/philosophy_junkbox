@@ -234,7 +234,7 @@
     </div>
 
     <script>
-        const driftData = {
+        let driftData = {
             nodes: [
                 {
                     id: "Saint-Saturnin",
@@ -301,7 +301,7 @@
                 },
                 {
                     id: "Youth / Counterculture Inertia",
-                    category": "Social / Mimetic Node",
+                    category: "Social / Mimetic Node",
                     pos: [160, -80, 100],
                     color: "#e11d48",
                     stats: "58% lack of energy, 44% concentration difficulty",
@@ -336,6 +336,22 @@
         let isDragging = false;
         let lastMouseX = 0;
         let lastMouseY = 0;
+
+        // Attempt fetching dynamic node data from backend server if available
+        async function fetchBackendData() {
+            try {
+                const res = await fetch('/api/data');
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.nodes && data.nodes.length > 0) {
+                        console.log("Loaded dynamic node data from API server.");
+                    }
+                }
+            } catch (err) {
+                console.log("Using baseline dynamic data buffer.");
+            }
+        }
+        fetchBackendData();
 
         function project3D(x, y, z) {
             let radX = angleX;
@@ -509,18 +525,51 @@
             render();
         });
 
+        document.getElementById('epistemic-brake-toggle').addEventListener('change', async (e) => {
+            const status = e.target.value;
+            try {
+                await fetch('/api/epistemic_brake', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ status: status })
+                });
+            } catch (err) {}
+        });
+
         document.getElementById('extract-data-btn').addEventListener('click', () => {
             alert(`Extracted data for ${driftData.nodes.length} nodes to research buffer.`);
         });
 
-        document.getElementById('llm-reorganize-btn').addEventListener('click', () => {
+        document.getElementById('llm-reorganize-btn').addEventListener('click', async () => {
             const prompt = document.getElementById('llm-prompt').value || "Default semantic reorganization";
             const outputEl = document.getElementById('llm-output');
             outputEl.textContent = "Agent reasoning... Analyzing " + prompt + "\n\n";
 
+            try {
+                const res = await fetch('/api/reorganize', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ query: prompt })
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.result) {
+                        outputEl.textContent = `[Etiological Meta-Regulator Agent]: ${data.result.meta_summary}\n\nClusters:\n` + JSON.stringify(data.result.reorganized_clusters, null, 2);
+                        if (data.result.reorganized_nodes) {
+                            driftData.nodes = data.result.reorganized_nodes.map(n => ({
+                                ...n,
+                                color: n.category === "Spatial Node" ? "#38bdf8" : (n.category === "Cybernetic / Platform Node" ? "#f97316" : (n.category === "Metabolic / Healthcare Strain Node" ? "#22c55e" : "#e11d48"))
+                            }));
+                        }
+                        render();
+                        return;
+                    }
+                }
+            } catch (err) {}
+
+            // Client-side fallback if server offline
             setTimeout(() => {
                 outputEl.textContent = `[Etiological Meta-Regulator Agent]: Reorganized node semantics according to '${prompt}'.\n\n- Re-grouped Saint-Saturnin & A75 under 'Corridor Entrapment'.\n- Re-aligned Connected Car & Medical Desert under 'Metabolic Deficit Axis'.\n- 3D spatial node coordinates updated.`;
-
                 driftData.nodes.forEach(node => {
                     node.pos[0] += (Math.random() - 0.5) * 40;
                     node.pos[1] += (Math.random() - 0.5) * 40;
