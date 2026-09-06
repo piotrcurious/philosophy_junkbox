@@ -68,28 +68,31 @@ axiom(a3_symbolic_spectacle, 'Symbolic Geometry', 'Heritage Spectacle nodes ampl
 axiom(a4_reachability_continuity, 'Topology', 'Valid drift trajectory requires continuous connected edge transitions').
 axiom(a5_surveillance_symmetry, 'Control Space', 'Surveillance archetype experiences minimal physical friction').
 
-% --- 5. N-DIMENSIONAL MATH & CORE DIMENSION ENGINE ---
+% --- 5. N-DIMENSIONAL MATH & NUMERICAL STABILITY ENGINE ---
 
-% Euclidean distance in N-dimensions
+% Euclidean distance in N-dimensions with non-negative sum check
 vector_distance_euclidean([], [], 0.0).
 vector_distance_euclidean([X|Xs], [Y|Ys], Dist) :-
     vector_distance_euclidean(Xs, Ys, SubDistSq),
     Diff is X - Y,
     DistSq is SubDistSq + Diff * Diff,
-    Dist is sqrt(DistSq).
+    ( DistSq >= 0.0 -> Dist is sqrt(DistSq) ; Dist = 0.0 ).
 
 % Weighted distance in N-dimensions
 vector_distance_weighted([], [], [], 0.0).
 vector_distance_weighted([X|Xs], [Y|Ys], [W|Ws], Dist) :-
     vector_distance_weighted(Xs, Ys, Ws, SubDistSq),
     Diff is X - Y,
-    DistSq is SubDistSq + W * Diff * Diff,
-    Dist is sqrt(DistSq).
+    Weight is max(0.0, W),
+    DistSq is SubDistSq + Weight * Diff * Diff,
+    ( DistSq >= 0.0 -> Dist is sqrt(DistSq) ; Dist = 0.0 ).
 
-% Non-linear Vector Interpolation across N dimensions
+% Non-linear Vector Interpolation with numerical stability guards
 vector_interpolate([], [], _, _, []).
 vector_interpolate([X|Xs], [Y|Ys], T, Warp, [V|Vs]) :-
-    TWarped is T ** Warp,
+    SafeT is max(0.0, min(1.0, T)),
+    SafeWarp is max(0.01, Warp),
+    ( SafeT =:= 0.0 -> TWarped = 0.0 ; TWarped is SafeT ** SafeWarp ),
     V is X + (Y - X) * TWarped,
     vector_interpolate(Xs, Ys, T, Warp, Vs).
 
@@ -108,7 +111,7 @@ compare_threshold(gt, Val, Thresh) :- Val > Thresh.
 compare_threshold(lt, Val, Thresh) :- Val < Thresh.
 compare_threshold(eq, Val, Thresh) :- Val =:= Thresh.
 
-% --- 6. ONTOLOGY & TRAJECTORY VERIFICATION ---
+% --- 6. ONTOLOGY & CYCLE-FREE TRAJECTORY VERIFICATION ---
 
 connected(A, B, D, CT, CW, CR, CS) :- edge(A, B, D, CT, CW, CR, CS).
 connected(A, B, D, CT, CW, CR, CS) :- edge(B, A, D, CT, CW, CR, CS).
@@ -118,6 +121,7 @@ archetype_cost(worker, _, CW, _, _, CW).
 archetype_cost(resident, _, _, CR, _, CR).
 archetype_cost(surveillance, _, _, _, CS, CS).
 
+% Cycle-free graph traversal preventing circular logic loops
 valid_path(Start, End, Path, Archetype) :-
     travel(Start, End, [Start], ReversedPath, Archetype),
     reverse(ReversedPath, Path).
@@ -127,7 +131,7 @@ travel(Curr, End, Visited, Path, Archetype) :-
     connected(Curr, Next, _, CT, CW, CR, CS),
     archetype_cost(Archetype, CT, CW, CR, CS, Cost),
     Cost < 0.9,
-    \+ member(Next, Visited),
+    \+ member(Next, Visited), % Prevents circular looping
     travel(Next, End, [Next|Visited], Path, Archetype).
 
 verify_manifold_consistency(Results) :-
