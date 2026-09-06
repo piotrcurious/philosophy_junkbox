@@ -1,7 +1,7 @@
 """
 REST API Backend Server with Complex Axioms, Localized Neuropsychiatry & LSTM Memory,
-Holomorphic Manifold Geometry, Executable Prolog Axiom Programs, Agent Personality Editing,
-and Epistemic Exploration Endpoints.
+Directed Relational Flow Dynamics, Holomorphic Manifold Geometry, Executable Prolog Axiom Programs,
+Agent Personality Editing, and Epistemic Exploration Endpoints.
 """
 
 import os
@@ -108,6 +108,8 @@ class PsychogeographicalServer(BaseHTTPRequestHandler):
             mu_i = float(req_data.get('mu_i', 1.1))
             Sigma_r = float(req_data.get('Sigma_r', 1.2))
             Sigma_i = float(req_data.get('Sigma_i', 0.4))
+            flow_acceleration = float(req_data.get('flow_acceleration', 1.0))
+            global_impedance = float(req_data.get('global_impedance', 1.0))
             node_overrides = req_data.get('node_overrides', None)
 
             M = complex(M_r, M_i)
@@ -116,7 +118,8 @@ class PsychogeographicalServer(BaseHTTPRequestHandler):
             Sigma = complex(Sigma_r, Sigma_i)
 
             transformed = transformer_engine.transform_model(
-                M=M, V=V, mu=mu, Sigma=Sigma, node_overrides=node_overrides, use_prolog_deduction=use_prolog
+                M=M, V=V, mu=mu, Sigma=Sigma, node_overrides=node_overrides,
+                use_prolog_deduction=use_prolog, flow_acceleration=flow_acceleration, global_impedance=global_impedance
             )
             self._set_headers(200)
             self.wfile.write(json.dumps(transformed).encode())

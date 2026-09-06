@@ -11,6 +11,38 @@ import sympy as sp
 from typing import Dict, List, Any, Tuple, Optional
 from drifting_logs.tools.prolog_engine import PrologAxiomProgram, KnowledgeBase
 
+class ComplexSymbolicFieldExtension:
+    """
+    Symbolic Complex Field Extension Q(i, α) over Q(i) representing exact, un-flattened
+    algebraic numbers and minimal polynomials for non-linear psychogeographical complex axioms.
+    """
+    def __init__(self, generator_expr: Optional[sp.Expr] = None):
+        x = sp.Symbol('x')
+        if generator_expr is None:
+            generator_expr = sp.sqrt(2) + 3*sp.I
+        self.generator = generator_expr
+        try:
+            self.min_poly = sp.minimal_polynomial(self.generator, x)
+            self.degree = int(sp.degree(self.min_poly, x))
+        except Exception:
+            self.min_poly = x**2 + 1
+            self.degree = 2
+
+    def evaluate_exact_complex(self) -> complex:
+        val = complex(sp.N(self.generator))
+        return val
+
+    def get_extension_summary(self) -> Dict[str, Any]:
+        val = self.evaluate_exact_complex()
+        return {
+            "generator_symbolic": str(self.generator),
+            "minimal_polynomial": str(self.min_poly),
+            "extension_degree": self.degree,
+            "exact_complex_value": {"real": float(val.real), "imag": float(val.imag)},
+            "polar_representation": {"magnitude": float(abs(val)), "phase_rad": float(cmath.phase(val))}
+        }
+
+
 class ComplexAxiomField:
     def __init__(self, M: complex = 1.0 + 0.5j, V: complex = 2.0 - 0.3j, mu: complex = 0.5 + 0.8j, Sigma: complex = 1.0 + 0.2j, prolog_program: Optional[PrologAxiomProgram] = None):
         self.prolog_program = prolog_program if prolog_program is not None else PrologAxiomProgram()
@@ -18,6 +50,7 @@ class ComplexAxiomField:
         self.V = V        # Ashby Requisite Variety + i * Variety Dissipation
         self.mu = mu      # Girardian Mimetic Coupling + i * Mimetic Interference Phase
         self.Sigma = Sigma # Debordian Spectacle Shield + i * Spectacle Refraction Index
+        self.field_extension = ComplexSymbolicFieldExtension(sp.sqrt(abs(M.real) + 1) + (M.imag)*sp.I)
 
     @classmethod
     def from_prolog_deduction(cls, m_state: str = "high_entropy", v_state: str = "hyper_variable",
