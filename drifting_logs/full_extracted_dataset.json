@@ -1,0 +1,638 @@
+{
+  "nodes": [
+    {
+      "id": "Saint-Saturnin",
+      "category": "Spatial Corridor",
+      "excerpts": [
+        "Saint-Saturnin wygląda na miejsce, z którego można wyjść z miasta. Statystycznie okazuje się miejscem, z którego ogromna większość aktywnych ludzi musi codziennie wrócić do systemu pracy .",
+        "Plan mobilności Mond'Arverne nie opisuje sytuacji jako rozwiązanej. Wprost zapisano zapotrzebowanie na nowe regularne linie autobusowe do Clermont przez N89/A75, nowe połączenia Saint-Saturnin–Saint-Amant-Tallende, transport na żądanie i lepszą intermodalność. Mond'Arverne communauté +1",
+        "Lokalna strona gminna wskazuje, że profesjonaliści są skupieni w Saint-Amant-Tallende, około pięciu minut samochodem. saint-saturnin.com",
+        "Theix, kilka kilometrów od Saint-Saturnin, było od 1941 r. szkołą kadry Chantiers de la Jeunesse; zachował się cały zespół archiwów: programy kursów, materiały szkoleniowe, fiches stagiaires, broszury, wycinki prasowe i notatki z lat 1941–1943. servicehistorique.sga.defense.gouv.fr",
+        "I wtedy naprawdę siedzimy nad doliną Saint-Saturnin."
+      ],
+      "stats": [
+        "89",
+        "75",
+        "1",
+        "1941",
+        "1941",
+        "1943"
+      ],
+      "raw_count": 5
+    },
+    {
+      "id": "A75 Highway Corridor",
+      "category": "Spatial Corridor",
+      "excerpts": [
+        "I wtedy szum A75 nabiera innego znaczenia.",
+        "Plan mobilności Mond'Arverne nie opisuje sytuacji jako rozwiązanej. Wprost zapisano zapotrzebowanie na nowe regularne linie autobusowe do Clermont przez N89/A75, nowe połączenia Saint-Saturnin–Saint-Amant-Tallende, transport na żądanie i lepszą intermodalność. Mond'Arverne communauté +1",
+        "To jest chyba najmocniejszy cyfrowy odpowiednik A75.",
+        "A75 — człowiek musi wykonywać tysiące mikrokorekt, żeby uczestniczyć w systemie pracy.",
+        "ile z tego ruchu jest jeszcze naszym życiem, a ile jest tylko poprawnie wykonaną odpowiedzią systemu sterowania? Sources You said: ciekawe jest że to ty wciąż tworzysz te grube symetrystyczne hiperbole. młodzież ma za zadanie przede wszystkim przekształcić społeczeństwo. 19% młodych ludzi z zaburzen"
+      ],
+      "stats": [
+        "75",
+        "89",
+        "75",
+        "1",
+        "75",
+        "75",
+        "19%"
+      ],
+      "raw_count": 14
+    },
+    {
+      "id": "Mond'Arverne Mobility Area",
+      "category": "Spatial Corridor",
+      "excerpts": [
+        "Plan mobilności Mond'Arverne nie opisuje sytuacji jako rozwiązanej. Wprost zapisano zapotrzebowanie na nowe regularne linie autobusowe do Clermont przez N89/A75, nowe połączenia Saint-Saturnin–Saint-Amant-Tallende, transport na żądanie i lepszą intermodalność. Mond'Arverne communauté +1",
+        "Mond'Arverne planuje stop organized, transport społeczny, transport na żądanie, sieć rowerową, węzeł multimodalny i rozwój linii regularnych. Mond'Arverne communauté"
+      ],
+      "stats": [
+        "89",
+        "75",
+        "1"
+      ],
+      "raw_count": 2
+    },
+    {
+      "id": "IGAS Medical Audit",
+      "category": "Healthcare Strain",
+      "excerpts": [
+        "Młodzi ludzie są szczególnie interesującym przypadkiem właśnie dlatego, że ich autonomia motoryzacyjna jest mniejsza. Odpowiedź ministra transportu z 2025 r. przytacza dane, według których 72,6% gospodarstw, których głową jest osoba w wieku 16–24 lat, posiada samochód wobec 84,1% dla całej populacji",
+        "Raport IGAS dotyczący Haute-Garonne dokumentował sytuacje, w których brakowało lekarzy, działały pojedyncze obsady dyżurowe, a ARS naciskała na ponowne otwieranie zamkniętych łóżek, w tym oddziału dla młodych dorosłych. Igas",
+        "Content-Location: https://www.google.com/s2/favicons?domain=https://igas.gouv.fr&sz\u00128"
+      ],
+      "stats": [
+        "2025",
+        "72",
+        "6%",
+        "16",
+        "24",
+        "84",
+        "1%",
+        "2",
+        "8"
+      ],
+      "raw_count": 3
+    },
+    {
+      "id": "Over-The-Air Update ECU",
+      "category": "Cybernetic Platform",
+      "excerpts": [
+        "Theix, kilka kilometrów od Saint-Saturnin, było od 1941 r. szkołą kadry Chantiers de la Jeunesse; zachował się cały zespół archiwów: programy kursów, materiały szkoleniowe, fiches stagiaires, broszury, wycinki prasowe i notatki z lat 1941–1943. servicehistorique.sga.defense.gouv.fr",
+        ".rH9vzq_blueGlow .rH9vzq_lightGlow { filter: hue-rotate(-40deg) saturate(1.7) contrast(1.12) brightness(0.98); opacity: 1; animation-name: rH9vzq_pricing-gradient-blue-light-breathe; }",
+        ".dark .rH9vzq_blueGlow .rH9vzq_darkGlow { filter: hue-rotate(-40deg) saturate(1.35) brightness(1.05); }",
+        ".feh-border-glow { width: var(--feh-border-glow-size,500px); height: var(--feh-border-glow-size,500px); transform-origin: 0px 0px; filter: drop-shadow(rgba(125, 91, 255, 0.7) 0px 0px 6px) drop-shadow(rgba(125, 91, 255, 0.45) 0px 0px 14px); animation-name: var(--feh-border-glow-animation,rotateShine)",
+        ".chevron-marker:first-of-type > summary::before { transition: rotate var(--easing-spring-elegant-duration,.2s) var(--easing-spring-elegant,linear); }"
+      ],
+      "stats": [
+        "1941",
+        "1941",
+        "1943",
+        "9",
+        "9",
+        "40",
+        "1.7",
+        "1.12",
+        "0.98",
+        "1",
+        "9",
+        "9",
+        "9",
+        "40",
+        "1.35",
+        "1.05",
+        "500",
+        "500",
+        "0",
+        "0",
+        "125",
+        "91",
+        "255",
+        "0.7",
+        "0",
+        "0",
+        "6",
+        "125",
+        "91",
+        "255",
+        "0.45",
+        "0",
+        "0",
+        "14",
+        "2"
+      ],
+      "raw_count": 54
+    },
+    {
+      "id": "Youth Energy Depletion (58%)",
+      "category": "Metabolic Deficit",
+      "excerpts": [
+        "To 19% z istotnym ryzykiem depresji według zastosowanej skali. Najczęściej zgłaszanymi objawami są brak energii (58%), trudności koncentracji (44%) i zniechęcenie (42%). Santé publique France +1"
+      ],
+      "stats": [
+        "19%",
+        "58%",
+        "44%",
+        "42%",
+        "1"
+      ],
+      "raw_count": 1
+    },
+    {
+      "id": "Haute-Garonne Region",
+      "category": "Healthcare Strain Zone",
+      "excerpts": [
+        "Raport IGAS dotyczący Haute-Garonne dokumentował sytuacje, w których brakowało lekarzy, działały pojedyncze obsady dyżurowe, a ARS naciskała na ponowne otwieranie zamkniętych łóżek, w tym oddziału dla młodych dorosłych. Igas"
+      ],
+      "stats": [],
+      "raw_count": 1
+    },
+    {
+      "id": "Medical & Psychiatric Desert",
+      "category": "Healthcare Strain",
+      "excerpts": [
+        "Raport IGAS dotyczący Haute-Garonne dokumentował sytuacje, w których brakowało lekarzy, działały pojedyncze obsady dyżurowe, a ARS naciskała na ponowne otwieranie zamkniętych łóżek, w tym oddziału dla młodych dorosłych. Igas"
+      ],
+      "stats": [],
+      "raw_count": 1
+    },
+    {
+      "id": "Belfort-Lure Belt",
+      "category": "Spatial Corridor",
+      "excerpts": [
+        "Stwórz dryft Belfort Lure Skip to content Open sidebar ChatGPT Log in Sign up for free This is a copy of a shared ChatGPT chat. It won't be added to memory. Report conversation ChatGPT said: Montceau-les-Mines → dalej",
+        "Teraz można wreszcie połączyć wszystkie nitki, które pojawiały się od Belfort.",
+        "Od Belfort przestaliśmy podróżować jedną drogą."
+      ],
+      "stats": [],
+      "raw_count": 3
+    },
+    {
+      "id": "Lure Zone",
+      "category": "Spatial Corridor",
+      "excerpts": [
+        "Stwórz dryft Belfort Lure Skip to content Open sidebar ChatGPT Log in Sign up for free This is a copy of a shared ChatGPT chat. It won't be added to memory. Report conversation ChatGPT said: Montceau-les-Mines → dalej",
+        ".F0JZuq_RenderFailureDebugBox { align-items: center; gap: calc(var(--spacing)*1.5); box-sizing: border-box; width: fit-content; max-width: 100%; padding: calc(var(--spacing)*1.5) calc(var(--spacing)*2); border: 1px solid var(--color-border-danger-surface); border-radius: var(--radius-md); background",
+        ".F0JZuq_ExpressionFailureDebugMarker .F0JZuq_RenderFailureDebugBox { margin-block: 0px; padding-inline-end: calc(var(--spacing)*5); }",
+        ".F0JZuq_RenderFailureDebugSummary { gap: calc(var(--spacing)*.5); flex-direction: column; flex: 1 1 auto; min-width: 0px; display: flex; }",
+        ".F0JZuq_RenderFailureDebugPopover { border: 1px solid var(--color-border-danger-surface); background: var(--color-surface-elevated); color: var(--color-text-danger-surface); overflow-wrap: anywhere; white-space: normal; flex-direction: column; gap: 0px; padding: 0px; font-family: ui-monospace, SFMon"
+      ],
+      "stats": [
+        "0",
+        "1.5",
+        "100%",
+        "1.5",
+        "2",
+        "1",
+        "0",
+        "0",
+        "0",
+        "5",
+        "0",
+        "5",
+        "1",
+        "1",
+        "0",
+        "0",
+        "1",
+        "0",
+        "0"
+      ],
+      "raw_count": 11
+    },
+    {
+      "id": "Aire de la Guye",
+      "category": "Ecological Checkpoint",
+      "excerpts": [
+        "Aire de la Guye — system próbujący posadzić przyszłość w klimacie, który właśnie przyspieszył.",
+        "Wyobraź sobie człowieka na Aire de la Guye."
+      ],
+      "stats": [],
+      "raw_count": 2
+    },
+    {
+      "id": "Anti-Autofac Meta-Regulator",
+      "category": "Cybernetic Control",
+      "excerpts": [
+        "Wtedy naprawdę zaczynamy wydostawać się z bagna — nie dlatego, że znaleźliśmy jeden magiczny wynalazek, lecz dlatego, że zaczynamy widzieć, jak bagno steruje nami, jak my reprodukujemy jego sterowanie i gdzie można wstawić nowe sprzężenie zwrotne. Sources You said: jednocześnie mamy w obrazie autofa",
+        "I właśnie tutaj Autofac Philipa K. Dicka staje się niemal dokumentem teraźniejszości.",
+        "W Autofac automatyczne fabryki zostały stworzone, żeby dostarczać ludziom dobra. Po zakończeniu wojny ludzie przestają jednak potrzebować tej produkcji w dotychczasowej skali, a mimo to nie potrafią zatrzymać systemu. Fabryki zdobywają surowce, produkują i nawet reprodukują własną infrastrukturę , p",
+        "W Autofac ludzie chcieli odzyskać kontrolę nad środkami produkcji.",
+        "W Autofac fabryka była fizycznym potworem."
+      ],
+      "stats": [],
+      "raw_count": 14
+    },
+    {
+      "id": "BMW SaaS Platform",
+      "category": "Cybernetic Platform",
+      "excerpts": [
+        "BMW oficjalnie wprowadziło Functions on Demand , pozwalające kupować funkcje po zakupie auta na określony czas; w materiałach firmy pojawiają się jednorazowe zakupy i modele subskrypcyjne. BMW Group PressClub +1",
+        "BMW rzeczywiście próbowało nawet sprzedawać w modelu subskrypcyjnym podgrzewanie siedzeń. Po bardzo złym odbiorze klientów firma w 2023 r. wycofała tę konkretną możliwość i powiedziała, że będzie koncentrować subskrypcje przede wszystkim na funkcjach programowych, takich jak asystenci jazdy czy park",
+        "Content-Location: https://www.google.com/s2/favicons?domain=https://www.press.bmwgroup.com&sz\u00128"
+      ],
+      "stats": [
+        "1",
+        "2023",
+        "2",
+        "8"
+      ],
+      "raw_count": 3
+    }
+  ],
+  "total_entities_extracted": 13,
+  "relational_facts": [
+    {
+      "predicate": "relates_to",
+      "subject": "Saint-Saturnin",
+      "object": "A75 Highway Corridor"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Saint-Saturnin",
+      "object": "Mond'Arverne Mobility Area"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Saint-Saturnin",
+      "object": "IGAS Medical Audit"
+    },
+    {
+      "predicate": "depends_on",
+      "subject": "Saint-Saturnin",
+      "object": "Over-The-Air Update ECU"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Saint-Saturnin",
+      "object": "Youth Energy Depletion (58%)"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Saint-Saturnin",
+      "object": "Haute-Garonne Region"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Saint-Saturnin",
+      "object": "Medical & Psychiatric Desert"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Saint-Saturnin",
+      "object": "Belfort-Lure Belt"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Saint-Saturnin",
+      "object": "Lure Zone"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Saint-Saturnin",
+      "object": "Aire de la Guye"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Saint-Saturnin",
+      "object": "Anti-Autofac Meta-Regulator"
+    },
+    {
+      "predicate": "depends_on",
+      "subject": "Saint-Saturnin",
+      "object": "BMW SaaS Platform"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "A75 Highway Corridor",
+      "object": "Mond'Arverne Mobility Area"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "A75 Highway Corridor",
+      "object": "IGAS Medical Audit"
+    },
+    {
+      "predicate": "depends_on",
+      "subject": "A75 Highway Corridor",
+      "object": "Over-The-Air Update ECU"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "A75 Highway Corridor",
+      "object": "Youth Energy Depletion (58%)"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "A75 Highway Corridor",
+      "object": "Haute-Garonne Region"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "A75 Highway Corridor",
+      "object": "Medical & Psychiatric Desert"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "A75 Highway Corridor",
+      "object": "Belfort-Lure Belt"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "A75 Highway Corridor",
+      "object": "Lure Zone"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "A75 Highway Corridor",
+      "object": "Aire de la Guye"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "A75 Highway Corridor",
+      "object": "Anti-Autofac Meta-Regulator"
+    },
+    {
+      "predicate": "depends_on",
+      "subject": "A75 Highway Corridor",
+      "object": "BMW SaaS Platform"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Mond'Arverne Mobility Area",
+      "object": "IGAS Medical Audit"
+    },
+    {
+      "predicate": "depends_on",
+      "subject": "Mond'Arverne Mobility Area",
+      "object": "Over-The-Air Update ECU"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Mond'Arverne Mobility Area",
+      "object": "Youth Energy Depletion (58%)"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Mond'Arverne Mobility Area",
+      "object": "Haute-Garonne Region"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Mond'Arverne Mobility Area",
+      "object": "Medical & Psychiatric Desert"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Mond'Arverne Mobility Area",
+      "object": "Belfort-Lure Belt"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Mond'Arverne Mobility Area",
+      "object": "Lure Zone"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Mond'Arverne Mobility Area",
+      "object": "Aire de la Guye"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Mond'Arverne Mobility Area",
+      "object": "Anti-Autofac Meta-Regulator"
+    },
+    {
+      "predicate": "depends_on",
+      "subject": "Mond'Arverne Mobility Area",
+      "object": "BMW SaaS Platform"
+    },
+    {
+      "predicate": "depends_on",
+      "subject": "IGAS Medical Audit",
+      "object": "Over-The-Air Update ECU"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "IGAS Medical Audit",
+      "object": "Youth Energy Depletion (58%)"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "IGAS Medical Audit",
+      "object": "Haute-Garonne Region"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "IGAS Medical Audit",
+      "object": "Medical & Psychiatric Desert"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "IGAS Medical Audit",
+      "object": "Belfort-Lure Belt"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "IGAS Medical Audit",
+      "object": "Lure Zone"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "IGAS Medical Audit",
+      "object": "Aire de la Guye"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "IGAS Medical Audit",
+      "object": "Anti-Autofac Meta-Regulator"
+    },
+    {
+      "predicate": "depends_on",
+      "subject": "IGAS Medical Audit",
+      "object": "BMW SaaS Platform"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Over-The-Air Update ECU",
+      "object": "Youth Energy Depletion (58%)"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Over-The-Air Update ECU",
+      "object": "Haute-Garonne Region"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Over-The-Air Update ECU",
+      "object": "Medical & Psychiatric Desert"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Over-The-Air Update ECU",
+      "object": "Belfort-Lure Belt"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Over-The-Air Update ECU",
+      "object": "Lure Zone"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Over-The-Air Update ECU",
+      "object": "Aire de la Guye"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Over-The-Air Update ECU",
+      "object": "Anti-Autofac Meta-Regulator"
+    },
+    {
+      "predicate": "depends_on",
+      "subject": "Over-The-Air Update ECU",
+      "object": "BMW SaaS Platform"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Youth Energy Depletion (58%)",
+      "object": "Haute-Garonne Region"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Youth Energy Depletion (58%)",
+      "object": "Medical & Psychiatric Desert"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Youth Energy Depletion (58%)",
+      "object": "Belfort-Lure Belt"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Youth Energy Depletion (58%)",
+      "object": "Lure Zone"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Youth Energy Depletion (58%)",
+      "object": "Aire de la Guye"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Youth Energy Depletion (58%)",
+      "object": "Anti-Autofac Meta-Regulator"
+    },
+    {
+      "predicate": "depends_on",
+      "subject": "Youth Energy Depletion (58%)",
+      "object": "BMW SaaS Platform"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Haute-Garonne Region",
+      "object": "Medical & Psychiatric Desert"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Haute-Garonne Region",
+      "object": "Belfort-Lure Belt"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Haute-Garonne Region",
+      "object": "Lure Zone"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Haute-Garonne Region",
+      "object": "Aire de la Guye"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Haute-Garonne Region",
+      "object": "Anti-Autofac Meta-Regulator"
+    },
+    {
+      "predicate": "depends_on",
+      "subject": "Haute-Garonne Region",
+      "object": "BMW SaaS Platform"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Medical & Psychiatric Desert",
+      "object": "Belfort-Lure Belt"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Medical & Psychiatric Desert",
+      "object": "Lure Zone"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Medical & Psychiatric Desert",
+      "object": "Aire de la Guye"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Medical & Psychiatric Desert",
+      "object": "Anti-Autofac Meta-Regulator"
+    },
+    {
+      "predicate": "depends_on",
+      "subject": "Medical & Psychiatric Desert",
+      "object": "BMW SaaS Platform"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Belfort-Lure Belt",
+      "object": "Lure Zone"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Belfort-Lure Belt",
+      "object": "Aire de la Guye"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Belfort-Lure Belt",
+      "object": "Anti-Autofac Meta-Regulator"
+    },
+    {
+      "predicate": "depends_on",
+      "subject": "Belfort-Lure Belt",
+      "object": "BMW SaaS Platform"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Lure Zone",
+      "object": "Aire de la Guye"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Lure Zone",
+      "object": "Anti-Autofac Meta-Regulator"
+    },
+    {
+      "predicate": "depends_on",
+      "subject": "Lure Zone",
+      "object": "BMW SaaS Platform"
+    },
+    {
+      "predicate": "relates_to",
+      "subject": "Aire de la Guye",
+      "object": "Anti-Autofac Meta-Regulator"
+    },
+    {
+      "predicate": "depends_on",
+      "subject": "Aire de la Guye",
+      "object": "BMW SaaS Platform"
+    },
+    {
+      "predicate": "depends_on",
+      "subject": "Anti-Autofac Meta-Regulator",
+      "object": "BMW SaaS Platform"
+    }
+  ]
+}

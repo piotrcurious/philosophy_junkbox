@@ -1,6 +1,6 @@
 """
-REST API Backend Server with Algebraic Geometry, Prolog Deduction,
-and Dynamic Model Transformer Endpoints for Psychogeographical Exploration.
+REST API Backend Server with Full Dataset Ingestion, Prolog Deductions,
+Symbolic Algebra, and Autonomous Exploration Streaming.
 """
 
 import os
@@ -8,15 +8,16 @@ import json
 import sys
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
-# Ensure drifting_logs root is in PYTHONPATH
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
 from drifting_logs.tools.algebraic_model_transformer import AlgebraicModelTransformer
 from drifting_logs.tools.prolog_engine import build_psychogeographical_kb, Term
-from drifting_logs.tools.etiological_listening_center import EtiologicalListeningCenter
+from drifting_logs.tools.autonomous_explorer import AutonomousEpistemicExplorer
 
 PORT = 8080
 transformer_engine = AlgebraicModelTransformer()
+explorer_engine = AutonomousEpistemicExplorer()
+auto_step_counter = 0
 
 class PsychogeographicalServer(BaseHTTPRequestHandler):
     def _set_headers(self, status=200, content_type="application/json"):
@@ -40,13 +41,21 @@ class PsychogeographicalServer(BaseHTTPRequestHandler):
                 self.wfile.write(f"<h1>Error loading webgl_map.html: {str(e)}</h1>".encode())
             return
 
-        if self.path == '/api/data':
+        if self.path == '/api/full_nodes':
             self._set_headers(200)
             try:
-                with open('drifting_logs/multidimensional_psychogeographical_map.json', 'rb') as f:
+                with open('drifting_logs/full_extracted_dataset.json', 'rb') as f:
                     self.wfile.write(f.read())
             except Exception as e:
                 self.wfile.write(json.dumps({"error": str(e)}).encode())
+            return
+
+        if self.path == '/api/autonomous_step':
+            global auto_step_counter
+            auto_step_counter += 1
+            step_data = explorer_engine.execute_exploration_step(auto_step_counter)
+            self._set_headers(200)
+            self.wfile.write(json.dumps(step_data).encode())
             return
 
         if self.path == '/api/deduce_prolog':
@@ -58,13 +67,6 @@ class PsychogeographicalServer(BaseHTTPRequestHandler):
                 "systemic_traps": traps,
                 "entropic_corridors": corridors
             }).encode())
-            return
-
-        if self.path == '/api/diagnosis':
-            self._set_headers(200)
-            center = EtiologicalListeningCenter()
-            diag = center.run_full_diagnosis()
-            self.wfile.write(json.dumps(diag).encode())
             return
 
         self._set_headers(404)
@@ -107,15 +109,6 @@ class PsychogeographicalServer(BaseHTTPRequestHandler):
             }
             self._set_headers(200)
             self.wfile.write(json.dumps({"result": res_summary}).encode())
-            return
-
-        if self.path == '/api/epistemic_brake':
-            status = req_data.get('status', 'engaged')
-            self._set_headers(200)
-            self.wfile.write(json.dumps({
-                "epistemic_brake_status": status,
-                "message": f"Anti-Autofac Epistemic Brake status toggled to {status}."
-            }).encode())
             return
 
         self._set_headers(404)
