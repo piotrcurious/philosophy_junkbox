@@ -2,19 +2,41 @@
 Non-Linear Complex Axiom Fields Module
 Defines complex-valued axioms α, β, γ, δ ∈ ℂ with non-linear holomorphic dynamics,
 phase entanglements, complex Jacobian matrices in ℂ⁴, singular loci, and holomorphic differential forms.
+Driven by executable Prolog axiom programs for logical deduction and runtime extensibility.
 """
 
 import cmath
 import numpy as np
 import sympy as sp
-from typing import Dict, List, Any, Tuple
+from typing import Dict, List, Any, Tuple, Optional
+from drifting_logs.tools.prolog_engine import PrologAxiomProgram, KnowledgeBase
 
 class ComplexAxiomField:
-    def __init__(self, M: complex = 1.0 + 0.5j, V: complex = 2.0 - 0.3j, mu: complex = 0.5 + 0.8j, Sigma: complex = 1.0 + 0.2j):
+    def __init__(self, M: complex = 1.0 + 0.5j, V: complex = 2.0 - 0.3j, mu: complex = 0.5 + 0.8j, Sigma: complex = 1.0 + 0.2j, prolog_program: Optional[PrologAxiomProgram] = None):
+        self.prolog_program = prolog_program if prolog_program is not None else PrologAxiomProgram()
         self.M = M        # Kępiński Metabolic Rate + i * Metabolic Phase Shift
         self.V = V        # Ashby Requisite Variety + i * Variety Dissipation
         self.mu = mu      # Girardian Mimetic Coupling + i * Mimetic Interference Phase
         self.Sigma = Sigma # Debordian Spectacle Shield + i * Spectacle Refraction Index
+
+    @classmethod
+    def from_prolog_deduction(cls, m_state: str = "high_entropy", v_state: str = "hyper_variable",
+                              mu_state: str = "resonant", sigma_state: str = "alienated") -> 'ComplexAxiomField':
+        """
+        Instantiates ComplexAxiomField dynamically by evaluating executable Prolog programs.
+        """
+        prog = PrologAxiomProgram()
+        vals = prog.evaluate_axiom_values(m_state, v_state, mu_state, sigma_state)
+        return cls(M=vals["M"], V=vals["V"], mu=vals["mu"], Sigma=vals["Sigma"], prolog_program=prog)
+
+    def sync_from_prolog(self, m_state: str = "high_entropy", v_state: str = "hyper_variable",
+                         mu_state: str = "resonant", sigma_state: str = "alienated"):
+        """Re-evaluates Prolog program to update field parameters."""
+        vals = self.prolog_program.evaluate_axiom_values(m_state, v_state, mu_state, sigma_state)
+        self.M = vals["M"]
+        self.V = vals["V"]
+        self.mu = vals["mu"]
+        self.Sigma = vals["Sigma"]
 
     def holomorphic_transformation(self, z: complex) -> complex:
         """
@@ -116,7 +138,7 @@ class ComplexAxiomField:
         }
 
 if __name__ == "__main__":
-    field = ComplexAxiomField(M=1.5+0.8j, V=2.2-0.5j, mu=0.7+1.1j, Sigma=1.2+0.4j)
+    field = ComplexAxiomField.from_prolog_deduction()
     crit = field.find_critical_points()
     print("Critical Points f'(z)=0:", crit)
     print("Hermitian Metric at z=1+i:", field.compute_hermitian_metric(1.0 + 1.0j))

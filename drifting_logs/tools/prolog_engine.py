@@ -1,12 +1,14 @@
 """
-Prolog Engine (Declarative Relational Resolution Engine)
-Supports multi-hop unification, negation-as-failure, recursive reachability, and complex constraint queries.
+Prolog Engine (Declarative Relational Resolution Engine & Executable Prolog Axioms)
+Supports multi-hop unification, negation-as-failure, recursive reachability,
+dynamic rule injection, and executable Prolog programs for complex epistemological axioms.
 """
 
-from typing import List, Dict, Any, Union
+from typing import List, Dict, Any, Union, Optional, Tuple
+import cmath
 
 class Term:
-    def __init__(self, name: str, args: List[Any] = None):
+    def __init__(self, name: Any, args: List[Any] = None):
         self.name = str(name)
         self.args = args if args is not None else []
 
@@ -59,7 +61,7 @@ class KnowledgeBase:
         return filtered
 
     def _solve(self, goals: List[Term], env: Dict[str, Any], results: List[Dict[str, Any]], depth: int = 0):
-        if depth > 25: # Prevent infinite stack overflow on recursive loops
+        if depth > 30: # Prevent infinite stack overflow on recursive loops
             return
         if not goals:
             results.append(env)
@@ -213,9 +215,97 @@ def build_psychogeographical_kb() -> KnowledgeBase:
 
     return kb
 
+class PrologAxiomProgram:
+    """
+    Executable Prolog Program representing Epistemological Axioms as Logical Rules.
+    Allows runtime extension, rule injection, and logical deduction of Axiom Parameters.
+    """
+    def __init__(self, kb: Optional[KnowledgeBase] = None):
+        self.kb = kb if kb is not None else build_psychogeographical_kb()
+        self._init_axiom_rules()
+
+    def _init_axiom_rules(self):
+        """Define default Prolog rule sets for complex field axioms."""
+        # Kępiński Metabolic Axiom Program
+        self.kb.assertz(Term("kepinski_metabolic_state", [Term("high_entropy"), Term("1.8"), Term("0.9")]))
+        self.kb.assertz(Term("kepinski_metabolic_state", [Term("homeostatic"), Term("1.2"), Term("0.3")]))
+
+        # Rule: Derive M values based on systemic state
+        self.kb.assertz(Rule(
+            Term("derive_m_axiom", [Term("Real"), Term("Imag"), Term("State")]),
+            [Term("kepinski_metabolic_state", [Term("State"), Term("Real"), Term("Imag")])]
+        ))
+
+        # Ashby Requisite Variety Axiom Program
+        self.kb.assertz(Term("ashby_variety_state", [Term("hyper_variable"), Term("2.5"), Term("-0.8")]))
+        self.kb.assertz(Term("ashby_variety_state", [Term("constrained"), Term("1.1"), Term("-0.2")]))
+
+        self.kb.assertz(Rule(
+            Term("derive_v_axiom", [Term("Real"), Term("Imag"), Term("State")]),
+            [Term("ashby_variety_state", [Term("State"), Term("Real"), Term("Imag")])]
+        ))
+
+        # Girard Mimetic Axiom Program
+        self.kb.assertz(Term("girard_mimetic_state", [Term("resonant"), Term("0.8"), Term("1.2")]))
+        self.kb.assertz(Term("girard_mimetic_state", [Term("isolated"), Term("0.2"), Term("0.1")]))
+
+        self.kb.assertz(Rule(
+            Term("derive_mu_axiom", [Term("Real"), Term("Imag"), Term("State")]),
+            [Term("girard_mimetic_state", [Term("State"), Term("Real"), Term("Imag")])]
+        ))
+
+        # Debord Spectacle Axiom Program
+        self.kb.assertz(Term("debord_spectacle_state", [Term("alienated"), Term("1.5"), Term("0.6")]))
+        self.kb.assertz(Term("debord_spectacle_state", [Term("authentic"), Term("0.4"), Term("0.05")]))
+
+        self.kb.assertz(Rule(
+            Term("derive_sigma_axiom", [Term("Real"), Term("Imag"), Term("State")]),
+            [Term("debord_spectacle_state", [Term("State"), Term("Real"), Term("Imag")])]
+        ))
+
+        # Extensible Ideal Generator Prolog Rules
+        self.kb.assertz(Term("scheme_ideal_template", [Term("f1"), Term("x*y - M*z")]))
+        self.kb.assertz(Term("scheme_ideal_template", [Term("f2"), Term("y**2 + z**2 - V*w")]))
+        self.kb.assertz(Term("scheme_ideal_template", [Term("f3"), Term("w**2 - mu*x*z")]))
+
+    def inject_rule(self, head_str: str, head_args: List[str], body_terms: List[Tuple[str, List[str]]] = None):
+        """Allows runtime extensibility by injecting custom user/agent Prolog rules."""
+        head = Term(head_str, [Term(a) for a in head_args])
+        body = []
+        if body_terms:
+            for b_name, b_args in body_terms:
+                body.append(Term(b_name, [Term(a) for a in b_args]))
+        self.kb.assertz(Rule(head, body))
+
+    def evaluate_axiom_values(self, m_state: str = "high_entropy", v_state: str = "hyper_variable",
+                              mu_state: str = "resonant", sigma_state: str = "alienated") -> Dict[str, complex]:
+        """Queries Prolog KB to derive exact complex values for M, V, mu, Sigma."""
+        # Query M
+        q_m = self.kb.query(Term("derive_m_axiom", [Term("R"), Term("I"), Term(m_state)]))
+        m_val = complex(float(q_m[0]["R"]), float(q_m[0]["I"])) if q_m else (1.5 + 0.8j)
+
+        # Query V
+        q_v = self.kb.query(Term("derive_v_axiom", [Term("R"), Term("I"), Term(v_state)]))
+        v_val = complex(float(q_v[0]["R"]), float(q_v[0]["I"])) if q_v else (2.2 - 0.5j)
+
+        # Query mu
+        q_mu = self.kb.query(Term("derive_mu_axiom", [Term("R"), Term("I"), Term(mu_state)]))
+        mu_val = complex(float(q_mu[0]["R"]), float(q_mu[0]["I"])) if q_mu else (0.7 + 1.1j)
+
+        # Query Sigma
+        q_sig = self.kb.query(Term("derive_sigma_axiom", [Term("R"), Term("I"), Term(sigma_state)]))
+        sigma_val = complex(float(q_sig[0]["R"]), float(q_sig[0]["I"])) if q_sig else (1.2 + 0.4j)
+
+        return {
+            "M": m_val,
+            "V": v_val,
+            "mu": mu_val,
+            "Sigma": sigma_val
+        }
+
 if __name__ == "__main__":
-    kb = build_psychogeographical_kb()
-    print("Entropic Corridor:", kb.query(Term("entropic_corridor", [Term("X"), Term("Z")])))
-    print("Feedback Loop:", kb.query(Term("feedback_loop", [Term("X"), Term("Z")])))
-    print("Systemic Trap:", kb.query(Term("systemic_trap", [Term("X"), Term("W")])))
-    print("Multi-hop Reachable (saint_saturnin -> ?):", kb.query(Term("reachable", [Term("saint_saturnin"), Term("Y")])))
+    prog = PrologAxiomProgram()
+    vals = prog.evaluate_axiom_values()
+    print("Derived Axiom Values from Executable Prolog Program:", vals)
+    prog.inject_rule("custom_axiom", ["?X", "?Y"], [("kepinski_metabolic_state", ["?X", "?R", "?I"])])
+    print("Injected Rule Query:", prog.kb.query(Term("custom_axiom", [Term("State"), Term("R")])))
