@@ -316,6 +316,13 @@
             <label class="checkbox-item"><input type="checkbox" id="chk-ext-cross-section" checked>Cross-Section Plane</label>
         </div>
 
+        <h2>Data Import Engine</h2>
+        <div class="control-group">
+            <label for="file-import-input">Import Psychogeographical Data (.json / .csv)</label>
+            <input type="file" id="file-import-input" accept=".json,.csv">
+            <div id="import-status" style="font-size:0.7rem; color:#00ffaa; margin-top:4px;">Ready to import custom drift data.</div>
+        </div>
+
         <h2>Trajectories</h2>
         <div class="checkbox-group">
             <label class="checkbox-item"><input type="checkbox" id="chk-tourist" checked><span style="color:#00f0ff">Tourist</span></label>
@@ -891,6 +898,63 @@
 
             ['tourist', 'worker', 'resident', 'surveillance'].forEach(arch => {
                 document.getElementById(`chk-${arch}`).addEventListener('change', updateVisibility);
+            });
+
+            document.getElementById('file-import-input').addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    try {
+                        let importedItems = [];
+                        if (file.name.endsWith('.json')) {
+                            const parsed = JSON.parse(event.target.result);
+                            importedItems = Array.isArray(parsed) ? parsed : (parsed.trajectories || []);
+                        } else if (file.name.endsWith('.csv')) {
+                            const lines = event.target.result.split('\n').filter(l => l.trim().length > 0);
+                            const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+                            for (let i = 1; i < lines.length; i++) {
+                                const vals = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+                                if (vals.length < headers.length) continue;
+                                const row = {};
+                                headers.forEach((h, idx) => row[h] = vals[idx]);
+                                const vec = {
+                                    posX: parseFloat(row.posX || 0),
+                                    posY: parseFloat(row.posY || 0),
+                                    posZ: parseFloat(row.posZ || 0),
+                                    temperature: parseFloat(row.temperature || 25),
+                                    humidity: parseFloat(row.humidity || 0.5),
+                                    commercialVal: parseFloat(row.commercialVal || 0.5),
+                                    accessibility: parseFloat(row.accessibility || 0.5),
+                                    symbolicVal: parseFloat(row.symbolicVal || 0.5),
+                                    thermalStress: parseFloat(row.thermalStress || 0.5),
+                                    flowDensity: parseFloat(row.flowDensity || 0.5)
+                                };
+                                importedItems.push({
+                                    id: row.id || `imported_${i}`,
+                                    name: row.name || `Imported Node ${i}`,
+                                    archetype: row.archetype || 'CustomImport',
+                                    raw_10d: vec,
+                                    spatial_3d: { x: vec.posX, y: vec.posY, z: vec.posZ },
+                                    mds_3d: { x: vec.posX*0.5, y: vec.posY*0.5, z: vec.posZ*0.5 },
+                                    pca_3d: { x: vec.posX*0.8, y: vec.posY*0.8, z: vec.posZ*0.8 }
+                                });
+                            }
+                        }
+
+                        if (importedItems.length > 0) {
+                            dataset = dataset.concat(importedItems);
+                            document.getElementById('import-status').innerText = `Successfully imported ${importedItems.length} items from ${file.name}`;
+                            renderTrajectories();
+                        } else {
+                            document.getElementById('import-status').innerText = `No valid drift items found in ${file.name}`;
+                        }
+                    } catch (err) {
+                        console.error("Import error:", err);
+                        document.getElementById('import-status').innerText = `Error parsing ${file.name}: ${err.message}`;
+                    }
+                };
+                reader.readAsText(file);
             });
 
             const raycaster = new THREE.Raycaster();

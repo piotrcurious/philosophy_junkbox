@@ -2,7 +2,7 @@
 """
 Automated end-to-end test suite for Galeries Lafayette Psychogeographical Pipeline
 Tests Prolog ontology output, Haskell trajectory generation, R dimension decompression,
-and WebGL HTML asset integrity.
+Python Data Import Engine, and WebGL HTML asset integrity.
 """
 
 import json
@@ -28,6 +28,7 @@ class TestGaleriaLafayettePipeline(unittest.TestCase):
         with open(output_json, "r", encoding="utf-8") as f:
             data = json.load(f)
 
+        self.assertIn("dimensions", data)
         self.assertIn("nodes", data)
         self.assertIn("edges", data)
         self.assertIn("axioms", data)
@@ -100,7 +101,29 @@ class TestGaleriaLafayettePipeline(unittest.TestCase):
         self.assertIn("temperature", first["raw_10d"])
         self.assertIn("commercialVal", first["raw_10d"])
 
-    def test_04_html_visualizer_integrity(self):
+    def test_04_data_import_engine(self):
+        """Test import_data.py Python Data Import Engine for CSV and JSON files."""
+        import_py = os.path.join(BASE_DIR, "import_data.py")
+        csv_in = os.path.join(BASE_DIR, "high_dim_trajectories.csv")
+        base_json = os.path.join(BASE_DIR, "decompressed_data.json")
+        out_json = os.path.join(BASE_DIR, "test_import_output.json")
+
+        cmd = ["python3", import_py, "-i", csv_in, "-b", base_json, "-o", out_json]
+        result = subprocess.run(cmd, capture_output=True, text=True, cwd=BASE_DIR)
+        self.assertEqual(result.returncode, 0, f"Data import engine failed: {result.stderr}")
+        self.assertTrue(os.path.exists(out_json), "Imported output JSON missing")
+
+        with open(out_json, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        self.assertIn("trajectories", data)
+        self.assertIn("imported_count", data)
+        self.assertGreater(data["imported_count"], 0)
+
+        if os.path.exists(out_json):
+            os.remove(out_json)
+
+    def test_05_html_visualizer_integrity(self):
         """Test index.html DOM element structure and required controls."""
         html_path = os.path.join(BASE_DIR, "index.html")
         self.assertTrue(os.path.exists(html_path), "index.html missing")
@@ -123,6 +146,8 @@ class TestGaleriaLafayettePipeline(unittest.TestCase):
             "chk-ext-friction",
             "chk-ext-pivot-sphere",
             "chk-ext-cross-section",
+            "file-import-input",
+            "import-status",
             "prolog-verification-panel",
             "info-panel"
         ]
