@@ -490,23 +490,29 @@
             return dataset.find(d => d.id.includes(pivotNodeId) || d.id === pivotNodeId) || dataset[0];
         }
 
+        function safeVal(v, fallback = 0) {
+            if (v === null || v === undefined || isNaN(v) || !isFinite(v)) return fallback;
+            return parseFloat(v);
+        }
+
         function distance10D(itemA, itemB) {
             if (!itemA || !itemB || !itemA.raw_10d || !itemB.raw_10d) return 0;
             const a = itemA.raw_10d;
             const b = itemB.raw_10d;
 
-            const dx = a.posX - b.posX;
-            const dy = a.posY - b.posY;
-            const dz = a.posZ - b.posZ;
-            const dTemp = (a.temperature - b.temperature) * weights.thermal * 2.0;
-            const dHum = (a.humidity - b.humidity) * weights.thermal * 10.0;
-            const dComm = (a.commercialVal - b.commercialVal) * weights.commerce * 20.0;
-            const dAcc = (a.accessibility - b.accessibility) * 10.0;
-            const dSym = (a.symbolicVal - b.symbolicVal) * weights.symbolic * 20.0;
-            const dStress = (a.thermalStress - b.thermalStress) * weights.thermal * 15.0;
-            const dFlow = (a.flowDensity - b.flowDensity) * weights.flow * 15.0;
+            const dx = safeVal(a.posX) - safeVal(b.posX);
+            const dy = safeVal(a.posY) - safeVal(b.posY);
+            const dz = safeVal(a.posZ) - safeVal(b.posZ);
+            const dTemp = (safeVal(a.temperature) - safeVal(b.temperature)) * weights.thermal * 2.0;
+            const dHum = (safeVal(a.humidity) - safeVal(b.humidity)) * weights.thermal * 10.0;
+            const dComm = (safeVal(a.commercialVal) - safeVal(b.commercialVal)) * weights.commerce * 20.0;
+            const dAcc = (safeVal(a.accessibility) - safeVal(b.accessibility)) * 10.0;
+            const dSym = (safeVal(a.symbolicVal) - safeVal(b.symbolicVal)) * weights.symbolic * 20.0;
+            const dStress = (safeVal(a.thermalStress) - safeVal(b.thermalStress)) * weights.thermal * 15.0;
+            const dFlow = (safeVal(a.flowDensity) - safeVal(b.flowDensity)) * weights.flow * 15.0;
 
-            return Math.sqrt(dx*dx + dy*dy + dz*dz + dTemp*dTemp + dHum*dHum + dComm*dComm + dAcc*dAcc + dSym*dSym + dStress*dStress + dFlow*dFlow);
+            const sqSum = dx*dx + dy*dy + dz*dz + dTemp*dTemp + dHum*dHum + dComm*dComm + dAcc*dAcc + dSym*dSym + dStress*dStress + dFlow*dFlow;
+            return Math.sqrt(Math.max(0, sqSum));
         }
 
         function projectItemTo3D(item) {
@@ -611,6 +617,8 @@
                 if (items.length === 0) return;
 
                 const points = items.map(d => projectItemTo3D(d));
+                if (points.length < 2) return;
+
                 const curve = new THREE.CatmullRomCurve3(points);
                 trajectoryCurves[arch] = curve;
 

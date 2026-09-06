@@ -44,32 +44,38 @@ nodeData =
   , DriftPoint "rooftop"     "Rooftop Terrace & Microclimate"      0.0  70.0  15.0  36.0 0.30 0.40 0.60 0.85 0.90 0.60
   ]
 
--- Distance in 10D space
+-- Distance in 10D space with non-negative sqrt guard
 distance10D :: DriftPoint -> DriftPoint -> Double
-distance10D p1 p2 = sqrt $ sum
-  [ (posX p1 - posX p2)**2
-  , (posY p1 - posY p2)**2
-  , (posZ p1 - posZ p2)**2
-  , (temperature p1 - temperature p2)**2
-  , (humidity p1 - humidity p2)**2
-  , (commercialVal p1 - commercialVal p2)**2
-  , (accessibility p1 - accessibility p2)**2
-  , (symbolicVal p1 - symbolicVal p2)**2
-  , (thermalStress p1 - thermalStress p2)**2
-  , (flowDensity p1 - flowDensity p2)**2
-  ]
+distance10D p1 p2 =
+  let sqSum = sum
+        [ (posX p1 - posX p2)**2
+        , (posY p1 - posY p2)**2
+        , (posZ p1 - posZ p2)**2
+        , (temperature p1 - temperature p2)**2
+        , (humidity p1 - humidity p2)**2
+        , (commercialVal p1 - commercialVal p2)**2
+        , (accessibility p1 - accessibility p2)**2
+        , (symbolicVal p1 - symbolicVal p2)**2
+        , (thermalStress p1 - thermalStress p2)**2
+        , (flowDensity p1 - flowDensity p2)**2
+        ]
+  in if sqSum >= 0.0 then sqrt sqSum else 0.0
 
 -- Cumulative trajectory path length
 trajectoryPathLength :: [DriftPoint] -> Double
-trajectoryPathLength points = sum $ zipWith distance10D points (tail points)
+trajectoryPathLength points
+  | length points < 2 = 0.0
+  | otherwise         = sum $ zipWith distance10D points (tail points)
 
--- Non-linear interpolation between 2 points in 10D space with non-linear warping factor
+-- Non-linear interpolation between 2 points in 10D space with numerical guards
 interpolate10D :: DriftPoint -> DriftPoint -> Double -> Double -> DriftPoint
 interpolate10D p1 p2 t warp =
-  let tWarped = t ** warp
+  let safeT = max 0.0 (min 1.0 t)
+      safeWarp = max 0.01 warp
+      tWarped = if safeT == 0.0 then 0.0 else safeT ** safeWarp
       interp a b = a + (b - a) * tWarped
   in DriftPoint
-       { pointId       = pointId p1 ++ "_" ++ pointId p2 ++ "_" ++ show (floor (t * 100) :: Int)
+       { pointId       = pointId p1 ++ "_" ++ pointId p2 ++ "_" ++ show (floor (safeT * 100) :: Int)
        , pointName     = "Interpolated Waypoint"
        , posX          = interp (posX p1) (posX p2)
        , posY          = interp (posY p1) (posY p2)
@@ -83,10 +89,13 @@ interpolate10D p1 p2 t warp =
        , flowDensity   = interp (flowDensity p1) (flowDensity p2)
        }
 
--- Generate full trajectory curve for a given archetype path with configurable step resolution
+-- Generate full trajectory curve for a given archetype path with numerical guards
 generateTrajectory :: Archetype -> [DriftPoint] -> Double -> Double -> [DriftPoint]
+generateTrajectory arch [] _ _ = []
+generateTrajectory arch [p] _ _ = [p]
 generateTrajectory arch points stepRes warp =
-  let steps = [0.0, stepRes .. 0.999]
+  let safeStep = if stepRes <= 0.0 then 0.25 else stepRes
+      steps = [0.0, safeStep .. 0.999]
       pairs = zip points (tail points)
   in concatMap (\(p1, p2) -> map (\t -> interpolate10D p1 p2 t warp) steps) pairs ++ [last points]
 
@@ -113,9 +122,12 @@ csvHeader = "archetype,id,name,posX,posY,posZ,temperature,humidity,commercialVal
 main :: IO ()
 main = do
   args <- getArgs
-  let stepRes = case args of
-                  (s:_) -> maybe 0.25 id (readMaybe s)
-                  _     -> 0.25
+  let rawStep = case args of
+                  (s:_) -> readMaybe s
+                  _     -> Just 0.25
+      stepRes = case rawStep of
+                  Just s | s > 0.0 -> s
+                  _                -> 0.25
       outFile = case args of
                   (_:f:_) -> f
                   _       -> "high_dim_trajectories.csv"

@@ -29,9 +29,14 @@ def parse_csv_drift_data(filepath):
             for k, v in row.items():
                 if k not in ['archetype', 'id', 'name']:
                     try:
-                        vector_dict[k] = float(v)
-                    except ValueError:
-                        pass
+                        val = float(v)
+                        # Filter out NaN or Infinite floats
+                        if val == val and abs(val) != float('inf'):
+                            vector_dict[k] = val
+                        else:
+                            vector_dict[k] = 0.0
+                    except (ValueError, TypeError):
+                        vector_dict[k] = 0.0
 
             traj_item = {
                 'id': node_id,
