@@ -1,29 +1,114 @@
 """
-Algebraic Model Transformer Engine with Non-Linear Complex Axioms
-Transforms complex affine schemes, holomorphic manifolds, Hermitian metrics,
-Prolog logical traps, and 3D manifold embeddings.
+Algebraic Model Transformer Engine with Directed Relational Flow Dynamics, Non-Linear Complex Axioms, & Neuropsychiatry
+Transforms complex affine schemes, holomorphic manifolds, directed graph relational flow flux (Q_ij),
+path metabolic dissipation, Prolog logical traps, and localized neuropsychiatric LSTM memory feedback.
 """
 
-from typing import Dict, List, Any
-import numpy as np
+import math
 import cmath
+from typing import Dict, List, Any, Optional
+import numpy as np
 
 from drifting_logs.tools.algebraic_geometry import AlgebraicVarietySystem
 from drifting_logs.tools.statistical_geometry import StatisticalGeometryEngine
 from drifting_logs.tools.complex_axioms import ComplexAxiomField
-from drifting_logs.tools.prolog_engine import build_psychogeographical_kb, Term
+from drifting_logs.tools.prolog_engine import PrologAxiomProgram, Term
+from drifting_logs.tools.kepinski_neuropsychiatry import LocalizedNodeNeuropsychiatry
+
+class DirectedRelationalFlowEngine:
+    """
+    Calculates directed flow flux Q_ij, path metabolic dissipation D_ij, and edge capacity limits
+    between psychogeographical nodes driven by complex axiom fields and node metabolic potentials.
+    """
+    def __init__(self):
+        self.edges = [
+            ("Saint-Saturnin", "A75 Highway Corridor", 12.5),
+            ("A75 Highway Corridor", "Connected Car / Platform", 18.0),
+            ("Connected Car / Platform", "Youth / Counterculture Inertia", 14.2),
+            ("Psychiatric & Medical Deserts", "Saint-Saturnin", 8.4),
+            ("Montceau-les-Mines", "Belfort-Lure Belt", 10.0),
+            ("Aire de la Guye", "A75 Highway Corridor", 9.5)
+        ]
+
+    def compute_relational_flows(
+        self,
+        node_evaluations: Dict[str, Dict[str, Any]],
+        M: complex,
+        V: complex,
+        flow_acceleration: float = 1.0,
+        global_impedance: float = 1.0
+    ) -> List[Dict[str, Any]]:
+        flows = []
+        for src, tgt, base_cap in self.edges:
+            src_eval = node_evaluations.get(src, {})
+            tgt_eval = node_evaluations.get(tgt, {})
+
+            src_entropy = src_eval.get("diagnostic_metrics", {}).get("information_metabolism_entropy", 1.0)
+            tgt_entropy = tgt_eval.get("diagnostic_metrics", {}).get("information_metabolism_entropy", 1.0)
+
+            # Potential gradient delta_Phi = src_entropy - tgt_entropy
+            delta_phi = src_entropy - tgt_entropy
+
+            # Flux Q_ij = (base_cap * flow_acceleration / global_impedance) * (1 + |M| * tanh(delta_phi))
+            phase_mod = math.cos(cmath.phase(M + V))
+            q_ij = (base_cap * flow_acceleration / max(0.1, global_impedance)) * (1.0 + abs(M) * 0.3 * np.tanh(delta_phi) + 0.2 * phase_mod)
+            q_ij = max(0.1, round(float(q_ij), 3))
+
+            # Dissipation D_ij = q_ij^2 * global_impedance / max(0.1, base_cap)
+            dissipation = round(float((q_ij ** 2) * global_impedance / max(0.1, base_cap)), 3)
+
+            is_bottleneck = q_ij > (base_cap * 1.3)
+
+            flows.append({
+                "source": src,
+                "target": tgt,
+                "base_capacity": base_cap,
+                "flow_flux_Q": q_ij,
+                "path_dissipation_D": dissipation,
+                "is_bottleneck": is_bottleneck,
+                "particle_speed": round(float(q_ij / 5.0), 3)
+            })
+        return flows
 
 class AlgebraicModelTransformer:
     def __init__(self):
         self.stats_engine = StatisticalGeometryEngine()
+        self.prolog_program = PrologAxiomProgram()
+        self.flow_engine = DirectedRelationalFlowEngine()
+        self.node_neuropsychiatry: Dict[str, LocalizedNodeNeuropsychiatry] = {}
 
-    def transform_model(self, M: complex = 1.0+0.5j, V: complex = 2.0-0.3j, mu: complex = 0.5+0.8j, Sigma: complex = 1.0+0.2j) -> Dict[str, Any]:
+    def get_or_create_node_neuropsychiatry(self, node_id: str) -> LocalizedNodeNeuropsychiatry:
+        if node_id not in self.node_neuropsychiatry:
+            self.node_neuropsychiatry[node_id] = LocalizedNodeNeuropsychiatry(node_id)
+        return self.node_neuropsychiatry[node_id]
+
+    def transform_model(
+        self,
+        M: complex = 1.0+0.5j,
+        V: complex = 2.0-0.3j,
+        mu: complex = 0.5+0.8j,
+        Sigma: complex = 1.0+0.2j,
+        node_overrides: Optional[Dict[str, Dict[str, float]]] = None,
+        use_prolog_deduction: bool = False,
+        flow_acceleration: float = 1.0,
+        global_impedance: float = 1.0
+    ) -> Dict[str, Any]:
         """
         Recalculates complex scheme varieties V(I) ⊂ ℂ⁴, Gröbner bases,
-        Hermitian metric curvature, and 3D manifold coordinates based on complex axiom parameters.
+        Hermitian metric curvature, directed graph relational flows (Q_ij),
+        localized neuropsychiatric LSTM states, and 3D manifold coordinates.
         """
-        # 1. Complex Axiom Field
-        axiom_field = ComplexAxiomField(M=M, V=V, mu=mu, Sigma=Sigma)
+        if use_prolog_deduction:
+            axiom_field = ComplexAxiomField.from_prolog_deduction()
+            M, V, mu, Sigma = axiom_field.M, axiom_field.V, axiom_field.mu, axiom_field.Sigma
+        else:
+            axiom_field = ComplexAxiomField(M=M, V=V, mu=mu, Sigma=Sigma, prolog_program=self.prolog_program)
+
+        if node_overrides:
+            for n_id, params in node_overrides.items():
+                node_model = self.get_or_create_node_neuropsychiatry(n_id)
+                node_model.update_parameters(params)
+
         metric_info = axiom_field.compute_hermitian_metric(1.0 + 1.0j)
 
         # 2. Complex Algebraic Geometry & Affine Schemes
@@ -32,9 +117,9 @@ class AlgebraicModelTransformer:
         groebner_basis = [str(g) for g in variety_sys.compute_grobner_basis()]
         variety_dim = variety_sys.compute_variety_dimension()
 
-        # 3. Prolog Relational Logic
-        kb = build_psychogeographical_kb()
-        prolog_traps = kb.query(Term("systemic_trap", [Term("X"), Term("W")]))
+        # 3. Prolog Relational Logic Querying
+        prolog_traps = self.prolog_program.kb.query(Term("systemic_trap", [Term("X"), Term("W")]))
+        prolog_derived_axioms = self.prolog_program.evaluate_axiom_values()
 
         # 4. Statistical Geometry & Manifold Embedding
         metric_weight = (Sigma * Sigma.conjugate()).real / max(0.1, (M * M.conjugate()).real)
@@ -52,17 +137,35 @@ class AlgebraicModelTransformer:
         ]
 
         rebuilt_nodes = []
+        node_evaluations = {}
+
         for idx, (node_id, cat) in enumerate(node_ids):
-            # Apply complex phase rotation to spatial coordinates
-            phase = cmath.phase(M + V)
+            # Evaluate localized Kępiński Neuropsychiatry & LSTM cell
+            node_model = self.get_or_create_node_neuropsychiatry(node_id)
+            eval_res = node_model.evaluate_metabolism()
+            node_evaluations[node_id] = eval_res
+
+            # Local complex shift from neurotransmitter LSTM memory
+            d_M = eval_res["localized_axiom_shifts"]["delta_M"]
+            effective_M = M + complex(d_M["real"], d_M["imag"])
+
+            # Apply complex phase rotation with localized shift
+            phase = cmath.phase(effective_M + V)
             rot_x = coords[idx][0] * np.cos(phase) - coords[idx][1] * np.sin(phase)
             rot_y = coords[idx][0] * np.sin(phase) + coords[idx][1] * np.cos(phase)
             pos = [float(rot_x), float(rot_y), float(coords[idx][2])]
+
             rebuilt_nodes.append({
                 "id": node_id,
                 "category": cat,
-                "pos": pos
+                "pos": pos,
+                "neuropsychiatry": eval_res
             })
+
+        # 5. Directed Relational Flow Calculations
+        relational_flows = self.flow_engine.compute_relational_flows(
+            node_evaluations, M, V, flow_acceleration, global_impedance
+        )
 
         return {
             "complex_axioms": {
@@ -71,6 +174,7 @@ class AlgebraicModelTransformer:
                 "mu": {"real": mu.real, "imag": mu.imag, "magnitude": abs(mu), "phase_rad": cmath.phase(mu)},
                 "Sigma": {"real": Sigma.real, "imag": Sigma.imag, "magnitude": abs(Sigma), "phase_rad": cmath.phase(Sigma)}
             },
+            "field_extension": axiom_field.field_extension.get_extension_summary(),
             "algebraic_scheme": {
                 "ideal_generators": ideal_gens,
                 "groebner_basis": groebner_basis,
@@ -80,13 +184,18 @@ class AlgebraicModelTransformer:
                 "critical_points": metric_info["critical_points"]
             },
             "prolog_deductions": {
-                "systemic_traps": prolog_traps
+                "systemic_traps": prolog_traps,
+                "derived_axiom_values": {
+                    k: {"real": v.real, "imag": v.imag} for k, v in prolog_derived_axioms.items()
+                }
             },
-            "rebuilt_nodes": rebuilt_nodes
+            "rebuilt_nodes": rebuilt_nodes,
+            "node_evaluations": node_evaluations,
+            "relational_flows": relational_flows
         }
 
 if __name__ == "__main__":
     transformer = AlgebraicModelTransformer()
     res = transformer.transform_model(M=1.5+0.8j, V=2.2-0.5j, mu=0.7+1.1j, Sigma=1.2+0.4j)
-    print("Complex Scheme Curvature:", res["algebraic_scheme"]["holomorphic_ricci_curvature"])
-    print("Node 0 Phase Rotated Pos:", res["rebuilt_nodes"][0]["pos"])
+    print("Relational Flows Count:", len(res["relational_flows"]))
+    print("Flow 0 Flux Q_ij:", res["relational_flows"][0]["flow_flux_Q"])

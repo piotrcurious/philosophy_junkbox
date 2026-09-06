@@ -25,7 +25,7 @@ class EtiologicalListeningCenter:
             drift_data_text = load_all_logs_text()
 
         agent_reports = {}
-        for agent in self.agents:
+        for agent in self.agents.values():
             agent_reports[agent.name] = agent.analyze(drift_data_text)
 
         # Identification of System Voices ("Which component of the cart is speaking?")

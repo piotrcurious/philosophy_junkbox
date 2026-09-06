@@ -1,12 +1,13 @@
 """
 Autonomous Epistemic Exploration Loop Engine
 Performs uninhibited hypothesis generation, Prolog deduction, Gröbner basis scheme transformations,
-Riemannian scalar curvature evaluations, and dynamic target function revisions.
+Riemannian scalar curvature evaluations, and dynamic target function revisions over ℂ⁴ complex axiom fields.
 """
 
 import time
 import json
 import random
+import cmath
 import numpy as np
 from typing import Dict, List, Any
 
@@ -22,16 +23,16 @@ class AutonomousEpistemicExplorer:
     def execute_exploration_step(self, step_id: int) -> Dict[str, Any]:
         """
         Executes an autonomous exploration step:
-        1. Mutates axioms (M, V, mu, Sigma) representing a hypothesis shift.
-        2. Computes Gröbner basis, variety dimension, and Riemannian scalar curvature R.
+        1. Mutates complex axioms (M, V, mu, Sigma ∈ ℂ) representing a hypothesis phase shift.
+        2. Computes Gröbner basis, variety dimension, and holomorphic Ricci curvature R.
         3. Runs Prolog deduction queries across the knowledge base.
         4. Evaluates Kępiński metabolic entropy deficit and proposes target function revisions.
         """
-        # Perturb axioms
-        M = round(random.uniform(0.5, 4.0), 2)
-        V = round(random.uniform(0.5, 4.0), 2)
-        mu = round(random.uniform(0.2, 2.5), 2)
-        Sigma = round(random.uniform(0.2, 3.0), 2)
+        # Perturb complex axioms
+        M = complex(round(random.uniform(0.5, 4.0), 2), round(random.uniform(-2.0, 2.0), 2))
+        V = complex(round(random.uniform(0.5, 4.0), 2), round(random.uniform(-2.0, 2.0), 2))
+        mu = complex(round(random.uniform(0.2, 2.5), 2), round(random.uniform(-2.0, 2.0), 2))
+        Sigma = complex(round(random.uniform(0.2, 3.0), 2), round(random.uniform(-2.0, 2.0), 2))
 
         # Run model transformation
         transformed = self.transformer.transform_model(M=M, V=V, mu=mu, Sigma=Sigma)
@@ -45,12 +46,17 @@ class AutonomousEpistemicExplorer:
 
         # Evaluate Anti-Autofac Epistemic Brake trigger
         scalar_curv = transformed["algebraic_scheme"]["holomorphic_ricci_curvature"]
-        brake_triggered = scalar_curv > 1.5 or (M / max(0.1, V)) < 0.4
+        brake_triggered = scalar_curv > 1.5 or (abs(M) / max(0.1, abs(V))) < 0.4
 
         step_result = {
             "step_id": step_id,
             "timestamp": time.time(),
-            "axiom_hypothesis": {"M": M, "V": V, "mu": mu, "Sigma": Sigma},
+            "axiom_hypothesis": {
+                "M_r": M.real, "M_i": M.imag,
+                "V_r": V.real, "V_i": V.imag,
+                "mu_r": mu.real, "mu_i": mu.imag,
+                "Sigma_r": Sigma.real, "Sigma_i": Sigma.imag
+            },
             "algebraic_variety": {
                 "ideal_generators": transformed["algebraic_scheme"]["ideal_generators"],
                 "groebner_basis": transformed["algebraic_scheme"]["groebner_basis"],
@@ -76,4 +82,4 @@ if __name__ == "__main__":
     explorer = AutonomousEpistemicExplorer()
     for i in range(1, 4):
         res = explorer.execute_exploration_step(i)
-        print(f"Autonomous Step {i}: Axioms {res['axiom_hypothesis']} | Curvature R={res['algebraic_variety']['scalar_curvature_R']:.3f} | Epistemic Brake={res['anti_autofac_epistemic_brake']['status']}")
+        print(f"Autonomous Step {i}: Complex Axioms {res['axiom_hypothesis']} | Curvature R={res['algebraic_variety']['scalar_curvature_R']:.3f} | Epistemic Brake={res['anti_autofac_epistemic_brake']['status']}")

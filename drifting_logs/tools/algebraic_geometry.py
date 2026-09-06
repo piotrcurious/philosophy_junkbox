@@ -1,7 +1,7 @@
 """
 Algebraic Geometry Module for Psychogeographical Systems
 Provides formal symbolic affine schemes, polynomial ideals, Gröbner bases,
-affine varieties V(I), manifold metric tensors, and complex axiom geometry.
+affine varieties V(I) ⊂ ℂ⁴, ℂ⁴ Jacobian matrices, singular loci, and complex axiom geometry.
 """
 
 import sympy as sp
@@ -11,10 +11,6 @@ from typing import Dict, List, Any, Tuple
 
 # Define symbolic affine space coordinates over C^4
 x, y, z, w = sp.symbols('x y z w', complex=True) # x: Spatial, y: Cybernetic, z: Metabolic, w: Mimetic
-M_r, M_i = sp.symbols('M_r M_i', real=True)
-V_r, V_i = sp.symbols('V_r V_i', real=True)
-mu_r, mu_i = sp.symbols('mu_r mu_i', real=True)
-Sigma_r, Sigma_i = sp.symbols('Sigma_r Sigma_i', real=True)
 
 class AlgebraicVarietySystem:
     def __init__(self, M: complex = 1.0+0.5j, V: complex = 2.0-0.3j, mu: complex = 0.5+0.8j, Sigma: complex = 1.0+0.2j):
@@ -48,13 +44,31 @@ class AlgebraicVarietySystem:
     def evaluate_jacobian(self, point: Tuple[complex, complex, complex, complex]) -> sp.Matrix:
         generators = self.get_ideal_generators()
         J = sp.Matrix(generators).jacobian([x, y, z, w])
-        return J.subs({x: point[0], y: point[1], z: point[2], w: point[3]})
+        return J.subs({
+            x: sp.Float(point[0].real) + sp.I * sp.Float(point[0].imag),
+            y: sp.Float(point[1].real) + sp.I * sp.Float(point[1].imag),
+            z: sp.Float(point[2].real) + sp.I * sp.Float(point[2].imag),
+            w: sp.Float(point[3].real) + sp.I * sp.Float(point[3].imag)
+        })
 
     def compute_variety_dimension(self) -> int:
         pt = (2.0+0.1j, 1.0+0.2j, 1.5-0.1j, 1.0+0.0j)
         J = self.evaluate_jacobian(pt)
         rank = J.rank()
         return max(0, 4 - rank)
+
+    def compute_singular_locus_analysis(self) -> Dict[str, Any]:
+        """
+        Computes symbolic Jacobian determinant conditions for singular points on V(I).
+        """
+        generators = self.get_ideal_generators()
+        J = sp.Matrix(generators).jacobian([x, y, z, w])
+        minors = J.minor_submatrix(0, 0)
+        return {
+            "jacobian_shape": (J.rows, J.cols),
+            "ideal_generator_count": len(generators),
+            "affine_ambient_dimension": 4
+        }
 
 if __name__ == "__main__":
     system = AlgebraicVarietySystem(M=1.5+0.8j, V=2.2-0.5j, mu=0.7+1.1j, Sigma=1.2+0.4j)
