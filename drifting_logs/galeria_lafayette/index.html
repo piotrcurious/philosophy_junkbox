@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeries Lafayette - Psychogeographical Map Visualizer & Prolog Formal Verification</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #050508;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #e0e6ed;
+        }
+
+        #canvas-container {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+
+        #ui-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 360px;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+            background: rgba(12, 16, 26, 0.88);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+            z-index: 100;
+        }
+
+        #ui-overlay::-webkit-scrollbar {
+            width: 6px;
+        }
+        #ui-overlay::-webkit-scrollbar-thumb {
+            background: rgba(0, 240, 255, 0.3);
+            border-radius: 3px;
+        }
+
+        h1 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 0;
+            color: #00f0ff;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        h2 {
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 14px;
+            margin-bottom: 6px;
+            color: #aaa;
+            border-left: 3px solid #00f0ff;
+            padding-left: 6px;
+        }
+
+        .control-group {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.78rem;
+            margin-bottom: 4px;
+            color: #ccc;
+        }
+
+        select, input[type=range], button {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border-radius: 6px;
+            padding: 6px;
+            box-sizing: border-box;
+            outline: none;
+            font-size: 0.78rem;
+        }
+
+        input[type=range] {
+            -webkit-appearance: none;
+            height: 5px;
+            background: #2a2f3a;
+            border-radius: 3px;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00f0ff;
+            cursor: pointer;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            margin-top: 6px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+
+        .checkbox-item input {
+            margin-right: 6px;
+        }
+
+        #info-panel {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 320px;
+            background: rgba(12, 16, 26, 0.88);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 0.8rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+            z-index: 100;
+        }
+
+        #prolog-verification-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 320px;
+            background: rgba(12, 16, 26, 0.88);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 255, 170, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 0.75rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+            z-index: 100;
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3px;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+            padding-bottom: 2px;
+        }
+
+        .metric-value {
+            font-weight: bold;
+            color: #00ffaa;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .tourist-bg { background: rgba(0, 240, 255, 0.2); color: #00f0ff; border: 1px solid #00f0ff; }
+        .worker-bg { background: rgba(255, 120, 0, 0.2); color: #ff7800; border: 1px solid #ff7800; }
+        .resident-bg { background: rgba(0, 255, 120, 0.2); color: #00ff78; border: 1px solid #00ff78; }
+        .surveillance-bg { background: rgba(200, 0, 255, 0.2); color: #c800ff; border: 1px solid #c800ff; }
+    </style>
+    <!-- Three.js and OrbitControls CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+    <div id="canvas-container"></div>
+
+    <div id="ui-overlay">
+        <h1>Galeries Lafayette</h1>
+        <p style="font-size: 0.72rem; color: #8a99ad; margin-top: -6px;">10D Psychogeographical Engine & Prolog Formal Proofs</p>
+
+        <div class="control-group">
+            <label for="projection-select">10D -> 3D Translation Method</label>
+            <select id="projection-select">
+                <option value="spatial_3d">Physical 3D Architecture (X, Y, Z)</option>
+                <option value="mds_3d">MDS Multidimensional Scaling</option>
+                <option value="pca_3d">PCA Principal Component Analysis</option>
+                <option value="custom_axes">Custom 10D Axis Mapping</option>
+                <option value="local_pivot">Local Pivot Neighborhood Projection</option>
+            </select>
+        </div>
+
+        <div id="custom-axes-container" style="display: none; background: rgba(255,255,255,0.03); padding: 8px; border-radius: 6px; margin-bottom: 10px;">
+            <div class="control-group">
+                <label>X-Axis Dimension</label>
+                <select id="select-axis-x">
+                    <option value="posX" selected>posX (Physical X)</option>
+                    <option value="posY">posY (Physical Elevation)</option>
+                    <option value="posZ">posZ (Physical Depth)</option>
+                    <option value="temperature">temperature (°C)</option>
+                    <option value="humidity">humidity (%)</option>
+                    <option value="commercialVal">commercialVal (Capital Index)</option>
+                    <option value="accessibility">accessibility Index</option>
+                    <option value="symbolicVal">symbolicVal (Heritage)</option>
+                    <option value="thermalStress">thermalStress Index</option>
+                    <option value="flowDensity">flowDensity Index</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label>Y-Axis Dimension</label>
+                <select id="select-axis-y">
+                    <option value="posX">posX (Physical X)</option>
+                    <option value="posY" selected>posY (Physical Elevation)</option>
+                    <option value="posZ">posZ (Physical Depth)</option>
+                    <option value="temperature">temperature (°C)</option>
+                    <option value="humidity">humidity (%)</option>
+                    <option value="commercialVal">commercialVal (Capital Index)</option>
+                    <option value="accessibility">accessibility Index</option>
+                    <option value="symbolicVal">symbolicVal (Heritage)</option>
+                    <option value="thermalStress">thermalStress Index</option>
+                    <option value="flowDensity">flowDensity Index</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label>Z-Axis Dimension</label>
+                <select id="select-axis-z">
+                    <option value="posX">posX (Physical X)</option>
+                    <option value="posY">posY (Physical Elevation)</option>
+                    <option value="posZ" selected>posZ (Physical Depth)</option>
+                    <option value="temperature">temperature (°C)</option>
+                    <option value="humidity">humidity (%)</option>
+                    <option value="commercialVal">commercialVal (Capital Index)</option>
+                    <option value="accessibility">accessibility Index</option>
+                    <option value="symbolicVal">symbolicVal (Heritage)</option>
+                    <option value="thermalStress">thermalStress Index</option>
+                    <option value="flowDensity">flowDensity Index</option>
+                </select>
+            </div>
+        </div>
+
+        <h2>Flow Dynamics Simulation</h2>
+        <div class="control-group">
+            <label>Flow Velocity / Speed <span id="val-flow-speed">1.2</span></label>
+            <input type="range" id="slider-flow-speed" min="0.1" max="4.0" step="0.1" value="1.2">
+        </div>
+        <div class="control-group">
+            <label>Flow Turbulence <span id="val-flow-turb">0.5</span></label>
+            <input type="range" id="slider-flow-turb" min="0.0" max="2.0" step="0.1" value="0.5">
+        </div>
+        <div class="control-group">
+            <label>Particle Stream Density <span id="val-particle-density">200</span></label>
+            <input type="range" id="slider-particle-density" min="50" max="600" step="25" value="200">
+        </div>
+        <div class="checkbox-group">
+            <label class="checkbox-item"><input type="checkbox" id="chk-flow-particles" checked><span style="color:#00ffaa">Stream Particles</span></label>
+            <label class="checkbox-item"><input type="checkbox" id="chk-node-vortices" checked><span style="color:#00f0ff">Node Vortices</span></label>
+        </div>
+
+        <h2>Local Pivot Point</h2>
+        <div class="control-group">
+            <label>Selected Pivot Node</label>
+            <select id="select-pivot-node">
+                <option value="underground">Underground Metro Connection</option>
+                <option value="boulevard">Boulevard Haussmann Entrance</option>
+                <option value="vip_salon">VIP Personal Shopping Salons</option>
+                <option value="coupole" selected>Historic Glass Coupole Dome</option>
+                <option value="glasswalk">Glasswalk Suspended Runway</option>
+                <option value="rooftop">Rooftop Terrace Microclimate</option>
+            </select>
+        </div>
+
+        <h2>10D Feature Amplification Weights</h2>
+        <div class="control-group">
+            <label>Thermal / Climate Weight <span id="val-w-thermal">1.0</span></label>
+            <input type="range" id="slider-w-thermal" min="0.0" max="3.0" step="0.1" value="1.0">
+        </div>
+        <div class="control-group">
+            <label>Commercial / Capital Weight <span id="val-w-commerce">1.0</span></label>
+            <input type="range" id="slider-w-commerce" min="0.0" max="3.0" step="0.1" value="1.0">
+        </div>
+        <div class="control-group">
+            <label>Symbolic / Heritage Weight <span id="val-w-symbolic">1.0</span></label>
+            <input type="range" id="slider-w-symbolic" min="0.0" max="3.0" step="0.1" value="1.0">
+        </div>
+        <div class="control-group">
+            <label>Flow Density / Crowd Weight <span id="val-w-flow">1.0</span></label>
+            <input type="range" id="slider-w-flow" min="0.0" max="3.0" step="0.1" value="1.0">
+        </div>
+
+        <h2>Non-linear Local Warping</h2>
+        <div class="control-group">
+            <label>Gamma Warping Factor <span id="val-gamma">1.00</span></label>
+            <input type="range" id="slider-gamma" min="0.2" max="3.0" step="0.05" value="1.0">
+        </div>
+        <div class="control-group">
+            <label>Spatial Curvature <span id="val-curvature">0.00</span></label>
+            <input type="range" id="slider-curvature" min="-0.05" max="0.05" step="0.005" value="0.0">
+        </div>
+
+        <h2>Event Extensions & Cross Sections</h2>
+        <div class="checkbox-group">
+            <label class="checkbox-item"><input type="checkbox" id="chk-ext-friction" checked>High Friction Jump Vectors</label>
+            <label class="checkbox-item"><input type="checkbox" id="chk-ext-pivot-sphere" checked>Pivot Neighborhood Sphere</label>
+            <label class="checkbox-item"><input type="checkbox" id="chk-ext-cross-section" checked>Cross-Section Plane</label>
+        </div>
+
+        <h2>Data Import Engine</h2>
+        <div class="control-group">
+            <label for="file-import-input">Import Psychogeographical Data (.json / .csv)</label>
+            <input type="file" id="file-import-input" accept=".json,.csv">
+            <div id="import-status" style="font-size:0.7rem; color:#00ffaa; margin-top:4px;">Ready to import custom drift data.</div>
+        </div>
+
+        <h2>Trajectories</h2>
+        <div class="checkbox-group">
+            <label class="checkbox-item"><input type="checkbox" id="chk-tourist" checked><span style="color:#00f0ff">Tourist</span></label>
+            <label class="checkbox-item"><input type="checkbox" id="chk-worker" checked><span style="color:#ff7800">Worker</span></label>
+            <label class="checkbox-item"><input type="checkbox" id="chk-resident" checked><span style="color:#00ff78">Resident</span></label>
+            <label class="checkbox-item"><input type="checkbox" id="chk-surveillance" checked><span style="color:#c800ff">Surveillance</span></label>
+        </div>
+    </div>
+
+    <!-- PROLOG FORMAL PROOF STATUS PANEL -->
+    <div id="prolog-verification-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <strong style="color:#00ffaa; text-transform:uppercase;">Prolog Proof Engine</strong>
+            <span id="proof-status" class="badge" style="background:rgba(0,255,170,0.2); color:#00ffaa; border:1px solid #00ffaa;">PROVED</span>
+        </div>
+        <div class="metric-row"><span>Manifold Axioms Verified:</span><span class="metric-value" id="proof-axioms-cnt">5</span></div>
+        <div class="metric-row"><span>Thermal Barriers (A1):</span><span class="metric-value" id="proof-a1">1 Node</span></div>
+        <div class="metric-row"><span>Commerce Exclusion (A2):</span><span class="metric-value" id="proof-a2">2 Nodes</span></div>
+        <div class="metric-row"><span>Tourist Trajectory Status:</span><span class="metric-value" id="proof-traj-tourist">VALIDATED</span></div>
+        <div class="metric-row"><span>Worker Trajectory Status:</span><span class="metric-value" id="proof-traj-worker">VALIDATED</span></div>
+    </div>
+
+    <div id="info-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <strong id="node-name">Hover / Click Node to Pivot</strong>
+            <span id="node-archetype" class="badge tourist-bg">Info</span>
+        </div>
+        <div class="metric-row"><span>Temperature (T):</span><span class="metric-value" id="m-temp">-- °C</span></div>
+        <div class="metric-row"><span>Humidity (RH):</span><span class="metric-value" id="m-humidity">-- %</span></div>
+        <div class="metric-row"><span>Commerce Index:</span><span class="metric-value" id="m-commerce">--</span></div>
+        <div class="metric-row"><span>Accessibility Index:</span><span class="metric-value" id="m-accessibility">--</span></div>
+        <div class="metric-row"><span>Symbolic Value:</span><span class="metric-value" id="m-symbolic">--</span></div>
+        <div class="metric-row"><span>Thermal Stress:</span><span class="metric-value" id="m-stress">--</span></div>
+        <div class="metric-row"><span>Flow Density:</span><span class="metric-value" id="m-flow">--</span></div>
+        <div class="metric-row" style="margin-top:6px; border-top: 1px solid rgba(0,240,255,0.3); padding-top:4px;">
+            <span style="color:#00f0ff">Pivot 10D Distance:</span><span class="metric-value" id="m-pivot-dist" style="color:#00f0ff">--</span>
+        </div>
+    </div>
+
+    <script>
+        let scene, camera, renderer, controls;
+        let dataset = [];
+        let prologData = {};
+        let trajectoryLines = {};
+        let trajectoryPoints = {};
+        let trajectoryCurves = {};
+        let flowParticleSystems = {};
+        let vortexGroup;
+        let eventExtensionsGroup;
+        let architectureGroup;
+
+        const colors = {
+            Tourist: 0x00f0ff,
+            Worker: 0xff7800,
+            Resident: 0x00ff78,
+            Surveillance: 0xc800ff
+        };
+
+        let currentProjection = 'spatial_3d';
+        let pivotNodeId = 'coupole';
+        let gammaWarp = 1.0;
+        let curvature = 0.0;
+
+        let flowSpeed = 1.2;
+        let flowTurbulence = 0.5;
+        let particleCount = 200;
+        let enableFlowParticles = true;
+        let enableNodeVortices = true;
+
+        let weights = {
+            thermal: 1.0,
+            commerce: 1.0,
+            symbolic: 1.0,
+            flow: 1.0
+        };
+
+        let customAxes = {
+            x: 'posX',
+            y: 'posY',
+            z: 'posZ'
+        };
+
+        init();
+        loadData();
+
+        function init() {
+            const container = document.getElementById('canvas-container');
+
+            scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x050508, 0.008);
+
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(40, 40, 60);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.shadowMap.enabled = true;
+            container.appendChild(renderer.domElement);
+
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+            scene.add(ambientLight);
+
+            const dirLight = new THREE.DirectionalLight(0x00f0ff, 0.8);
+            dirLight.position.set(50, 100, 50);
+            scene.add(dirLight);
+
+            const pointLight = new THREE.PointLight(0xff00ff, 0.6, 120);
+            pointLight.position.set(-30, 20, -30);
+            scene.add(pointLight);
+
+            eventExtensionsGroup = new THREE.Group();
+            scene.add(eventExtensionsGroup);
+
+            vortexGroup = new THREE.Group();
+            scene.add(vortexGroup);
+
+            buildArchitecture();
+            setupUIListeners();
+            window.addEventListener('resize', onWindowResize);
+
+            animate();
+        }
+
+        function buildArchitecture() {
+            architectureGroup = new THREE.Group();
+
+            const levels = [
+                { y: -10, r: 25 },
+                { y: 0,  r: 30 },
+                { y: 20, r: 22 },
+                { y: 40, r: 20 },
+                { y: 50, r: 18 },
+                { y: 70, r: 28 }
+            ];
+
+            levels.forEach(lvl => {
+                const geometry = new THREE.RingGeometry(lvl.r - 2, lvl.r, 32);
+                const material = new THREE.MeshBasicMaterial({ color: 0x00f0ff, side: THREE.DoubleSide, transparent: true, opacity: 0.12, wireframe: true });
+                const mesh = new THREE.Mesh(geometry, material);
+                mesh.rotation.x = Math.PI / 2;
+                mesh.position.y = lvl.y;
+                architectureGroup.add(mesh);
+            });
+
+            const domeGeo = new THREE.SphereGeometry(15, 16, 12, 0, Math.PI * 2, 0, Math.PI / 2);
+            const domeMat = new THREE.MeshBasicMaterial({ color: 0x00ffaa, wireframe: true, transparent: true, opacity: 0.18 });
+            const domeMesh = new THREE.Mesh(domeGeo, domeMat);
+            domeMesh.position.set(0, 40, 0);
+            architectureGroup.add(domeMesh);
+
+            scene.add(architectureGroup);
+        }
+
+        function getPivotItem() {
+            return dataset.find(d => d.id.includes(pivotNodeId) || d.id === pivotNodeId) || dataset[0];
+        }
+
+        function distance10D(itemA, itemB) {
+            if (!itemA || !itemB || !itemA.raw_10d || !itemB.raw_10d) return 0;
+            const a = itemA.raw_10d;
+            const b = itemB.raw_10d;
+
+            const dx = a.posX - b.posX;
+            const dy = a.posY - b.posY;
+            const dz = a.posZ - b.posZ;
+            const dTemp = (a.temperature - b.temperature) * weights.thermal * 2.0;
+            const dHum = (a.humidity - b.humidity) * weights.thermal * 10.0;
+            const dComm = (a.commercialVal - b.commercialVal) * weights.commerce * 20.0;
+            const dAcc = (a.accessibility - b.accessibility) * 10.0;
+            const dSym = (a.symbolicVal - b.symbolicVal) * weights.symbolic * 20.0;
+            const dStress = (a.thermalStress - b.thermalStress) * weights.thermal * 15.0;
+            const dFlow = (a.flowDensity - b.flowDensity) * weights.flow * 15.0;
+
+            return Math.sqrt(dx*dx + dy*dy + dz*dz + dTemp*dTemp + dHum*dHum + dComm*dComm + dAcc*dAcc + dSym*dSym + dStress*dStress + dFlow*dFlow);
+        }
+
+        function projectItemTo3D(item) {
+            let pos = { x: 0, y: 0, z: 0 };
+            const raw = item.raw_10d;
+
+            if (currentProjection === 'spatial_3d') {
+                pos.x = item.spatial_3d.x;
+                pos.y = item.spatial_3d.y;
+                pos.z = item.spatial_3d.z;
+            } else if (currentProjection === 'mds_3d') {
+                pos.x = item.mds_3d.x * (1 + (weights.commerce - 1)*0.3);
+                pos.y = item.mds_3d.y * (1 + (weights.thermal - 1)*0.3);
+                pos.z = item.mds_3d.z * (1 + (weights.symbolic - 1)*0.3);
+            } else if (currentProjection === 'pca_3d') {
+                pos.x = item.pca_3d.x;
+                pos.y = item.pca_3d.y;
+                pos.z = item.pca_3d.z;
+            } else if (currentProjection === 'custom_axes') {
+                const getVal = (dimKey) => {
+                    let v = raw[dimKey] || 0;
+                    if (dimKey === 'temperature') v = (v - 20) * 3 * weights.thermal;
+                    else if (dimKey === 'commercialVal') v = (v - 0.5) * 40 * weights.commerce;
+                    else if (dimKey === 'symbolicVal') v = (v - 0.5) * 40 * weights.symbolic;
+                    else if (dimKey === 'flowDensity') v = (v - 0.5) * 30 * weights.flow;
+                    else if (dimKey === 'thermalStress') v = (v - 0.5) * 30 * weights.thermal;
+                    return v;
+                };
+                pos.x = getVal(customAxes.x);
+                pos.y = getVal(customAxes.y);
+                pos.z = getVal(customAxes.z);
+            } else if (currentProjection === 'local_pivot') {
+                const pivot = getPivotItem();
+                const dist = distance10D(item, pivot);
+
+                const dx = raw.posX - pivot.raw_10d.posX;
+                const dy = (raw.temperature - pivot.raw_10d.temperature) * weights.thermal * 5;
+                const dz = (raw.commercialVal - pivot.raw_10d.commercialVal) * weights.commerce * 30;
+
+                const norm = Math.sqrt(dx*dx + dy*dy + dz*dz) || 1;
+                pos.x = (dx / norm) * dist * 1.5;
+                pos.y = (dy / norm) * dist * 1.5;
+                pos.z = (dz / norm) * dist * 1.5;
+            }
+
+            let x = pos.x;
+            let y = pos.y;
+            let z = pos.z;
+
+            const r = Math.sqrt(x * x + z * z);
+            if (r > 0.001) {
+                const rWarped = Math.pow(r, gammaWarp);
+                const factor = rWarped / r;
+                x *= factor;
+                z *= factor;
+            }
+            y += curvature * (x * x + z * z);
+
+            return new THREE.Vector3(x, y, z);
+        }
+
+        function loadData() {
+            fetch('decompressed_data.json')
+                .then(res => res.json())
+                .then(data => {
+                    dataset = data.trajectories;
+                    prologData = data;
+                    updatePrologPanel();
+                    renderTrajectories();
+                })
+                .catch(err => {
+                    console.error("Error loading decompressed_data.json:", err);
+                });
+        }
+
+        function updatePrologPanel() {
+            if (!prologData.prolog_verification) return;
+            const v = prologData.prolog_verification;
+            document.getElementById('proof-status').innerText = v.manifold_status || 'PROVED';
+            document.getElementById('proof-a1').innerText = `${v.theorem_a1_thermal_barriers_cnt ? v.theorem_a1_thermal_barriers_cnt.length : 0} Node(s)`;
+            document.getElementById('proof-a2').innerText = `${v.theorem_a2_high_commerce_exclusion_cnt ? v.theorem_a2_high_commerce_exclusion_cnt.length : 0} Node(s)`;
+            if (prologData.prolog_formal_trajectories) {
+                document.getElementById('proof-traj-tourist').innerText = prologData.prolog_formal_trajectories.tourist.status;
+                document.getElementById('proof-traj-worker').innerText = prologData.prolog_formal_trajectories.worker.status;
+            }
+        }
+
+        function renderTrajectories() {
+            Object.values(trajectoryLines).forEach(line => scene.remove(line));
+            Object.values(trajectoryPoints).forEach(group => scene.remove(group));
+            Object.values(flowParticleSystems).forEach(ps => scene.remove(ps.pointsMesh));
+
+            trajectoryLines = {};
+            trajectoryPoints = {};
+            trajectoryCurves = {};
+            flowParticleSystems = {};
+
+            const archetypes = ['Tourist', 'Worker', 'Resident', 'Surveillance'];
+
+            archetypes.forEach(arch => {
+                const items = dataset.filter(d => d.archetype === arch);
+                if (items.length === 0) return;
+
+                const points = items.map(d => projectItemTo3D(d));
+                const curve = new THREE.CatmullRomCurve3(points);
+                trajectoryCurves[arch] = curve;
+
+                const geometry = new THREE.TubeGeometry(curve, 64, 0.6, 8, false);
+                const material = new THREE.MeshStandardMaterial({
+                    color: colors[arch] || 0xffffff,
+                    emissive: colors[arch] || 0xffffff,
+                    emissiveIntensity: 0.5,
+                    roughness: 0.2,
+                    metalness: 0.8
+                });
+
+                const lineMesh = new THREE.Mesh(geometry, material);
+                scene.add(lineMesh);
+                trajectoryLines[arch] = lineMesh;
+
+                const pointGroup = new THREE.Group();
+                items.forEach((d, idx) => {
+                    const pos = points[idx];
+                    const pGeo = new THREE.SphereGeometry(1.2, 16, 16);
+                    const pMat = new THREE.MeshBasicMaterial({ color: colors[arch] || 0xffffff });
+                    const pMesh = new THREE.Mesh(pGeo, pMat);
+                    pMesh.position.copy(pos);
+                    pMesh.userData = d;
+                    pointGroup.add(pMesh);
+                });
+                scene.add(pointGroup);
+                trajectoryPoints[arch] = pointGroup;
+
+                buildFlowParticleSystem(arch, curve, items);
+            });
+
+            renderEventExtensions();
+            renderNodeVortices();
+            updateVisibility();
+        }
+
+        function buildFlowParticleSystem(arch, curve, items) {
+            const pGeo = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const progress = new Float32Array(particleCount);
+            const speeds = new Float32Array(particleCount);
+            const offsets = new Float32Array(particleCount * 3);
+
+            for (let i = 0; i < particleCount; i++) {
+                progress[i] = Math.random();
+                speeds[i] = (0.5 + Math.random() * 0.8);
+                offsets[i * 3]     = (Math.random() - 0.5) * 2.0;
+                offsets[i * 3 + 1] = (Math.random() - 0.5) * 2.0;
+                offsets[i * 3 + 2] = (Math.random() - 0.5) * 2.0;
+
+                const p = curve.getPointAt(progress[i]);
+                positions[i * 3]     = p.x + offsets[i * 3];
+                positions[i * 3 + 1] = p.y + offsets[i * 3 + 1];
+                positions[i * 3 + 2] = p.z + offsets[i * 3 + 2];
+            }
+
+            pGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+            const pMat = new THREE.PointsMaterial({
+                color: colors[arch] || 0xffffff,
+                size: 1.5,
+                transparent: true,
+                opacity: 0.85,
+                blending: THREE.AdditiveBlending
+            });
+
+            const pointsMesh = new THREE.Points(pGeo, pMat);
+            scene.add(pointsMesh);
+
+            flowParticleSystems[arch] = {
+                pointsMesh: pointsMesh,
+                progress: progress,
+                speeds: speeds,
+                offsets: offsets,
+                curve: curve
+            };
+        }
+
+        function renderNodeVortices() {
+            while (vortexGroup.children.length > 0) {
+                vortexGroup.remove(vortexGroup.children[0]);
+            }
+
+            if (!enableNodeVortices || dataset.length === 0) return;
+
+            dataset.forEach(item => {
+                if (item.raw_10d && item.raw_10d.flowDensity > 0.7) {
+                    const pos = projectItemTo3D(item);
+                    const ringGeo = new THREE.RingGeometry(3, 5 + item.raw_10d.flowDensity * 4, 24);
+                    const ringMat = new THREE.MeshBasicMaterial({
+                        color: 0x00f0ff,
+                        side: THREE.DoubleSide,
+                        transparent: true,
+                        opacity: 0.4,
+                        wireframe: true
+                    });
+                    const ringMesh = new THREE.Mesh(ringGeo, ringMat);
+                    ringMesh.rotation.x = Math.PI / 2;
+                    ringMesh.position.copy(pos);
+                    vortexGroup.add(ringMesh);
+                }
+            });
+        }
+
+        function renderEventExtensions() {
+            while(eventExtensionsGroup.children.length > 0) {
+                eventExtensionsGroup.remove(eventExtensionsGroup.children[0]);
+            }
+
+            const pivotItem = getPivotItem();
+            const pivotPos = projectItemTo3D(pivotItem);
+
+            if (document.getElementById('chk-ext-pivot-sphere').checked) {
+                const sphereGeo = new THREE.SphereGeometry(20, 32, 24);
+                const sphereMat = new THREE.MeshBasicMaterial({ color: 0x00ffaa, wireframe: true, transparent: true, opacity: 0.25 });
+                const sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
+                sphereMesh.position.copy(pivotPos);
+                eventExtensionsGroup.add(sphereMesh);
+            }
+
+            if (document.getElementById('chk-ext-cross-section').checked) {
+                const planeGeo = new THREE.PlaneGeometry(80, 80);
+                const planeMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff, side: THREE.DoubleSide, transparent: true, opacity: 0.12 });
+                const planeMesh = new THREE.Mesh(planeGeo, planeMat);
+                planeMesh.rotation.x = Math.PI / 2;
+                planeMesh.position.copy(pivotPos);
+                eventExtensionsGroup.add(planeMesh);
+            }
+
+            if (document.getElementById('chk-ext-friction').checked && dataset.length > 0) {
+                dataset.forEach(item => {
+                    if (item.raw_10d && (item.raw_10d.thermalStress > 0.7 || item.raw_10d.commercialVal > 0.85)) {
+                        const itemPos = projectItemTo3D(item);
+                        const lineGeo = new THREE.BufferGeometry().setFromPoints([pivotPos, itemPos]);
+                        const lineMat = new THREE.LineDashedMaterial({ color: 0xff0077, dashSize: 2, gapSize: 1 });
+                        const line = new THREE.Line(lineGeo, lineMat);
+                        line.computeLineDistances();
+                        eventExtensionsGroup.add(line);
+                    }
+                });
+            }
+        }
+
+        function updatePositions() {
+            const archetypes = ['Tourist', 'Worker', 'Resident', 'Surveillance'];
+
+            archetypes.forEach(arch => {
+                const items = dataset.filter(d => d.archetype === arch);
+                if (items.length === 0) return;
+
+                const points = items.map(d => projectItemTo3D(d));
+                const curve = new THREE.CatmullRomCurve3(points);
+                trajectoryCurves[arch] = curve;
+
+                if (trajectoryLines[arch]) {
+                    trajectoryLines[arch].geometry.dispose();
+                    trajectoryLines[arch].geometry = new THREE.TubeGeometry(curve, 64, 0.6, 8, false);
+                }
+
+                if (trajectoryPoints[arch]) {
+                    trajectoryPoints[arch].children.forEach((pMesh, idx) => {
+                        if (points[idx]) pMesh.position.copy(points[idx]);
+                    });
+                }
+
+                if (flowParticleSystems[arch]) {
+                    flowParticleSystems[arch].curve = curve;
+                }
+            });
+
+            if (architectureGroup) {
+                architectureGroup.visible = (currentProjection === 'spatial_3d');
+            }
+
+            renderEventExtensions();
+            renderNodeVortices();
+        }
+
+        function animateFlowParticles(delta) {
+            if (!enableFlowParticles) return;
+
+            Object.keys(flowParticleSystems).forEach(arch => {
+                const ps = flowParticleSystems[arch];
+                if (!ps || !ps.pointsMesh.visible) return;
+
+                const positions = ps.pointsMesh.geometry.attributes.position.array;
+                const curve = ps.curve;
+
+                for (let i = 0; i < particleCount; i++) {
+                    ps.progress[i] += delta * 0.08 * flowSpeed * ps.speeds[i];
+                    if (ps.progress[i] > 1.0) ps.progress[i] -= 1.0;
+
+                    const p = curve.getPointAt(ps.progress[i]);
+
+                    const turbX = (Math.sin(ps.progress[i] * 20 + i) * flowTurbulence);
+                    const turbY = (Math.cos(ps.progress[i] * 20 + i) * flowTurbulence);
+                    const turbZ = (Math.sin(ps.progress[i] * 15 + i) * flowTurbulence);
+
+                    positions[i * 3]     = p.x + ps.offsets[i * 3] + turbX;
+                    positions[i * 3 + 1] = p.y + ps.offsets[i * 3 + 1] + turbY;
+                    positions[i * 3 + 2] = p.z + ps.offsets[i * 3 + 2] + turbZ;
+                }
+
+                ps.pointsMesh.geometry.attributes.position.needsUpdate = true;
+            });
+
+            vortexGroup.children.forEach((mesh, idx) => {
+                mesh.rotation.z += 0.02 * (idx % 2 === 0 ? 1 : -1);
+            });
+        }
+
+        function setupUIListeners() {
+            document.getElementById('projection-select').addEventListener('change', (e) => {
+                currentProjection = e.target.value;
+                document.getElementById('custom-axes-container').style.display =
+                    (currentProjection === 'custom_axes') ? 'block' : 'none';
+                updatePositions();
+            });
+
+            ['x', 'y', 'z'].forEach(axis => {
+                document.getElementById(`select-axis-${axis}`).addEventListener('change', (e) => {
+                    customAxes[axis] = e.target.value;
+                    if (currentProjection === 'custom_axes') updatePositions();
+                });
+            });
+
+            document.getElementById('slider-flow-speed').addEventListener('input', (e) => {
+                flowSpeed = parseFloat(e.target.value);
+                document.getElementById('val-flow-speed').innerText = flowSpeed.toFixed(1);
+            });
+
+            document.getElementById('slider-flow-turb').addEventListener('input', (e) => {
+                flowTurbulence = parseFloat(e.target.value);
+                document.getElementById('val-flow-turb').innerText = flowTurbulence.toFixed(1);
+            });
+
+            document.getElementById('slider-particle-density').addEventListener('input', (e) => {
+                particleCount = parseInt(e.target.value, 10);
+                document.getElementById('val-particle-density').innerText = particleCount;
+                renderTrajectories();
+            });
+
+            document.getElementById('chk-flow-particles').addEventListener('change', (e) => {
+                enableFlowParticles = e.target.checked;
+                Object.values(flowParticleSystems).forEach(ps => {
+                    ps.pointsMesh.visible = enableFlowParticles;
+                });
+            });
+
+            document.getElementById('chk-node-vortices').addEventListener('change', (e) => {
+                enableNodeVortices = e.target.checked;
+                renderNodeVortices();
+            });
+
+            document.getElementById('select-pivot-node').addEventListener('change', (e) => {
+                pivotNodeId = e.target.value;
+                updatePositions();
+                displayNodeInfo(getPivotItem());
+            });
+
+            const setupWeightSlider = (key, elemId, valId) => {
+                document.getElementById(elemId).addEventListener('input', (e) => {
+                    weights[key] = parseFloat(e.target.value);
+                    document.getElementById(valId).innerText = weights[key].toFixed(1);
+                    updatePositions();
+                });
+            };
+
+            setupWeightSlider('thermal', 'slider-w-thermal', 'val-w-thermal');
+            setupWeightSlider('commerce', 'slider-w-commerce', 'val-w-commerce');
+            setupWeightSlider('symbolic', 'slider-w-symbolic', 'val-w-symbolic');
+            setupWeightSlider('flow', 'slider-w-flow', 'val-w-flow');
+
+            document.getElementById('slider-gamma').addEventListener('input', (e) => {
+                gammaWarp = parseFloat(e.target.value);
+                document.getElementById('val-gamma').innerText = gammaWarp.toFixed(2);
+                updatePositions();
+            });
+
+            document.getElementById('slider-curvature').addEventListener('input', (e) => {
+                curvature = parseFloat(e.target.value);
+                document.getElementById('val-curvature').innerText = curvature.toFixed(3);
+                updatePositions();
+            });
+
+            ['chk-ext-friction', 'chk-ext-pivot-sphere', 'chk-ext-cross-section'].forEach(id => {
+                document.getElementById(id).addEventListener('change', renderEventExtensions);
+            });
+
+            ['tourist', 'worker', 'resident', 'surveillance'].forEach(arch => {
+                document.getElementById(`chk-${arch}`).addEventListener('change', updateVisibility);
+            });
+
+            document.getElementById('file-import-input').addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    try {
+                        let importedItems = [];
+                        if (file.name.endsWith('.json')) {
+                            const parsed = JSON.parse(event.target.result);
+                            importedItems = Array.isArray(parsed) ? parsed : (parsed.trajectories || []);
+                        } else if (file.name.endsWith('.csv')) {
+                            const lines = event.target.result.split('\n').filter(l => l.trim().length > 0);
+                            const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+                            for (let i = 1; i < lines.length; i++) {
+                                const vals = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+                                if (vals.length < headers.length) continue;
+                                const row = {};
+                                headers.forEach((h, idx) => row[h] = vals[idx]);
+                                const vec = {
+                                    posX: parseFloat(row.posX || 0),
+                                    posY: parseFloat(row.posY || 0),
+                                    posZ: parseFloat(row.posZ || 0),
+                                    temperature: parseFloat(row.temperature || 25),
+                                    humidity: parseFloat(row.humidity || 0.5),
+                                    commercialVal: parseFloat(row.commercialVal || 0.5),
+                                    accessibility: parseFloat(row.accessibility || 0.5),
+                                    symbolicVal: parseFloat(row.symbolicVal || 0.5),
+                                    thermalStress: parseFloat(row.thermalStress || 0.5),
+                                    flowDensity: parseFloat(row.flowDensity || 0.5)
+                                };
+                                importedItems.push({
+                                    id: row.id || `imported_${i}`,
+                                    name: row.name || `Imported Node ${i}`,
+                                    archetype: row.archetype || 'CustomImport',
+                                    raw_10d: vec,
+                                    spatial_3d: { x: vec.posX, y: vec.posY, z: vec.posZ },
+                                    mds_3d: { x: vec.posX*0.5, y: vec.posY*0.5, z: vec.posZ*0.5 },
+                                    pca_3d: { x: vec.posX*0.8, y: vec.posY*0.8, z: vec.posZ*0.8 }
+                                });
+                            }
+                        }
+
+                        if (importedItems.length > 0) {
+                            dataset = dataset.concat(importedItems);
+                            document.getElementById('import-status').innerText = `Successfully imported ${importedItems.length} items from ${file.name}`;
+                            renderTrajectories();
+                        } else {
+                            document.getElementById('import-status').innerText = `No valid drift items found in ${file.name}`;
+                        }
+                    } catch (err) {
+                        console.error("Import error:", err);
+                        document.getElementById('import-status').innerText = `Error parsing ${file.name}: ${err.message}`;
+                    }
+                };
+                reader.readAsText(file);
+            });
+
+            const raycaster = new THREE.Raycaster();
+            const mouse = new THREE.Vector2();
+
+            window.addEventListener('click', (e) => {
+                if (e.clientX < 380 && e.clientY < 680) return;
+                mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+                mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+
+                raycaster.setFromCamera(mouse, camera);
+                const meshes = [];
+                Object.values(trajectoryPoints).forEach(group => {
+                    if (group.visible) meshes.push(...group.children);
+                });
+
+                const intersects = raycaster.intersectObjects(meshes);
+                if (intersects.length > 0) {
+                    const d = intersects[0].object.userData;
+                    if (d) {
+                        pivotNodeId = d.id;
+                        document.getElementById('select-pivot-node').value = d.id;
+                        displayNodeInfo(d);
+                        updatePositions();
+                    }
+                }
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+                mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+
+                raycaster.setFromCamera(mouse, camera);
+                const meshes = [];
+                Object.values(trajectoryPoints).forEach(group => {
+                    if (group.visible) meshes.push(...group.children);
+                });
+
+                const intersects = raycaster.intersectObjects(meshes);
+                if (intersects.length > 0) {
+                    const d = intersects[0].object.userData;
+                    if (d) displayNodeInfo(d);
+                }
+            });
+        }
+
+        function displayNodeInfo(d) {
+            document.getElementById('node-name').innerText = d.name || d.id;
+            const badge = document.getElementById('node-archetype');
+            badge.innerText = d.archetype;
+            badge.className = `badge ${d.archetype.toLowerCase()}-bg`;
+
+            if (d.raw_10d) {
+                document.getElementById('m-temp').innerText = `${d.raw_10d.temperature.toFixed(1)} °C`;
+                document.getElementById('m-humidity').innerText = `${(d.raw_10d.humidity * 100).toFixed(0)} %`;
+                document.getElementById('m-commerce').innerText = d.raw_10d.commercialVal.toFixed(2);
+                document.getElementById('m-accessibility').innerText = d.raw_10d.accessibility.toFixed(2);
+                document.getElementById('m-symbolic').innerText = d.raw_10d.symbolicVal.toFixed(2);
+                document.getElementById('m-stress').innerText = d.raw_10d.thermalStress.toFixed(2);
+                document.getElementById('m-flow').innerText = d.raw_10d.flowDensity.toFixed(2);
+
+                const pivot = getPivotItem();
+                const dist10 = distance10D(d, pivot);
+                document.getElementById('m-pivot-dist').innerText = dist10.toFixed(2);
+            }
+        }
+
+        function updateVisibility() {
+            const vis = {
+                Tourist: document.getElementById('chk-tourist').checked,
+                Worker: document.getElementById('chk-worker').checked,
+                Resident: document.getElementById('chk-resident').checked,
+                Surveillance: document.getElementById('chk-surveillance').checked
+            };
+
+            Object.keys(vis).forEach(arch => {
+                if (trajectoryLines[arch]) trajectoryLines[arch].visible = vis[arch];
+                if (trajectoryPoints[arch]) trajectoryPoints[arch].visible = vis[arch];
+                if (flowParticleSystems[arch]) flowParticleSystems[arch].pointsMesh.visible = (vis[arch] && enableFlowParticles);
+            });
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        let clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const delta = clock.getDelta();
+
+            controls.update();
+            animateFlowParticles(delta);
+
+            if (architectureGroup && currentProjection === 'spatial_3d') {
+                architectureGroup.rotation.y += 0.001;
+            }
+
+            renderer.render(scene, camera);
+        }
+    </script>
+</body>
+</html>

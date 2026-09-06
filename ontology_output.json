@@ -1,0 +1,156 @@
+{
+  "axioms": [
+    {
+      "category":"Climate Adaptability",
+      "id":"a1_thermal_barrier",
+      "statement":"Thermal Stress / Temp > 35.0 C creates access friction"
+    },
+    {
+      "category":"Social Access",
+      "id":"a2_commercial_exclusion",
+      "statement":"Commerce Index > 0.90 excludes non-commercial public trajectories"
+    },
+    {
+      "category":"Symbolic Geometry",
+      "id":"a3_symbolic_spectacle",
+      "statement":"Heritage Spectacle nodes amplify flow density and tourist attraction"
+    },
+    {
+      "category":"Topology",
+      "id":"a4_reachability_continuity",
+      "statement":"Valid drift trajectory requires continuous connected edge transitions"
+    },
+    {
+      "category":"Control Space",
+      "id":"a5_surveillance_symmetry",
+      "statement":"Surveillance archetype experiences minimal physical friction"
+    }
+  ],
+  "dimensions": [
+    {"index":0, "key":"x", "label":"X Coordinate (Spatial)", "max":50.0, "min":-50.0, "unit":"m"},
+    {"index":1, "key":"y", "label":"Y Coordinate (Spatial)", "max":100.0, "min":-50.0, "unit":"m"},
+    {"index":2, "key":"z", "label":"Z Coordinate (Spatial)", "max":30.0, "min":-10.0, "unit":"m"},
+    {"index":3, "key":"temp", "label":"Temperature", "max":45.0, "min":15.0, "unit":"C"},
+    {"index":4, "key":"humidity", "label":"Relative Humidity", "max":0.95, "min":0.1, "unit":"%"},
+    {"index":5, "key":"commerce", "label":"Commerce Index", "max":1.0, "min":0.0, "unit":"idx"},
+    {"index":6, "key":"access", "label":"Accessibility Index", "max":1.0, "min":0.0, "unit":"idx"},
+    {"index":7, "key":"symbolic", "label":"Symbolic / Heritage Value", "max":1.0, "min":0.0, "unit":"idx"},
+    {"index":8, "key":"thermal_stress", "label":"Thermal Stress Index", "max":1.0, "min":0.0, "unit":"idx"},
+    {"index":9, "key":"flow_density", "label":"Crowd Flow Density", "max":1.0, "min":0.0, "unit":"idx"}
+  ],
+  "edges": [
+    {
+      "cost_resident":0.3,
+      "cost_surveillance":0.1,
+      "cost_tourist":0.2,
+      "cost_worker":0.1,
+      "dist":15,
+      "from":"underground",
+      "to":"boulevard"
+    },
+    {
+      "cost_resident":0.9,
+      "cost_surveillance":0.2,
+      "cost_tourist":0.8,
+      "cost_worker":0.4,
+      "dist":30,
+      "from":"boulevard",
+      "to":"vip_salon"
+    },
+    {
+      "cost_resident":0.7,
+      "cost_surveillance":0.2,
+      "cost_tourist":0.3,
+      "cost_worker":0.5,
+      "dist":45,
+      "from":"boulevard",
+      "to":"coupole"
+    },
+    {
+      "cost_resident":0.8,
+      "cost_surveillance":0.3,
+      "cost_tourist":0.5,
+      "cost_worker":0.6,
+      "dist":25,
+      "from":"vip_salon",
+      "to":"glasswalk"
+    },
+    {
+      "cost_resident":0.6,
+      "cost_surveillance":0.1,
+      "cost_tourist":0.1,
+      "cost_worker":0.5,
+      "dist":15,
+      "from":"coupole",
+      "to":"glasswalk"
+    },
+    {
+      "cost_resident":0.5,
+      "cost_surveillance":0.2,
+      "cost_tourist":0.2,
+      "cost_worker":0.4,
+      "dist":20,
+      "from":"glasswalk",
+      "to":"rooftop"
+    },
+    {
+      "cost_resident":0.4,
+      "cost_surveillance":0.1,
+      "cost_tourist":0.4,
+      "cost_worker":0.3,
+      "dist":80,
+      "from":"boulevard",
+      "to":"rooftop"
+    },
+    {
+      "cost_resident":0.5,
+      "cost_surveillance":0.2,
+      "cost_tourist":0.9,
+      "cost_worker":0.2,
+      "dist":95,
+      "from":"underground",
+      "to":"rooftop"
+    }
+  ],
+  "formal_trajectories": {
+    "resident": {"path": ["underground", "boulevard", "coupole", "glasswalk", "rooftop" ], "status":"FORMALLY_VALIDATED"},
+    "surveillance": {"path": ["underground", "boulevard", "vip_salon", "glasswalk", "rooftop" ], "status":"FORMALLY_VALIDATED"},
+    "tourist": {"path": ["boulevard", "vip_salon", "glasswalk", "rooftop" ], "status":"FORMALLY_VALIDATED"},
+    "worker": {"path": ["underground", "boulevard", "vip_salon", "glasswalk", "rooftop" ], "status":"FORMALLY_VALIDATED"}
+  },
+  "nodes": [
+    {
+      "id":"underground",
+      "label":"Underground Metro Connection",
+      "vector": [0.0, -10.0, 0.0, 24.5, 0.75, 0.2, 0.9, 0.2, 0.3, 0.85 ]
+    },
+    {
+      "id":"boulevard",
+      "label":"Boulevard Haussmann Ground Entrance",
+      "vector": [10.0, 0.0, 5.0, 33.0, 0.45, 0.9, 0.85, 0.8, 0.85, 0.95 ]
+    },
+    {
+      "id":"vip_salon",
+      "label":"VIP Personal Shopping Salons",
+      "vector": [15.0, 20.0, 12.0, 21.0, 0.5, 0.95, 0.2, 0.9, 0.15, 0.25 ]
+    },
+    {
+      "id":"coupole",
+      "label":"Historic Glass Coupole Dome",
+      "vector": [0.0, 40.0, 8.0, 28.5, 0.55, 0.7, 0.7, 0.95, 0.55, 0.75 ]
+    },
+    {"id":"glasswalk", "label":"Glasswalk Suspended Runway", "vector": [5.0, 50.0, 10.0, 29.5, 0.5, 0.85, 0.4, 0.9, 0.6, 0.8 ]},
+    {
+      "id":"rooftop",
+      "label":"Rooftop Terrace & Microclimate",
+      "vector": [0.0, 70.0, 15.0, 36.0, 0.3, 0.4, 0.6, 0.85, 0.9, 0.6 ]
+    }
+  ],
+  "verification": {
+    "active_dimensions_count":10,
+    "manifold_status":"PROVED_CONSISTENT",
+    "theorem_a1_thermal_barriers_cnt": ["rooftop" ],
+    "theorem_a2_high_commerce_exclusion_cnt": ["vip_salon" ],
+    "total_manifold_edges":8
+  }
+}

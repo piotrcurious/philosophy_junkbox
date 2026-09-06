@@ -1,0 +1,5 @@
+# Ignore compiled Haskell build artifacts and temporary server logs
+TrajectoryEngine
+*.hi
+*.o
+*.log
