@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galeries Lafayette - Psychogeographical Map Visualizer & 10D Translation</title>
+    <title>Galeries Lafayette - Psychogeographical Map Visualizer & Flow Dynamics</title>
     <style>
         body {
             margin: 0;
@@ -36,7 +36,6 @@
             z-index: 100;
         }
 
-        /* Scrollbar styles for UI overlay */
         #ui-overlay::-webkit-scrollbar {
             width: 6px;
         }
@@ -88,22 +87,6 @@
             box-sizing: border-box;
             outline: none;
             font-size: 0.78rem;
-        }
-
-        button {
-            background: linear-gradient(135deg, rgba(0,240,255,0.2), rgba(0,120,255,0.4));
-            border: 1px solid #00f0ff;
-            cursor: pointer;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            margin-top: 6px;
-            transition: all 0.2s ease;
-        }
-
-        button:hover {
-            background: linear-gradient(135deg, rgba(0,240,255,0.4), rgba(0,120,255,0.7));
-            box-shadow: 0 0 10px rgba(0,240,255,0.5);
         }
 
         input[type=range] {
@@ -181,11 +164,6 @@
         .worker-bg { background: rgba(255, 120, 0, 0.2); color: #ff7800; border: 1px solid #ff7800; }
         .resident-bg { background: rgba(0, 255, 120, 0.2); color: #00ff78; border: 1px solid #00ff78; }
         .surveillance-bg { background: rgba(200, 0, 255, 0.2); color: #c800ff; border: 1px solid #c800ff; }
-
-        .pivot-active {
-            border: 1px solid #00ffaa !important;
-            box-shadow: 0 0 12px rgba(0, 255, 170, 0.4);
-        }
     </style>
     <!-- Three.js and OrbitControls CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -196,7 +174,7 @@
 
     <div id="ui-overlay">
         <h1>Galeries Lafayette</h1>
-        <p style="font-size: 0.72rem; color: #8a99ad; margin-top: -6px;">10D Psychogeographical Manifold & Local Pivot Translation</p>
+        <p style="font-size: 0.72rem; color: #8a99ad; margin-top: -6px;">Psychogeographical Manifold & Flow Dynamics Simulation</p>
 
         <div class="control-group">
             <label for="projection-select">10D -> 3D Translation Method</label>
@@ -255,6 +233,24 @@
                     <option value="flowDensity">flowDensity Index</option>
                 </select>
             </div>
+        </div>
+
+        <h2>Flow Dynamics Simulation</h2>
+        <div class="control-group">
+            <label>Flow Velocity / Velocity Speed <span id="val-flow-speed">1.2</span></label>
+            <input type="range" id="slider-flow-speed" min="0.1" max="4.0" step="0.1" value="1.2">
+        </div>
+        <div class="control-group">
+            <label>Flow Turbulence <span id="val-flow-turb">0.5</span></label>
+            <input type="range" id="slider-flow-turb" min="0.0" max="2.0" step="0.1" value="0.5">
+        </div>
+        <div class="control-group">
+            <label>Particle Stream Density <span id="val-particle-density">200</span></label>
+            <input type="range" id="slider-particle-density" min="50" max="600" step="25" value="200">
+        </div>
+        <div class="checkbox-group">
+            <label class="checkbox-item"><input type="checkbox" id="chk-flow-particles" checked><span style="color:#00ffaa">Stream Particles</span></label>
+            <label class="checkbox-item"><input type="checkbox" id="chk-node-vortices" checked><span style="color:#00f0ff">Node Vortices</span></label>
         </div>
 
         <h2>Local Pivot Point</h2>
@@ -336,6 +332,9 @@
         let dataset = [];
         let trajectoryLines = {};
         let trajectoryPoints = {};
+        let trajectoryCurves = {};
+        let flowParticleSystems = {};
+        let vortexGroup;
         let eventExtensionsGroup;
         let architectureGroup;
 
@@ -350,6 +349,13 @@
         let pivotNodeId = 'coupole';
         let gammaWarp = 1.0;
         let curvature = 0.0;
+
+        // Flow Simulation Parameters
+        let flowSpeed = 1.2;
+        let flowTurbulence = 0.5;
+        let particleCount = 200;
+        let enableFlowParticles = true;
+        let enableNodeVortices = true;
 
         // Feature amplification weights
         let weights = {
@@ -402,10 +408,10 @@
             eventExtensionsGroup = new THREE.Group();
             scene.add(eventExtensionsGroup);
 
-            // Architectural model
-            buildArchitecture();
+            vortexGroup = new THREE.Group();
+            scene.add(vortexGroup);
 
-            // Setup listeners
+            buildArchitecture();
             setupUIListeners();
             window.addEventListener('resize', onWindowResize);
 
@@ -447,7 +453,6 @@
             return dataset.find(d => d.id.includes(pivotNodeId) || d.id === pivotNodeId) || dataset[0];
         }
 
-        // Calculate 10D weighted Euclidean distance between two items
         function distance10D(itemA, itemB) {
             if (!itemA || !itemB || !itemA.raw_10d || !itemB.raw_10d) return 0;
             const a = itemA.raw_10d;
@@ -500,7 +505,6 @@
                 const pivot = getPivotItem();
                 const dist = distance10D(item, pivot);
 
-                // Re-center space around pivot and project directional 10D vectors
                 const dx = raw.posX - pivot.raw_10d.posX;
                 const dy = (raw.temperature - pivot.raw_10d.temperature) * weights.thermal * 5;
                 const dz = (raw.commercialVal - pivot.raw_10d.commercialVal) * weights.commerce * 30;
@@ -511,7 +515,6 @@
                 pos.z = (dz / norm) * dist * 1.5;
             }
 
-            // Apply non-linear local gamma warping & curvature
             let x = pos.x;
             let y = pos.y;
             let z = pos.z;
@@ -543,8 +546,12 @@
         function renderTrajectories() {
             Object.values(trajectoryLines).forEach(line => scene.remove(line));
             Object.values(trajectoryPoints).forEach(group => scene.remove(group));
+            Object.values(flowParticleSystems).forEach(ps => scene.remove(ps.pointsMesh));
+
             trajectoryLines = {};
             trajectoryPoints = {};
+            trajectoryCurves = {};
+            flowParticleSystems = {};
 
             const archetypes = ['Tourist', 'Worker', 'Resident', 'Surveillance'];
 
@@ -554,6 +561,8 @@
 
                 const points = items.map(d => projectItemTo3D(d));
                 const curve = new THREE.CatmullRomCurve3(points);
+                trajectoryCurves[arch] = curve;
+
                 const geometry = new THREE.TubeGeometry(curve, 64, 0.6, 8, false);
                 const material = new THREE.MeshStandardMaterial({
                     color: colors[arch] || 0xffffff,
@@ -579,14 +588,86 @@
                 });
                 scene.add(pointGroup);
                 trajectoryPoints[arch] = pointGroup;
+
+                // Create Flow Particle System for Trajectory
+                buildFlowParticleSystem(arch, curve, items);
             });
 
             renderEventExtensions();
+            renderNodeVortices();
             updateVisibility();
         }
 
+        function buildFlowParticleSystem(arch, curve, items) {
+            const pGeo = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const progress = new Float32Array(particleCount);
+            const speeds = new Float32Array(particleCount);
+            const offsets = new Float32Array(particleCount * 3);
+
+            for (let i = 0; i < particleCount; i++) {
+                progress[i] = Math.random();
+                speeds[i] = (0.5 + Math.random() * 0.8);
+                offsets[i * 3]     = (Math.random() - 0.5) * 2.0;
+                offsets[i * 3 + 1] = (Math.random() - 0.5) * 2.0;
+                offsets[i * 3 + 2] = (Math.random() - 0.5) * 2.0;
+
+                const p = curve.getPointAt(progress[i]);
+                positions[i * 3]     = p.x + offsets[i * 3];
+                positions[i * 3 + 1] = p.y + offsets[i * 3 + 1];
+                positions[i * 3 + 2] = p.z + offsets[i * 3 + 2];
+            }
+
+            pGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+            const pMat = new THREE.PointsMaterial({
+                color: colors[arch] || 0xffffff,
+                size: 1.5,
+                transparent: true,
+                opacity: 0.85,
+                blending: THREE.AdditiveBlending
+            });
+
+            const pointsMesh = new THREE.Points(pGeo, pMat);
+            scene.add(pointsMesh);
+
+            flowParticleSystems[arch] = {
+                pointsMesh: pointsMesh,
+                progress: progress,
+                speeds: speeds,
+                offsets: offsets,
+                curve: curve
+            };
+        }
+
+        function renderNodeVortices() {
+            while (vortexGroup.children.length > 0) {
+                vortexGroup.remove(vortexGroup.children[0]);
+            }
+
+            if (!enableNodeVortices || dataset.length === 0) return;
+
+            // Render flow vortex rings at high flow density nodes
+            dataset.forEach(item => {
+                if (item.raw_10d && item.raw_10d.flowDensity > 0.7) {
+                    const pos = projectItemTo3D(item);
+                    const ringGeo = new THREE.RingGeometry(3, 5 + item.raw_10d.flowDensity * 4, 24);
+                    const ringMat = new THREE.MeshBasicMaterial({
+                        color: 0x00f0ff,
+                        side: THREE.DoubleSide,
+                        transparent: true,
+                        opacity: 0.4,
+                        wireframe: true
+                    });
+                    const ringMesh = new THREE.Mesh(ringGeo, ringMat);
+                    ringMesh.rotation.x = Math.PI / 2;
+                    ringMesh.position.copy(pos);
+                    vortexGroup.add(ringMesh);
+                }
+            });
+        }
+
         function renderEventExtensions() {
-            // Clear existing extensions
             while(eventExtensionsGroup.children.length > 0) {
                 eventExtensionsGroup.remove(eventExtensionsGroup.children[0]);
             }
@@ -594,7 +675,6 @@
             const pivotItem = getPivotItem();
             const pivotPos = projectItemTo3D(pivotItem);
 
-            // 1. Pivot Local Neighborhood Hyper-Sphere
             if (document.getElementById('chk-ext-pivot-sphere').checked) {
                 const sphereGeo = new THREE.SphereGeometry(20, 32, 24);
                 const sphereMat = new THREE.MeshBasicMaterial({ color: 0x00ffaa, wireframe: true, transparent: true, opacity: 0.25 });
@@ -603,7 +683,6 @@
                 eventExtensionsGroup.add(sphereMesh);
             }
 
-            // 2. Cross-Section Slicing Plane at Pivot
             if (document.getElementById('chk-ext-cross-section').checked) {
                 const planeGeo = new THREE.PlaneGeometry(80, 80);
                 const planeMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff, side: THREE.DoubleSide, transparent: true, opacity: 0.12 });
@@ -613,7 +692,6 @@
                 eventExtensionsGroup.add(planeMesh);
             }
 
-            // 3. High Friction / Transport Jump Vectors
             if (document.getElementById('chk-ext-friction').checked && dataset.length > 0) {
                 dataset.forEach(item => {
                     if (item.raw_10d && (item.raw_10d.thermalStress > 0.7 || item.raw_10d.commercialVal > 0.85)) {
@@ -636,9 +714,10 @@
                 if (items.length === 0) return;
 
                 const points = items.map(d => projectItemTo3D(d));
+                const curve = new THREE.CatmullRomCurve3(points);
+                trajectoryCurves[arch] = curve;
 
                 if (trajectoryLines[arch]) {
-                    const curve = new THREE.CatmullRomCurve3(points);
                     trajectoryLines[arch].geometry.dispose();
                     trajectoryLines[arch].geometry = new THREE.TubeGeometry(curve, 64, 0.6, 8, false);
                 }
@@ -648,6 +727,10 @@
                         if (points[idx]) pMesh.position.copy(points[idx]);
                     });
                 }
+
+                if (flowParticleSystems[arch]) {
+                    flowParticleSystems[arch].curve = curve;
+                }
             });
 
             if (architectureGroup) {
@@ -655,6 +738,42 @@
             }
 
             renderEventExtensions();
+            renderNodeVortices();
+        }
+
+        function animateFlowParticles(delta) {
+            if (!enableFlowParticles) return;
+
+            Object.keys(flowParticleSystems).forEach(arch => {
+                const ps = flowParticleSystems[arch];
+                if (!ps || !ps.pointsMesh.visible) return;
+
+                const positions = ps.pointsMesh.geometry.attributes.position.array;
+                const curve = ps.curve;
+
+                for (let i = 0; i < particleCount; i++) {
+                    ps.progress[i] += delta * 0.08 * flowSpeed * ps.speeds[i];
+                    if (ps.progress[i] > 1.0) ps.progress[i] -= 1.0;
+
+                    const p = curve.getPointAt(ps.progress[i]);
+
+                    // Apply flow turbulence
+                    const turbX = (Math.sin(ps.progress[i] * 20 + i) * flowTurbulence);
+                    const turbY = (Math.cos(ps.progress[i] * 20 + i) * flowTurbulence);
+                    const turbZ = (Math.sin(ps.progress[i] * 15 + i) * flowTurbulence);
+
+                    positions[i * 3]     = p.x + ps.offsets[i * 3] + turbX;
+                    positions[i * 3 + 1] = p.y + ps.offsets[i * 3 + 1] + turbY;
+                    positions[i * 3 + 2] = p.z + ps.offsets[i * 3 + 2] + turbZ;
+                }
+
+                ps.pointsMesh.geometry.attributes.position.needsUpdate = true;
+            });
+
+            // Animate node vortices
+            vortexGroup.children.forEach((mesh, idx) => {
+                mesh.rotation.z += 0.02 * (idx % 2 === 0 ? 1 : -1);
+            });
         }
 
         function setupUIListeners() {
@@ -670,6 +789,34 @@
                     customAxes[axis] = e.target.value;
                     if (currentProjection === 'custom_axes') updatePositions();
                 });
+            });
+
+            document.getElementById('slider-flow-speed').addEventListener('input', (e) => {
+                flowSpeed = parseFloat(e.target.value);
+                document.getElementById('val-flow-speed').innerText = flowSpeed.toFixed(1);
+            });
+
+            document.getElementById('slider-flow-turb').addEventListener('input', (e) => {
+                flowTurbulence = parseFloat(e.target.value);
+                document.getElementById('val-flow-turb').innerText = flowTurbulence.toFixed(1);
+            });
+
+            document.getElementById('slider-particle-density').addEventListener('input', (e) => {
+                particleCount = parseInt(e.target.value, 10);
+                document.getElementById('val-particle-density').innerText = particleCount;
+                renderTrajectories();
+            });
+
+            document.getElementById('chk-flow-particles').addEventListener('change', (e) => {
+                enableFlowParticles = e.target.checked;
+                Object.values(flowParticleSystems).forEach(ps => {
+                    ps.pointsMesh.visible = enableFlowParticles;
+                });
+            });
+
+            document.getElementById('chk-node-vortices').addEventListener('change', (e) => {
+                enableNodeVortices = e.target.checked;
+                renderNodeVortices();
             });
 
             document.getElementById('select-pivot-node').addEventListener('change', (e) => {
@@ -711,12 +858,11 @@
                 document.getElementById(`chk-${arch}`).addEventListener('change', updateVisibility);
             });
 
-            // Raycaster for interactive pivot selection and node inspection
             const raycaster = new THREE.Raycaster();
             const mouse = new THREE.Vector2();
 
             window.addEventListener('click', (e) => {
-                if (e.clientX < 380 && e.clientY < 600) return; // Ignore click on UI
+                if (e.clientX < 380 && e.clientY < 680) return;
                 mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
                 mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
 
@@ -788,6 +934,7 @@
             Object.keys(vis).forEach(arch => {
                 if (trajectoryLines[arch]) trajectoryLines[arch].visible = vis[arch];
                 if (trajectoryPoints[arch]) trajectoryPoints[arch].visible = vis[arch];
+                if (flowParticleSystems[arch]) flowParticleSystems[arch].pointsMesh.visible = (vis[arch] && enableFlowParticles);
             });
         }
 
@@ -797,9 +944,14 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         }
 
+        let clock = new THREE.Clock();
+
         function animate() {
             requestAnimationFrame(animate);
+            const delta = clock.getDelta();
+
             controls.update();
+            animateFlowParticles(delta);
 
             if (architectureGroup && currentProjection === 'spatial_3d') {
                 architectureGroup.rotation.y += 0.001;
