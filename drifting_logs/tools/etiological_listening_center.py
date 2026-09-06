@@ -7,7 +7,10 @@ Reconstructs the full genealogy of systemic forces without truncation or censors
 import os
 import json
 from typing import Dict, List, Any, Optional
-from epistemic_agents import create_agent_ensemble, LLMInterface, load_all_logs_text
+try:
+    from drifting_logs.tools.epistemic_agents import create_agent_ensemble, LLMInterface, load_all_logs_text
+except ImportError:
+    from epistemic_agents import create_agent_ensemble, LLMInterface, load_all_logs_text
 
 class EtiologicalListeningCenter:
     """

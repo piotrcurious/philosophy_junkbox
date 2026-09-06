@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multidimensional Psychogeographical Explorer (Algebraic Geometry & Dynamic Axioms)</title>
+    <title>Complex Axiom Psychogeographical Explorer (ℂ⁴ Scheme Varieties & Phase Dynamics)</title>
     <style>
         * {
             box-sizing: border-box;
@@ -44,16 +44,16 @@
         #header-panel {
             top: 20px;
             left: 20px;
-            max-width: 440px;
+            max-width: 480px;
         }
         h1 {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: #38bdf8;
             margin-bottom: 6px;
         }
         p.subtitle {
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: #94a3b8;
             margin-bottom: 12px;
             line-height: 1.4;
@@ -61,7 +61,7 @@
         #control-panel {
             bottom: 20px;
             left: 20px;
-            width: 360px;
+            width: 380px;
             max-height: calc(100vh - 220px);
             overflow-y: auto;
         }
@@ -70,7 +70,7 @@
         }
         label {
             display: block;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             color: #cbd5e1;
@@ -88,10 +88,10 @@
             font-size: 0.8rem;
             font-weight: 600;
             color: #38bdf8;
-            width: 36px;
+            width: 42px;
             text-align: right;
         }
-        select, input[type="range"], button, textarea {
+        select, input[type="range"], button {
             width: 100%;
             background: #1e293b;
             border: 1px solid #334155;
@@ -102,7 +102,7 @@
             outline: none;
             transition: border-color 0.2s;
         }
-        select:focus, textarea:focus {
+        select:focus {
             border-color: #38bdf8;
         }
         button {
@@ -118,21 +118,9 @@
         #inspector-panel {
             top: 20px;
             right: 20px;
-            width: 440px;
-            max-height: calc(100vh - 260px);
+            width: 460px;
+            max-height: calc(100vh - 100px);
             overflow-y: auto;
-        }
-        .dimension-badge {
-            display: inline-block;
-            padding: 3px 8px;
-            border-radius: 9999px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            margin-right: 4px;
-            margin-bottom: 8px;
-            background: rgba(56, 189, 248, 0.2);
-            color: #38bdf8;
-            border: 1px solid rgba(56, 189, 248, 0.3);
         }
         .data-card {
             background: rgba(30, 41, 59, 0.6);
@@ -140,6 +128,10 @@
             padding: 10px;
             margin-bottom: 10px;
             border-left: 3px solid #38bdf8;
+        }
+        .data-card.complex-card {
+            border-left-color: #ec4899;
+            background: rgba(131, 24, 67, 0.2);
         }
         .data-card.algebraic-card {
             border-left-color: #a855f7;
@@ -154,29 +146,11 @@
             color: #f1f5f9;
             margin-bottom: 4px;
         }
-        .data-card p, .data-card code {
+        .data-card p {
             font-size: 0.78rem;
             color: #cbd5e1;
             line-height: 1.4;
             word-break: break-all;
-        }
-        #llm-panel {
-            bottom: 20px;
-            right: 20px;
-            width: 440px;
-        }
-        #llm-output {
-            font-size: 0.78rem;
-            color: #e2e8f0;
-            background: #0f172a;
-            border: 1px solid #1e293b;
-            border-radius: 6px;
-            padding: 10px;
-            max-height: 130px;
-            overflow-y: auto;
-            margin-top: 8px;
-            white-space: pre-wrap;
-            line-height: 1.4;
         }
         .legend {
             display: flex;
@@ -201,8 +175,8 @@
     <div id="canvas-container"></div>
 
     <div id="header-panel" class="ui-panel">
-        <h1>Multidimensional Psychogeographical Explorer</h1>
-        <p class="subtitle">Formal Algebraic Geometry, Scheme Varieties V(I), Prolog Deductions, & Dynamic Axiom Mutations</p>
+        <h1>Complex Axiom Psychogeographical Explorer</h1>
+        <p class="subtitle">Non-Linear Complex Axiom Fields $\alpha, \beta, \gamma, \delta \in \mathbb{C}$ | Holomorphic Scheme Varieties $V(I) \subset \mathbb{C}^4$ | Hermitian Metric $h_{z\bar{z}}$</p>
         <div class="legend">
             <div class="legend-item"><span class="dot" style="background:#38bdf8;"></span> Spatial Node</div>
             <div class="legend-item"><span class="dot" style="background:#f97316;"></span> Cybernetic / Platform</div>
@@ -212,81 +186,70 @@
     </div>
 
     <div id="control-panel" class="ui-panel">
-        <h2 style="font-size:0.95rem; color:#f8fafc; margin-bottom:10px;">Axiom Mutation Controls</h2>
+        <h2 style="font-size:0.95rem; color:#f8fafc; margin-bottom:10px;">Complex Axiom Controls (Re, Im)</h2>
 
         <div class="control-group">
-            <label for="slider-M">Kępiński Metabolic Rate (M)</label>
+            <label for="slider-Mr">Kępiński Metabolic Rate Re(M)</label>
             <div class="slider-row">
-                <input type="range" id="slider-M" min="0.1" max="5.0" step="0.1" value="1.0">
-                <span class="slider-val" id="val-M">1.0</span>
+                <input type="range" id="slider-Mr" min="0.1" max="4.0" step="0.1" value="1.5">
+                <span class="slider-val" id="val-Mr">1.5</span>
+            </div>
+            <label for="slider-Mi" style="margin-top:4px;">Kępiński Phase Shift Im(M)</label>
+            <div class="slider-row">
+                <input type="range" id="slider-Mi" min="-2.0" max="2.0" step="0.1" value="0.8">
+                <span class="slider-val" id="val-Mi">0.8</span>
             </div>
         </div>
 
         <div class="control-group">
-            <label for="slider-V">Ashby Requisite Variety (V)</label>
+            <label for="slider-Vr">Ashby Requisite Variety Re(V)</label>
             <div class="slider-row">
-                <input type="range" id="slider-V" min="0.1" max="5.0" step="0.1" value="2.0">
-                <span class="slider-val" id="val-V">2.0</span>
+                <input type="range" id="slider-Vr" min="0.1" max="4.0" step="0.1" value="2.2">
+                <span class="slider-val" id="val-Vr">2.2</span>
+            </div>
+            <label for="slider-Vi" style="margin-top:4px;">Variety Dissipation Im(V)</label>
+            <div class="slider-row">
+                <input type="range" id="slider-Vi" min="-2.0" max="2.0" step="0.1" value="-0.5">
+                <span class="slider-val" id="val-Vi">-0.5</span>
             </div>
         </div>
 
         <div class="control-group">
-            <label for="slider-mu">Girardian Mimetic Coupling (&mu;)</label>
+            <label for="slider-mur">Girardian Mimetic Coupling Re(&mu;)</label>
             <div class="slider-row">
-                <input type="range" id="slider-mu" min="0.1" max="3.0" step="0.1" value="0.5">
-                <span class="slider-val" id="val-mu">0.5</span>
+                <input type="range" id="slider-mur" min="0.1" max="3.0" step="0.1" value="0.7">
+                <span class="slider-val" id="val-mur">0.7</span>
+            </div>
+            <label for="slider-mui" style="margin-top:4px;">Mimetic Interference Phase Im(&mu;)</label>
+            <div class="slider-row">
+                <input type="range" id="slider-mui" min="-2.0" max="2.0" step="0.1" value="1.1">
+                <span class="slider-val" id="val-mui">1.1</span>
             </div>
         </div>
 
-        <div class="control-group">
-            <label for="slider-Sigma">Debordian Spectacle Shield (&Sigma;)</label>
-            <div class="slider-row">
-                <input type="range" id="slider-Sigma" min="0.1" max="5.0" step="0.1" value="1.0">
-                <span class="slider-val" id="val-Sigma">1.0</span>
-            </div>
-        </div>
-
-        <div class="control-group">
-            <label for="dimension-view">Camera Projection Plane</label>
-            <select id="dimension-view">
-                <option value="3d_perspective">3D Multi-Perspective (Spatial + Cybernetic + Metabolic)</option>
-                <option value="spatial_plane">Spatial Axis Projection (X-Y Plane)</option>
-                <option value="metabolic_plane">Information Metabolism Projection (Y-Z Plane)</option>
-                <option value="control_source_plane">Control Source Plane (X-Z Plane)</option>
-            </select>
-        </div>
-
-        <button id="mutate-axioms-btn">Trigger Symbolic Variety Recalculation</button>
+        <button id="mutate-axioms-btn">Recalculate Complex Variety & Holomorphic Metric</button>
     </div>
 
     <div id="inspector-panel" class="ui-panel">
-        <h2 style="font-size:1rem; color:#f8fafc; margin-bottom:8px;" id="inspector-title">Algebraic & Logical Inspector</h2>
+        <h2 style="font-size:1rem; color:#f8fafc; margin-bottom:8px;" id="inspector-title">Complex Algebraic Geometry Inspector</h2>
         <div id="inspector-content">
+            <div class="data-card complex-card">
+                <h3>Complex Axiom Field Magnitudes & Phases</h3>
+                <p id="complex-axiom-props">M: |1.70| ∠0.49 rad | V: |2.26| ∠-0.22 rad</p>
+            </div>
             <div class="data-card algebraic-card">
-                <h3>Affine Scheme Ideal Generators I</h3>
+                <h3>Complex Scheme Ideal Generators V(I) ⊂ ℂ⁴</h3>
                 <p id="algebraic-generators">Loading polynomials...</p>
             </div>
             <div class="data-card algebraic-card">
-                <h3>Gröbner Basis (Lex Order)</h3>
-                <p id="algebraic-groebner">Computing...</p>
-            </div>
-            <div class="data-card algebraic-card">
-                <h3>Variety Dimension & Curvature R</h3>
-                <p id="algebraic-metrics">dim V(I): 1 | Curvature R: 0.38</p>
+                <h3>Hermitian Metric h & Holomorphic Curvature R</h3>
+                <p id="algebraic-groebner">Computing metric...</p>
             </div>
             <div class="data-card prolog-card">
                 <h3>Prolog Relational Trap Deduction</h3>
                 <p id="prolog-output">Prolog query running...</p>
             </div>
-            <div id="node-buttons-list" style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px;"></div>
         </div>
-    </div>
-
-    <div id="llm-panel" class="ui-panel">
-        <label for="llm-prompt">LLM Epistemic Model Transformer</label>
-        <textarea id="llm-prompt" rows="2" placeholder="e.g. Reorganize Saint-Saturnin & A75 under Kępiński metabolic entropy..."></textarea>
-        <button id="llm-reorganize-btn">Reorganize Model Semantics</button>
-        <div id="llm-output">Symbolic Meta-Regulator output will appear here...</div>
     </div>
 
     <script>
@@ -295,7 +258,7 @@
                 { id: "Saint-Saturnin", category: "Spatial Node", pos: [-127, -78, -32], color: "#38bdf8" },
                 { id: "A75 Highway Corridor", category: "Spatial Node", pos: [-37, -141, 62], color: "#38bdf8" },
                 { id: "Montceau-les-Mines", category: "Spatial Node", pos: [-73, 79, -37], color: "#38bdf8" },
-                { id: "Belfort-Lure Drift", category: "Spatial Node", pos: [-26, 7, -60], color: "#38bdf8" },
+                { id: "Belfort-Lure Belt", category: "Spatial Node", pos: [-26, 7, -60], color: "#38bdf8" },
                 { id: "Aire de la Guye", category: "Spatial Node", pos: [-71, 20, 47], color: "#38bdf8" },
                 { id: "Connected Car / Platform", category: "Cybernetic / Platform Node", pos: [158, -51, -24], color: "#f97316" },
                 { id: "Psychiatric & Medical Deserts", category: "Metabolic / Healthcare Strain Node", pos: [14, 180, 41], color: "#22c55e" },
@@ -306,9 +269,8 @@
                 { source: "A75 Highway Corridor", target: "Connected Car / Platform" },
                 { source: "Connected Car / Platform", target: "Youth / Counterculture Inertia" },
                 { source: "Psychiatric & Medical Deserts", target: "Saint-Saturnin" },
-                { source: "Montceau-les-Mines", target: "Belfort-Lure Drift" },
-                { source: "Aire de la Guye", target: "A75 Highway Corridor" },
-                { source: "Youth / Counterculture Inertia", target: "Psychiatric & Medical Deserts" }
+                { source: "Montceau-les-Mines", target: "Belfort-Lure Belt" },
+                { source: "Aire de la Guye", target: "A75 Highway Corridor" }
             ]
         };
 
@@ -350,7 +312,6 @@
             ctx.fillStyle = "#0b0f19";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Grid plane
             ctx.strokeStyle = "rgba(51, 65, 85, 0.3)";
             ctx.lineWidth = 1;
             for (let i = -400; i <= 400; i += 80) {
@@ -362,7 +323,6 @@
                 ctx.stroke();
             }
 
-            // Edges
             driftData.edges.forEach(edge => {
                 let sNode = driftData.nodes.find(n => n.id === edge.source);
                 let tNode = driftData.nodes.find(n => n.id === edge.target);
@@ -378,7 +338,6 @@
                 }
             });
 
-            // Nodes
             const projectedNodes = driftData.nodes.map(node => ({
                 ...node,
                 proj: project3D(...node.pos)
@@ -408,31 +367,31 @@
         }
 
         async function triggerAxiomMutation() {
-            const M = parseFloat(document.getElementById('slider-M').value);
-            const V = parseFloat(document.getElementById('slider-V').value);
-            const mu = parseFloat(document.getElementById('slider-mu').value);
-            const Sigma = parseFloat(document.getElementById('slider-Sigma').value);
+            const M_r = parseFloat(document.getElementById('slider-Mr').value);
+            const M_i = parseFloat(document.getElementById('slider-Mi').value);
+            const V_r = parseFloat(document.getElementById('slider-Vr').value);
+            const V_i = parseFloat(document.getElementById('slider-Vi').value);
+            const mu_r = parseFloat(document.getElementById('slider-mur').value);
+            const mu_i = parseFloat(document.getElementById('slider-mui').value);
 
             try {
                 const res = await fetch('/api/axiom_transform', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ M, V, mu, Sigma })
+                    body: JSON.stringify({ M_r, M_i, V_r, V_i, mu_r, mu_i, Sigma_r: 1.0, Sigma_i: 0.2 })
                 });
                 if (res.ok) {
                     const data = await res.json();
 
-                    // Update Inspector UI with formal algebraic geometry
+                    document.getElementById('complex-axiom-props').textContent = `M: |${data.complex_axioms.M.magnitude.toFixed(2)}| ∠${data.complex_axioms.M.phase_rad.toFixed(2)}rad | V: |${data.complex_axioms.V.magnitude.toFixed(2)}| ∠${data.complex_axioms.V.phase_rad.toFixed(2)}rad`;
                     document.getElementById('algebraic-generators').textContent = data.algebraic_scheme.ideal_generators.join(', ');
-                    document.getElementById('algebraic-groebner').textContent = data.algebraic_scheme.groebner_basis.slice(0, 3).join(', ') + '...';
-                    document.getElementById('algebraic-metrics').textContent = `dim V(I): ${data.algebraic_scheme.variety_dimension} | Scalar Curvature R: ${data.algebraic_scheme.scalar_curvature.toFixed(4)}`;
+                    document.getElementById('algebraic-groebner').textContent = `dim V(I): ${data.algebraic_scheme.variety_dimension} | Hermitian Metric h: ${data.algebraic_scheme.hermitian_metric_h.toFixed(2)}\nHolomorphic Ricci R: ${data.algebraic_scheme.holomorphic_ricci_curvature.toFixed(4)}`;
 
                     if (data.prolog_deductions.systemic_traps.length > 0) {
                         const trap = data.prolog_deductions.systemic_traps[0];
                         document.getElementById('prolog-output').textContent = `Systemic Trap Deducted: ${trap.X} -> ${trap.W}`;
                     }
 
-                    // Update 3D coordinates based on metric embedding
                     if (data.rebuilt_nodes) {
                         data.rebuilt_nodes.forEach(rn => {
                             let n = driftData.nodes.find(node => node.id === rn.id);
@@ -443,13 +402,10 @@
                     }
                     render();
                 }
-            } catch (err) {
-                console.error("Axiom transformation failed:", err);
-            }
+            } catch (err) {}
         }
 
-        // Setup slider sync
-        ['M', 'V', 'mu', 'Sigma'].forEach(param => {
+        ['Mr', 'Mi', 'Vr', 'Vi', 'mur', 'mui'].forEach(param => {
             const slider = document.getElementById(`slider-${param}`);
             const valSpan = document.getElementById(`val-${param}`);
             slider.addEventListener('input', (e) => {
@@ -481,55 +437,11 @@
 
         window.addEventListener('mouseup', () => { isDragging = false; });
 
-        document.getElementById('dimension-view').addEventListener('change', (e) => {
-            let val = e.target.value;
-            if (val === 'spatial_plane') { angleX = 0; angleY = 0; }
-            else if (val === 'metabolic_plane') { angleX = 0; angleY = Math.PI / 2; }
-            else if (val === 'control_source_plane') { angleX = Math.PI / 2; angleY = 0; }
-            else { angleX = 0.2; angleY = 0.4; }
-            render();
-        });
-
-        document.getElementById('llm-reorganize-btn').addEventListener('click', async () => {
-            const prompt = document.getElementById('llm-prompt').value || "Symbolic reorganization";
-            const outputEl = document.getElementById('llm-output');
-            outputEl.textContent = "Running symbolic transformation pipeline...\n";
-
-            const M = parseFloat(document.getElementById('slider-M').value);
-            const V = parseFloat(document.getElementById('slider-V').value);
-            const mu = parseFloat(document.getElementById('slider-mu').value);
-            const Sigma = parseFloat(document.getElementById('slider-Sigma').value);
-
-            try {
-                const res = await fetch('/api/reorganize', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ query: prompt, M, V, mu, Sigma })
-                });
-                if (res.ok) {
-                    const data = await res.json();
-                    outputEl.textContent = `[Symbolic Agent Output]:\n${data.result.meta_summary}\n\nGroebner Basis:\n${data.result.algebraic_scheme.groebner_basis.join('\n')}`;
-                    if (data.result.reorganized_nodes) {
-                        data.result.reorganized_nodes.forEach(rn => {
-                            let n = driftData.nodes.find(node => node.id === rn.id);
-                            if (n) {
-                                n.pos = rn.pos;
-                            }
-                        });
-                    }
-                    render();
-                }
-            } catch (err) {
-                outputEl.textContent = "Reorganization completed locally.";
-            }
-        });
-
         window.addEventListener('resize', () => {
             resizeCanvas();
             render();
         });
 
-        // Initial load
         triggerAxiomMutation();
     </script>
 </body>
