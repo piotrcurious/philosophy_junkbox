@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galeries Lafayette - Psychogeographical Map Visualizer</title>
+    <title>Galeries Lafayette - Psychogeographical Map Visualizer & 10D Translation</title>
     <style>
         body {
             margin: 0;
@@ -24,14 +24,25 @@
             position: absolute;
             top: 20px;
             left: 20px;
-            width: 320px;
-            background: rgba(12, 16, 26, 0.85);
-            backdrop-filter: blur(10px);
+            width: 360px;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+            background: rgba(12, 16, 26, 0.88);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
             z-index: 100;
+        }
+
+        /* Scrollbar styles for UI overlay */
+        #ui-overlay::-webkit-scrollbar {
+            width: 6px;
+        }
+        #ui-overlay::-webkit-scrollbar-thumb {
+            background: rgba(0, 240, 255, 0.3);
+            border-radius: 3px;
         }
 
         h1 {
@@ -45,27 +56,29 @@
         }
 
         h2 {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-top: 15px;
-            margin-bottom: 8px;
+            margin-top: 14px;
+            margin-bottom: 6px;
             color: #aaa;
+            border-left: 3px solid #00f0ff;
+            padding-left: 6px;
         }
 
         .control-group {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         label {
             display: flex;
             justify-content: space-between;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             margin-bottom: 4px;
             color: #ccc;
         }
 
-        select, input[type=range] {
+        select, input[type=range], button {
             width: 100%;
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -74,19 +87,36 @@
             padding: 6px;
             box-sizing: border-box;
             outline: none;
+            font-size: 0.78rem;
+        }
+
+        button {
+            background: linear-gradient(135deg, rgba(0,240,255,0.2), rgba(0,120,255,0.4));
+            border: 1px solid #00f0ff;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-top: 6px;
+            transition: all 0.2s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, rgba(0,240,255,0.4), rgba(0,120,255,0.7));
+            box-shadow: 0 0 10px rgba(0,240,255,0.5);
         }
 
         input[type=range] {
             -webkit-appearance: none;
-            height: 6px;
+            height: 5px;
             background: #2a2f3a;
             border-radius: 3px;
         }
 
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 14px;
-            height: 14px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             background: #00f0ff;
             cursor: pointer;
@@ -95,8 +125,8 @@
         .checkbox-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-top: 8px;
+            gap: 6px;
+            margin-top: 6px;
         }
 
         .checkbox-item {
@@ -114,21 +144,21 @@
             position: absolute;
             bottom: 20px;
             right: 20px;
-            width: 300px;
-            background: rgba(12, 16, 26, 0.85);
-            backdrop-filter: blur(10px);
+            width: 320px;
+            background: rgba(12, 16, 26, 0.88);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 12px;
             padding: 16px;
             font-size: 0.8rem;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
             z-index: 100;
         }
 
         .metric-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
             border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
             padding-bottom: 2px;
         }
@@ -151,6 +181,11 @@
         .worker-bg { background: rgba(255, 120, 0, 0.2); color: #ff7800; border: 1px solid #ff7800; }
         .resident-bg { background: rgba(0, 255, 120, 0.2); color: #00ff78; border: 1px solid #00ff78; }
         .surveillance-bg { background: rgba(200, 0, 255, 0.2); color: #c800ff; border: 1px solid #c800ff; }
+
+        .pivot-active {
+            border: 1px solid #00ffaa !important;
+            box-shadow: 0 0 12px rgba(0, 255, 170, 0.4);
+        }
     </style>
     <!-- Three.js and OrbitControls CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -161,17 +196,96 @@
 
     <div id="ui-overlay">
         <h1>Galeries Lafayette</h1>
-        <p style="font-size: 0.75rem; color: #8a99ad; margin-top: -6px;">Psychogeographical Drift & Decompression</p>
+        <p style="font-size: 0.72rem; color: #8a99ad; margin-top: -6px;">10D Psychogeographical Manifold & Local Pivot Translation</p>
 
         <div class="control-group">
-            <label for="projection-select">Decompression Space</label>
+            <label for="projection-select">10D -> 3D Translation Method</label>
             <select id="projection-select">
-                <option value="spatial_3d">3D Physical Architecture</option>
+                <option value="spatial_3d">Physical 3D Architecture (X, Y, Z)</option>
                 <option value="mds_3d">MDS Multidimensional Scaling</option>
-                <option value="pca_3d">PCA Principal Components</option>
-                <option value="thermal_3d">Microclimate / Thermal Field</option>
-                <option value="commercial_3d">Capital vs Symbolic Field</option>
+                <option value="pca_3d">PCA Principal Component Analysis</option>
+                <option value="custom_axes">Custom 10D Axis Mapping</option>
+                <option value="local_pivot">Local Pivot Neighborhood Projection</option>
             </select>
+        </div>
+
+        <div id="custom-axes-container" style="display: none; background: rgba(255,255,255,0.03); padding: 8px; border-radius: 6px; margin-bottom: 10px;">
+            <div class="control-group">
+                <label>X-Axis Dimension</label>
+                <select id="select-axis-x">
+                    <option value="posX" selected>posX (Physical X)</option>
+                    <option value="posY">posY (Physical Elevation)</option>
+                    <option value="posZ">posZ (Physical Depth)</option>
+                    <option value="temperature">temperature (°C)</option>
+                    <option value="humidity">humidity (%)</option>
+                    <option value="commercialVal">commercialVal (Capital Index)</option>
+                    <option value="accessibility">accessibility Index</option>
+                    <option value="symbolicVal">symbolicVal (Heritage)</option>
+                    <option value="thermalStress">thermalStress Index</option>
+                    <option value="flowDensity">flowDensity Index</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label>Y-Axis Dimension</label>
+                <select id="select-axis-y">
+                    <option value="posX">posX (Physical X)</option>
+                    <option value="posY" selected>posY (Physical Elevation)</option>
+                    <option value="posZ">posZ (Physical Depth)</option>
+                    <option value="temperature">temperature (°C)</option>
+                    <option value="humidity">humidity (%)</option>
+                    <option value="commercialVal">commercialVal (Capital Index)</option>
+                    <option value="accessibility">accessibility Index</option>
+                    <option value="symbolicVal">symbolicVal (Heritage)</option>
+                    <option value="thermalStress">thermalStress Index</option>
+                    <option value="flowDensity">flowDensity Index</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label>Z-Axis Dimension</label>
+                <select id="select-axis-z">
+                    <option value="posX">posX (Physical X)</option>
+                    <option value="posY">posY (Physical Elevation)</option>
+                    <option value="posZ" selected>posZ (Physical Depth)</option>
+                    <option value="temperature">temperature (°C)</option>
+                    <option value="humidity">humidity (%)</option>
+                    <option value="commercialVal">commercialVal (Capital Index)</option>
+                    <option value="accessibility">accessibility Index</option>
+                    <option value="symbolicVal">symbolicVal (Heritage)</option>
+                    <option value="thermalStress">thermalStress Index</option>
+                    <option value="flowDensity">flowDensity Index</option>
+                </select>
+            </div>
+        </div>
+
+        <h2>Local Pivot Point</h2>
+        <div class="control-group">
+            <label>Selected Pivot Node</label>
+            <select id="select-pivot-node">
+                <option value="underground">Underground Metro Connection</option>
+                <option value="boulevard">Boulevard Haussmann Entrance</option>
+                <option value="vip_salon">VIP Personal Shopping Salons</option>
+                <option value="coupole" selected>Historic Glass Coupole Dome</option>
+                <option value="glasswalk">Glasswalk Suspended Runway</option>
+                <option value="rooftop">Rooftop Terrace Microclimate</option>
+            </select>
+        </div>
+
+        <h2>10D Feature Amplification Weights</h2>
+        <div class="control-group">
+            <label>Thermal / Climate Weight <span id="val-w-thermal">1.0</span></label>
+            <input type="range" id="slider-w-thermal" min="0.0" max="3.0" step="0.1" value="1.0">
+        </div>
+        <div class="control-group">
+            <label>Commercial / Capital Weight <span id="val-w-commerce">1.0</span></label>
+            <input type="range" id="slider-w-commerce" min="0.0" max="3.0" step="0.1" value="1.0">
+        </div>
+        <div class="control-group">
+            <label>Symbolic / Heritage Weight <span id="val-w-symbolic">1.0</span></label>
+            <input type="range" id="slider-w-symbolic" min="0.0" max="3.0" step="0.1" value="1.0">
+        </div>
+        <div class="control-group">
+            <label>Flow Density / Crowd Weight <span id="val-w-flow">1.0</span></label>
+            <input type="range" id="slider-w-flow" min="0.0" max="3.0" step="0.1" value="1.0">
         </div>
 
         <h2>Non-linear Local Warping</h2>
@@ -183,9 +297,12 @@
             <label>Spatial Curvature <span id="val-curvature">0.00</span></label>
             <input type="range" id="slider-curvature" min="-0.05" max="0.05" step="0.005" value="0.0">
         </div>
-        <div class="control-group">
-            <label>Vertical Stretch <span id="val-stretch">1.00</span></label>
-            <input type="range" id="slider-stretch" min="0.5" max="2.5" step="0.1" value="1.0">
+
+        <h2>Event Extensions & Cross Sections</h2>
+        <div class="checkbox-group">
+            <label class="checkbox-item"><input type="checkbox" id="chk-ext-friction" checked>High Friction Jump Vectors</label>
+            <label class="checkbox-item"><input type="checkbox" id="chk-ext-pivot-sphere" checked>Pivot Neighborhood Sphere</label>
+            <label class="checkbox-item"><input type="checkbox" id="chk-ext-cross-section" checked>Cross-Section Plane</label>
         </div>
 
         <h2>Trajectories</h2>
@@ -199,15 +316,19 @@
 
     <div id="info-panel">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <strong id="node-name">Hover / Select Node</strong>
+            <strong id="node-name">Hover / Click Node to Pivot</strong>
             <span id="node-archetype" class="badge tourist-bg">Info</span>
         </div>
         <div class="metric-row"><span>Temperature (T):</span><span class="metric-value" id="m-temp">-- °C</span></div>
         <div class="metric-row"><span>Humidity (RH):</span><span class="metric-value" id="m-humidity">-- %</span></div>
         <div class="metric-row"><span>Commerce Index:</span><span class="metric-value" id="m-commerce">--</span></div>
+        <div class="metric-row"><span>Accessibility Index:</span><span class="metric-value" id="m-accessibility">--</span></div>
         <div class="metric-row"><span>Symbolic Value:</span><span class="metric-value" id="m-symbolic">--</span></div>
         <div class="metric-row"><span>Thermal Stress:</span><span class="metric-value" id="m-stress">--</span></div>
         <div class="metric-row"><span>Flow Density:</span><span class="metric-value" id="m-flow">--</span></div>
+        <div class="metric-row" style="margin-top:6px; border-top: 1px solid rgba(0,240,255,0.3); padding-top:4px;">
+            <span style="color:#00f0ff">Pivot 10D Distance:</span><span class="metric-value" id="m-pivot-dist" style="color:#00f0ff">--</span>
+        </div>
     </div>
 
     <script>
@@ -215,8 +336,8 @@
         let dataset = [];
         let trajectoryLines = {};
         let trajectoryPoints = {};
+        let eventExtensionsGroup;
         let architectureGroup;
-        let animatedParticles = [];
 
         const colors = {
             Tourist: 0x00f0ff,
@@ -226,9 +347,23 @@
         };
 
         let currentProjection = 'spatial_3d';
+        let pivotNodeId = 'coupole';
         let gammaWarp = 1.0;
         let curvature = 0.0;
-        let verticalStretch = 1.0;
+
+        // Feature amplification weights
+        let weights = {
+            thermal: 1.0,
+            commerce: 1.0,
+            symbolic: 1.0,
+            flow: 1.0
+        };
+
+        let customAxes = {
+            x: 'posX',
+            y: 'posY',
+            z: 'posZ'
+        };
 
         init();
         loadData();
@@ -253,18 +388,21 @@
             controls.dampingFactor = 0.05;
 
             // Lighting
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
             scene.add(ambientLight);
 
             const dirLight = new THREE.DirectionalLight(0x00f0ff, 0.8);
             dirLight.position.set(50, 100, 50);
             scene.add(dirLight);
 
-            const pointLight = new THREE.PointLight(0xff00ff, 0.5, 100);
+            const pointLight = new THREE.PointLight(0xff00ff, 0.6, 120);
             pointLight.position.set(-30, 20, -30);
             scene.add(pointLight);
 
-            // Architectural representation of Galeries Lafayette
+            eventExtensionsGroup = new THREE.Group();
+            scene.add(eventExtensionsGroup);
+
+            // Architectural model
             buildArchitecture();
 
             // Setup listeners
@@ -277,28 +415,27 @@
         function buildArchitecture() {
             architectureGroup = new THREE.Group();
 
-            // Floor levels (Underground, Ground, VIP, Coupole, Glasswalk, Rooftop)
             const levels = [
-                { y: -10, name: 'Underground Metro', r: 25 },
-                { y: 0, name: 'Boulevard Ground', r: 30 },
-                { y: 20, name: 'VIP Salons', r: 22 },
-                { y: 40, name: 'Coupole Dome Base', r: 20 },
-                { y: 50, name: 'Glasswalk Runway', r: 18 },
-                { y: 70, name: 'Rooftop Terrace', r: 28 }
+                { y: -10, r: 25 },
+                { y: 0,  r: 30 },
+                { y: 20, r: 22 },
+                { y: 40, r: 20 },
+                { y: 50, r: 18 },
+                { y: 70, r: 28 }
             ];
 
             levels.forEach(lvl => {
                 const geometry = new THREE.RingGeometry(lvl.r - 2, lvl.r, 32);
-                const material = new THREE.MeshBasicMaterial({ color: 0x00f0ff, side: THREE.DoubleSide, transparent: true, opacity: 0.15, wireframe: true });
+                const material = new THREE.MeshBasicMaterial({ color: 0x00f0ff, side: THREE.DoubleSide, transparent: true, opacity: 0.12, wireframe: true });
                 const mesh = new THREE.Mesh(geometry, material);
                 mesh.rotation.x = Math.PI / 2;
                 mesh.position.y = lvl.y;
                 architectureGroup.add(mesh);
             });
 
-            // Coupole Glass Dome wireframe model
+            // Coupole Dome
             const domeGeo = new THREE.SphereGeometry(15, 16, 12, 0, Math.PI * 2, 0, Math.PI / 2);
-            const domeMat = new THREE.MeshBasicMaterial({ color: 0x00ffaa, wireframe: true, transparent: true, opacity: 0.2 });
+            const domeMat = new THREE.MeshBasicMaterial({ color: 0x00ffaa, wireframe: true, transparent: true, opacity: 0.18 });
             const domeMesh = new THREE.Mesh(domeGeo, domeMat);
             domeMesh.position.set(0, 40, 0);
             architectureGroup.add(domeMesh);
@@ -306,12 +443,79 @@
             scene.add(architectureGroup);
         }
 
-        function transformPosition(pos) {
+        function getPivotItem() {
+            return dataset.find(d => d.id.includes(pivotNodeId) || d.id === pivotNodeId) || dataset[0];
+        }
+
+        // Calculate 10D weighted Euclidean distance between two items
+        function distance10D(itemA, itemB) {
+            if (!itemA || !itemB || !itemA.raw_10d || !itemB.raw_10d) return 0;
+            const a = itemA.raw_10d;
+            const b = itemB.raw_10d;
+
+            const dx = a.posX - b.posX;
+            const dy = a.posY - b.posY;
+            const dz = a.posZ - b.posZ;
+            const dTemp = (a.temperature - b.temperature) * weights.thermal * 2.0;
+            const dHum = (a.humidity - b.humidity) * weights.thermal * 10.0;
+            const dComm = (a.commercialVal - b.commercialVal) * weights.commerce * 20.0;
+            const dAcc = (a.accessibility - b.accessibility) * 10.0;
+            const dSym = (a.symbolicVal - b.symbolicVal) * weights.symbolic * 20.0;
+            const dStress = (a.thermalStress - b.thermalStress) * weights.thermal * 15.0;
+            const dFlow = (a.flowDensity - b.flowDensity) * weights.flow * 15.0;
+
+            return Math.sqrt(dx*dx + dy*dy + dz*dz + dTemp*dTemp + dHum*dHum + dComm*dComm + dAcc*dAcc + dSym*dSym + dStress*dStress + dFlow*dFlow);
+        }
+
+        function projectItemTo3D(item) {
+            let pos = { x: 0, y: 0, z: 0 };
+            const raw = item.raw_10d;
+
+            if (currentProjection === 'spatial_3d') {
+                pos.x = item.spatial_3d.x;
+                pos.y = item.spatial_3d.y;
+                pos.z = item.spatial_3d.z;
+            } else if (currentProjection === 'mds_3d') {
+                pos.x = item.mds_3d.x * (1 + (weights.commerce - 1)*0.3);
+                pos.y = item.mds_3d.y * (1 + (weights.thermal - 1)*0.3);
+                pos.z = item.mds_3d.z * (1 + (weights.symbolic - 1)*0.3);
+            } else if (currentProjection === 'pca_3d') {
+                pos.x = item.pca_3d.x;
+                pos.y = item.pca_3d.y;
+                pos.z = item.pca_3d.z;
+            } else if (currentProjection === 'custom_axes') {
+                const getVal = (dimKey) => {
+                    let v = raw[dimKey] || 0;
+                    if (dimKey === 'temperature') v = (v - 20) * 3 * weights.thermal;
+                    else if (dimKey === 'commercialVal') v = (v - 0.5) * 40 * weights.commerce;
+                    else if (dimKey === 'symbolicVal') v = (v - 0.5) * 40 * weights.symbolic;
+                    else if (dimKey === 'flowDensity') v = (v - 0.5) * 30 * weights.flow;
+                    else if (dimKey === 'thermalStress') v = (v - 0.5) * 30 * weights.thermal;
+                    return v;
+                };
+                pos.x = getVal(customAxes.x);
+                pos.y = getVal(customAxes.y);
+                pos.z = getVal(customAxes.z);
+            } else if (currentProjection === 'local_pivot') {
+                const pivot = getPivotItem();
+                const dist = distance10D(item, pivot);
+
+                // Re-center space around pivot and project directional 10D vectors
+                const dx = raw.posX - pivot.raw_10d.posX;
+                const dy = (raw.temperature - pivot.raw_10d.temperature) * weights.thermal * 5;
+                const dz = (raw.commercialVal - pivot.raw_10d.commercialVal) * weights.commerce * 30;
+
+                const norm = Math.sqrt(dx*dx + dy*dy + dz*dz) || 1;
+                pos.x = (dx / norm) * dist * 1.5;
+                pos.y = (dy / norm) * dist * 1.5;
+                pos.z = (dz / norm) * dist * 1.5;
+            }
+
+            // Apply non-linear local gamma warping & curvature
             let x = pos.x;
-            let y = pos.y * verticalStretch;
+            let y = pos.y;
             let z = pos.z;
 
-            // Apply non-linear local gamma warping
             const r = Math.sqrt(x * x + z * z);
             if (r > 0.001) {
                 const rWarped = Math.pow(r, gammaWarp);
@@ -319,8 +523,6 @@
                 x *= factor;
                 z *= factor;
             }
-
-            // Apply spatial curvature
             y += curvature * (x * x + z * z);
 
             return new THREE.Vector3(x, y, z);
@@ -334,12 +536,11 @@
                     renderTrajectories();
                 })
                 .catch(err => {
-                    console.warn("Could not load decompressed_data.json directly, fallback generated data initialized.", err);
+                    console.error("Error loading decompressed_data.json:", err);
                 });
         }
 
         function renderTrajectories() {
-            // Clear existing lines & points
             Object.values(trajectoryLines).forEach(line => scene.remove(line));
             Object.values(trajectoryPoints).forEach(group => scene.remove(group));
             trajectoryLines = {};
@@ -351,7 +552,7 @@
                 const items = dataset.filter(d => d.archetype === arch);
                 if (items.length === 0) return;
 
-                const points = items.map(d => transformPosition(d[currentProjection]));
+                const points = items.map(d => projectItemTo3D(d));
                 const curve = new THREE.CatmullRomCurve3(points);
                 const geometry = new THREE.TubeGeometry(curve, 64, 0.6, 8, false);
                 const material = new THREE.MeshStandardMaterial({
@@ -366,7 +567,6 @@
                 scene.add(lineMesh);
                 trajectoryLines[arch] = lineMesh;
 
-                // Points group
                 const pointGroup = new THREE.Group();
                 items.forEach((d, idx) => {
                     const pos = points[idx];
@@ -381,7 +581,51 @@
                 trajectoryPoints[arch] = pointGroup;
             });
 
+            renderEventExtensions();
             updateVisibility();
+        }
+
+        function renderEventExtensions() {
+            // Clear existing extensions
+            while(eventExtensionsGroup.children.length > 0) {
+                eventExtensionsGroup.remove(eventExtensionsGroup.children[0]);
+            }
+
+            const pivotItem = getPivotItem();
+            const pivotPos = projectItemTo3D(pivotItem);
+
+            // 1. Pivot Local Neighborhood Hyper-Sphere
+            if (document.getElementById('chk-ext-pivot-sphere').checked) {
+                const sphereGeo = new THREE.SphereGeometry(20, 32, 24);
+                const sphereMat = new THREE.MeshBasicMaterial({ color: 0x00ffaa, wireframe: true, transparent: true, opacity: 0.25 });
+                const sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
+                sphereMesh.position.copy(pivotPos);
+                eventExtensionsGroup.add(sphereMesh);
+            }
+
+            // 2. Cross-Section Slicing Plane at Pivot
+            if (document.getElementById('chk-ext-cross-section').checked) {
+                const planeGeo = new THREE.PlaneGeometry(80, 80);
+                const planeMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff, side: THREE.DoubleSide, transparent: true, opacity: 0.12 });
+                const planeMesh = new THREE.Mesh(planeGeo, planeMat);
+                planeMesh.rotation.x = Math.PI / 2;
+                planeMesh.position.copy(pivotPos);
+                eventExtensionsGroup.add(planeMesh);
+            }
+
+            // 3. High Friction / Transport Jump Vectors
+            if (document.getElementById('chk-ext-friction').checked && dataset.length > 0) {
+                dataset.forEach(item => {
+                    if (item.raw_10d && (item.raw_10d.thermalStress > 0.7 || item.raw_10d.commercialVal > 0.85)) {
+                        const itemPos = projectItemTo3D(item);
+                        const lineGeo = new THREE.BufferGeometry().setFromPoints([pivotPos, itemPos]);
+                        const lineMat = new THREE.LineDashedMaterial({ color: 0xff0077, dashSize: 2, gapSize: 1 });
+                        const line = new THREE.Line(lineGeo, lineMat);
+                        line.computeLineDistances();
+                        eventExtensionsGroup.add(line);
+                    }
+                });
+            }
         }
 
         function updatePositions() {
@@ -391,16 +635,14 @@
                 const items = dataset.filter(d => d.archetype === arch);
                 if (items.length === 0) return;
 
-                const points = items.map(d => transformPosition(d[currentProjection]));
+                const points = items.map(d => projectItemTo3D(d));
 
-                // Update tube mesh
                 if (trajectoryLines[arch]) {
                     const curve = new THREE.CatmullRomCurve3(points);
                     trajectoryLines[arch].geometry.dispose();
                     trajectoryLines[arch].geometry = new THREE.TubeGeometry(curve, 64, 0.6, 8, false);
                 }
 
-                // Update point markers
                 if (trajectoryPoints[arch]) {
                     trajectoryPoints[arch].children.forEach((pMesh, idx) => {
                         if (points[idx]) pMesh.position.copy(points[idx]);
@@ -408,17 +650,46 @@
                 }
             });
 
-            // Toggle architecture visibility depending on projection
             if (architectureGroup) {
                 architectureGroup.visible = (currentProjection === 'spatial_3d');
             }
+
+            renderEventExtensions();
         }
 
         function setupUIListeners() {
             document.getElementById('projection-select').addEventListener('change', (e) => {
                 currentProjection = e.target.value;
+                document.getElementById('custom-axes-container').style.display =
+                    (currentProjection === 'custom_axes') ? 'block' : 'none';
                 updatePositions();
             });
+
+            ['x', 'y', 'z'].forEach(axis => {
+                document.getElementById(`select-axis-${axis}`).addEventListener('change', (e) => {
+                    customAxes[axis] = e.target.value;
+                    if (currentProjection === 'custom_axes') updatePositions();
+                });
+            });
+
+            document.getElementById('select-pivot-node').addEventListener('change', (e) => {
+                pivotNodeId = e.target.value;
+                updatePositions();
+                displayNodeInfo(getPivotItem());
+            });
+
+            const setupWeightSlider = (key, elemId, valId) => {
+                document.getElementById(elemId).addEventListener('input', (e) => {
+                    weights[key] = parseFloat(e.target.value);
+                    document.getElementById(valId).innerText = weights[key].toFixed(1);
+                    updatePositions();
+                });
+            };
+
+            setupWeightSlider('thermal', 'slider-w-thermal', 'val-w-thermal');
+            setupWeightSlider('commerce', 'slider-w-commerce', 'val-w-commerce');
+            setupWeightSlider('symbolic', 'slider-w-symbolic', 'val-w-symbolic');
+            setupWeightSlider('flow', 'slider-w-flow', 'val-w-flow');
 
             document.getElementById('slider-gamma').addEventListener('input', (e) => {
                 gammaWarp = parseFloat(e.target.value);
@@ -432,19 +703,40 @@
                 updatePositions();
             });
 
-            document.getElementById('slider-stretch').addEventListener('input', (e) => {
-                verticalStretch = parseFloat(e.target.value);
-                document.getElementById('val-stretch').innerText = verticalStretch.toFixed(2);
-                updatePositions();
+            ['chk-ext-friction', 'chk-ext-pivot-sphere', 'chk-ext-cross-section'].forEach(id => {
+                document.getElementById(id).addEventListener('change', renderEventExtensions);
             });
 
             ['tourist', 'worker', 'resident', 'surveillance'].forEach(arch => {
                 document.getElementById(`chk-${arch}`).addEventListener('change', updateVisibility);
             });
 
-            // Raycaster for interactive node info display
+            // Raycaster for interactive pivot selection and node inspection
             const raycaster = new THREE.Raycaster();
             const mouse = new THREE.Vector2();
+
+            window.addEventListener('click', (e) => {
+                if (e.clientX < 380 && e.clientY < 600) return; // Ignore click on UI
+                mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+                mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+
+                raycaster.setFromCamera(mouse, camera);
+                const meshes = [];
+                Object.values(trajectoryPoints).forEach(group => {
+                    if (group.visible) meshes.push(...group.children);
+                });
+
+                const intersects = raycaster.intersectObjects(meshes);
+                if (intersects.length > 0) {
+                    const d = intersects[0].object.userData;
+                    if (d) {
+                        pivotNodeId = d.id;
+                        document.getElementById('select-pivot-node').value = d.id;
+                        displayNodeInfo(d);
+                        updatePositions();
+                    }
+                }
+            });
 
             window.addEventListener('mousemove', (e) => {
                 mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
@@ -470,13 +762,18 @@
             badge.innerText = d.archetype;
             badge.className = `badge ${d.archetype.toLowerCase()}-bg`;
 
-            if (d.raw_dim) {
-                document.getElementById('m-temp').innerText = `${d.raw_dim.temperature.toFixed(1)} °C`;
-                document.getElementById('m-humidity').innerText = `${(d.raw_dim.humidity * 100).toFixed(0)} %`;
-                document.getElementById('m-commerce').innerText = d.raw_dim.commercialVal.toFixed(2);
-                document.getElementById('m-symbolic').innerText = d.raw_dim.symbolicVal.toFixed(2);
-                document.getElementById('m-stress').innerText = d.raw_dim.thermalStress.toFixed(2);
-                document.getElementById('m-flow').innerText = d.raw_dim.flowDensity.toFixed(2);
+            if (d.raw_10d) {
+                document.getElementById('m-temp').innerText = `${d.raw_10d.temperature.toFixed(1)} °C`;
+                document.getElementById('m-humidity').innerText = `${(d.raw_10d.humidity * 100).toFixed(0)} %`;
+                document.getElementById('m-commerce').innerText = d.raw_10d.commercialVal.toFixed(2);
+                document.getElementById('m-accessibility').innerText = d.raw_10d.accessibility.toFixed(2);
+                document.getElementById('m-symbolic').innerText = d.raw_10d.symbolicVal.toFixed(2);
+                document.getElementById('m-stress').innerText = d.raw_10d.thermalStress.toFixed(2);
+                document.getElementById('m-flow').innerText = d.raw_10d.flowDensity.toFixed(2);
+
+                const pivot = getPivotItem();
+                const dist10 = distance10D(d, pivot);
+                document.getElementById('m-pivot-dist').innerText = dist10.toFixed(2);
             }
         }
 
@@ -504,7 +801,6 @@
             requestAnimationFrame(animate);
             controls.update();
 
-            // Rotate architecture slowly
             if (architectureGroup && currentProjection === 'spatial_3d') {
                 architectureGroup.rotation.y += 0.001;
             }

@@ -5,9 +5,10 @@ cat("Reading high_dim_trajectories.csv...\n")
 df <- read.csv("high_dim_trajectories.csv", stringsAsFactors = FALSE)
 
 # Extract 10D numerical matrix for dimensionality reduction
-dim_matrix <- as.matrix(df[, c("posX", "posY", "posZ", "temperature", "humidity",
-                               "commercialVal", "accessibility", "symbolicVal",
-                               "thermalStress", "flowDensity")])
+dim_cols <- c("posX", "posY", "posZ", "temperature", "humidity",
+              "commercialVal", "accessibility", "symbolicVal",
+              "thermalStress", "flowDensity")
+dim_matrix <- as.matrix(df[, dim_cols])
 
 # Scale matrix to zero mean, unit variance
 scaled_matrix <- scale(dim_matrix)
@@ -31,9 +32,10 @@ for (i in 1:nrow(df)) {
     spatial_3d     = list(x = df$posX[i], y = df$posY[i], z = df$posZ[i]),
     mds_3d         = list(x = mds_fit[i, 1] * 10, y = mds_fit[i, 2] * 10, z = mds_fit[i, 3] * 10),
     pca_3d         = list(x = pca_3d[i, 1] * 10, y = pca_3d[i, 2] * 10, z = pca_3d[i, 3] * 10),
-    thermal_3d     = list(x = df$posX[i], y = (df$temperature[i] - 20) * 4, z = df$posZ[i]),
-    commercial_3d  = list(x = df$commercialVal[i] * 30 - 15, y = df$posY[i], z = df$symbolicVal[i] * 30 - 15),
-    raw_dim        = list(
+    raw_10d        = list(
+      posX          = df$posX[i],
+      posY          = df$posY[i],
+      posZ          = df$posZ[i],
       temperature   = df$temperature[i],
       humidity      = df$humidity[i],
       commercialVal = df$commercialVal[i],
@@ -47,4 +49,4 @@ for (i in 1:nrow(df)) {
 
 json_output <- toJSON(data_list, auto_unbox = TRUE, pretty = TRUE)
 write(json_output, "decompressed_data.json")
-cat("Successfully generated decompressed_data.json with MDS & PCA reductions.\n")
+cat("Successfully generated decompressed_data.json with full 10D vectors.\n")
