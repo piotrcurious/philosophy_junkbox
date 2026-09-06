@@ -1,4 +1,31 @@
 {
+  "axioms": [
+    {
+      "category":"Climate Adaptability",
+      "id":"a1_thermal_barrier",
+      "statement":"Thermal Stress > 35.0 C creates access friction for vulnerable residents"
+    },
+    {
+      "category":"Social Access",
+      "id":"a2_commercial_exclusion",
+      "statement":"Commerce Index > 0.90 excludes non-commercial public trajectories"
+    },
+    {
+      "category":"Symbolic Geometry",
+      "id":"a3_symbolic_spectacle",
+      "statement":"Heritage Spectacle nodes amplify flow density and tourist attraction"
+    },
+    {
+      "category":"Topology",
+      "id":"a4_reachability_continuity",
+      "statement":"Valid drift trajectory requires continuous connected edge transitions without cost infinity"
+    },
+    {
+      "category":"Control Space",
+      "id":"a5_surveillance_symmetry",
+      "statement":"Surveillance archetype experiences minimal physical friction across all security boundaries"
+    }
+  ],
   "edges": [
     {
       "cost_resident":0.3,
@@ -73,6 +100,12 @@
       "to":"rooftop"
     }
   ],
+  "formal_trajectories": {
+    "resident": {"path": ["underground", "boulevard", "coupole", "glasswalk", "rooftop" ], "status":"FORMALLY_VALIDATED"},
+    "surveillance": {"path": ["underground", "boulevard", "vip_salon", "glasswalk", "rooftop" ], "status":"FORMALLY_VALIDATED"},
+    "tourist": {"path": ["boulevard", "vip_salon", "glasswalk", "rooftop" ], "status":"FORMALLY_VALIDATED"},
+    "worker": {"path": ["underground", "boulevard", "vip_salon", "glasswalk", "rooftop" ], "status":"FORMALLY_VALIDATED"}
+  },
   "nodes": [
     {
       "commerce":0.2,
@@ -122,5 +155,11 @@
       "symbol":"Viewpoint Oasis",
       "temp":36.0
     }
-  ]
+  ],
+  "verification": {
+    "manifold_status":"PROVED_CONSISTENT",
+    "theorem_a1_thermal_barriers_cnt": ["rooftop" ],
+    "theorem_a2_high_commerce_exclusion_cnt": ["vip_salon" ],
+    "total_manifold_edges":8
+  }
 }

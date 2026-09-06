@@ -1,8 +1,9 @@
-# dimension_decompression.R - Multidimensional Decompression & Projection Analysis
+# dimension_decompression.R - Multidimensional Decompression & Formal Proof Integration
 library(jsonlite)
 
-cat("Reading high_dim_trajectories.csv...\n")
+cat("Reading high_dim_trajectories.csv and ontology_output.json...\n")
 df <- read.csv("high_dim_trajectories.csv", stringsAsFactors = FALSE)
+prolog_data <- fromJSON("ontology_output.json")
 
 # Extract 10D numerical matrix for dimensionality reduction
 dim_cols <- c("posX", "posY", "posZ", "temperature", "humidity",
@@ -47,6 +48,13 @@ for (i in 1:nrow(df)) {
   )
 }
 
-json_output <- toJSON(data_list, auto_unbox = TRUE, pretty = TRUE)
+final_output <- list(
+  trajectories = data_list,
+  prolog_verification = prolog_data$verification,
+  prolog_axioms = prolog_data$axioms,
+  prolog_formal_trajectories = prolog_data$formal_trajectories
+)
+
+json_output <- toJSON(final_output, auto_unbox = TRUE, pretty = TRUE)
 write(json_output, "decompressed_data.json")
-cat("Successfully generated decompressed_data.json with full 10D vectors.\n")
+cat("Successfully generated decompressed_data.json with 10D vectors and Prolog proof results.\n")

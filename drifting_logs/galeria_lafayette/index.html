@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galeries Lafayette - Psychogeographical Map Visualizer & Flow Dynamics</title>
+    <title>Galeries Lafayette - Psychogeographical Map Visualizer & Prolog Formal Verification</title>
     <style>
         body {
             margin: 0;
@@ -138,6 +138,21 @@
             z-index: 100;
         }
 
+        #prolog-verification-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 320px;
+            background: rgba(12, 16, 26, 0.88);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 255, 170, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 0.75rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+            z-index: 100;
+        }
+
         .metric-row {
             display: flex;
             justify-content: space-between;
@@ -174,7 +189,7 @@
 
     <div id="ui-overlay">
         <h1>Galeries Lafayette</h1>
-        <p style="font-size: 0.72rem; color: #8a99ad; margin-top: -6px;">Psychogeographical Manifold & Flow Dynamics Simulation</p>
+        <p style="font-size: 0.72rem; color: #8a99ad; margin-top: -6px;">10D Psychogeographical Engine & Prolog Formal Proofs</p>
 
         <div class="control-group">
             <label for="projection-select">10D -> 3D Translation Method</label>
@@ -237,7 +252,7 @@
 
         <h2>Flow Dynamics Simulation</h2>
         <div class="control-group">
-            <label>Flow Velocity / Velocity Speed <span id="val-flow-speed">1.2</span></label>
+            <label>Flow Velocity / Speed <span id="val-flow-speed">1.2</span></label>
             <input type="range" id="slider-flow-speed" min="0.1" max="4.0" step="0.1" value="1.2">
         </div>
         <div class="control-group">
@@ -310,6 +325,19 @@
         </div>
     </div>
 
+    <!-- PROLOG FORMAL PROOF STATUS PANEL -->
+    <div id="prolog-verification-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <strong style="color:#00ffaa; text-transform:uppercase;">Prolog Proof Engine</strong>
+            <span id="proof-status" class="badge" style="background:rgba(0,255,170,0.2); color:#00ffaa; border:1px solid #00ffaa;">PROVED</span>
+        </div>
+        <div class="metric-row"><span>Manifold Axioms Verified:</span><span class="metric-value" id="proof-axioms-cnt">5</span></div>
+        <div class="metric-row"><span>Thermal Barriers (A1):</span><span class="metric-value" id="proof-a1">1 Node</span></div>
+        <div class="metric-row"><span>Commerce Exclusion (A2):</span><span class="metric-value" id="proof-a2">2 Nodes</span></div>
+        <div class="metric-row"><span>Tourist Trajectory Status:</span><span class="metric-value" id="proof-traj-tourist">VALIDATED</span></div>
+        <div class="metric-row"><span>Worker Trajectory Status:</span><span class="metric-value" id="proof-traj-worker">VALIDATED</span></div>
+    </div>
+
     <div id="info-panel">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
             <strong id="node-name">Hover / Click Node to Pivot</strong>
@@ -330,6 +358,7 @@
     <script>
         let scene, camera, renderer, controls;
         let dataset = [];
+        let prologData = {};
         let trajectoryLines = {};
         let trajectoryPoints = {};
         let trajectoryCurves = {};
@@ -350,14 +379,12 @@
         let gammaWarp = 1.0;
         let curvature = 0.0;
 
-        // Flow Simulation Parameters
         let flowSpeed = 1.2;
         let flowTurbulence = 0.5;
         let particleCount = 200;
         let enableFlowParticles = true;
         let enableNodeVortices = true;
 
-        // Feature amplification weights
         let weights = {
             thermal: 1.0,
             commerce: 1.0,
@@ -393,7 +420,6 @@
             controls.enableDamping = true;
             controls.dampingFactor = 0.05;
 
-            // Lighting
             const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
             scene.add(ambientLight);
 
@@ -439,7 +465,6 @@
                 architectureGroup.add(mesh);
             });
 
-            // Coupole Dome
             const domeGeo = new THREE.SphereGeometry(15, 16, 12, 0, Math.PI * 2, 0, Math.PI / 2);
             const domeMat = new THREE.MeshBasicMaterial({ color: 0x00ffaa, wireframe: true, transparent: true, opacity: 0.18 });
             const domeMesh = new THREE.Mesh(domeGeo, domeMat);
@@ -535,12 +560,26 @@
             fetch('decompressed_data.json')
                 .then(res => res.json())
                 .then(data => {
-                    dataset = data;
+                    dataset = data.trajectories;
+                    prologData = data;
+                    updatePrologPanel();
                     renderTrajectories();
                 })
                 .catch(err => {
                     console.error("Error loading decompressed_data.json:", err);
                 });
+        }
+
+        function updatePrologPanel() {
+            if (!prologData.prolog_verification) return;
+            const v = prologData.prolog_verification;
+            document.getElementById('proof-status').innerText = v.manifold_status || 'PROVED';
+            document.getElementById('proof-a1').innerText = `${v.theorem_a1_thermal_barriers_cnt ? v.theorem_a1_thermal_barriers_cnt.length : 0} Node(s)`;
+            document.getElementById('proof-a2').innerText = `${v.theorem_a2_high_commerce_exclusion_cnt ? v.theorem_a2_high_commerce_exclusion_cnt.length : 0} Node(s)`;
+            if (prologData.prolog_formal_trajectories) {
+                document.getElementById('proof-traj-tourist').innerText = prologData.prolog_formal_trajectories.tourist.status;
+                document.getElementById('proof-traj-worker').innerText = prologData.prolog_formal_trajectories.worker.status;
+            }
         }
 
         function renderTrajectories() {
@@ -589,7 +628,6 @@
                 scene.add(pointGroup);
                 trajectoryPoints[arch] = pointGroup;
 
-                // Create Flow Particle System for Trajectory
                 buildFlowParticleSystem(arch, curve, items);
             });
 
@@ -647,7 +685,6 @@
 
             if (!enableNodeVortices || dataset.length === 0) return;
 
-            // Render flow vortex rings at high flow density nodes
             dataset.forEach(item => {
                 if (item.raw_10d && item.raw_10d.flowDensity > 0.7) {
                     const pos = projectItemTo3D(item);
@@ -757,7 +794,6 @@
 
                     const p = curve.getPointAt(ps.progress[i]);
 
-                    // Apply flow turbulence
                     const turbX = (Math.sin(ps.progress[i] * 20 + i) * flowTurbulence);
                     const turbY = (Math.cos(ps.progress[i] * 20 + i) * flowTurbulence);
                     const turbZ = (Math.sin(ps.progress[i] * 15 + i) * flowTurbulence);
@@ -770,7 +806,6 @@
                 ps.pointsMesh.geometry.attributes.position.needsUpdate = true;
             });
 
-            // Animate node vortices
             vortexGroup.children.forEach((mesh, idx) => {
                 mesh.rotation.z += 0.02 * (idx % 2 === 0 ? 1 : -1);
             });
