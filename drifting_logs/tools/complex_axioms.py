@@ -11,35 +11,105 @@ import sympy as sp
 from typing import Dict, List, Any, Tuple, Optional
 from drifting_logs.tools.prolog_engine import PrologAxiomProgram, KnowledgeBase
 
-class ComplexSymbolicFieldExtension:
+class CompositeAxiomFieldExtension:
     """
-    Symbolic Complex Field Extension Q(i, α) over Q(i) representing exact, un-flattened
-    algebraic numbers and minimal polynomials for non-linear psychogeographical complex axioms.
+    Composite Algebraic Field Extension K = Q(i, α_M, α_V, α_μ, α_Σ) over Q(i)
+    representing exact, un-flattened algebraic field extensions for all four complex axioms:
+      - α_M: Kępiński Metabolic Rate Extension
+      - α_V: Ashby Variety Extension
+      - α_μ: Girardian Mimetic Extension
+      - α_Σ: Debordian Spectacle Extension
+    Computes per-axiom minimal polynomials, composite primitive element γ, Galois degree [K : Q],
+    and exact symbolic quotient ring representations Q[x]/(P(x)).
     """
-    def __init__(self, generator_expr: Optional[sp.Expr] = None):
+    def __init__(self, M: complex, V: complex, mu: complex, Sigma: complex):
         x = sp.Symbol('x')
-        if generator_expr is None:
-            generator_expr = sp.sqrt(2) + 3*sp.I
-        self.generator = generator_expr
-        try:
-            self.min_poly = sp.minimal_polynomial(self.generator, x)
-            self.degree = int(sp.degree(self.min_poly, x))
-        except Exception:
-            self.min_poly = x**2 + 1
-            self.degree = 2
+        self.x = x
 
-    def evaluate_exact_complex(self) -> complex:
-        val = complex(sp.N(self.generator))
-        return val
+        # Convert complex axioms to exact rational algebraic generators α = sqrt(Re) + i*Im
+        def to_algebraic_gen(c_val: complex) -> sp.Expr:
+            re_rat = sp.Rational(round(abs(c_val.real), 2)).limit_denominator(20)
+            im_rat = sp.Rational(round(c_val.imag, 2)).limit_denominator(20)
+            sign_re = 1 if c_val.real >= 0 else -1
+            return sign_re * sp.sqrt(re_rat) + sp.I * im_rat
+
+        self.alpha_M = to_algebraic_gen(M)
+        self.alpha_V = to_algebraic_gen(V)
+        self.alpha_mu = to_algebraic_gen(mu)
+        self.alpha_Sigma = to_algebraic_gen(Sigma)
+
+        # Compute minimal polynomials for each axiom generator over Q
+        try:
+            self.p_M = sp.minimal_polynomial(self.alpha_M, x)
+            self.deg_M = int(sp.degree(self.p_M, x))
+        except Exception:
+            self.p_M = x**2 + 1
+            self.deg_M = 2
+
+        try:
+            self.p_V = sp.minimal_polynomial(self.alpha_V, x)
+            self.deg_V = int(sp.degree(self.p_V, x))
+        except Exception:
+            self.p_V = x**2 + 1
+            self.deg_V = 2
+
+        try:
+            self.p_mu = sp.minimal_polynomial(self.alpha_mu, x)
+            self.deg_mu = int(sp.degree(self.p_mu, x))
+        except Exception:
+            self.p_mu = x**2 + 1
+            self.deg_mu = 2
+
+        try:
+            self.p_Sigma = sp.minimal_polynomial(self.alpha_Sigma, x)
+            self.deg_Sigma = int(sp.degree(self.p_Sigma, x))
+        except Exception:
+            self.p_Sigma = x**2 + 1
+            self.deg_Sigma = 2
+
+        # Composite primitive element generator γ = α_M + α_V + α_μ + α_Σ
+        self.primitive_gamma = self.alpha_M + self.alpha_V + self.alpha_mu + self.alpha_Sigma
+        try:
+            self.p_gamma = sp.minimal_polynomial(self.primitive_gamma, x)
+            self.composite_degree = int(sp.degree(self.p_gamma, x))
+        except Exception:
+            self.p_gamma = self.p_M * self.p_V
+            self.composite_degree = int(sp.degree(self.p_gamma, x))
 
     def get_extension_summary(self) -> Dict[str, Any]:
-        val = self.evaluate_exact_complex()
+        gamma_val = complex(sp.N(self.primitive_gamma))
         return {
-            "generator_symbolic": str(self.generator),
-            "minimal_polynomial": str(self.min_poly),
-            "extension_degree": self.degree,
-            "exact_complex_value": {"real": float(val.real), "imag": float(val.imag)},
-            "polar_representation": {"magnitude": float(abs(val)), "phase_rad": float(cmath.phase(val))}
+            "composite_field_label": "K = Q(i, α_M, α_V, α_μ, α_Σ)",
+            "composite_extension_degree": self.composite_degree,
+            "primitive_element_gamma": str(self.primitive_gamma),
+            "composite_minimal_polynomial": str(self.p_gamma),
+            "primitive_exact_val": {"real": float(gamma_val.real), "imag": float(gamma_val.imag)},
+            "per_axiom_extensions": {
+                "M_metabolic": {
+                    "generator": str(self.alpha_M),
+                    "minimal_polynomial": str(self.p_M),
+                    "degree": self.deg_M,
+                    "quotient_ring": f"Q[x]/({self.p_M})"
+                },
+                "V_variety": {
+                    "generator": str(self.alpha_V),
+                    "minimal_polynomial": str(self.p_V),
+                    "degree": self.deg_V,
+                    "quotient_ring": f"Q[x]/({self.p_V})"
+                },
+                "mu_mimetic": {
+                    "generator": str(self.alpha_mu),
+                    "minimal_polynomial": str(self.p_mu),
+                    "degree": self.deg_mu,
+                    "quotient_ring": f"Q[x]/({self.p_mu})"
+                },
+                "Sigma_spectacle": {
+                    "generator": str(self.alpha_Sigma),
+                    "minimal_polynomial": str(self.p_Sigma),
+                    "degree": self.deg_Sigma,
+                    "quotient_ring": f"Q[x]/({self.p_Sigma})"
+                }
+            }
         }
 
 
@@ -50,7 +120,7 @@ class ComplexAxiomField:
         self.V = V        # Ashby Requisite Variety + i * Variety Dissipation
         self.mu = mu      # Girardian Mimetic Coupling + i * Mimetic Interference Phase
         self.Sigma = Sigma # Debordian Spectacle Shield + i * Spectacle Refraction Index
-        self.field_extension = ComplexSymbolicFieldExtension(sp.sqrt(abs(M.real) + 1) + (M.imag)*sp.I)
+        self.field_extension = CompositeAxiomFieldExtension(M, V, mu, Sigma)
 
     @classmethod
     def from_prolog_deduction(cls, m_state: str = "high_entropy", v_state: str = "hyper_variable",

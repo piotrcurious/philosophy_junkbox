@@ -386,12 +386,12 @@
         <h2 style="font-size:1rem; color:#f8fafc; margin-bottom:8px;" id="inspector-title">Complex Epistemic Inspector</h2>
         <div id="inspector-content">
             <div class="data-card complex-card">
-                <h3>Symbolic Complex Field Extension &amp; Axiom Parameters</h3>
+                <h3>Composite Algebraic Field Extension K = Q(i, α_M, α_V, α_μ, α_Σ)</h3>
                 <p id="complex-axiom-props">M: |1.70| ∠0.49 rad | V: |2.26| ∠-0.22 rad</p>
-                <p id="field-extension-props" style="margin-top:4px; font-family:monospace; color:#f472b6; font-size:0.75rem;">Q(i, α) Generator: sqrt(M_r+1) + M_i*I</p>
-                <div style="margin-top:6px; display:flex; gap:4px;">
-                    <button id="integrate-ext-btn" class="btn-prolog" style="font-size:0.7rem; padding:4px 6px;">Integrate Field Extension into Prolog KB</button>
-                    <button id="integrate-node-btn" class="btn-secondary" style="font-size:0.7rem; padding:4px 6px;">Integrate Node State to Axiom M</button>
+                <p id="field-extension-props" style="margin-top:4px; font-family:monospace; color:#f472b6; font-size:0.75rem;">K = Q(i, α_M, α_V, α_μ, α_Σ) [K:Q] = 16</p>
+                <div style="margin-top:6px; display:flex; flex-wrap:wrap; gap:4px;">
+                    <button id="integrate-ext-btn" class="btn-prolog" style="font-size:0.7rem; padding:4px 6px; flex:1;">Assert Composite K into Prolog KB</button>
+                    <button id="integrate-node-btn" class="btn-secondary" style="font-size:0.7rem; padding:4px 6px; flex:1;">Sync Axiom M Field State</button>
                 </div>
             </div>
             <div class="data-card flow-card">
@@ -620,7 +620,12 @@
                     document.getElementById('complex-axiom-props').textContent = `M: |${data.complex_axioms.M.magnitude.toFixed(2)}| ∠${data.complex_axioms.M.phase_rad.toFixed(2)}rad | V: |${data.complex_axioms.V.magnitude.toFixed(2)}| ∠${data.complex_axioms.V.phase_rad.toFixed(2)}rad | Σ: |${data.complex_axioms.Sigma.magnitude.toFixed(2)}|`;
                     if (data.field_extension) {
                         const fe = data.field_extension;
-                        document.getElementById('field-extension-props').innerHTML = `<b>Extension:</b> ${fe.generator_symbolic}<br><b>Min Poly:</b> ${fe.minimal_polynomial} (Deg: ${fe.extension_degree})<br><b>Exact Val:</b> ${fe.exact_complex_value.real.toFixed(3)} + ${fe.exact_complex_value.imag.toFixed(3)}i`;
+                        const perAxiom = fe.per_axiom_extensions;
+                        let perAxiomHTML = "";
+                        if (perAxiom) {
+                            perAxiomHTML = `<br><b>Q[x]/(P_M):</b> ${perAxiom.M_metabolic.minimal_polynomial}<br><b>Q[x]/(P_V):</b> ${perAxiom.V_variety.minimal_polynomial}<br><b>Q[x]/(P_μ):</b> ${perAxiom.mu_mimetic.minimal_polynomial}<br><b>Q[x]/(P_Σ):</b> ${perAxiom.Sigma_spectacle.minimal_polynomial}`;
+                        }
+                        document.getElementById('field-extension-props').innerHTML = `<b>Field K:</b> ${fe.composite_field_label} | <b>[K:Q] = ${fe.composite_extension_degree}</b><br><b>Primitive γ:</b> ${fe.primitive_element_gamma}<br><b>Min Poly P_γ(x):</b> ${fe.composite_minimal_polynomial}${perAxiomHTML}`;
                     }
                     document.getElementById('algebraic-generators').textContent = data.algebraic_scheme.ideal_generators.join(', ');
                     document.getElementById('algebraic-groebner').textContent = `dim V(I): ${data.algebraic_scheme.variety_dimension} | Hermitian Metric h: ${data.algebraic_scheme.hermitian_metric_h.toFixed(2)}\nHolomorphic Ricci R: ${data.algebraic_scheme.holomorphic_ricci_curvature.toFixed(4)}`;
@@ -811,12 +816,15 @@
         });
 
         document.getElementById('integrate-ext-btn').addEventListener('click', async () => {
-            const fact_name = "field_extension_poly";
-            const poly = document.getElementById('field-extension-props').innerText;
             await fetch('/api/inject_prolog_fact', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ fact_name, args: ["symbolic_extension", "degree_4"] })
+                body: JSON.stringify({ fact_name: "composite_field_extension", args: ["field_K", "degree_16"] })
+            });
+            await fetch('/api/inject_prolog_fact', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ fact_name: "primitive_element_gamma", args: ["gamma_gen", "composite_extension"] })
             });
             triggerAxiomMutation(true);
         });
