@@ -1,11 +1,12 @@
 """
-REST API Backend Server with Full Dataset Ingestion, Prolog Deductions,
-Symbolic Algebra, and Autonomous Exploration Streaming.
+REST API Backend Server with Complex Axioms, Holomorphic Manifold Geometry,
+Prolog Inferences, and Dynamic Complex Transformation Endpoints.
 """
 
 import os
 import json
 import sys
+import cmath
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
@@ -17,7 +18,6 @@ from drifting_logs.tools.autonomous_explorer import AutonomousEpistemicExplorer
 PORT = 8080
 transformer_engine = AlgebraicModelTransformer()
 explorer_engine = AutonomousEpistemicExplorer()
-auto_step_counter = 0
 
 class PsychogeographicalServer(BaseHTTPRequestHandler):
     def _set_headers(self, status=200, content_type="application/json"):
@@ -50,23 +50,11 @@ class PsychogeographicalServer(BaseHTTPRequestHandler):
                 self.wfile.write(json.dumps({"error": str(e)}).encode())
             return
 
-        if self.path == '/api/autonomous_step':
-            global auto_step_counter
-            auto_step_counter += 1
-            step_data = explorer_engine.execute_exploration_step(auto_step_counter)
-            self._set_headers(200)
-            self.wfile.write(json.dumps(step_data).encode())
-            return
-
         if self.path == '/api/deduce_prolog':
             self._set_headers(200)
             kb = build_psychogeographical_kb()
             traps = kb.query(Term("systemic_trap", [Term("X"), Term("W")]))
-            corridors = kb.query(Term("entropic_corridor", [Term("X"), Term("Z")]))
-            self.wfile.write(json.dumps({
-                "systemic_traps": traps,
-                "entropic_corridors": corridors
-            }).encode())
+            self.wfile.write(json.dumps({"systemic_traps": traps}).encode())
             return
 
         self._set_headers(404)
@@ -82,33 +70,23 @@ class PsychogeographicalServer(BaseHTTPRequestHandler):
             req_data = {}
 
         if self.path == '/api/axiom_transform':
-            M = float(req_data.get('M', 1.0))
-            V = float(req_data.get('V', 2.0))
-            mu = float(req_data.get('mu', 0.5))
-            Sigma = float(req_data.get('Sigma', 1.0))
+            M_r = float(req_data.get('M_r', 1.0))
+            M_i = float(req_data.get('M_i', 0.5))
+            V_r = float(req_data.get('V_r', 2.0))
+            V_i = float(req_data.get('V_i', -0.3))
+            mu_r = float(req_data.get('mu_r', 0.5))
+            mu_i = float(req_data.get('mu_i', 0.8))
+            Sigma_r = float(req_data.get('Sigma_r', 1.0))
+            Sigma_i = float(req_data.get('Sigma_i', 0.2))
+
+            M = complex(M_r, M_i)
+            V = complex(V_r, V_i)
+            mu = complex(mu_r, mu_i)
+            Sigma = complex(Sigma_r, Sigma_i)
 
             transformed = transformer_engine.transform_model(M=M, V=V, mu=mu, Sigma=Sigma)
             self._set_headers(200)
             self.wfile.write(json.dumps(transformed).encode())
-            return
-
-        if self.path == '/api/reorganize':
-            query = req_data.get('query', 'Reorganize nodes')
-            M = float(req_data.get('M', 1.0))
-            V = float(req_data.get('V', 2.0))
-            mu = float(req_data.get('mu', 0.5))
-            Sigma = float(req_data.get('Sigma', 1.0))
-
-            transformed = transformer_engine.transform_model(M=M, V=V, mu=mu, Sigma=Sigma)
-
-            res_summary = {
-                "meta_summary": f"Symbolic Algebraic Transformation executed for query: '{query}' under axioms M={M}, V={V}, mu={mu}, Sigma={Sigma}.",
-                "algebraic_scheme": transformed["algebraic_scheme"],
-                "prolog_deductions": transformed["prolog_deductions"],
-                "reorganized_nodes": transformed["rebuilt_nodes"]
-            }
-            self._set_headers(200)
-            self.wfile.write(json.dumps({"result": res_summary}).encode())
             return
 
         self._set_headers(404)

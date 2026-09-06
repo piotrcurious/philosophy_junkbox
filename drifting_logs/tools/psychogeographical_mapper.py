@@ -8,8 +8,12 @@ import os
 import json
 import matplotlib.pyplot as plt
 import networkx as nx
-from etiological_listening_center import EtiologicalListeningCenter
-from epistemic_agents import load_all_logs_text
+try:
+    from drifting_logs.tools.etiological_listening_center import EtiologicalListeningCenter
+    from drifting_logs.tools.epistemic_agents import load_all_logs_text
+except ImportError:
+    from etiological_listening_center import EtiologicalListeningCenter
+    from epistemic_agents import load_all_logs_text
 
 def extract_drift_data():
     """

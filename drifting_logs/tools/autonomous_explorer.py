@@ -44,7 +44,7 @@ class AutonomousEpistemicExplorer:
         prolog_deductions = self.kb.query(Term(f"hypothesis_trap_level_{step_id}", [Term("X"), Term("W")]))
 
         # Evaluate Anti-Autofac Epistemic Brake trigger
-        scalar_curv = transformed["algebraic_scheme"]["scalar_curvature"]
+        scalar_curv = transformed["algebraic_scheme"]["holomorphic_ricci_curvature"]
         brake_triggered = scalar_curv > 1.5 or (M / max(0.1, V)) < 0.4
 
         step_result = {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autonomous Psychogeographical Research Engine (Full Dataset & Scheme Geometry)</title>
+    <title>Complex Axiom Psychogeographical Explorer (ℂ⁴ Scheme Varieties & Phase Dynamics)</title>
     <style>
         * {
             box-sizing: border-box;
@@ -44,7 +44,7 @@
         #header-panel {
             top: 20px;
             left: 20px;
-            max-width: 460px;
+            max-width: 480px;
         }
         h1 {
             font-size: 1.2rem;
@@ -61,7 +61,7 @@
         #control-panel {
             bottom: 20px;
             left: 20px;
-            width: 360px;
+            width: 380px;
             max-height: calc(100vh - 220px);
             overflow-y: auto;
         }
@@ -70,7 +70,7 @@
         }
         label {
             display: block;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             color: #cbd5e1;
@@ -88,10 +88,10 @@
             font-size: 0.8rem;
             font-weight: 600;
             color: #38bdf8;
-            width: 36px;
+            width: 42px;
             text-align: right;
         }
-        select, input[type="range"], button, textarea {
+        select, input[type="range"], button {
             width: 100%;
             background: #1e293b;
             border: 1px solid #334155;
@@ -102,7 +102,7 @@
             outline: none;
             transition: border-color 0.2s;
         }
-        select:focus, textarea:focus {
+        select:focus {
             border-color: #38bdf8;
         }
         button {
@@ -115,17 +115,11 @@
         button:hover {
             background: #0369a1;
         }
-        button.auto-btn {
-            background: #8b5cf6;
-        }
-        button.auto-btn:hover {
-            background: #7c3aed;
-        }
         #inspector-panel {
             top: 20px;
             right: 20px;
-            width: 450px;
-            max-height: calc(100vh - 260px);
+            width: 460px;
+            max-height: calc(100vh - 100px);
             overflow-y: auto;
         }
         .data-card {
@@ -135,6 +129,10 @@
             margin-bottom: 10px;
             border-left: 3px solid #38bdf8;
         }
+        .data-card.complex-card {
+            border-left-color: #ec4899;
+            background: rgba(131, 24, 67, 0.2);
+        }
         .data-card.algebraic-card {
             border-left-color: #a855f7;
             background: rgba(88, 28, 135, 0.2);
@@ -143,38 +141,16 @@
             border-left-color: #22c55e;
             background: rgba(20, 83, 45, 0.2);
         }
-        .data-card.auto-card {
-            border-left-color: #ec4899;
-            background: rgba(131, 24, 67, 0.2);
-        }
         .data-card h3 {
             font-size: 0.85rem;
             color: #f1f5f9;
             margin-bottom: 4px;
         }
-        .data-card p, .data-card code {
+        .data-card p {
             font-size: 0.78rem;
             color: #cbd5e1;
             line-height: 1.4;
             word-break: break-all;
-        }
-        #llm-panel {
-            bottom: 20px;
-            right: 20px;
-            width: 450px;
-        }
-        #llm-output {
-            font-size: 0.78rem;
-            color: #e2e8f0;
-            background: #0f172a;
-            border: 1px solid #1e293b;
-            border-radius: 6px;
-            padding: 10px;
-            max-height: 130px;
-            overflow-y: auto;
-            margin-top: 8px;
-            white-space: pre-wrap;
-            line-height: 1.4;
         }
         .legend {
             display: flex;
@@ -199,8 +175,8 @@
     <div id="canvas-container"></div>
 
     <div id="header-panel" class="ui-panel">
-        <h1>Autonomous Psychogeographical Research Engine</h1>
-        <p class="subtitle">Full Uninhibited Drift Log Dataset Ingestion | Algebraic Scheme $V(I)$ | Prolog Inference | Live Autonomous Loop</p>
+        <h1>Complex Axiom Psychogeographical Explorer</h1>
+        <p class="subtitle">Non-Linear Complex Axiom Fields $\alpha, \beta, \gamma, \delta \in \mathbb{C}$ | Holomorphic Scheme Varieties $V(I) \subset \mathbb{C}^4$ | Hermitian Metric $h_{z\bar{z}}$</p>
         <div class="legend">
             <div class="legend-item"><span class="dot" style="background:#38bdf8;"></span> Spatial Node</div>
             <div class="legend-item"><span class="dot" style="background:#f97316;"></span> Cybernetic / Platform</div>
@@ -210,72 +186,70 @@
     </div>
 
     <div id="control-panel" class="ui-panel">
-        <h2 style="font-size:0.95rem; color:#f8fafc; margin-bottom:10px;">Axiom Mutation & Exploration</h2>
+        <h2 style="font-size:0.95rem; color:#f8fafc; margin-bottom:10px;">Complex Axiom Controls (Re, Im)</h2>
 
         <div class="control-group">
-            <label for="slider-M">Kępiński Metabolic Rate (M)</label>
+            <label for="slider-Mr">Kępiński Metabolic Rate Re(M)</label>
             <div class="slider-row">
-                <input type="range" id="slider-M" min="0.1" max="5.0" step="0.1" value="1.0">
-                <span class="slider-val" id="val-M">1.0</span>
+                <input type="range" id="slider-Mr" min="0.1" max="4.0" step="0.1" value="1.5">
+                <span class="slider-val" id="val-Mr">1.5</span>
+            </div>
+            <label for="slider-Mi" style="margin-top:4px;">Kępiński Phase Shift Im(M)</label>
+            <div class="slider-row">
+                <input type="range" id="slider-Mi" min="-2.0" max="2.0" step="0.1" value="0.8">
+                <span class="slider-val" id="val-Mi">0.8</span>
             </div>
         </div>
 
         <div class="control-group">
-            <label for="slider-V">Ashby Requisite Variety (V)</label>
+            <label for="slider-Vr">Ashby Requisite Variety Re(V)</label>
             <div class="slider-row">
-                <input type="range" id="slider-V" min="0.1" max="5.0" step="0.1" value="2.0">
-                <span class="slider-val" id="val-V">2.0</span>
+                <input type="range" id="slider-Vr" min="0.1" max="4.0" step="0.1" value="2.2">
+                <span class="slider-val" id="val-Vr">2.2</span>
+            </div>
+            <label for="slider-Vi" style="margin-top:4px;">Variety Dissipation Im(V)</label>
+            <div class="slider-row">
+                <input type="range" id="slider-Vi" min="-2.0" max="2.0" step="0.1" value="-0.5">
+                <span class="slider-val" id="val-Vi">-0.5</span>
             </div>
         </div>
 
         <div class="control-group">
-            <label for="slider-mu">Girardian Mimetic Coupling (&mu;)</label>
+            <label for="slider-mur">Girardian Mimetic Coupling Re(&mu;)</label>
             <div class="slider-row">
-                <input type="range" id="slider-mu" min="0.1" max="3.0" step="0.1" value="0.5">
-                <span class="slider-val" id="val-mu">0.5</span>
+                <input type="range" id="slider-mur" min="0.1" max="3.0" step="0.1" value="0.7">
+                <span class="slider-val" id="val-mur">0.7</span>
+            </div>
+            <label for="slider-mui" style="margin-top:4px;">Mimetic Interference Phase Im(&mu;)</label>
+            <div class="slider-row">
+                <input type="range" id="slider-mui" min="-2.0" max="2.0" step="0.1" value="1.1">
+                <span class="slider-val" id="val-mui">1.1</span>
             </div>
         </div>
 
-        <div class="control-group">
-            <label for="slider-Sigma">Debordian Spectacle Shield (&Sigma;)</label>
-            <div class="slider-row">
-                <input type="range" id="slider-Sigma" min="0.1" max="5.0" step="0.1" value="1.0">
-                <span class="slider-val" id="val-Sigma">1.0</span>
-            </div>
-        </div>
-
-        <button id="mutate-axioms-btn">Trigger Symbolic Variety Recalculation</button>
-        <button id="autonomous-step-btn" class="auto-btn">Execute Autonomous Agent Step</button>
+        <button id="mutate-axioms-btn">Recalculate Complex Variety & Holomorphic Metric</button>
     </div>
 
     <div id="inspector-panel" class="ui-panel">
-        <h2 style="font-size:1rem; color:#f8fafc; margin-bottom:8px;" id="inspector-title">Autonomous & Algebraic Inspector</h2>
+        <h2 style="font-size:1rem; color:#f8fafc; margin-bottom:8px;" id="inspector-title">Complex Algebraic Geometry Inspector</h2>
         <div id="inspector-content">
-            <div class="data-card auto-card">
-                <h3>Autonomous Agent Loop State</h3>
-                <p id="auto-state">Awaiting initial step...</p>
+            <div class="data-card complex-card">
+                <h3>Complex Axiom Field Magnitudes & Phases</h3>
+                <p id="complex-axiom-props">M: |1.70| ∠0.49 rad | V: |2.26| ∠-0.22 rad</p>
             </div>
             <div class="data-card algebraic-card">
-                <h3>Affine Scheme Ideal Generators I</h3>
+                <h3>Complex Scheme Ideal Generators V(I) ⊂ ℂ⁴</h3>
                 <p id="algebraic-generators">Loading polynomials...</p>
             </div>
             <div class="data-card algebraic-card">
-                <h3>Gröbner Basis & Variety Dimension</h3>
-                <p id="algebraic-groebner">Computing Gröbner basis...</p>
+                <h3>Hermitian Metric h & Holomorphic Curvature R</h3>
+                <p id="algebraic-groebner">Computing metric...</p>
             </div>
             <div class="data-card prolog-card">
                 <h3>Prolog Relational Trap Deduction</h3>
                 <p id="prolog-output">Prolog query running...</p>
             </div>
-            <div id="node-buttons-list" style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px;"></div>
         </div>
-    </div>
-
-    <div id="llm-panel" class="ui-panel">
-        <label for="llm-prompt">LLM Epistemic Model Transformer</label>
-        <textarea id="llm-prompt" rows="2" placeholder="e.g. Reorganize full dataset nodes by Kępiński metabolic entropy..."></textarea>
-        <button id="llm-reorganize-btn">Reorganize Model Semantics</button>
-        <div id="llm-output">Symbolic Meta-Regulator output will appear here...</div>
     </div>
 
     <script>
@@ -338,7 +312,6 @@
             ctx.fillStyle = "#0b0f19";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Grid plane
             ctx.strokeStyle = "rgba(51, 65, 85, 0.3)";
             ctx.lineWidth = 1;
             for (let i = -400; i <= 400; i += 80) {
@@ -350,7 +323,6 @@
                 ctx.stroke();
             }
 
-            // Edges
             driftData.edges.forEach(edge => {
                 let sNode = driftData.nodes.find(n => n.id === edge.source);
                 let tNode = driftData.nodes.find(n => n.id === edge.target);
@@ -366,7 +338,6 @@
                 }
             });
 
-            // Nodes
             const projectedNodes = driftData.nodes.map(node => ({
                 ...node,
                 proj: project3D(...node.pos)
@@ -396,21 +367,25 @@
         }
 
         async function triggerAxiomMutation() {
-            const M = parseFloat(document.getElementById('slider-M').value);
-            const V = parseFloat(document.getElementById('slider-V').value);
-            const mu = parseFloat(document.getElementById('slider-mu').value);
-            const Sigma = parseFloat(document.getElementById('slider-Sigma').value);
+            const M_r = parseFloat(document.getElementById('slider-Mr').value);
+            const M_i = parseFloat(document.getElementById('slider-Mi').value);
+            const V_r = parseFloat(document.getElementById('slider-Vr').value);
+            const V_i = parseFloat(document.getElementById('slider-Vi').value);
+            const mu_r = parseFloat(document.getElementById('slider-mur').value);
+            const mu_i = parseFloat(document.getElementById('slider-mui').value);
 
             try {
                 const res = await fetch('/api/axiom_transform', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ M, V, mu, Sigma })
+                    body: JSON.stringify({ M_r, M_i, V_r, V_i, mu_r, mu_i, Sigma_r: 1.0, Sigma_i: 0.2 })
                 });
                 if (res.ok) {
                     const data = await res.json();
+
+                    document.getElementById('complex-axiom-props').textContent = `M: |${data.complex_axioms.M.magnitude.toFixed(2)}| ∠${data.complex_axioms.M.phase_rad.toFixed(2)}rad | V: |${data.complex_axioms.V.magnitude.toFixed(2)}| ∠${data.complex_axioms.V.phase_rad.toFixed(2)}rad`;
                     document.getElementById('algebraic-generators').textContent = data.algebraic_scheme.ideal_generators.join(', ');
-                    document.getElementById('algebraic-groebner').textContent = `dim V(I): ${data.algebraic_scheme.variety_dimension} | Curvature R: ${data.algebraic_scheme.scalar_curvature.toFixed(4)}\nGB: ${data.algebraic_scheme.groebner_basis.slice(0, 2).join(', ')}`;
+                    document.getElementById('algebraic-groebner').textContent = `dim V(I): ${data.algebraic_scheme.variety_dimension} | Hermitian Metric h: ${data.algebraic_scheme.hermitian_metric_h.toFixed(2)}\nHolomorphic Ricci R: ${data.algebraic_scheme.holomorphic_ricci_curvature.toFixed(4)}`;
 
                     if (data.prolog_deductions.systemic_traps.length > 0) {
                         const trap = data.prolog_deductions.systemic_traps[0];
@@ -430,29 +405,7 @@
             } catch (err) {}
         }
 
-        async function executeAutonomousStep() {
-            try {
-                const res = await fetch('/api/autonomous_step');
-                if (res.ok) {
-                    const data = await res.json();
-                    document.getElementById('auto-state').textContent = `Step #${data.step_id} | Epistemic Brake: ${data.anti_autofac_epistemic_brake.status}\nTarget Proposal: ${data.target_function_revision_proposal}`;
-
-                    // Update sliders with autonomous hypotheses
-                    document.getElementById('slider-M').value = data.axiom_hypothesis.M;
-                    document.getElementById('val-M').textContent = data.axiom_hypothesis.M;
-                    document.getElementById('slider-V').value = data.axiom_hypothesis.V;
-                    document.getElementById('val-V').textContent = data.axiom_hypothesis.V;
-                    document.getElementById('slider-mu').value = data.axiom_hypothesis.mu;
-                    document.getElementById('val-mu').textContent = data.axiom_hypothesis.mu;
-                    document.getElementById('slider-Sigma').value = data.axiom_hypothesis.Sigma;
-                    document.getElementById('val-Sigma').textContent = data.axiom_hypothesis.Sigma;
-
-                    triggerAxiomMutation();
-                }
-            } catch (err) {}
-        }
-
-        ['M', 'V', 'mu', 'Sigma'].forEach(param => {
+        ['Mr', 'Mi', 'Vr', 'Vi', 'mur', 'mui'].forEach(param => {
             const slider = document.getElementById(`slider-${param}`);
             const valSpan = document.getElementById(`val-${param}`);
             slider.addEventListener('input', (e) => {
@@ -461,7 +414,6 @@
         });
 
         document.getElementById('mutate-axioms-btn').addEventListener('click', triggerAxiomMutation);
-        document.getElementById('autonomous-step-btn').addEventListener('click', executeAutonomousStep);
 
         window.addEventListener('mousedown', (e) => {
             if (e.target.tagName === 'CANVAS') {
