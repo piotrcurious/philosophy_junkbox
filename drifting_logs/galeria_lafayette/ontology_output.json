@@ -1,0 +1,126 @@
+{
+  "edges": [
+    {
+      "cost_resident":0.3,
+      "cost_surveillance":0.1,
+      "cost_tourist":0.2,
+      "cost_worker":0.1,
+      "dist":15,
+      "from":"underground",
+      "to":"boulevard"
+    },
+    {
+      "cost_resident":0.9,
+      "cost_surveillance":0.2,
+      "cost_tourist":0.8,
+      "cost_worker":0.4,
+      "dist":30,
+      "from":"boulevard",
+      "to":"vip_salon"
+    },
+    {
+      "cost_resident":0.7,
+      "cost_surveillance":0.2,
+      "cost_tourist":0.3,
+      "cost_worker":0.5,
+      "dist":45,
+      "from":"boulevard",
+      "to":"coupole"
+    },
+    {
+      "cost_resident":0.8,
+      "cost_surveillance":0.3,
+      "cost_tourist":0.5,
+      "cost_worker":0.6,
+      "dist":25,
+      "from":"vip_salon",
+      "to":"glasswalk"
+    },
+    {
+      "cost_resident":0.6,
+      "cost_surveillance":0.1,
+      "cost_tourist":0.1,
+      "cost_worker":0.5,
+      "dist":15,
+      "from":"coupole",
+      "to":"glasswalk"
+    },
+    {
+      "cost_resident":0.5,
+      "cost_surveillance":0.2,
+      "cost_tourist":0.2,
+      "cost_worker":0.4,
+      "dist":20,
+      "from":"glasswalk",
+      "to":"rooftop"
+    },
+    {
+      "cost_resident":0.4,
+      "cost_surveillance":0.1,
+      "cost_tourist":0.4,
+      "cost_worker":0.3,
+      "dist":80,
+      "from":"boulevard",
+      "to":"rooftop"
+    },
+    {
+      "cost_resident":0.5,
+      "cost_surveillance":0.2,
+      "cost_tourist":0.9,
+      "cost_worker":0.2,
+      "dist":95,
+      "from":"underground",
+      "to":"rooftop"
+    }
+  ],
+  "nodes": [
+    {
+      "commerce":0.2,
+      "id":"underground",
+      "label":"Underground Metro Connection",
+      "level":-1,
+      "symbol":"Infrastructure",
+      "temp":24.5
+    },
+    {
+      "commerce":0.9,
+      "id":"boulevard",
+      "label":"Boulevard Haussmann Ground Entrance",
+      "level":0,
+      "symbol":"Commercial Street",
+      "temp":33.0
+    },
+    {
+      "commerce":0.95,
+      "id":"vip_salon",
+      "label":"VIP Personal Shopping Salons",
+      "level":2,
+      "symbol":"Exclusivity",
+      "temp":21.0
+    },
+    {
+      "commerce":0.7,
+      "id":"coupole",
+      "label":"Historic Glass Coupole Dome",
+      "level":4,
+      "symbol":"Heritage Spectacle",
+      "temp":28.5
+    },
+    {
+      "commerce":0.85,
+      "id":"glasswalk",
+      "label":"Glasswalk Suspended Runway",
+      "level":5,
+      "symbol":"Tourist Landmark",
+      "temp":29.5
+    },
+    {
+      "commerce":0.4,
+      "id":"rooftop",
+      "label":"Rooftop Terrace & Microclimate",
+      "level":7,
+      "symbol":"Viewpoint Oasis",
+      "temp":36.0
+    }
+  ]
+}
