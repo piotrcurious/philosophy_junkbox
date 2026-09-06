@@ -1,6 +1,7 @@
 """
 REST API Backend Server with Complex Axioms, Localized Neuropsychiatry & LSTM Memory,
-Holomorphic Manifold Geometry, Executable Prolog Axiom Programs, and Epistemic Exploration Endpoints.
+Holomorphic Manifold Geometry, Executable Prolog Axiom Programs, Agent Personality Editing,
+and Epistemic Exploration Endpoints.
 """
 
 import os
@@ -14,10 +15,13 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../.
 from drifting_logs.tools.algebraic_model_transformer import AlgebraicModelTransformer
 from drifting_logs.tools.prolog_engine import PrologAxiomProgram, Term
 from drifting_logs.tools.autonomous_explorer import AutonomousEpistemicExplorer
+from drifting_logs.tools.epistemic_agents import create_agent_ensemble, load_all_logs_text
 
 PORT = 8080
 transformer_engine = AlgebraicModelTransformer()
 explorer_engine = AutonomousEpistemicExplorer()
+agent_ensemble = create_agent_ensemble()
+raw_logs_context = load_all_logs_text()
 step_counter = 0
 
 class PsychogeographicalServer(BaseHTTPRequestHandler):
@@ -51,9 +55,27 @@ class PsychogeographicalServer(BaseHTTPRequestHandler):
                 self.wfile.write(json.dumps({"error": str(e)}).encode())
             return
 
+        if self.path == '/api/get_agents':
+            self._set_headers(200)
+            agents_info = {
+                k: {
+                    "name": agent.name,
+                    "lens": agent.lens,
+                    "personality": agent.personality.to_dict()
+                } for k, agent in agent_ensemble.items()
+            }
+            self.wfile.write(json.dumps(agents_info).encode())
+            return
+
+        if self.path == '/api/get_prolog_kb':
+            self._set_headers(200)
+            rules_str = transformer_engine.prolog_program.kb.get_all_rules_repr()
+            self.wfile.write(json.dumps({"rules": rules_str}).encode())
+            return
+
         if self.path == '/api/deduce_prolog':
             self._set_headers(200)
-            prolog = PrologAxiomProgram()
+            prolog = transformer_engine.prolog_program
             traps = prolog.kb.query(Term("systemic_trap", [Term("X"), Term("W")]))
             axiom_vals = prolog.evaluate_axiom_values()
             res = {
@@ -100,6 +122,47 @@ class PsychogeographicalServer(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps(transformed).encode())
             return
 
+        if self.path == '/api/update_agent_personality':
+            agent_key = req_data.get('agent_key', 'kepinski')
+            personality_traits = req_data.get('traits', {})
+            if agent_key in agent_ensemble:
+                agent_ensemble[agent_key].update_personality(personality_traits)
+                analysis_res = agent_ensemble[agent_key].analyze(raw_logs_context)
+                self._set_headers(200)
+                self.wfile.write(json.dumps({
+                    "status": f"Agent {agent_key} personality updated successfully.",
+                    "agent": agent_key,
+                    "personality": agent_ensemble[agent_key].personality.to_dict(),
+                    "analysis": analysis_res
+                }).encode())
+            else:
+                self._set_headers(400)
+                self.wfile.write(json.dumps({"error": f"Agent {agent_key} not found"}).encode())
+            return
+
+        if self.path == '/api/inject_prolog_fact':
+            fact_name = req_data.get('fact_name', 'linked')
+            args = req_data.get('args', ['node_a', 'node_b'])
+            transformer_engine.prolog_program.inject_fact(fact_name, args)
+            self._set_headers(200)
+            self.wfile.write(json.dumps({"status": "Fact successfully injected", "rules": transformer_engine.prolog_program.kb.get_all_rules_repr()}).encode())
+            return
+
+        if self.path == '/api/retract_prolog_relation':
+            head_name = req_data.get('head_name', '')
+            head_args = req_data.get('head_args', None)
+            count = transformer_engine.prolog_program.retract_relation(head_name, head_args)
+            self._set_headers(200)
+            self.wfile.write(json.dumps({"status": f"Retracted {count} matching rules/facts", "rules": transformer_engine.prolog_program.kb.get_all_rules_repr()}).encode())
+            return
+
+        if self.path == '/api/query_prolog_custom':
+            query_str = req_data.get('query', 'systemic_trap(?X, ?W)')
+            res = transformer_engine.prolog_program.parse_and_query_string(query_str)
+            self._set_headers(200)
+            self.wfile.write(json.dumps({"query": query_str, "results": res}).encode())
+            return
+
         if self.path == '/api/inject_prolog_rule':
             head_str = req_data.get('head_str', 'custom_rule')
             head_args = req_data.get('head_args', ['X', 'Y'])
@@ -107,7 +170,7 @@ class PsychogeographicalServer(BaseHTTPRequestHandler):
 
             transformer_engine.prolog_program.inject_rule(head_str, head_args, body_terms)
             self._set_headers(200)
-            self.wfile.write(json.dumps({"status": "Rule successfully injected into Prolog engine"}).encode())
+            self.wfile.write(json.dumps({"status": "Rule successfully injected into Prolog engine", "rules": transformer_engine.prolog_program.kb.get_all_rules_repr()}).encode())
             return
 
         if self.path == '/api/node_neuropsychiatry_transform':

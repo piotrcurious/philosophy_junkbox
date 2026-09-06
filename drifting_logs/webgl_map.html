@@ -91,7 +91,7 @@
             width: 42px;
             text-align: right;
         }
-        select, input[type="range"], button {
+        select, input[type="text"], input[type="range"], button {
             width: 100%;
             background: #1e293b;
             border: 1px solid #334155;
@@ -102,7 +102,7 @@
             outline: none;
             transition: border-color 0.2s;
         }
-        select:focus {
+        select:focus, input[type="text"]:focus {
             border-color: #38bdf8;
         }
         button {
@@ -130,7 +130,7 @@
         #inspector-panel {
             top: 20px;
             right: 20px;
-            width: 460px;
+            width: 480px;
             max-height: calc(100vh - 100px);
             overflow-y: auto;
         }
@@ -157,6 +157,10 @@
             border-left-color: #f59e0b;
             background: rgba(120, 53, 15, 0.2);
         }
+        .data-card.agent-card {
+            border-left-color: #06b6d4;
+            background: rgba(14, 116, 144, 0.2);
+        }
         .data-card h3 {
             font-size: 0.85rem;
             color: #f1f5f9;
@@ -167,6 +171,26 @@
             color: #cbd5e1;
             line-height: 1.4;
             word-break: break-all;
+        }
+        .tab-bar {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 6px 8px;
+            font-size: 0.75rem;
+            background: #1e293b;
+            color: #94a3b8;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .tab-btn.active {
+            background: #0284c7;
+            color: #ffffff;
+            border-color: #38bdf8;
         }
         .legend {
             display: flex;
@@ -191,8 +215,8 @@
     <div id="canvas-container"></div>
 
     <div id="header-panel" class="ui-panel">
-        <h1>Complex Axiom Psychogeographical Visualizer</h1>
-        <p class="subtitle">Non-Linear Complex Axiom Fields α, β, γ, δ ∈ ℂ | Holomorphic Scheme Varieties V(I) ⊂ ℂ⁴ | Executable Prolog Axiom Programs | Localized Kępiński Neuropsychiatry &amp; LSTM Memory</p>
+        <h1>Complex Axiom &amp; Agent Personality Explorer</h1>
+        <p class="subtitle">Non-Linear Complex Axiom Fields α, β, γ, δ ∈ ℂ | Holomorphic Schemes V(I) ⊂ ℂ⁴ | Executable Prolog KB | Editable Agent Character Biases &amp; Personalities</p>
         <div class="legend">
             <div class="legend-item"><span class="dot" style="background:#38bdf8;"></span> Spatial Node</div>
             <div class="legend-item"><span class="dot" style="background:#f97316;"></span> Cybernetic / Platform</div>
@@ -202,86 +226,164 @@
     </div>
 
     <div id="control-panel" class="ui-panel">
-        <h2 style="font-size:0.95rem; color:#f8fafc; margin-bottom:10px;">Complex Axiom Controls (Re, Im)</h2>
-
-        <div class="control-group">
-            <label for="slider-Mr">Kępiński Metabolic Rate Re(M)</label>
-            <div class="slider-row">
-                <input type="range" id="slider-Mr" min="0.1" max="4.0" step="0.1" value="1.5">
-                <span class="slider-val" id="val-Mr">1.5</span>
-            </div>
-            <label for="slider-Mi" style="margin-top:4px;">Kępiński Phase Shift Im(M)</label>
-            <div class="slider-row">
-                <input type="range" id="slider-Mi" min="-2.0" max="2.0" step="0.1" value="0.8">
-                <span class="slider-val" id="val-Mi">0.8</span>
-            </div>
+        <div class="tab-bar">
+            <button class="tab-btn active" id="tab-btn-axioms">Axioms (Re, Im)</button>
+            <button class="tab-btn" id="tab-btn-agents">Agent Character</button>
+            <button class="tab-btn" id="tab-btn-prolog">Prolog KB Editor</button>
         </div>
 
-        <div class="control-group">
-            <label for="slider-Vr">Ashby Requisite Variety Re(V)</label>
-            <div class="slider-row">
-                <input type="range" id="slider-Vr" min="0.1" max="4.0" step="0.1" value="2.2">
-                <span class="slider-val" id="val-Vr">2.2</span>
+        <!-- Tab 1: Complex Axioms -->
+        <div id="tab-content-axioms">
+            <h2 style="font-size:0.9rem; color:#f8fafc; margin-bottom:8px;">Complex Axiom Controls</h2>
+            <div class="control-group">
+                <label for="slider-Mr">Kępiński Metabolic Rate Re(M)</label>
+                <div class="slider-row">
+                    <input type="range" id="slider-Mr" min="0.1" max="4.0" step="0.1" value="1.5">
+                    <span class="slider-val" id="val-Mr">1.5</span>
+                </div>
+                <label for="slider-Mi" style="margin-top:4px;">Kępiński Phase Shift Im(M)</label>
+                <div class="slider-row">
+                    <input type="range" id="slider-Mi" min="-2.0" max="2.0" step="0.1" value="0.8">
+                    <span class="slider-val" id="val-Mi">0.8</span>
+                </div>
             </div>
-            <label for="slider-Vi" style="margin-top:4px;">Variety Dissipation Im(V)</label>
-            <div class="slider-row">
-                <input type="range" id="slider-Vi" min="-2.0" max="2.0" step="0.1" value="-0.5">
-                <span class="slider-val" id="val-Vi">-0.5</span>
+
+            <div class="control-group">
+                <label for="slider-Vr">Ashby Requisite Variety Re(V)</label>
+                <div class="slider-row">
+                    <input type="range" id="slider-Vr" min="0.1" max="4.0" step="0.1" value="2.2">
+                    <span class="slider-val" id="val-Vr">2.2</span>
+                </div>
+                <label for="slider-Vi" style="margin-top:4px;">Variety Dissipation Im(V)</label>
+                <div class="slider-row">
+                    <input type="range" id="slider-Vi" min="-2.0" max="2.0" step="0.1" value="-0.5">
+                    <span class="slider-val" id="val-Vi">-0.5</span>
+                </div>
             </div>
+
+            <div class="control-group">
+                <label for="slider-mur">Girardian Mimetic Coupling Re(&mu;)</label>
+                <div class="slider-row">
+                    <input type="range" id="slider-mur" min="0.1" max="3.0" step="0.1" value="0.7">
+                    <span class="slider-val" id="val-mur">0.7</span>
+                </div>
+                <label for="slider-mui" style="margin-top:4px;">Mimetic Interference Phase Im(&mu;)</label>
+                <div class="slider-row">
+                    <input type="range" id="slider-mui" min="-2.0" max="2.0" step="0.1" value="1.1">
+                    <span class="slider-val" id="val-mui">1.1</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="slider-Sigmar">Debordian Spectacle Shield Re(&Sigma;)</label>
+                <div class="slider-row">
+                    <input type="range" id="slider-Sigmar" min="0.1" max="3.0" step="0.1" value="1.2">
+                    <span class="slider-val" id="val-Sigmar">1.2</span>
+                </div>
+                <label for="slider-Sigmai" style="margin-top:4px;">Spectacle Refraction Index Im(&Sigma;)</label>
+                <div class="slider-row">
+                    <input type="range" id="slider-Sigmai" min="-2.0" max="2.0" step="0.1" value="0.4">
+                    <span class="slider-val" id="val-Sigmai">0.4</span>
+                </div>
+            </div>
+
+            <button id="mutate-axioms-btn">Recalculate Complex Variety &amp; Holomorphic Metric</button>
+            <button id="prolog-deduction-btn" class="btn-prolog" style="margin-top:6px;">Derive Axioms from Executable Prolog Engine</button>
+            <button id="autonomous-loop-btn" class="btn-secondary" style="margin-top:6px;">Execute Autonomous Epistemic Step</button>
         </div>
 
-        <div class="control-group">
-            <label for="slider-mur">Girardian Mimetic Coupling Re(&mu;)</label>
-            <div class="slider-row">
-                <input type="range" id="slider-mur" min="0.1" max="3.0" step="0.1" value="0.7">
-                <span class="slider-val" id="val-mur">0.7</span>
+        <!-- Tab 2: Agent Character Personality Editor -->
+        <div id="tab-content-agents" style="display:none;">
+            <h2 style="font-size:0.9rem; color:#f8fafc; margin-bottom:8px;">Agent Character Personality Editor</h2>
+            <div class="control-group">
+                <label for="select-agent-key">Select Epistemic Agent</label>
+                <select id="select-agent-key">
+                    <option value="kepinski">Kępiński Metabolism Agent</option>
+                    <option value="ashby">Ashby Variety Agent</option>
+                    <option value="girard">Girardian Mimesis Agent</option>
+                    <option value="debord">Debordian Spectacle Agent</option>
+                </select>
             </div>
-            <label for="slider-mui" style="margin-top:4px;">Mimetic Interference Phase Im(&mu;)</label>
-            <div class="slider-row">
-                <input type="range" id="slider-mui" min="-2.0" max="2.0" step="0.1" value="1.1">
-                <span class="slider-val" id="val-mui">1.1</span>
+
+            <div class="control-group">
+                <label for="slider-openness">Openness (Receptivity to Anomalies)</label>
+                <div class="slider-row">
+                    <input type="range" id="slider-openness" min="0.0" max="1.0" step="0.05" value="0.9">
+                    <span class="slider-val" id="val-openness">0.90</span>
+                </div>
+                <label for="slider-neuroticism" style="margin-top:4px;">Neuroticism (Strain &amp; Entropy Sensitivity)</label>
+                <div class="slider-row">
+                    <input type="range" id="slider-neuroticism" min="0.0" max="1.0" step="0.05" value="0.8">
+                    <span class="slider-val" id="val-neuroticism">0.80</span>
+                </div>
+                <label for="slider-extraversion" style="margin-top:4px;">Extraversion (Mimetic Signal Propagation)</label>
+                <div class="slider-row">
+                    <input type="range" id="slider-extraversion" min="0.0" max="1.0" step="0.05" value="0.5">
+                    <span class="slider-val" id="val-extraversion">0.50</span>
+                </div>
+                <label for="slider-conscientiousness" style="margin-top:4px;">Conscientiousness (Structural Capacity)</label>
+                <div class="slider-row">
+                    <input type="range" id="slider-conscientiousness" min="0.0" max="1.0" step="0.05" value="0.7">
+                    <span class="slider-val" id="val-conscientiousness">0.70</span>
+                </div>
             </div>
+
+            <button id="update-agent-btn" class="btn-prolog">Apply Character Personality &amp; Re-evaluate Agent</button>
         </div>
 
-        <div class="control-group">
-            <label for="slider-Sigmar">Debordian Spectacle Shield Re(&Sigma;)</label>
-            <div class="slider-row">
-                <input type="range" id="slider-Sigmar" min="0.1" max="3.0" step="0.1" value="1.2">
-                <span class="slider-val" id="val-Sigmar">1.2</span>
+        <!-- Tab 3: Prolog KB & Relational Fact/Rule Editor -->
+        <div id="tab-content-prolog" style="display:none;">
+            <h2 style="font-size:0.9rem; color:#f8fafc; margin-bottom:8px;">Relational KB &amp; Query Editor</h2>
+
+            <div class="control-group">
+                <label for="input-prolog-query">Custom Prolog Query</label>
+                <input type="text" id="input-prolog-query" value="systemic_trap(?X, ?W)" placeholder="e.g. reachable(saint_saturnin, ?Y)">
+                <button id="run-custom-query-btn" style="margin-top:4px;">Execute Prolog Query</button>
             </div>
-            <label for="slider-Sigmai" style="margin-top:4px;">Spectacle Refraction Index Im(&Sigma;)</label>
-            <div class="slider-row">
-                <input type="range" id="slider-Sigmai" min="-2.0" max="2.0" step="0.1" value="0.4">
-                <span class="slider-val" id="val-Sigmai">0.4</span>
+
+            <div class="control-group" style="margin-top:10px;">
+                <label for="input-fact-name">Inject Relational Fact (Name, Arg1, Arg2)</label>
+                <div style="display:flex; gap:4px;">
+                    <input type="text" id="input-fact-name" placeholder="linked" value="linked" style="flex:1;">
+                    <input type="text" id="input-fact-arg1" placeholder="node_a" value="saint_saturnin" style="flex:1;">
+                    <input type="text" id="input-fact-arg2" placeholder="node_b" value="medical_desert" style="flex:1;">
+                </div>
+                <button id="inject-fact-btn" class="btn-prolog" style="margin-top:4px;">Assert Fact</button>
+            </div>
+
+            <div class="control-group" style="margin-top:10px;">
+                <label for="input-retract-head">Retract Relational Relation</label>
+                <input type="text" id="input-retract-head" placeholder="linked" value="linked">
+                <button id="retract-relation-btn" class="btn-secondary" style="margin-top:4px;">Retract Relation</button>
             </div>
         </div>
-
-        <button id="mutate-axioms-btn">Recalculate Complex Variety & Holomorphic Metric</button>
-        <button id="prolog-deduction-btn" class="btn-prolog" style="margin-top:6px;">Derive Axioms from Executable Prolog Engine</button>
-        <button id="autonomous-loop-btn" class="btn-secondary" style="margin-top:6px;">Execute Autonomous Epistemic Step</button>
     </div>
 
     <div id="inspector-panel" class="ui-panel">
-        <h2 style="font-size:1rem; color:#f8fafc; margin-bottom:8px;" id="inspector-title">Complex Algebraic Geometry Inspector</h2>
+        <h2 style="font-size:1rem; color:#f8fafc; margin-bottom:8px;" id="inspector-title">Complex Epistemic Inspector</h2>
         <div id="inspector-content">
             <div class="data-card complex-card">
-                <h3>Complex Axiom Field Magnitudes & Phases</h3>
+                <h3>Complex Axiom Field Magnitudes &amp; Phases</h3>
                 <p id="complex-axiom-props">M: |1.70| ∠0.49 rad | V: |2.26| ∠-0.22 rad</p>
             </div>
+            <div class="data-card agent-card">
+                <h3>Agent Character Personality Evaluation</h3>
+                <p id="agent-personality-output">Agent: Kępiński Metabolism Agent | Neuroticism: 0.80 | Openness: 0.90<br>Weighted Stimulus: 238.7 | Metabolic Deficit Index: 0.70</p>
+            </div>
             <div class="data-card kepinski-card">
-                <h3>Kępiński Localized Neuropsychiatry & LSTM Memory</h3>
-                <p id="kepinski-neuro-props">Node: Saint-Saturnin | DA: 1.00 | 5-HT: 1.00 | BDNF: 0.64<br>Anhedonia Index: 0.36 | Entropy H: 1.10<br>LSTM Memory State c_t: [0.12, -0.08, 0.24, -0.15]</p>
+                <h3>Kępiński Localized Neuropsychiatry &amp; LSTM Memory</h3>
+                <p id="kepinski-neuro-props">Node: Saint-Saturnin | DA: 1.00 | 5-HT: 1.00 | Effective BDNF: 0.64<br>Anhedonia Index: 0.36 | Entropy H: 1.10<br>LSTM Memory State c_t: [0.12, -0.08, 0.24, -0.15]</p>
             </div>
             <div class="data-card algebraic-card">
                 <h3>Complex Scheme Ideal Generators V(I) ⊂ ℂ⁴</h3>
                 <p id="algebraic-generators">Loading polynomials...</p>
             </div>
             <div class="data-card algebraic-card">
-                <h3>Hermitian Metric h & Holomorphic Curvature R</h3>
+                <h3>Hermitian Metric h &amp; Holomorphic Curvature R</h3>
                 <p id="algebraic-groebner">Computing metric...</p>
             </div>
             <div class="data-card prolog-card">
-                <h3>Prolog Executable Axiom & Relational Trap Deduction</h3>
+                <h3>Prolog Executable Axiom &amp; Relational Trap Deduction</h3>
                 <p id="prolog-output">Prolog query running...</p>
             </div>
         </div>
@@ -468,24 +570,115 @@
             } catch (err) {}
         }
 
-        async function triggerAutonomousStep() {
-            try {
-                const res = await fetch('/api/autonomous_step', { method: 'POST' });
-                if (res.ok) {
-                    const stepData = await res.json();
-                    document.getElementById('slider-Mr').value = stepData.axiom_hypothesis.M;
-                    document.getElementById('val-Mr').textContent = stepData.axiom_hypothesis.M;
-                    document.getElementById('slider-Vr').value = stepData.axiom_hypothesis.V;
-                    document.getElementById('val-Vr').textContent = stepData.axiom_hypothesis.V;
-                    document.getElementById('slider-mur').value = stepData.axiom_hypothesis.mu;
-                    document.getElementById('val-mur').textContent = stepData.axiom_hypothesis.mu;
-                    document.getElementById('slider-Sigmar').value = stepData.axiom_hypothesis.Sigma;
-                    document.getElementById('val-Sigmar').textContent = stepData.axiom_hypothesis.Sigma;
+        async function updateAgentPersonality() {
+            const agentKey = document.getElementById('select-agent-key').value;
+            const openness = parseFloat(document.getElementById('slider-openness').value);
+            const neuroticism = parseFloat(document.getElementById('slider-neuroticism').value);
+            const extraversion = parseFloat(document.getElementById('slider-extraversion').value);
+            const conscientiousness = parseFloat(document.getElementById('slider-conscientiousness').value);
 
-                    await triggerAxiomMutation();
+            try {
+                const res = await fetch('/api/update_agent_personality', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        agent_key: agentKey,
+                        traits: { openness, neuroticism, extraversion, conscientiousness }
+                    })
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    const p = data.personality;
+                    const m = data.analysis.quantitative_metrics;
+                    document.getElementById('agent-personality-output').innerHTML = `<b>Agent:</b> ${data.agent.toUpperCase()} | <b>Neuroticism:</b> ${p.neuroticism.toFixed(2)} | <b>Openness:</b> ${p.openness.toFixed(2)}<br><b>Metrics:</b> ${JSON.stringify(m)}<br><b>Diagnostic:</b> ${data.analysis.diagnostic || 'Evaluated.'}`;
                 }
             } catch (err) {}
         }
+
+        async function executeCustomQuery() {
+            const query = document.getElementById('input-prolog-query').value;
+            try {
+                const res = await fetch('/api/query_prolog_custom', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ query })
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    document.getElementById('prolog-output').innerHTML = `<b>Query:</b> ${data.query}<br><b>Results:</b> ${JSON.stringify(data.results)}`;
+                }
+            } catch (err) {}
+        }
+
+        async function injectFact() {
+            const fact_name = document.getElementById('input-fact-name').value;
+            const arg1 = document.getElementById('input-fact-arg1').value;
+            const arg2 = document.getElementById('input-fact-arg2').value;
+            try {
+                const res = await fetch('/api/inject_prolog_fact', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ fact_name, args: [arg1, arg2] })
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    document.getElementById('prolog-output').innerHTML = `<b>Fact Asserted:</b> ${fact_name}(${arg1}, ${arg2})<br><b>Total KB Rules/Facts:</b> ${data.rules.length}`;
+                }
+            } catch (err) {}
+        }
+
+        async function retractRelation() {
+            const head_name = document.getElementById('input-retract-head').value;
+            try {
+                const res = await fetch('/api/retract_prolog_relation', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ head_name })
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    document.getElementById('prolog-output').innerHTML = `<b>Status:</b> ${data.status}<br><b>Remaining Rules/Facts:</b> ${data.rules.length}`;
+                }
+            } catch (err) {}
+        }
+
+        // Tab Switching Logic
+        document.getElementById('tab-btn-axioms').addEventListener('click', () => {
+            document.getElementById('tab-btn-axioms').classList.add('active');
+            document.getElementById('tab-btn-agents').classList.remove('active');
+            document.getElementById('tab-btn-prolog').classList.remove('active');
+            document.getElementById('tab-content-axioms').style.display = 'block';
+            document.getElementById('tab-content-agents').style.display = 'none';
+            document.getElementById('tab-content-prolog').style.display = 'none';
+        });
+
+        document.getElementById('tab-btn-agents').addEventListener('click', () => {
+            document.getElementById('tab-btn-agents').classList.add('active');
+            document.getElementById('tab-btn-axioms').classList.remove('active');
+            document.getElementById('tab-btn-prolog').classList.remove('active');
+            document.getElementById('tab-content-agents').style.display = 'block';
+            document.getElementById('tab-content-axioms').style.display = 'none';
+            document.getElementById('tab-content-prolog').style.display = 'none';
+        });
+
+        document.getElementById('tab-btn-prolog').addEventListener('click', () => {
+            document.getElementById('tab-btn-prolog').classList.add('active');
+            document.getElementById('tab-btn-axioms').classList.remove('active');
+            document.getElementById('tab-btn-agents').classList.remove('active');
+            document.getElementById('tab-content-prolog').style.display = 'block';
+            document.getElementById('tab-content-axioms').style.display = 'none';
+            document.getElementById('tab-content-agents').style.display = 'none';
+        });
+
+        ['openness', 'neuroticism', 'extraversion', 'conscientiousness'].forEach(trait => {
+            const slider = document.getElementById(`slider-${trait}`);
+            const valSpan = document.getElementById(`val-${trait}`);
+            if (slider && valSpan) {
+                slider.addEventListener('input', (e) => {
+                    valSpan.textContent = parseFloat(e.target.value).toFixed(2);
+                });
+            }
+        });
 
         ['Mr', 'Mi', 'Vr', 'Vi', 'mur', 'mui', 'Sigmar', 'Sigmai'].forEach(param => {
             const slider = document.getElementById(`slider-${param}`);
@@ -499,7 +692,10 @@
 
         document.getElementById('mutate-axioms-btn').addEventListener('click', () => triggerAxiomMutation(false));
         document.getElementById('prolog-deduction-btn').addEventListener('click', () => triggerAxiomMutation(true));
-        document.getElementById('autonomous-loop-btn').addEventListener('click', triggerAutonomousStep);
+        document.getElementById('update-agent-btn').addEventListener('click', updateAgentPersonality);
+        document.getElementById('run-custom-query-btn').addEventListener('click', executeCustomQuery);
+        document.getElementById('inject-fact-btn').addEventListener('click', injectFact);
+        document.getElementById('retract-relation-btn').addEventListener('click', retractRelation);
 
         window.addEventListener('mousedown', (e) => {
             if (e.target.tagName === 'CANVAS') {

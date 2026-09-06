@@ -1,9 +1,10 @@
 """
 Prolog Engine (Declarative Relational Resolution Engine & Executable Prolog Axioms)
 Supports multi-hop unification, negation-as-failure, recursive reachability,
-dynamic rule injection, and executable Prolog programs for complex epistemological axioms.
+dynamic fact/rule retract and update, and executable Prolog programs for complex epistemological axioms.
 """
 
+import re
 from typing import List, Dict, Any, Union, Optional, Tuple
 import cmath
 
@@ -46,6 +47,22 @@ class KnowledgeBase:
         else:
             self.rules.append(Rule(head_or_rule, body))
 
+    def retract(self, head_name: str, head_args: Optional[List[str]] = None) -> int:
+        """Removes rules or facts matching head_name and optionally head_args."""
+        initial_count = len(self.rules)
+        new_rules = []
+        for r in self.rules:
+            if r.head.name == head_name:
+                if head_args is not None:
+                    str_args = [str(a) for a in r.head.args]
+                    if str_args == head_args:
+                        continue
+                else:
+                    continue
+            new_rules.append(r)
+        self.rules = new_rules
+        return initial_count - len(self.rules)
+
     def query(self, goal: Term) -> List[Dict[str, str]]:
         results = []
         self._solve([goal], {}, results, depth=0)
@@ -59,6 +76,9 @@ class KnowledgeBase:
             if clean_subst not in filtered:
                 filtered.append(clean_subst)
         return filtered
+
+    def get_all_rules_repr(self) -> List[str]:
+        return [str(r) for r in self.rules]
 
     def _solve(self, goals: List[Term], env: Dict[str, Any], results: List[Dict[str, Any]], depth: int = 0):
         if depth > 30: # Prevent infinite stack overflow on recursive loops
@@ -218,7 +238,7 @@ def build_psychogeographical_kb() -> KnowledgeBase:
 class PrologAxiomProgram:
     """
     Executable Prolog Program representing Epistemological Axioms as Logical Rules.
-    Allows runtime extension, rule injection, and logical deduction of Axiom Parameters.
+    Allows runtime extension, rule injection, dynamic retraction, and logical deduction of Axiom Parameters.
     """
     def __init__(self, kb: Optional[KnowledgeBase] = None):
         self.kb = kb if kb is not None else build_psychogeographical_kb()
@@ -268,6 +288,14 @@ class PrologAxiomProgram:
         self.kb.assertz(Term("scheme_ideal_template", [Term("f2"), Term("y**2 + z**2 - V*w")]))
         self.kb.assertz(Term("scheme_ideal_template", [Term("f3"), Term("w**2 - mu*x*z")]))
 
+    def inject_fact(self, fact_name: str, args: List[str]):
+        """Asserts a new relational fact into the Prolog KB."""
+        self.kb.assertz(Term(fact_name, [Term(a) for a in args]))
+
+    def retract_relation(self, head_name: str, head_args: Optional[List[str]] = None) -> int:
+        """Retracts matching facts or rules from the Prolog KB."""
+        return self.kb.retract(head_name, head_args)
+
     def inject_rule(self, head_str: str, head_args: List[str], body_terms: List[Tuple[str, List[str]]] = None):
         """Allows runtime extensibility by injecting custom user/agent Prolog rules."""
         head = Term(head_str, [Term(a) for a in head_args])
@@ -276,6 +304,16 @@ class PrologAxiomProgram:
             for b_name, b_args in body_terms:
                 body.append(Term(b_name, [Term(a) for a in b_args]))
         self.kb.assertz(Rule(head, body))
+
+    def parse_and_query_string(self, query_str: str) -> List[Dict[str, str]]:
+        """Parses a string query like 'systemic_trap(?X, ?W)' or 'linked(saint_saturnin, ?Y)' and runs query."""
+        m = re.match(r'^\s*(\w+)\s*\((.*)\)\s*$', query_str.strip())
+        if not m:
+            return []
+        pred_name = m.group(1)
+        args_raw = [a.strip() for a in m.group(2).split(',') if a.strip()]
+        goal_term = Term(pred_name, [Term(a) for a in args_raw])
+        return self.kb.query(goal_term)
 
     def evaluate_axiom_values(self, m_state: str = "high_entropy", v_state: str = "hyper_variable",
                               mu_state: str = "resonant", sigma_state: str = "alienated") -> Dict[str, complex]:
@@ -307,5 +345,4 @@ if __name__ == "__main__":
     prog = PrologAxiomProgram()
     vals = prog.evaluate_axiom_values()
     print("Derived Axiom Values from Executable Prolog Program:", vals)
-    prog.inject_rule("custom_axiom", ["?X", "?Y"], [("kepinski_metabolic_state", ["?X", "?R", "?I"])])
-    print("Injected Rule Query:", prog.kb.query(Term("custom_axiom", [Term("State"), Term("R")])))
+    print("Custom Query String Parse:", prog.parse_and_query_string("systemic_trap(?X, ?W)"))
