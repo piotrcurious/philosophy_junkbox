@@ -1,6 +1,6 @@
 """
 REST API Backend Server with Complex Axioms, Holomorphic Manifold Geometry,
-Prolog Inferences, and Dynamic Complex Transformation Endpoints.
+Prolog Inferences, Singular Locus Analysis, and Autonomous Epistemic Exploration Endpoints.
 """
 
 import os
@@ -18,6 +18,7 @@ from drifting_logs.tools.autonomous_explorer import AutonomousEpistemicExplorer
 PORT = 8080
 transformer_engine = AlgebraicModelTransformer()
 explorer_engine = AutonomousEpistemicExplorer()
+step_counter = 0
 
 class PsychogeographicalServer(BaseHTTPRequestHandler):
     def _set_headers(self, status=200, content_type="application/json"):
@@ -61,6 +62,7 @@ class PsychogeographicalServer(BaseHTTPRequestHandler):
         self.wfile.write(json.dumps({"error": "Endpoint not found"}).encode())
 
     def do_POST(self):
+        global step_counter
         content_len = int(self.headers.get('Content-Length', 0))
         post_body = self.rfile.read(content_len) if content_len > 0 else b'{}'
 
@@ -70,14 +72,14 @@ class PsychogeographicalServer(BaseHTTPRequestHandler):
             req_data = {}
 
         if self.path == '/api/axiom_transform':
-            M_r = float(req_data.get('M_r', 1.0))
-            M_i = float(req_data.get('M_i', 0.5))
-            V_r = float(req_data.get('V_r', 2.0))
-            V_i = float(req_data.get('V_i', -0.3))
-            mu_r = float(req_data.get('mu_r', 0.5))
-            mu_i = float(req_data.get('mu_i', 0.8))
-            Sigma_r = float(req_data.get('Sigma_r', 1.0))
-            Sigma_i = float(req_data.get('Sigma_i', 0.2))
+            M_r = float(req_data.get('M_r', 1.5))
+            M_i = float(req_data.get('M_i', 0.8))
+            V_r = float(req_data.get('V_r', 2.2))
+            V_i = float(req_data.get('V_i', -0.5))
+            mu_r = float(req_data.get('mu_r', 0.7))
+            mu_i = float(req_data.get('mu_i', 1.1))
+            Sigma_r = float(req_data.get('Sigma_r', 1.2))
+            Sigma_i = float(req_data.get('Sigma_i', 0.4))
 
             M = complex(M_r, M_i)
             V = complex(V_r, V_i)
@@ -87,6 +89,13 @@ class PsychogeographicalServer(BaseHTTPRequestHandler):
             transformed = transformer_engine.transform_model(M=M, V=V, mu=mu, Sigma=Sigma)
             self._set_headers(200)
             self.wfile.write(json.dumps(transformed).encode())
+            return
+
+        if self.path == '/api/autonomous_step':
+            step_counter += 1
+            res = explorer_engine.execute_exploration_step(step_counter)
+            self._set_headers(200)
+            self.wfile.write(json.dumps(res).encode())
             return
 
         self._set_headers(404)

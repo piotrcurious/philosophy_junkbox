@@ -1,5 +1,6 @@
 """
 Prolog Engine (Declarative Relational Resolution Engine)
+Supports multi-hop unification, negation-as-failure, recursive reachability, and complex constraint queries.
 """
 
 from typing import List, Dict, Any, Union
@@ -45,7 +46,7 @@ class KnowledgeBase:
 
     def query(self, goal: Term) -> List[Dict[str, str]]:
         results = []
-        self._solve([goal], {}, results)
+        self._solve([goal], {}, results, depth=0)
         query_vars = get_vars(goal)
         filtered = []
         for subst in results:
@@ -57,17 +58,29 @@ class KnowledgeBase:
                 filtered.append(clean_subst)
         return filtered
 
-    def _solve(self, goals: List[Term], env: Dict[str, Any], results: List[Dict[str, Any]]):
+    def _solve(self, goals: List[Term], env: Dict[str, Any], results: List[Dict[str, Any]], depth: int = 0):
+        if depth > 25: # Prevent infinite stack overflow on recursive loops
+            return
         if not goals:
             results.append(env)
             return
 
         current_goal = goals[0]
+
+        # Handle negation-as-failure: not(Goal)
+        if current_goal.name == "not" and len(current_goal.args) == 1:
+            sub_goal = current_goal.args[0]
+            sub_results = []
+            self._solve([sub_goal], env, sub_results, depth + 1)
+            if not sub_results:
+                self._solve(goals[1:], env, results, depth + 1)
+            return
+
         for rule in self.rules:
             renamed_rule = rename_vars(rule)
             new_env = env.copy()
             if unify(current_goal, renamed_rule.head, new_env):
-                self._solve(renamed_rule.body + goals[1:], new_env, results)
+                self._solve(renamed_rule.body + goals[1:], new_env, results, depth + 1)
 
 _var_counter = 0
 def rename_vars(rule: Rule) -> Rule:
@@ -135,11 +148,21 @@ def unify(t1: Any, t2: Any, env: Dict[str, Any]) -> bool:
 def build_psychogeographical_kb() -> KnowledgeBase:
     kb = KnowledgeBase()
 
-    # Facts
+    # Facts - Direct Systemic Connections
     kb.assertz(Term("commute_dependency", [Term("saint_saturnin"), Term("a75_corridor")]))
     kb.assertz(Term("platform_lockin", [Term("a75_corridor"), Term("connected_car")]))
     kb.assertz(Term("metabolic_exhaustion", [Term("connected_car"), Term("youth_inertia")]))
     kb.assertz(Term("institutional_desert", [Term("youth_inertia"), Term("medical_desert")]))
+
+    kb.assertz(Term("industrial_memory", [Term("montceau_les_mines"), Term("belfort_lure")]))
+    kb.assertz(Term("ecological_anomaly", [Term("aire_de_la_guye"), Term("a75_corridor")]))
+    kb.assertz(Term("autonomous_counter_signal", [Term("mond_arverne"), Term("saint_saturnin")]))
+
+    # Direct edge relation
+    kb.assertz(Term("linked", [Term("saint_saturnin"), Term("a75_corridor")]))
+    kb.assertz(Term("linked", [Term("a75_corridor"), Term("connected_car")]))
+    kb.assertz(Term("linked", [Term("connected_car"), Term("youth_inertia")]))
+    kb.assertz(Term("linked", [Term("youth_inertia"), Term("medical_desert")]))
 
     # Rules
     kb.assertz(Rule(
@@ -166,11 +189,33 @@ def build_psychogeographical_kb() -> KnowledgeBase:
         ]
     ))
 
+    # Multi-hop Reachability Rule
+    kb.assertz(Rule(
+        Term("reachable", [Term("X"), Term("Y")]),
+        [Term("linked", [Term("X"), Term("Y")])]
+    ))
+    kb.assertz(Rule(
+        Term("reachable", [Term("X"), Term("Y")]),
+        [
+            Term("linked", [Term("X"), Term("Z")]),
+            Term("reachable", [Term("Z"), Term("Y")])
+        ]
+    ))
+
+    # Unresolved Trap Query using Negation as Failure
+    kb.assertz(Rule(
+        Term("unresolved_trap", [Term("X"), Term("Y")]),
+        [
+            Term("systemic_trap", [Term("X"), Term("Y")]),
+            Term("not", [Term("autonomous_counter_signal", [Term("X"), Term("Y")])])
+        ]
+    ))
+
     return kb
 
 if __name__ == "__main__":
     kb = build_psychogeographical_kb()
     print("Entropic Corridor:", kb.query(Term("entropic_corridor", [Term("X"), Term("Z")])))
     print("Feedback Loop:", kb.query(Term("feedback_loop", [Term("X"), Term("Z")])))
-    res = kb.query(Term("systemic_trap", [Term("X"), Term("W")]))
-    print("Prolog Deductions for Systemic Trap:", res)
+    print("Systemic Trap:", kb.query(Term("systemic_trap", [Term("X"), Term("W")])))
+    print("Multi-hop Reachable (saint_saturnin -> ?):", kb.query(Term("reachable", [Term("saint_saturnin"), Term("Y")])))

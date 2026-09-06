@@ -115,6 +115,12 @@
         button:hover {
             background: #0369a1;
         }
+        button.btn-secondary {
+            background: #475569;
+        }
+        button.btn-secondary:hover {
+            background: #334155;
+        }
         #inspector-panel {
             top: 20px;
             right: 20px;
@@ -227,7 +233,21 @@
             </div>
         </div>
 
+        <div class="control-group">
+            <label for="slider-Sigmar">Debordian Spectacle Shield Re(&Sigma;)</label>
+            <div class="slider-row">
+                <input type="range" id="slider-Sigmar" min="0.1" max="3.0" step="0.1" value="1.2">
+                <span class="slider-val" id="val-Sigmar">1.2</span>
+            </div>
+            <label for="slider-Sigmai" style="margin-top:4px;">Spectacle Refraction Index Im(&Sigma;)</label>
+            <div class="slider-row">
+                <input type="range" id="slider-Sigmai" min="-2.0" max="2.0" step="0.1" value="0.4">
+                <span class="slider-val" id="val-Sigmai">0.4</span>
+            </div>
+        </div>
+
         <button id="mutate-axioms-btn">Recalculate Complex Variety & Holomorphic Metric</button>
+        <button id="autonomous-loop-btn" class="btn-secondary" style="margin-top:6px;">Execute Autonomous Epistemic Step</button>
     </div>
 
     <div id="inspector-panel" class="ui-panel">
@@ -373,21 +393,23 @@
             const V_i = parseFloat(document.getElementById('slider-Vi').value);
             const mu_r = parseFloat(document.getElementById('slider-mur').value);
             const mu_i = parseFloat(document.getElementById('slider-mui').value);
+            const Sigma_r = parseFloat(document.getElementById('slider-Sigmar').value);
+            const Sigma_i = parseFloat(document.getElementById('slider-Sigmai').value);
 
             try {
                 const res = await fetch('/api/axiom_transform', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ M_r, M_i, V_r, V_i, mu_r, mu_i, Sigma_r: 1.0, Sigma_i: 0.2 })
+                    body: JSON.stringify({ M_r, M_i, V_r, V_i, mu_r, mu_i, Sigma_r, Sigma_i })
                 });
                 if (res.ok) {
                     const data = await res.json();
 
-                    document.getElementById('complex-axiom-props').textContent = `M: |${data.complex_axioms.M.magnitude.toFixed(2)}| ∠${data.complex_axioms.M.phase_rad.toFixed(2)}rad | V: |${data.complex_axioms.V.magnitude.toFixed(2)}| ∠${data.complex_axioms.V.phase_rad.toFixed(2)}rad`;
+                    document.getElementById('complex-axiom-props').textContent = `M: |${data.complex_axioms.M.magnitude.toFixed(2)}| ∠${data.complex_axioms.M.phase_rad.toFixed(2)}rad | V: |${data.complex_axioms.V.magnitude.toFixed(2)}| ∠${data.complex_axioms.V.phase_rad.toFixed(2)}rad | Σ: |${data.complex_axioms.Sigma.magnitude.toFixed(2)}|`;
                     document.getElementById('algebraic-generators').textContent = data.algebraic_scheme.ideal_generators.join(', ');
                     document.getElementById('algebraic-groebner').textContent = `dim V(I): ${data.algebraic_scheme.variety_dimension} | Hermitian Metric h: ${data.algebraic_scheme.hermitian_metric_h.toFixed(2)}\nHolomorphic Ricci R: ${data.algebraic_scheme.holomorphic_ricci_curvature.toFixed(4)}`;
 
-                    if (data.prolog_deductions.systemic_traps.length > 0) {
+                    if (data.prolog_deductions && data.prolog_deductions.systemic_traps && data.prolog_deductions.systemic_traps.length > 0) {
                         const trap = data.prolog_deductions.systemic_traps[0];
                         document.getElementById('prolog-output').textContent = `Systemic Trap Deducted: ${trap.X} -> ${trap.W}`;
                     }
@@ -405,15 +427,37 @@
             } catch (err) {}
         }
 
-        ['Mr', 'Mi', 'Vr', 'Vi', 'mur', 'mui'].forEach(param => {
+        async function triggerAutonomousStep() {
+            try {
+                const res = await fetch('/api/autonomous_step', { method: 'POST' });
+                if (res.ok) {
+                    const stepData = await res.json();
+                    document.getElementById('slider-Mr').value = stepData.axiom_hypothesis.M;
+                    document.getElementById('val-Mr').textContent = stepData.axiom_hypothesis.M;
+                    document.getElementById('slider-Vr').value = stepData.axiom_hypothesis.V;
+                    document.getElementById('val-Vr').textContent = stepData.axiom_hypothesis.V;
+                    document.getElementById('slider-mur').value = stepData.axiom_hypothesis.mu;
+                    document.getElementById('val-mur').textContent = stepData.axiom_hypothesis.mu;
+                    document.getElementById('slider-Sigmar').value = stepData.axiom_hypothesis.Sigma;
+                    document.getElementById('val-Sigmar').textContent = stepData.axiom_hypothesis.Sigma;
+
+                    await triggerAxiomMutation();
+                }
+            } catch (err) {}
+        }
+
+        ['Mr', 'Mi', 'Vr', 'Vi', 'mur', 'mui', 'Sigmar', 'Sigmai'].forEach(param => {
             const slider = document.getElementById(`slider-${param}`);
             const valSpan = document.getElementById(`val-${param}`);
-            slider.addEventListener('input', (e) => {
-                valSpan.textContent = e.target.value;
-            });
+            if (slider && valSpan) {
+                slider.addEventListener('input', (e) => {
+                    valSpan.textContent = e.target.value;
+                });
+            }
         });
 
         document.getElementById('mutate-axioms-btn').addEventListener('click', triggerAxiomMutation);
+        document.getElementById('autonomous-loop-btn').addEventListener('click', triggerAutonomousStep);
 
         window.addEventListener('mousedown', (e) => {
             if (e.target.tagName === 'CANVAS') {

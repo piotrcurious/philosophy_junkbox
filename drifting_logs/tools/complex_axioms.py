@@ -1,11 +1,12 @@
 """
 Non-Linear Complex Axiom Fields Module
 Defines complex-valued axioms α, β, γ, δ ∈ ℂ with non-linear holomorphic dynamics,
-phase entanglements, complex Jacobian determinants, and holomorphic differential forms.
+phase entanglements, complex Jacobian matrices in ℂ⁴, singular loci, and holomorphic differential forms.
 """
 
 import cmath
 import numpy as np
+import sympy as sp
 from typing import Dict, List, Any, Tuple
 
 class ComplexAxiomField:
@@ -39,6 +40,48 @@ class ComplexAxiomField:
         z2 = (-self.M - disc) / 3.0
         return z1, z2
 
+    def jacobian_matrix_4d(self, point: Tuple[complex, complex, complex, complex]) -> np.ndarray:
+        """
+        Full 3x4 complex Jacobian matrix J for the ℂ⁴ affine scheme generators:
+        f1 = x*y - M*z
+        f2 = y^2 + z^2 - V*w
+        f3 = w^2 - mu*x*z
+        at point p = (x, y, z, w) ∈ ℂ⁴.
+        """
+        px, py, pz, pw = point
+        J = np.array([
+            [py, px, -self.M, 0.0],
+            [0.0, 2*py, 2*pz, -self.V],
+            [-self.mu*pz, 0.0, -self.mu*px, 2*pw]
+        ], dtype=complex)
+        return J
+
+    def compute_singular_locus(self, point: Tuple[complex, complex, complex, complex]) -> Dict[str, Any]:
+        """
+        Evaluates rank drop of the 3x4 Jacobian matrix to identify singular loci on V(I) ⊂ ℂ⁴.
+        """
+        J = self.jacobian_matrix_4d(point)
+        U, S, Vh = np.linalg.svd(J)
+        rank = np.sum(S > 1e-7)
+        is_singular = rank < 3
+        return {
+            "rank": int(rank),
+            "singular_values": [float(s) for s in S],
+            "is_singular": bool(is_singular),
+            "kernel_dimension": int(4 - rank)
+        }
+
+    def compute_tangent_space_kernel(self, point: Tuple[complex, complex, complex, complex]) -> List[List[complex]]:
+        """
+        Calculates basis for the tangent space T_p V(I) = Ker(J_p) in ℂ⁴.
+        """
+        J = self.jacobian_matrix_4d(point)
+        U, S, Vh = np.linalg.svd(J)
+        kernel_vectors = Vh[S.shape[0]:] if S.shape[0] < 4 else Vh[np.where(S <= 1e-7)[0]]
+        if kernel_vectors.shape[0] == 0 and Vh.shape[0] == 4:
+            kernel_vectors = Vh[-1:]
+        return kernel_vectors.tolist()
+
     def compute_hermitian_metric(self, z: complex) -> Dict[str, Any]:
         """
         Hermitian metric tensor h_z̄z = 1 + |f'(z)|^2 / (|Sigma|^2)
@@ -51,18 +94,22 @@ class ComplexAxiomField:
         h_val = 1.0 + mag_df2 / max(0.01, mag_Sigma2)
 
         # Holomorphic Ricci Curvature R = -∂²(log h) / ∂z∂z̄
-        # Approximated via finite difference along complex direction
         eps = 1e-4
         h_plus = 1.0 + ((self.complex_jacobian_derivative(z + eps) * self.complex_jacobian_derivative(z + eps).conjugate()).real) / max(0.01, mag_Sigma2)
         h_minus = 1.0 + ((self.complex_jacobian_derivative(z - eps) * self.complex_jacobian_derivative(z - eps).conjugate()).real) / max(0.01, mag_Sigma2)
         laplacian_log_h = (np.log(h_plus) - 2 * np.log(h_val) + np.log(h_minus)) / (eps**2)
         ricci_curvature = -laplacian_log_h
 
+        # Evaluate ℂ⁴ tangent space at sample point
+        sample_pt = (z, z*0.5, z*0.8, z*0.3)
+        sing_info = self.compute_singular_locus(sample_pt)
+
         return {
             "z": {"real": z.real, "imag": z.imag},
             "hermitian_metric_h": float(h_val),
             "holomorphic_ricci_curvature": float(ricci_curvature),
             "phase_angle_rad": float(cmath.phase(df)),
+            "singular_locus": sing_info,
             "critical_points": [
                 {"real": cp.real, "imag": cp.imag} for cp in self.find_critical_points()
             ]

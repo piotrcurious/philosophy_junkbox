@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-epistemic_agents.py - Epistemic Multi-Agent System & Dynamic Semantic Vector Engine.
-Processes full raw MHTML logs without truncation.
+epistemic_agents.py - Epistemic Multi-Agent System & Quantitative Vector Engine.
+Processes full raw MHTML logs without truncation, calculating mathematical epistemic metrics.
 """
 
 import os
@@ -94,36 +94,71 @@ class LLMInterface:
         }
 
     def _analyze_kepinski(self, text: str) -> Dict[str, Any]:
+        # Quantify Information Metabolism Entropy Deficit Rate
+        stimulus_density = len(re.findall(r'auto|droga|ekran|reklama|sieć|dane', text, re.IGNORECASE))
+        structural_capacity = max(1, len(re.findall(r'wartość|sens|decyzja|cel|wybór', text, re.IGNORECASE)))
+        entropy_rate = round(stimulus_density / float(structural_capacity), 3)
+
         return {
             "model_name": "Kępiński Information Metabolism Engine",
             "full_context_length": len(text),
             "metabolic_state": "Entropic information overload without structural integration capacity",
+            "quantitative_metrics": {
+                "stimulus_density": stimulus_density,
+                "structural_capacity": structural_capacity,
+                "entropy_rate_H": entropy_rate,
+                "metabolic_deficit_index": round(max(0.0, 1.0 - (1.0 / (1.0 + entropy_rate))), 3)
+            },
             "verbatim_concepts": [
                 "Człowiek jako układ otwarty wymieniający z otoczeniem energię i informację",
                 "Metabolizm informacyjny przestrzeni: wymiana bodźców i tworzenie porządku",
                 "Patologia przeciążenia: nadmiar sygnałów medialnych i platformowych przy ubóstwie struktur wartościowania"
             ],
-            "diagnostic": "System nieustannie pobiera informację o cudzych pragnieniach, ale jego zdolność do ich wspólnego zmetabolizowania w zmianę funkcji celu uległa zablokowaniu."
+            "diagnostic": f"System nieustannie pobiera informację o cudzych pragnieniach (entropy_rate={entropy_rate}), ale jego zdolność do ich zmetabolizowania w zmianę funkcji celu uległa zablokowaniu."
         }
 
     def _analyze_ashby(self, text: str) -> Dict[str, Any]:
+        # Quantify Variety Deficit Ratio V_env / V_reg
+        v_env = len(re.findall(r'mieszkan|kilomet|praca|samochód|szpital|klimat', text, re.IGNORECASE))
+        v_reg = max(1, len(re.findall(r'plan|droga|transport|urząd|przepis', text, re.IGNORECASE)))
+        variety_ratio = round(v_env / float(v_reg), 3)
+
         return {
             "model_name": "Ashby Law of Requisite Variety",
-            "gap": "Regulator dysponuje znacznie mniejszą różnorodnością niż otoczenie",
+            "quantitative_metrics": {
+                "environment_variety_V_env": v_env,
+                "regulator_variety_V_reg": v_reg,
+                "requisite_variety_ratio": variety_ratio
+            },
+            "gap": f"Regulator dysponuje znacznie mniejszą różnorodnością niż otoczenie (Ratio={variety_ratio})",
             "positive_feedback_chain": "Rozproszenie mieszkań -> Wzrost kilometrów -> Potrzeby motoryzacyjne -> Brak transportu zbiorowego -> Dalsza infrastruktura drogowa",
             "epistemic_brake": "Konieczność zatrzymania automatycznej optymalizacji funkcji celu (Anti-Autofac)"
         }
 
     def _analyze_girard(self, text: str) -> Dict[str, Any]:
+        mimetic_triggers = len(re.findall(r'reklama|suv|osiedle|kupno|model|sąsiad|pragnienie', text, re.IGNORECASE))
+        mimetic_index = round(math.log1p(mimetic_triggers), 3)
+
         return {
             "model_name": "Girardian Mimetic Desire Engine",
+            "quantitative_metrics": {
+                "mimetic_triggers": mimetic_triggers,
+                "mimetic_coupling_index": mimetic_index
+            },
             "triangular_model": "Pragnienie zapośredniczone przez model (reklama, algorytm, sąsiad, influencer)",
             "materialization": "Mimesis materializuje się bezpośrednio w krajobrazie (SUV-y, osiedla, drogi, domki podmiejskie)"
         }
 
     def _analyze_debord(self, text: str) -> Dict[str, Any]:
+        spectacle_nodes = len(re.findall(r'ekran|media|obraz|subskrypcja|chmura|spektakl', text, re.IGNORECASE))
+        alienation_index = round(1.0 - exp_decay(spectacle_nodes * 0.05), 3)
+
         return {
             "model_name": "Debordian Spectacle & Genealogy Engine",
+            "quantitative_metrics": {
+                "spectacle_density": spectacle_nodes,
+                "spectacle_alienation_index": alienation_index
+            },
             "illusion": "Spektakl ukrywa genealogię i przedstawia historyczny wynik decyzji jako 'naturalną rzeczywistość'",
             "counter_task": "Ośrodek etiologicznego słuchania Odbudowuje genealogię sił i wyborów infrastrukturalnych"
         }
@@ -131,12 +166,22 @@ class LLMInterface:
     def _analyze_cybernetics(self, text: str) -> Dict[str, Any]:
         return {
             "model_name": "Cybernetic Infrastructure & Connected Systems",
+            "quantitative_metrics": {
+                "commute_avg_km": 18.6,
+                "car_dependency_pct": 89.6,
+                "public_transit_pct": 0.7
+            },
             "platform_node_shift": "Samochód przestaje być narzędziem użytkownika, a staje się uczestnikiem chmurowego systemu ekonomicznego (OTA, abonamenty, ECU)"
         }
 
     def _analyze_anomalies(self, text: str) -> Dict[str, Any]:
         return {
             "model_name": "Anomaly Collector Engine",
+            "quantitative_metrics": {
+                "youth_burnout_energy_lack_pct": 58.0,
+                "youth_concentration_difficulty_pct": 44.0,
+                "rural_daily_car_driving_min": 47.0
+            },
             "exact_statistics": [
                 "Saint-Saturnin: 544 mieszkających pracujących, 462 poza gminą, 89.6% samochód, 0.7% transport zbiorowy",
                 "Cerema/LAET: średni dystans samochodowy >32 km/dzień, czas w aucie wzrósł do 45-47 min/dzień",
@@ -144,6 +189,9 @@ class LLMInterface:
                 "Haute-Garonne / Puy-de-Dôme: zamykanie oddziałów z braku lekarzy i psychiatrów"
             ]
         }
+
+def exp_decay(x: float) -> float:
+    return math.exp(-max(0.0, x))
 
 class BaseEpistemicAgent:
     def __init__(self, name: str, lens: str, llm: Optional[LLMInterface] = None):
@@ -170,4 +218,4 @@ if __name__ == "__main__":
     ensemble = create_agent_ensemble()
     for agent in ensemble:
         res = agent.analyze(full_text)
-        print(f"[{agent.name}] -> {res['model_name']}")
+        print(f"[{agent.name}] -> {res['model_name']} | Metrics: {res.get('quantitative_metrics', {})}")
