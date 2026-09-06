@@ -10,14 +10,14 @@
         "z": 5
       },
       "mds_3d": {
-        "x": 3.0389,
-        "y": -9.1554,
-        "z": -28.1405
+        "x": 7.122,
+        "y": -8.4028,
+        "z": -27.3837
       },
       "pca_3d": {
-        "x": 3.0389,
-        "y": -9.1554,
-        "z": -28.1405
+        "x": -7.122,
+        "y": 8.4028,
+        "z": -27.3837
       },
       "raw_10d": {
         "posX": 10,
@@ -34,103 +34,135 @@
     },
     {
       "archetype": "Tourist",
-      "id": "boulevard_coupole_25",
+      "id": "boulevard_coupole_20",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 8.1054,
-        "y": 7.5786,
-        "z": 5.5684
+        "x": 8.5504,
+        "y": 5.7982,
+        "z": 5.4349
       },
       "mds_3d": {
-        "x": 2.2638,
-        "y": -7.5043,
-        "z": -21.8106
+        "x": 6.1462,
+        "y": -7.2133,
+        "z": -22.8098
       },
       "pca_3d": {
-        "x": 2.2638,
-        "y": -7.5043,
-        "z": -21.8106
+        "x": -6.1462,
+        "y": 7.2133,
+        "z": -22.8098
       },
       "raw_10d": {
-        "posX": 8.1054,
-        "posY": 7.5786,
-        "posZ": 5.5684,
-        "temperature": 32.1474,
-        "humidity": 0.4689,
-        "commercialVal": 0.8621,
-        "accessibility": 0.8216,
-        "symbolicVal": 0.8284,
-        "thermalStress": 0.7932,
-        "flowDensity": 0.9121
+        "posX": 8.5504,
+        "posY": 5.7982,
+        "posZ": 5.4349,
+        "temperature": 32.3477,
+        "humidity": 0.4645,
+        "commercialVal": 0.871,
+        "accessibility": 0.8283,
+        "symbolicVal": 0.8217,
+        "thermalStress": 0.8065,
+        "flowDensity": 0.921
       }
     },
     {
       "archetype": "Tourist",
-      "id": "boulevard_coupole_50",
+      "id": "boulevard_coupole_40",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 5.6472,
-        "y": 17.411,
-        "z": 6.3058
+        "x": 6.6698,
+        "y": 13.3209,
+        "z": 5.9991
       },
       "mds_3d": {
-        "x": 1.2583,
-        "y": -5.362,
-        "z": -13.5982
+        "x": 4.8802,
+        "y": -5.67,
+        "z": -16.8758
       },
       "pca_3d": {
-        "x": 1.2583,
-        "y": -5.362,
-        "z": -13.5982
+        "x": -4.8802,
+        "y": 5.67,
+        "z": -16.8758
       },
       "raw_10d": {
-        "posX": 5.6472,
-        "posY": 17.411,
-        "posZ": 6.3058,
-        "temperature": 31.0413,
-        "humidity": 0.4935,
-        "commercialVal": 0.8129,
-        "accessibility": 0.7847,
-        "symbolicVal": 0.8653,
-        "thermalStress": 0.7194,
-        "flowDensity": 0.8629
+        "posX": 6.6698,
+        "posY": 13.3209,
+        "posZ": 5.9991,
+        "temperature": 31.5014,
+        "humidity": 0.4833,
+        "commercialVal": 0.8334,
+        "accessibility": 0.8,
+        "symbolicVal": 0.85,
+        "thermalStress": 0.7501,
+        "flowDensity": 0.8834
       }
     },
     {
       "archetype": "Tourist",
-      "id": "boulevard_coupole_75",
+      "id": "boulevard_coupole_60",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 2.9193,
-        "y": 28.3226,
-        "z": 7.1242
+        "x": 4.5827,
+        "y": 21.6691,
+        "z": 6.6252
       },
       "mds_3d": {
-        "x": 0.1423,
-        "y": -2.9847,
-        "z": -4.4844
+        "x": 3.4753,
+        "y": -3.9572,
+        "z": -10.2904
       },
       "pca_3d": {
-        "x": 0.1423,
-        "y": -2.9847,
-        "z": -4.4844
+        "x": -3.4753,
+        "y": 3.9572,
+        "z": -10.2904
       },
       "raw_10d": {
-        "posX": 2.9193,
-        "posY": 28.3226,
-        "posZ": 7.1242,
-        "temperature": 29.8137,
-        "humidity": 0.5208,
-        "commercialVal": 0.7584,
-        "accessibility": 0.7438,
-        "symbolicVal": 0.9062,
-        "thermalStress": 0.6376,
-        "flowDensity": 0.8084
+        "posX": 4.5827,
+        "posY": 21.6691,
+        "posZ": 6.6252,
+        "temperature": 30.5622,
+        "humidity": 0.5042,
+        "commercialVal": 0.7917,
+        "accessibility": 0.7687,
+        "symbolicVal": 0.8813,
+        "thermalStress": 0.6875,
+        "flowDensity": 0.8417
       }
     },
     {
       "archetype": "Tourist",
-      "id": "coupole_glasswalk_0",
+      "id": "boulevard_coupole_80",
+      "name": "Interpolated Waypoint",
+      "spatial_3d": {
+        "x": 2.3492,
+        "y": 30.6033,
+        "z": 7.2952
+      },
+      "mds_3d": {
+        "x": 1.9718,
+        "y": -2.1243,
+        "z": -3.2429
+      },
+      "pca_3d": {
+        "x": -1.9718,
+        "y": 2.1243,
+        "z": -3.2429
+      },
+      "raw_10d": {
+        "posX": 2.3492,
+        "posY": 30.6033,
+        "posZ": 7.2952,
+        "temperature": 29.5571,
+        "humidity": 0.5265,
+        "commercialVal": 0.747,
+        "accessibility": 0.7352,
+        "symbolicVal": 0.9148,
+        "thermalStress": 0.6205,
+        "flowDensity": 0.797
+      }
+    },
+    {
+      "archetype": "Tourist",
+      "id": "boulevard_coupole_100",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
         "x": 0,
@@ -138,14 +170,14 @@
         "z": 8
       },
       "mds_3d": {
-        "x": -1.052,
-        "y": -0.4405,
-        "z": 5.269
+        "x": 0.3904,
+        "y": -0.1965,
+        "z": 4.1695
       },
       "pca_3d": {
-        "x": -1.052,
-        "y": -0.4405,
-        "z": 5.269
+        "x": -0.3904,
+        "y": 0.1965,
+        "z": 4.1695
       },
       "raw_10d": {
         "posX": 0,
@@ -162,103 +194,167 @@
     },
     {
       "archetype": "Tourist",
-      "id": "coupole_glasswalk_25",
+      "id": "coupole_glasswalk_0",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 0.9473,
-        "y": 41.8946,
-        "z": 8.3789
+        "x": 0,
+        "y": 40,
+        "z": 8
       },
       "mds_3d": {
-        "x": -2.9836,
-        "y": 1.3403,
-        "z": 3.7212
+        "x": 0.3904,
+        "y": -0.1965,
+        "z": 4.1695
       },
       "pca_3d": {
-        "x": -2.9836,
-        "y": 1.3403,
-        "z": 3.7212
+        "x": -0.3904,
+        "y": 0.1965,
+        "z": 4.1695
       },
       "raw_10d": {
-        "posX": 0.9473,
-        "posY": 41.8946,
-        "posZ": 8.3789,
-        "temperature": 28.6895,
-        "humidity": 0.5405,
-        "commercialVal": 0.7284,
-        "accessibility": 0.6432,
-        "symbolicVal": 0.9405,
-        "thermalStress": 0.5595,
-        "flowDensity": 0.7595
+        "posX": 0,
+        "posY": 40,
+        "posZ": 8,
+        "temperature": 28.5,
+        "humidity": 0.55,
+        "commercialVal": 0.7,
+        "accessibility": 0.7,
+        "symbolicVal": 0.95,
+        "thermalStress": 0.55,
+        "flowDensity": 0.75
       }
     },
     {
       "archetype": "Tourist",
-      "id": "coupole_glasswalk_50",
+      "id": "coupole_glasswalk_20",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 2.1764,
-        "y": 44.3528,
-        "z": 8.8706
+        "x": 0.7248,
+        "y": 41.4496,
+        "z": 8.2899
       },
       "mds_3d": {
-        "x": -5.4897,
-        "y": 3.6508,
-        "z": 1.713
+        "x": -0.8134,
+        "y": 1.3156,
+        "z": 3.0203
       },
       "pca_3d": {
-        "x": -5.4897,
-        "y": 3.6508,
-        "z": 1.713
+        "x": 0.8134,
+        "y": -1.3156,
+        "z": 3.0203
       },
       "raw_10d": {
-        "posX": 2.1764,
-        "posY": 44.3528,
-        "posZ": 8.8706,
-        "temperature": 28.9353,
-        "humidity": 0.5282,
-        "commercialVal": 0.7653,
-        "accessibility": 0.5694,
-        "symbolicVal": 0.9282,
-        "thermalStress": 0.5718,
-        "flowDensity": 0.7718
+        "posX": 0.7248,
+        "posY": 41.4496,
+        "posZ": 8.2899,
+        "temperature": 28.645,
+        "humidity": 0.5428,
+        "commercialVal": 0.7217,
+        "accessibility": 0.6565,
+        "symbolicVal": 0.9428,
+        "thermalStress": 0.5572,
+        "flowDensity": 0.7572
       }
     },
     {
       "archetype": "Tourist",
-      "id": "coupole_glasswalk_75",
+      "id": "coupole_glasswalk_40",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 3.5403,
-        "y": 47.0807,
-        "z": 9.4161
+        "x": 1.6651,
+        "y": 43.3302,
+        "z": 8.666
       },
       "mds_3d": {
-        "x": -8.2708,
-        "y": 6.2149,
-        "z": -0.5156
+        "x": -2.3753,
+        "y": 3.2773,
+        "z": 1.5293
       },
       "pca_3d": {
-        "x": -8.2708,
-        "y": 6.2149,
-        "z": -0.5156
+        "x": 2.3753,
+        "y": -3.2773,
+        "z": 1.5293
       },
       "raw_10d": {
-        "posX": 3.5403,
-        "posY": 47.0807,
-        "posZ": 9.4161,
-        "temperature": 29.2081,
-        "humidity": 0.5146,
-        "commercialVal": 0.8062,
-        "accessibility": 0.4876,
-        "symbolicVal": 0.9146,
-        "thermalStress": 0.5854,
-        "flowDensity": 0.7854
+        "posX": 1.6651,
+        "posY": 43.3302,
+        "posZ": 8.666,
+        "temperature": 28.833,
+        "humidity": 0.5333,
+        "commercialVal": 0.75,
+        "accessibility": 0.6001,
+        "symbolicVal": 0.9333,
+        "thermalStress": 0.5667,
+        "flowDensity": 0.7667
       }
     },
     {
       "archetype": "Tourist",
-      "id": "glasswalk_rooftop_0",
+      "id": "coupole_glasswalk_60",
+      "name": "Interpolated Waypoint",
+      "spatial_3d": {
+        "x": 2.7086,
+        "y": 45.4173,
+        "z": 9.0835
+      },
+      "mds_3d": {
+        "x": -4.1085,
+        "y": 5.4544,
+        "z": -0.1254
+      },
+      "pca_3d": {
+        "x": 4.1085,
+        "y": -5.4544,
+        "z": -0.1254
+      },
+      "raw_10d": {
+        "posX": 2.7086,
+        "posY": 45.4173,
+        "posZ": 9.0835,
+        "temperature": 29.0417,
+        "humidity": 0.5229,
+        "commercialVal": 0.7813,
+        "accessibility": 0.5375,
+        "symbolicVal": 0.9229,
+        "thermalStress": 0.5771,
+        "flowDensity": 0.7771
+      }
+    },
+    {
+      "archetype": "Tourist",
+      "id": "coupole_glasswalk_80",
+      "name": "Interpolated Waypoint",
+      "spatial_3d": {
+        "x": 3.8254,
+        "y": 47.6508,
+        "z": 9.5302
+      },
+      "mds_3d": {
+        "x": -5.9634,
+        "y": 7.7842,
+        "z": -1.8962
+      },
+      "pca_3d": {
+        "x": 5.9634,
+        "y": -7.7842,
+        "z": -1.8962
+      },
+      "raw_10d": {
+        "posX": 3.8254,
+        "posY": 47.6508,
+        "posZ": 9.5302,
+        "temperature": 29.2651,
+        "humidity": 0.5117,
+        "commercialVal": 0.8148,
+        "accessibility": 0.4705,
+        "symbolicVal": 0.9117,
+        "thermalStress": 0.5883,
+        "flowDensity": 0.7883
+      }
+    },
+    {
+      "archetype": "Tourist",
+      "id": "coupole_glasswalk_100",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
         "x": 5,
@@ -266,14 +362,14 @@
         "z": 10
       },
       "mds_3d": {
-        "x": -11.2471,
-        "y": 8.9589,
-        "z": -2.9006
+        "x": -7.9144,
+        "y": 10.2347,
+        "z": -3.7586
       },
       "pca_3d": {
-        "x": -11.2471,
-        "y": 8.9589,
-        "z": -2.9006
+        "x": 7.9144,
+        "y": -10.2347,
+        "z": -3.7586
       },
       "raw_10d": {
         "posX": 5,
@@ -290,98 +386,194 @@
     },
     {
       "archetype": "Tourist",
-      "id": "glasswalk_rooftop_25",
+      "id": "glasswalk_rooftop_0",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 4.0527,
-        "y": 53.7893,
-        "z": 10.9473
+        "x": 5,
+        "y": 50,
+        "z": 10
       },
       "mds_3d": {
-        "x": -14.5662,
-        "y": 4.4613,
-        "z": 1.063
+        "x": -7.9144,
+        "y": 10.2347,
+        "z": -3.7586
       },
       "pca_3d": {
-        "x": -14.5662,
-        "y": 4.4613,
-        "z": 1.063
+        "x": 7.9144,
+        "y": -10.2347,
+        "z": -3.7586
       },
       "raw_10d": {
-        "posX": 4.0527,
-        "posY": 53.7893,
-        "posZ": 10.9473,
-        "temperature": 30.7315,
-        "humidity": 0.4621,
-        "commercialVal": 0.7647,
-        "accessibility": 0.4379,
-        "symbolicVal": 0.8905,
-        "thermalStress": 0.6568,
-        "flowDensity": 0.7621
+        "posX": 5,
+        "posY": 50,
+        "posZ": 10,
+        "temperature": 29.5,
+        "humidity": 0.5,
+        "commercialVal": 0.85,
+        "accessibility": 0.4,
+        "symbolicVal": 0.9,
+        "thermalStress": 0.6,
+        "flowDensity": 0.8
       }
     },
     {
       "archetype": "Tourist",
-      "id": "glasswalk_rooftop_50",
+      "id": "glasswalk_rooftop_20",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 2.8236,
-        "y": 58.7055,
-        "z": 12.1764
+        "x": 4.2752,
+        "y": 52.8991,
+        "z": 10.7248
       },
       "mds_3d": {
-        "x": -18.8724,
-        "y": -1.374,
-        "z": 6.2053
+        "x": -11.0613,
+        "y": 6.8314,
+        "z": -1.1553
       },
       "pca_3d": {
-        "x": -18.8724,
-        "y": -1.374,
-        "z": 6.2053
+        "x": 11.0613,
+        "y": -6.8314,
+        "z": -1.1553
       },
       "raw_10d": {
-        "posX": 2.8236,
-        "posY": 58.7055,
-        "posZ": 12.1764,
-        "temperature": 32.3293,
-        "humidity": 0.4129,
-        "commercialVal": 0.6541,
-        "accessibility": 0.4871,
-        "symbolicVal": 0.8782,
-        "thermalStress": 0.7306,
-        "flowDensity": 0.7129
+        "posX": 4.2752,
+        "posY": 52.8991,
+        "posZ": 10.7248,
+        "temperature": 30.4422,
+        "humidity": 0.471,
+        "commercialVal": 0.7848,
+        "accessibility": 0.429,
+        "symbolicVal": 0.8928,
+        "thermalStress": 0.6435,
+        "flowDensity": 0.771
       }
     },
     {
       "archetype": "Tourist",
-      "id": "glasswalk_rooftop_75",
+      "id": "glasswalk_rooftop_40",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 1.4597,
-        "y": 64.1613,
-        "z": 13.5403
+        "x": 3.3349,
+        "y": 56.6604,
+        "z": 11.6651
       },
       "mds_3d": {
-        "x": -23.6513,
-        "y": -7.8497,
-        "z": 11.912
+        "x": -15.1442,
+        "y": 2.4159,
+        "z": 2.2222
       },
       "pca_3d": {
-        "x": -23.6513,
-        "y": -7.8497,
-        "z": 11.912
+        "x": 15.1442,
+        "y": -2.4159,
+        "z": 2.2222
       },
       "raw_10d": {
-        "posX": 1.4597,
-        "posY": 64.1613,
-        "posZ": 13.5403,
-        "temperature": 34.1024,
-        "humidity": 0.3584,
-        "commercialVal": 0.5314,
-        "accessibility": 0.5416,
-        "symbolicVal": 0.8646,
-        "thermalStress": 0.8124,
-        "flowDensity": 0.6584
+        "posX": 3.3349,
+        "posY": 56.6604,
+        "posZ": 11.6651,
+        "temperature": 31.6646,
+        "humidity": 0.4334,
+        "commercialVal": 0.7001,
+        "accessibility": 0.4666,
+        "symbolicVal": 0.8833,
+        "thermalStress": 0.6999,
+        "flowDensity": 0.7334
+      }
+    },
+    {
+      "archetype": "Tourist",
+      "id": "glasswalk_rooftop_60",
+      "name": "Interpolated Waypoint",
+      "spatial_3d": {
+        "x": 2.2914,
+        "y": 60.8346,
+        "z": 12.7086
+      },
+      "mds_3d": {
+        "x": -19.6752,
+        "y": -2.4843,
+        "z": 5.9704
+      },
+      "pca_3d": {
+        "x": 19.6752,
+        "y": 2.4843,
+        "z": 5.9704
+      },
+      "raw_10d": {
+        "posX": 2.2914,
+        "posY": 60.8346,
+        "posZ": 12.7086,
+        "temperature": 33.0212,
+        "humidity": 0.3917,
+        "commercialVal": 0.6062,
+        "accessibility": 0.5083,
+        "symbolicVal": 0.8729,
+        "thermalStress": 0.7625,
+        "flowDensity": 0.6917
+      }
+    },
+    {
+      "archetype": "Tourist",
+      "id": "glasswalk_rooftop_80",
+      "name": "Interpolated Waypoint",
+      "spatial_3d": {
+        "x": 1.1746,
+        "y": 65.3016,
+        "z": 13.8254
+      },
+      "mds_3d": {
+        "x": -24.5241,
+        "y": -7.7283,
+        "z": 9.9817
+      },
+      "pca_3d": {
+        "x": 24.5241,
+        "y": 7.7283,
+        "z": 9.9817
+      },
+      "raw_10d": {
+        "posX": 1.1746,
+        "posY": 65.3016,
+        "posZ": 13.8254,
+        "temperature": 34.473,
+        "humidity": 0.347,
+        "commercialVal": 0.5057,
+        "accessibility": 0.553,
+        "symbolicVal": 0.8617,
+        "thermalStress": 0.8295,
+        "flowDensity": 0.647
+      }
+    },
+    {
+      "archetype": "Tourist",
+      "id": "glasswalk_rooftop_100",
+      "name": "Interpolated Waypoint",
+      "spatial_3d": {
+        "x": 0,
+        "y": 70,
+        "z": 15
+      },
+      "mds_3d": {
+        "x": -29.6242,
+        "y": -13.2439,
+        "z": 14.2007
+      },
+      "pca_3d": {
+        "x": 29.6242,
+        "y": 13.2439,
+        "z": 14.2007
+      },
+      "raw_10d": {
+        "posX": 0,
+        "posY": 70,
+        "posZ": 15,
+        "temperature": 36,
+        "humidity": 0.3,
+        "commercialVal": 0.4,
+        "accessibility": 0.6,
+        "symbolicVal": 0.85,
+        "thermalStress": 0.9,
+        "flowDensity": 0.6
       }
     },
     {
@@ -394,14 +586,14 @@
         "z": 15
       },
       "mds_3d": {
-        "x": -28.7655,
-        "y": -14.7799,
-        "z": 18.0192
+        "x": -29.6242,
+        "y": -13.2439,
+        "z": 14.2007
       },
       "pca_3d": {
-        "x": -28.7655,
-        "y": -14.7799,
-        "z": 18.0192
+        "x": 29.6242,
+        "y": 13.2439,
+        "z": 14.2007
       },
       "raw_10d": {
         "posX": 0,
@@ -426,14 +618,14 @@
         "z": 0
       },
       "mds_3d": {
-        "x": 48.2583,
-        "y": -7.1106,
-        "z": 17.6778
+        "x": 48.6752,
+        "y": -12.8549,
+        "z": 22.5849
       },
       "pca_3d": {
-        "x": 48.2583,
-        "y": -7.1106,
-        "z": 17.6778
+        "x": -48.6752,
+        "y": 12.8549,
+        "z": 22.5849
       },
       "raw_10d": {
         "posX": 0,
@@ -450,103 +642,135 @@
     },
     {
       "archetype": "Worker",
-      "id": "underground_boulevard_25",
+      "id": "underground_boulevard_20",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 3.2988,
-        "y": -6.7012,
-        "z": 1.6494
+        "x": 2.7595,
+        "y": -7.2405,
+        "z": 1.3797
       },
       "mds_3d": {
-        "x": 33.3415,
-        "y": -7.7851,
-        "z": 2.5634
+        "x": 37.2087,
+        "y": -11.6264,
+        "z": 8.7963
       },
       "pca_3d": {
-        "x": 33.3415,
-        "y": -7.7851,
-        "z": 2.5634
+        "x": -37.2087,
+        "y": 11.6264,
+        "z": 8.7963
       },
       "raw_10d": {
-        "posX": 3.2988,
-        "posY": -6.7012,
-        "posZ": 1.6494,
-        "temperature": 27.304,
-        "humidity": 0.651,
-        "commercialVal": 0.4309,
-        "accessibility": 0.8835,
-        "symbolicVal": 0.3979,
-        "thermalStress": 0.4814,
-        "flowDensity": 0.883
+        "posX": 2.7595,
+        "posY": -7.2405,
+        "posZ": 1.3797,
+        "temperature": 26.8455,
+        "humidity": 0.6672,
+        "commercialVal": 0.3932,
+        "accessibility": 0.8862,
+        "symbolicVal": 0.3656,
+        "thermalStress": 0.4518,
+        "flowDensity": 0.8776
       }
     },
     {
       "archetype": "Worker",
-      "id": "underground_boulevard_50",
+      "id": "underground_boulevard_40",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 5.7435,
-        "y": -4.2565,
-        "z": 2.8717
+        "x": 4.8045,
+        "y": -5.1955,
+        "z": 2.4022
       },
       "mds_3d": {
-        "x": 22.2866,
-        "y": -8.285,
-        "z": -8.6379
+        "x": 28.7109,
+        "y": -10.7159,
+        "z": -1.4225
       },
       "pca_3d": {
-        "x": 22.2866,
-        "y": -8.285,
-        "z": -8.6379
+        "x": -28.7109,
+        "y": 10.7159,
+        "z": -1.4225
       },
       "raw_10d": {
-        "posX": 5.7435,
-        "posY": -4.2565,
-        "posZ": 2.8717,
-        "temperature": 29.382,
-        "humidity": 0.5777,
-        "commercialVal": 0.602,
-        "accessibility": 0.8713,
-        "symbolicVal": 0.5446,
-        "thermalStress": 0.6159,
-        "flowDensity": 0.9074
+        "posX": 4.8045,
+        "posY": -5.1955,
+        "posZ": 2.4022,
+        "temperature": 28.5838,
+        "humidity": 0.6059,
+        "commercialVal": 0.5363,
+        "accessibility": 0.876,
+        "symbolicVal": 0.4883,
+        "thermalStress": 0.5642,
+        "flowDensity": 0.898
       }
     },
     {
       "archetype": "Worker",
-      "id": "underground_boulevard_75",
+      "id": "underground_boulevard_60",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 7.9442,
-        "y": -2.0558,
-        "z": 3.9721
+        "x": 6.6454,
+        "y": -3.3546,
+        "z": 3.3227
       },
       "mds_3d": {
-        "x": 12.3352,
-        "y": -8.735,
-        "z": -18.7211
+        "x": 21.0614,
+        "y": -9.8963,
+        "z": -10.6212
       },
       "pca_3d": {
-        "x": 12.3352,
-        "y": -8.735,
-        "z": -18.7211
+        "x": -21.0614,
+        "y": 9.8963,
+        "z": -10.6212
       },
       "raw_10d": {
-        "posX": 7.9442,
-        "posY": -2.0558,
-        "posZ": 3.9721,
-        "temperature": 31.2526,
-        "humidity": 0.5117,
-        "commercialVal": 0.7561,
-        "accessibility": 0.8603,
-        "symbolicVal": 0.6767,
-        "thermalStress": 0.7369,
-        "flowDensity": 0.9294
+        "posX": 6.6454,
+        "posY": -3.3546,
+        "posZ": 3.3227,
+        "temperature": 30.1486,
+        "humidity": 0.5506,
+        "commercialVal": 0.6652,
+        "accessibility": 0.8668,
+        "symbolicVal": 0.5987,
+        "thermalStress": 0.6655,
+        "flowDensity": 0.9165
       }
     },
     {
       "archetype": "Worker",
-      "id": "boulevard_rooftop_0",
+      "id": "underground_boulevard_80",
+      "name": "Interpolated Waypoint",
+      "spatial_3d": {
+        "x": 8.3651,
+        "y": -1.6349,
+        "z": 4.1826
+      },
+      "mds_3d": {
+        "x": 13.9154,
+        "y": -9.1307,
+        "z": -19.2144
+      },
+      "pca_3d": {
+        "x": -13.9154,
+        "y": 9.1307,
+        "z": -19.2144
+      },
+      "raw_10d": {
+        "posX": 8.3651,
+        "posY": -1.6349,
+        "posZ": 4.1826,
+        "temperature": 31.6103,
+        "humidity": 0.499,
+        "commercialVal": 0.7856,
+        "accessibility": 0.8582,
+        "symbolicVal": 0.7019,
+        "thermalStress": 0.7601,
+        "flowDensity": 0.9337
+      }
+    },
+    {
+      "archetype": "Worker",
+      "id": "underground_boulevard_100",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
         "x": 10,
@@ -554,14 +778,14 @@
         "z": 5
       },
       "mds_3d": {
-        "x": 3.0389,
-        "y": -9.1554,
-        "z": -28.1405
+        "x": 7.122,
+        "y": -8.4028,
+        "z": -27.3837
       },
       "pca_3d": {
-        "x": 3.0389,
-        "y": -9.1554,
-        "z": -28.1405
+        "x": -7.122,
+        "y": 8.4028,
+        "z": -27.3837
       },
       "raw_10d": {
         "posX": 10,
@@ -578,98 +802,194 @@
     },
     {
       "archetype": "Worker",
-      "id": "boulevard_rooftop_25",
+      "id": "boulevard_rooftop_0",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 6.7012,
-        "y": 23.0914,
-        "z": 8.2988
+        "x": 10,
+        "y": 0,
+        "z": 5
       },
       "mds_3d": {
-        "x": -7.4526,
-        "y": -11.0108,
-        "z": -12.9135
+        "x": 7.122,
+        "y": -8.4028,
+        "z": -27.3837
       },
       "pca_3d": {
-        "x": -7.4526,
-        "y": -11.0108,
-        "z": -12.9135
+        "x": -7.122,
+        "y": 8.4028,
+        "z": -27.3837
       },
       "raw_10d": {
-        "posX": 6.7012,
-        "posY": 23.0914,
-        "posZ": 8.2988,
-        "temperature": 33.9896,
-        "humidity": 0.4005,
-        "commercialVal": 0.7351,
-        "accessibility": 0.7675,
-        "symbolicVal": 0.8165,
-        "thermalStress": 0.8665,
-        "flowDensity": 0.8345
+        "posX": 10,
+        "posY": 0,
+        "posZ": 5,
+        "temperature": 33,
+        "humidity": 0.45,
+        "commercialVal": 0.9,
+        "accessibility": 0.85,
+        "symbolicVal": 0.8,
+        "thermalStress": 0.85,
+        "flowDensity": 0.95
       }
     },
     {
       "archetype": "Worker",
-      "id": "boulevard_rooftop_50",
+      "id": "boulevard_rooftop_20",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 4.2565,
-        "y": 40.2044,
-        "z": 10.7435
+        "x": 7.2405,
+        "y": 19.3162,
+        "z": 7.7595
       },
       "mds_3d": {
-        "x": -15.2279,
-        "y": -12.3859,
-        "z": -1.6287
+        "x": -3.018,
+        "y": -9.7387,
+        "z": -15.9086
       },
       "pca_3d": {
-        "x": -15.2279,
-        "y": -12.3859,
-        "z": -1.6287
+        "x": 3.018,
+        "y": 9.7387,
+        "z": -15.9086
       },
       "raw_10d": {
-        "posX": 4.2565,
-        "posY": 40.2044,
-        "posZ": 10.7435,
-        "temperature": 34.723,
-        "humidity": 0.3638,
-        "commercialVal": 0.6128,
-        "accessibility": 0.7064,
-        "symbolicVal": 0.8287,
-        "thermalStress": 0.8787,
-        "flowDensity": 0.749
+        "posX": 7.2405,
+        "posY": 19.3162,
+        "posZ": 7.7595,
+        "temperature": 33.8278,
+        "humidity": 0.4086,
+        "commercialVal": 0.762,
+        "accessibility": 0.781,
+        "symbolicVal": 0.8138,
+        "thermalStress": 0.8638,
+        "flowDensity": 0.8534
       }
     },
     {
       "archetype": "Worker",
-      "id": "boulevard_rooftop_75",
+      "id": "boulevard_rooftop_40",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 2.0558,
-        "y": 55.6093,
-        "z": 12.9442
+        "x": 5.1955,
+        "y": 33.6315,
+        "z": 9.8045
       },
       "mds_3d": {
-        "x": -22.2271,
-        "y": -13.6236,
-        "z": 8.5296
+        "x": -10.5327,
+        "y": -10.7287,
+        "z": -7.4045
       },
       "pca_3d": {
-        "x": -22.2271,
-        "y": -13.6236,
-        "z": 8.5296
+        "x": 10.5327,
+        "y": 10.7287,
+        "z": -7.4045
       },
       "raw_10d": {
-        "posX": 2.0558,
-        "posY": 55.6093,
-        "posZ": 12.9442,
-        "temperature": 35.3833,
-        "humidity": 0.3308,
-        "commercialVal": 0.5028,
-        "accessibility": 0.6514,
-        "symbolicVal": 0.8397,
-        "thermalStress": 0.8897,
-        "flowDensity": 0.672
+        "posX": 5.1955,
+        "posY": 33.6315,
+        "posZ": 9.8045,
+        "temperature": 34.4413,
+        "humidity": 0.3779,
+        "commercialVal": 0.6598,
+        "accessibility": 0.7299,
+        "symbolicVal": 0.824,
+        "thermalStress": 0.874,
+        "flowDensity": 0.7818
+      }
+    },
+    {
+      "archetype": "Worker",
+      "id": "boulevard_rooftop_60",
+      "name": "Interpolated Waypoint",
+      "spatial_3d": {
+        "x": 3.3546,
+        "y": 46.5178,
+        "z": 11.6454
+      },
+      "mds_3d": {
+        "x": -17.2973,
+        "y": -11.6199,
+        "z": 0.2508
+      },
+      "pca_3d": {
+        "x": 17.2973,
+        "y": 11.6199,
+        "z": 0.2508
+      },
+      "raw_10d": {
+        "posX": 3.3546,
+        "posY": 46.5178,
+        "posZ": 11.6454,
+        "temperature": 34.9936,
+        "humidity": 0.3503,
+        "commercialVal": 0.5677,
+        "accessibility": 0.6839,
+        "symbolicVal": 0.8332,
+        "thermalStress": 0.8832,
+        "flowDensity": 0.7174
+      }
+    },
+    {
+      "archetype": "Worker",
+      "id": "boulevard_rooftop_80",
+      "name": "Interpolated Waypoint",
+      "spatial_3d": {
+        "x": 1.6349,
+        "y": 58.5558,
+        "z": 13.3651
+      },
+      "mds_3d": {
+        "x": -23.6166,
+        "y": -12.4524,
+        "z": 7.4021
+      },
+      "pca_3d": {
+        "x": 23.6166,
+        "y": 12.4524,
+        "z": 7.4021
+      },
+      "raw_10d": {
+        "posX": 1.6349,
+        "posY": 58.5558,
+        "posZ": 13.3651,
+        "temperature": 35.5095,
+        "humidity": 0.3245,
+        "commercialVal": 0.4817,
+        "accessibility": 0.6409,
+        "symbolicVal": 0.8418,
+        "thermalStress": 0.8918,
+        "flowDensity": 0.6572
+      }
+    },
+    {
+      "archetype": "Worker",
+      "id": "boulevard_rooftop_100",
+      "name": "Interpolated Waypoint",
+      "spatial_3d": {
+        "x": 0,
+        "y": 70,
+        "z": 15
+      },
+      "mds_3d": {
+        "x": -29.6242,
+        "y": -13.2439,
+        "z": 14.2007
+      },
+      "pca_3d": {
+        "x": 29.6242,
+        "y": 13.2439,
+        "z": 14.2007
+      },
+      "raw_10d": {
+        "posX": 0,
+        "posY": 70,
+        "posZ": 15,
+        "temperature": 36,
+        "humidity": 0.3,
+        "commercialVal": 0.4,
+        "accessibility": 0.6,
+        "symbolicVal": 0.85,
+        "thermalStress": 0.9,
+        "flowDensity": 0.6
       }
     },
     {
@@ -682,14 +1002,14 @@
         "z": 15
       },
       "mds_3d": {
-        "x": -28.7655,
-        "y": -14.7799,
-        "z": 18.0192
+        "x": -29.6242,
+        "y": -13.2439,
+        "z": 14.2007
       },
       "pca_3d": {
-        "x": -28.7655,
-        "y": -14.7799,
-        "z": 18.0192
+        "x": 29.6242,
+        "y": 13.2439,
+        "z": 14.2007
       },
       "raw_10d": {
         "posX": 0,
@@ -714,14 +1034,14 @@
         "z": 0
       },
       "mds_3d": {
-        "x": 48.2583,
-        "y": -7.1106,
-        "z": 17.6778
+        "x": 48.6752,
+        "y": -12.8549,
+        "z": 22.5849
       },
       "pca_3d": {
-        "x": 48.2583,
-        "y": -7.1106,
-        "z": 17.6778
+        "x": -48.6752,
+        "y": 12.8549,
+        "z": 22.5849
       },
       "raw_10d": {
         "posX": 0,
@@ -738,103 +1058,135 @@
     },
     {
       "archetype": "Resident",
-      "id": "underground_boulevard_25",
+      "id": "underground_boulevard_20",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 1.25,
-        "y": -8.75,
-        "z": 0.625
+        "x": 0.8944,
+        "y": -9.1056,
+        "z": 0.4472
       },
       "mds_3d": {
-        "x": 42.6059,
-        "y": -7.3662,
-        "z": 11.9505
+        "x": 44.9585,
+        "y": -12.4567,
+        "z": 18.1156
       },
       "pca_3d": {
-        "x": 42.6059,
-        "y": -7.3662,
-        "z": 11.9505
+        "x": -44.9585,
+        "y": 12.4567,
+        "z": 18.1156
       },
       "raw_10d": {
-        "posX": 1.25,
-        "posY": -8.75,
-        "posZ": 0.625,
-        "temperature": 25.5625,
-        "humidity": 0.7125,
-        "commercialVal": 0.2875,
-        "accessibility": 0.8938,
-        "symbolicVal": 0.275,
-        "thermalStress": 0.3688,
-        "flowDensity": 0.8625
+        "posX": 0.8944,
+        "posY": -9.1056,
+        "posZ": 0.4472,
+        "temperature": 25.2603,
+        "humidity": 0.7232,
+        "commercialVal": 0.2626,
+        "accessibility": 0.8955,
+        "symbolicVal": 0.2537,
+        "thermalStress": 0.3492,
+        "flowDensity": 0.8589
       }
     },
     {
       "archetype": "Resident",
-      "id": "underground_boulevard_50",
+      "id": "underground_boulevard_40",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 3.5355,
-        "y": -6.4645,
-        "z": 1.7678
+        "x": 2.5298,
+        "y": -7.4702,
+        "z": 1.2649
       },
       "mds_3d": {
-        "x": 32.2708,
-        "y": -7.8335,
-        "z": 1.4785
+        "x": 38.163,
+        "y": -11.7286,
+        "z": 9.9438
       },
       "pca_3d": {
-        "x": 32.2708,
-        "y": -7.8335,
-        "z": 1.4785
+        "x": -38.163,
+        "y": 11.7286,
+        "z": 9.9438
       },
       "raw_10d": {
-        "posX": 3.5355,
-        "posY": -6.4645,
-        "posZ": 1.7678,
-        "temperature": 27.5052,
-        "humidity": 0.6439,
-        "commercialVal": 0.4475,
-        "accessibility": 0.8823,
-        "symbolicVal": 0.4121,
-        "thermalStress": 0.4945,
-        "flowDensity": 0.8854
+        "posX": 2.5298,
+        "posY": -7.4702,
+        "posZ": 1.2649,
+        "temperature": 26.6503,
+        "humidity": 0.6741,
+        "commercialVal": 0.3771,
+        "accessibility": 0.8874,
+        "symbolicVal": 0.3518,
+        "thermalStress": 0.4391,
+        "flowDensity": 0.8753
       }
     },
     {
       "archetype": "Resident",
-      "id": "underground_boulevard_75",
+      "id": "underground_boulevard_60",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 6.4952,
-        "y": -3.5048,
-        "z": 3.2476
+        "x": 4.6476,
+        "y": -5.3524,
+        "z": 2.3238
       },
       "mds_3d": {
-        "x": 18.8875,
-        "y": -8.4387,
-        "z": -12.0821
+        "x": 29.363,
+        "y": -10.7858,
+        "z": -0.6384
       },
       "pca_3d": {
-        "x": 18.8875,
-        "y": -8.4387,
-        "z": -12.0821
+        "x": -29.363,
+        "y": 10.7858,
+        "z": -0.6384
       },
       "raw_10d": {
-        "posX": 6.4952,
-        "posY": -3.5048,
-        "posZ": 3.2476,
-        "temperature": 30.0209,
-        "humidity": 0.5551,
-        "commercialVal": 0.6547,
-        "accessibility": 0.8675,
-        "symbolicVal": 0.5897,
-        "thermalStress": 0.6572,
-        "flowDensity": 0.915
+        "posX": 4.6476,
+        "posY": -5.3524,
+        "posZ": 2.3238,
+        "temperature": 28.4504,
+        "humidity": 0.6106,
+        "commercialVal": 0.5253,
+        "accessibility": 0.8768,
+        "symbolicVal": 0.4789,
+        "thermalStress": 0.5556,
+        "flowDensity": 0.8965
       }
     },
     {
       "archetype": "Resident",
-      "id": "boulevard_rooftop_0",
+      "id": "underground_boulevard_80",
+      "name": "Interpolated Waypoint",
+      "spatial_3d": {
+        "x": 7.1554,
+        "y": -2.8446,
+        "z": 3.5777
+      },
+      "mds_3d": {
+        "x": 18.9421,
+        "y": -9.6693,
+        "z": -13.1697
+      },
+      "pca_3d": {
+        "x": -18.9421,
+        "y": 9.6693,
+        "z": -13.1697
+      },
+      "raw_10d": {
+        "posX": 7.1554,
+        "posY": -2.8446,
+        "posZ": 3.5777,
+        "temperature": 30.5821,
+        "humidity": 0.5353,
+        "commercialVal": 0.7009,
+        "accessibility": 0.8642,
+        "symbolicVal": 0.6293,
+        "thermalStress": 0.6935,
+        "flowDensity": 0.9216
+      }
+    },
+    {
+      "archetype": "Resident",
+      "id": "underground_boulevard_100",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
         "x": 10,
@@ -842,14 +1194,14 @@
         "z": 5
       },
       "mds_3d": {
-        "x": 3.0389,
-        "y": -9.1554,
-        "z": -28.1405
+        "x": 7.122,
+        "y": -8.4028,
+        "z": -27.3837
       },
       "pca_3d": {
-        "x": 3.0389,
-        "y": -9.1554,
-        "z": -28.1405
+        "x": -7.122,
+        "y": 8.4028,
+        "z": -27.3837
       },
       "raw_10d": {
         "posX": 10,
@@ -866,98 +1218,194 @@
     },
     {
       "archetype": "Resident",
-      "id": "boulevard_rooftop_25",
+      "id": "boulevard_rooftop_0",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 8.75,
-        "y": 8.75,
-        "z": 6.25
+        "x": 10,
+        "y": 0,
+        "z": 5
       },
       "mds_3d": {
-        "x": -0.9366,
-        "y": -9.8585,
-        "z": -22.3706
+        "x": 7.122,
+        "y": -8.4028,
+        "z": -27.3837
       },
       "pca_3d": {
-        "x": -0.9366,
-        "y": -9.8585,
-        "z": -22.3706
+        "x": -7.122,
+        "y": 8.4028,
+        "z": -27.3837
       },
       "raw_10d": {
-        "posX": 8.75,
-        "posY": 8.75,
-        "posZ": 6.25,
-        "temperature": 33.375,
-        "humidity": 0.4312,
-        "commercialVal": 0.8375,
-        "accessibility": 0.8188,
-        "symbolicVal": 0.8062,
-        "thermalStress": 0.8562,
-        "flowDensity": 0.9062
+        "posX": 10,
+        "posY": 0,
+        "posZ": 5,
+        "temperature": 33,
+        "humidity": 0.45,
+        "commercialVal": 0.9,
+        "accessibility": 0.85,
+        "symbolicVal": 0.8,
+        "thermalStress": 0.85,
+        "flowDensity": 0.95
       }
     },
     {
       "archetype": "Resident",
-      "id": "boulevard_rooftop_50",
+      "id": "boulevard_rooftop_20",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 6.4645,
-        "y": 24.7487,
-        "z": 8.5355
+        "x": 9.1056,
+        "y": 6.261,
+        "z": 5.8944
       },
       "mds_3d": {
-        "x": -8.2056,
-        "y": -11.144,
-        "z": -11.8206
+        "x": 3.8353,
+        "y": -8.8358,
+        "z": -23.6642
       },
       "pca_3d": {
-        "x": -8.2056,
-        "y": -11.144,
-        "z": -11.8206
+        "x": -3.8353,
+        "y": 8.8358,
+        "z": -23.6642
       },
       "raw_10d": {
-        "posX": 6.4645,
-        "posY": 24.7487,
-        "posZ": 8.5355,
-        "temperature": 34.0607,
-        "humidity": 0.397,
-        "commercialVal": 0.7232,
-        "accessibility": 0.7616,
-        "symbolicVal": 0.8177,
-        "thermalStress": 0.8677,
-        "flowDensity": 0.8263
+        "posX": 9.1056,
+        "posY": 6.261,
+        "posZ": 5.8944,
+        "temperature": 33.2683,
+        "humidity": 0.4366,
+        "commercialVal": 0.8553,
+        "accessibility": 0.8276,
+        "symbolicVal": 0.8045,
+        "thermalStress": 0.8545,
+        "flowDensity": 0.9187
       }
     },
     {
       "archetype": "Resident",
-      "id": "boulevard_rooftop_75",
+      "id": "boulevard_rooftop_40",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 3.5048,
-        "y": 45.4663,
-        "z": 11.4952
+        "x": 7.4702,
+        "y": 17.7088,
+        "z": 7.5298
       },
       "mds_3d": {
-        "x": -17.6186,
-        "y": -12.8087,
-        "z": 1.8411
+        "x": -2.1742,
+        "y": -9.6275,
+        "z": -16.8636
       },
       "pca_3d": {
-        "x": -17.6186,
-        "y": -12.8087,
-        "z": 1.8411
+        "x": 2.1742,
+        "y": 9.6275,
+        "z": -16.8636
       },
       "raw_10d": {
-        "posX": 3.5048,
-        "posY": 45.4663,
-        "posZ": 11.4952,
-        "temperature": 34.9486,
-        "humidity": 0.3526,
-        "commercialVal": 0.5752,
-        "accessibility": 0.6876,
-        "symbolicVal": 0.8325,
-        "thermalStress": 0.8825,
-        "flowDensity": 0.7227
+        "posX": 7.4702,
+        "posY": 17.7088,
+        "posZ": 7.5298,
+        "temperature": 33.7589,
+        "humidity": 0.4121,
+        "commercialVal": 0.7735,
+        "accessibility": 0.7868,
+        "symbolicVal": 0.8126,
+        "thermalStress": 0.8626,
+        "flowDensity": 0.8615
+      }
+    },
+    {
+      "archetype": "Resident",
+      "id": "boulevard_rooftop_60",
+      "name": "Interpolated Waypoint",
+      "spatial_3d": {
+        "x": 5.3524,
+        "y": 32.5331,
+        "z": 9.6476
+      },
+      "mds_3d": {
+        "x": -9.9561,
+        "y": -10.6527,
+        "z": -8.057
+      },
+      "pca_3d": {
+        "x": 9.9561,
+        "y": 10.6527,
+        "z": -8.057
+      },
+      "raw_10d": {
+        "posX": 5.3524,
+        "posY": 32.5331,
+        "posZ": 9.6476,
+        "temperature": 34.3943,
+        "humidity": 0.3803,
+        "commercialVal": 0.6676,
+        "accessibility": 0.7338,
+        "symbolicVal": 0.8232,
+        "thermalStress": 0.8732,
+        "flowDensity": 0.7873
+      }
+    },
+    {
+      "archetype": "Resident",
+      "id": "boulevard_rooftop_80",
+      "name": "Interpolated Waypoint",
+      "spatial_3d": {
+        "x": 2.8446,
+        "y": 50.0879,
+        "z": 12.1554
+      },
+      "mds_3d": {
+        "x": -19.1714,
+        "y": -11.8668,
+        "z": 2.3717
+      },
+      "pca_3d": {
+        "x": 19.1714,
+        "y": 11.8668,
+        "z": 2.3717
+      },
+      "raw_10d": {
+        "posX": 2.8446,
+        "posY": 50.0879,
+        "posZ": 12.1554,
+        "temperature": 35.1466,
+        "humidity": 0.3427,
+        "commercialVal": 0.5422,
+        "accessibility": 0.6711,
+        "symbolicVal": 0.8358,
+        "thermalStress": 0.8858,
+        "flowDensity": 0.6996
+      }
+    },
+    {
+      "archetype": "Resident",
+      "id": "boulevard_rooftop_100",
+      "name": "Interpolated Waypoint",
+      "spatial_3d": {
+        "x": 0,
+        "y": 70,
+        "z": 15
+      },
+      "mds_3d": {
+        "x": -29.6242,
+        "y": -13.2439,
+        "z": 14.2007
+      },
+      "pca_3d": {
+        "x": 29.6242,
+        "y": 13.2439,
+        "z": 14.2007
+      },
+      "raw_10d": {
+        "posX": 0,
+        "posY": 70,
+        "posZ": 15,
+        "temperature": 36,
+        "humidity": 0.3,
+        "commercialVal": 0.4,
+        "accessibility": 0.6,
+        "symbolicVal": 0.85,
+        "thermalStress": 0.9,
+        "flowDensity": 0.6
       }
     },
     {
@@ -970,14 +1418,14 @@
         "z": 15
       },
       "mds_3d": {
-        "x": -28.7655,
-        "y": -14.7799,
-        "z": 18.0192
+        "x": -29.6242,
+        "y": -13.2439,
+        "z": 14.2007
       },
       "pca_3d": {
-        "x": -28.7655,
-        "y": -14.7799,
-        "z": 18.0192
+        "x": 29.6242,
+        "y": 13.2439,
+        "z": 14.2007
       },
       "raw_10d": {
         "posX": 0,
@@ -1002,14 +1450,14 @@
         "z": 0
       },
       "mds_3d": {
-        "x": 48.2583,
-        "y": -7.1106,
-        "z": 17.6778
+        "x": 48.6752,
+        "y": -12.8549,
+        "z": 22.5849
       },
       "pca_3d": {
-        "x": 48.2583,
-        "y": -7.1106,
-        "z": 17.6778
+        "x": -48.6752,
+        "y": 12.8549,
+        "z": 22.5849
       },
       "raw_10d": {
         "posX": 0,
@@ -1026,103 +1474,135 @@
     },
     {
       "archetype": "Surveillance",
-      "id": "underground_vip_salon_25",
+      "id": "underground_vip_salon_20",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 3.75,
-        "y": -2.5,
-        "z": 3
+        "x": 3,
+        "y": -4,
+        "z": 2.4
       },
       "mds_3d": {
-        "x": 34.2768,
-        "y": 8.7347,
-        "z": 12.7962
+        "x": 38.8265,
+        "y": 0.7452,
+        "z": 18.317
       },
       "pca_3d": {
-        "x": 34.2768,
-        "y": 8.7347,
-        "z": 12.7962
+        "x": -38.8265,
+        "y": -0.7452,
+        "z": 18.317
       },
       "raw_10d": {
-        "posX": 3.75,
-        "posY": -2.5,
-        "posZ": 3,
-        "temperature": 23.625,
-        "humidity": 0.6875,
-        "commercialVal": 0.3875,
-        "accessibility": 0.725,
-        "symbolicVal": 0.375,
-        "thermalStress": 0.2625,
-        "flowDensity": 0.7
+        "posX": 3,
+        "posY": -4,
+        "posZ": 2.4,
+        "temperature": 23.8,
+        "humidity": 0.7,
+        "commercialVal": 0.35,
+        "accessibility": 0.76,
+        "symbolicVal": 0.34,
+        "thermalStress": 0.27,
+        "flowDensity": 0.73
       }
     },
     {
       "archetype": "Surveillance",
-      "id": "underground_vip_salon_50",
+      "id": "underground_vip_salon_40",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 7.5,
-        "y": 5,
-        "z": 6
+        "x": 6,
+        "y": 2,
+        "z": 4.8
       },
       "mds_3d": {
-        "x": 20.2953,
-        "y": 24.58,
-        "z": 7.9146
+        "x": 28.9778,
+        "y": 14.3453,
+        "z": 14.0491
       },
       "pca_3d": {
-        "x": 20.2953,
-        "y": 24.58,
-        "z": 7.9146
+        "x": -28.9778,
+        "y": -14.3453,
+        "z": 14.0491
       },
       "raw_10d": {
-        "posX": 7.5,
-        "posY": 5,
-        "posZ": 6,
-        "temperature": 22.75,
-        "humidity": 0.625,
-        "commercialVal": 0.575,
-        "accessibility": 0.55,
-        "symbolicVal": 0.55,
-        "thermalStress": 0.225,
-        "flowDensity": 0.55
+        "posX": 6,
+        "posY": 2,
+        "posZ": 4.8,
+        "temperature": 23.1,
+        "humidity": 0.65,
+        "commercialVal": 0.5,
+        "accessibility": 0.62,
+        "symbolicVal": 0.48,
+        "thermalStress": 0.24,
+        "flowDensity": 0.61
       }
     },
     {
       "archetype": "Surveillance",
-      "id": "underground_vip_salon_75",
+      "id": "underground_vip_salon_60",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 11.25,
-        "y": 12.5,
-        "z": 9
+        "x": 9,
+        "y": 8,
+        "z": 7.2
       },
       "mds_3d": {
-        "x": 6.3138,
-        "y": 40.4252,
-        "z": 3.0331
+        "x": 19.1291,
+        "y": 27.9454,
+        "z": 9.7812
       },
       "pca_3d": {
-        "x": 6.3138,
-        "y": 40.4252,
-        "z": 3.0331
+        "x": -19.1291,
+        "y": -27.9454,
+        "z": 9.7812
       },
       "raw_10d": {
-        "posX": 11.25,
-        "posY": 12.5,
-        "posZ": 9,
-        "temperature": 21.875,
-        "humidity": 0.5625,
-        "commercialVal": 0.7625,
-        "accessibility": 0.375,
-        "symbolicVal": 0.725,
-        "thermalStress": 0.1875,
-        "flowDensity": 0.4
+        "posX": 9,
+        "posY": 8,
+        "posZ": 7.2,
+        "temperature": 22.4,
+        "humidity": 0.6,
+        "commercialVal": 0.65,
+        "accessibility": 0.48,
+        "symbolicVal": 0.62,
+        "thermalStress": 0.21,
+        "flowDensity": 0.49
       }
     },
     {
       "archetype": "Surveillance",
-      "id": "vip_salon_glasswalk_0",
+      "id": "underground_vip_salon_80",
+      "name": "Interpolated Waypoint",
+      "spatial_3d": {
+        "x": 12,
+        "y": 14,
+        "z": 9.6
+      },
+      "mds_3d": {
+        "x": 9.2804,
+        "y": 41.5455,
+        "z": 5.5133
+      },
+      "pca_3d": {
+        "x": -9.2804,
+        "y": -41.5455,
+        "z": 5.5133
+      },
+      "raw_10d": {
+        "posX": 12,
+        "posY": 14,
+        "posZ": 9.6,
+        "temperature": 21.7,
+        "humidity": 0.55,
+        "commercialVal": 0.8,
+        "accessibility": 0.34,
+        "symbolicVal": 0.76,
+        "thermalStress": 0.18,
+        "flowDensity": 0.37
+      }
+    },
+    {
+      "archetype": "Surveillance",
+      "id": "underground_vip_salon_100",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
         "x": 15,
@@ -1130,14 +1610,14 @@
         "z": 12
       },
       "mds_3d": {
-        "x": -7.6678,
-        "y": 56.2705,
-        "z": -1.8485
+        "x": -0.5683,
+        "y": 55.1456,
+        "z": 1.2454
       },
       "pca_3d": {
-        "x": -7.6678,
-        "y": 56.2705,
-        "z": -1.8485
+        "x": 0.5683,
+        "y": -55.1456,
+        "z": 1.2454
       },
       "raw_10d": {
         "posX": 15,
@@ -1154,103 +1634,167 @@
     },
     {
       "archetype": "Surveillance",
-      "id": "vip_salon_glasswalk_25",
+      "id": "vip_salon_glasswalk_0",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 12.5,
-        "y": 27.5,
-        "z": 11.5
+        "x": 15,
+        "y": 20,
+        "z": 12
       },
       "mds_3d": {
-        "x": -8.5626,
-        "y": 44.4426,
-        "z": -2.1115
+        "x": -0.5683,
+        "y": 55.1456,
+        "z": 1.2454
       },
       "pca_3d": {
-        "x": -8.5626,
-        "y": 44.4426,
-        "z": -2.1115
+        "x": 0.5683,
+        "y": -55.1456,
+        "z": 1.2454
       },
       "raw_10d": {
-        "posX": 12.5,
-        "posY": 27.5,
-        "posZ": 11.5,
-        "temperature": 23.125,
+        "posX": 15,
+        "posY": 20,
+        "posZ": 12,
+        "temperature": 21,
         "humidity": 0.5,
-        "commercialVal": 0.925,
-        "accessibility": 0.25,
+        "commercialVal": 0.95,
+        "accessibility": 0.2,
         "symbolicVal": 0.9,
-        "thermalStress": 0.2625,
-        "flowDensity": 0.3875
+        "thermalStress": 0.15,
+        "flowDensity": 0.25
       }
     },
     {
       "archetype": "Surveillance",
-      "id": "vip_salon_glasswalk_50",
+      "id": "vip_salon_glasswalk_20",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 10,
-        "y": 35,
-        "z": 11
+        "x": 13,
+        "y": 26,
+        "z": 11.6
       },
       "mds_3d": {
-        "x": -9.4574,
-        "y": 32.6147,
-        "z": -2.3745
+        "x": -2.0375,
+        "y": 46.1634,
+        "z": 0.2446
       },
       "pca_3d": {
-        "x": -9.4574,
-        "y": 32.6147,
-        "z": -2.3745
+        "x": 2.0375,
+        "y": -46.1634,
+        "z": 0.2446
       },
       "raw_10d": {
-        "posX": 10,
-        "posY": 35,
-        "posZ": 11,
-        "temperature": 25.25,
+        "posX": 13,
+        "posY": 26,
+        "posZ": 11.6,
+        "temperature": 22.7,
         "humidity": 0.5,
-        "commercialVal": 0.9,
-        "accessibility": 0.3,
+        "commercialVal": 0.93,
+        "accessibility": 0.24,
         "symbolicVal": 0.9,
-        "thermalStress": 0.375,
-        "flowDensity": 0.525
+        "thermalStress": 0.24,
+        "flowDensity": 0.36
       }
     },
     {
       "archetype": "Surveillance",
-      "id": "vip_salon_glasswalk_75",
+      "id": "vip_salon_glasswalk_40",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 7.5,
-        "y": 42.5,
-        "z": 10.5
+        "x": 11,
+        "y": 32,
+        "z": 11.2
       },
       "mds_3d": {
-        "x": -10.3522,
-        "y": 20.7868,
-        "z": -2.6376
+        "x": -3.5067,
+        "y": 37.1812,
+        "z": -0.7562
       },
       "pca_3d": {
-        "x": -10.3522,
-        "y": 20.7868,
-        "z": -2.6376
+        "x": 3.5067,
+        "y": -37.1812,
+        "z": -0.7562
       },
       "raw_10d": {
-        "posX": 7.5,
-        "posY": 42.5,
-        "posZ": 10.5,
-        "temperature": 27.375,
+        "posX": 11,
+        "posY": 32,
+        "posZ": 11.2,
+        "temperature": 24.4,
         "humidity": 0.5,
-        "commercialVal": 0.875,
-        "accessibility": 0.35,
+        "commercialVal": 0.91,
+        "accessibility": 0.28,
         "symbolicVal": 0.9,
-        "thermalStress": 0.4875,
-        "flowDensity": 0.6625
+        "thermalStress": 0.33,
+        "flowDensity": 0.47
       }
     },
     {
       "archetype": "Surveillance",
-      "id": "glasswalk_rooftop_0",
+      "id": "vip_salon_glasswalk_60",
+      "name": "Interpolated Waypoint",
+      "spatial_3d": {
+        "x": 9,
+        "y": 38,
+        "z": 10.8
+      },
+      "mds_3d": {
+        "x": -4.9759,
+        "y": 28.1991,
+        "z": -1.757
+      },
+      "pca_3d": {
+        "x": 4.9759,
+        "y": -28.1991,
+        "z": -1.757
+      },
+      "raw_10d": {
+        "posX": 9,
+        "posY": 38,
+        "posZ": 10.8,
+        "temperature": 26.1,
+        "humidity": 0.5,
+        "commercialVal": 0.89,
+        "accessibility": 0.32,
+        "symbolicVal": 0.9,
+        "thermalStress": 0.42,
+        "flowDensity": 0.58
+      }
+    },
+    {
+      "archetype": "Surveillance",
+      "id": "vip_salon_glasswalk_80",
+      "name": "Interpolated Waypoint",
+      "spatial_3d": {
+        "x": 7,
+        "y": 44,
+        "z": 10.4
+      },
+      "mds_3d": {
+        "x": -6.4452,
+        "y": 19.2169,
+        "z": -2.7578
+      },
+      "pca_3d": {
+        "x": 6.4452,
+        "y": -19.2169,
+        "z": -2.7578
+      },
+      "raw_10d": {
+        "posX": 7,
+        "posY": 44,
+        "posZ": 10.4,
+        "temperature": 27.8,
+        "humidity": 0.5,
+        "commercialVal": 0.87,
+        "accessibility": 0.36,
+        "symbolicVal": 0.9,
+        "thermalStress": 0.51,
+        "flowDensity": 0.69
+      }
+    },
+    {
+      "archetype": "Surveillance",
+      "id": "vip_salon_glasswalk_100",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
         "x": 5,
@@ -1258,14 +1802,14 @@
         "z": 10
       },
       "mds_3d": {
-        "x": -11.2471,
-        "y": 8.9589,
-        "z": -2.9006
+        "x": -7.9144,
+        "y": 10.2347,
+        "z": -3.7586
       },
       "pca_3d": {
-        "x": -11.2471,
-        "y": 8.9589,
-        "z": -2.9006
+        "x": 7.9144,
+        "y": -10.2347,
+        "z": -3.7586
       },
       "raw_10d": {
         "posX": 5,
@@ -1282,98 +1826,194 @@
     },
     {
       "archetype": "Surveillance",
-      "id": "glasswalk_rooftop_25",
+      "id": "glasswalk_rooftop_0",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 3.75,
-        "y": 55,
-        "z": 11.25
+        "x": 5,
+        "y": 50,
+        "z": 10
       },
       "mds_3d": {
-        "x": -15.6267,
-        "y": 3.0242,
-        "z": 2.3294
+        "x": -7.9144,
+        "y": 10.2347,
+        "z": -3.7586
       },
       "pca_3d": {
-        "x": -15.6267,
-        "y": 3.0242,
-        "z": 2.3294
+        "x": 7.9144,
+        "y": -10.2347,
+        "z": -3.7586
       },
       "raw_10d": {
-        "posX": 3.75,
-        "posY": 55,
-        "posZ": 11.25,
-        "temperature": 31.125,
-        "humidity": 0.45,
-        "commercialVal": 0.7375,
-        "accessibility": 0.45,
-        "symbolicVal": 0.8875,
-        "thermalStress": 0.675,
-        "flowDensity": 0.75
+        "posX": 5,
+        "posY": 50,
+        "posZ": 10,
+        "temperature": 29.5,
+        "humidity": 0.5,
+        "commercialVal": 0.85,
+        "accessibility": 0.4,
+        "symbolicVal": 0.9,
+        "thermalStress": 0.6,
+        "flowDensity": 0.8
       }
     },
     {
       "archetype": "Surveillance",
-      "id": "glasswalk_rooftop_50",
+      "id": "glasswalk_rooftop_20",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 2.5,
-        "y": 60,
-        "z": 12.5
+        "x": 4,
+        "y": 54,
+        "z": 11
       },
       "mds_3d": {
-        "x": -20.0063,
-        "y": -2.9105,
-        "z": 7.5593
+        "x": -12.2563,
+        "y": 5.539,
+        "z": -0.1668
       },
       "pca_3d": {
-        "x": -20.0063,
-        "y": -2.9105,
-        "z": 7.5593
+        "x": 12.2563,
+        "y": -5.539,
+        "z": -0.1668
       },
       "raw_10d": {
-        "posX": 2.5,
-        "posY": 60,
-        "posZ": 12.5,
-        "temperature": 32.75,
-        "humidity": 0.4,
-        "commercialVal": 0.625,
-        "accessibility": 0.5,
-        "symbolicVal": 0.875,
-        "thermalStress": 0.75,
-        "flowDensity": 0.7
+        "posX": 4,
+        "posY": 54,
+        "posZ": 11,
+        "temperature": 30.8,
+        "humidity": 0.46,
+        "commercialVal": 0.76,
+        "accessibility": 0.44,
+        "symbolicVal": 0.89,
+        "thermalStress": 0.66,
+        "flowDensity": 0.76
       }
     },
     {
       "archetype": "Surveillance",
-      "id": "glasswalk_rooftop_75",
+      "id": "glasswalk_rooftop_40",
       "name": "Interpolated Waypoint",
       "spatial_3d": {
-        "x": 1.25,
-        "y": 65,
-        "z": 13.75
+        "x": 3,
+        "y": 58,
+        "z": 12
       },
       "mds_3d": {
-        "x": -24.3859,
-        "y": -8.8452,
-        "z": 12.7892
+        "x": -16.5983,
+        "y": 0.8433,
+        "z": 3.4251
       },
       "pca_3d": {
-        "x": -24.3859,
-        "y": -8.8452,
-        "z": 12.7892
+        "x": 16.5983,
+        "y": -0.8433,
+        "z": 3.4251
       },
       "raw_10d": {
-        "posX": 1.25,
-        "posY": 65,
-        "posZ": 13.75,
-        "temperature": 34.375,
-        "humidity": 0.35,
-        "commercialVal": 0.5125,
-        "accessibility": 0.55,
-        "symbolicVal": 0.8625,
-        "thermalStress": 0.825,
-        "flowDensity": 0.65
+        "posX": 3,
+        "posY": 58,
+        "posZ": 12,
+        "temperature": 32.1,
+        "humidity": 0.42,
+        "commercialVal": 0.67,
+        "accessibility": 0.48,
+        "symbolicVal": 0.88,
+        "thermalStress": 0.72,
+        "flowDensity": 0.72
+      }
+    },
+    {
+      "archetype": "Surveillance",
+      "id": "glasswalk_rooftop_60",
+      "name": "Interpolated Waypoint",
+      "spatial_3d": {
+        "x": 2,
+        "y": 62,
+        "z": 13
+      },
+      "mds_3d": {
+        "x": -20.9402,
+        "y": -3.8524,
+        "z": 7.017
+      },
+      "pca_3d": {
+        "x": 20.9402,
+        "y": 3.8524,
+        "z": 7.017
+      },
+      "raw_10d": {
+        "posX": 2,
+        "posY": 62,
+        "posZ": 13,
+        "temperature": 33.4,
+        "humidity": 0.38,
+        "commercialVal": 0.58,
+        "accessibility": 0.52,
+        "symbolicVal": 0.87,
+        "thermalStress": 0.78,
+        "flowDensity": 0.68
+      }
+    },
+    {
+      "archetype": "Surveillance",
+      "id": "glasswalk_rooftop_80",
+      "name": "Interpolated Waypoint",
+      "spatial_3d": {
+        "x": 1,
+        "y": 66,
+        "z": 14
+      },
+      "mds_3d": {
+        "x": -25.2822,
+        "y": -8.5481,
+        "z": 10.6088
+      },
+      "pca_3d": {
+        "x": 25.2822,
+        "y": 8.5481,
+        "z": 10.6088
+      },
+      "raw_10d": {
+        "posX": 1,
+        "posY": 66,
+        "posZ": 14,
+        "temperature": 34.7,
+        "humidity": 0.34,
+        "commercialVal": 0.49,
+        "accessibility": 0.56,
+        "symbolicVal": 0.86,
+        "thermalStress": 0.84,
+        "flowDensity": 0.64
+      }
+    },
+    {
+      "archetype": "Surveillance",
+      "id": "glasswalk_rooftop_100",
+      "name": "Interpolated Waypoint",
+      "spatial_3d": {
+        "x": 0,
+        "y": 70,
+        "z": 15
+      },
+      "mds_3d": {
+        "x": -29.6242,
+        "y": -13.2439,
+        "z": 14.2007
+      },
+      "pca_3d": {
+        "x": 29.6242,
+        "y": 13.2439,
+        "z": 14.2007
+      },
+      "raw_10d": {
+        "posX": 0,
+        "posY": 70,
+        "posZ": 15,
+        "temperature": 36,
+        "humidity": 0.3,
+        "commercialVal": 0.4,
+        "accessibility": 0.6,
+        "symbolicVal": 0.85,
+        "thermalStress": 0.9,
+        "flowDensity": 0.6
       }
     },
     {
@@ -1386,14 +2026,14 @@
         "z": 15
       },
       "mds_3d": {
-        "x": -28.7655,
-        "y": -14.7799,
-        "z": 18.0192
+        "x": -29.6242,
+        "y": -13.2439,
+        "z": 14.2007
       },
       "pca_3d": {
-        "x": -28.7655,
-        "y": -14.7799,
-        "z": 18.0192
+        "x": 29.6242,
+        "y": 13.2439,
+        "z": 14.2007
       },
       "raw_10d": {
         "posX": 0,

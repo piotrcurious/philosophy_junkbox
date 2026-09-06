@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 Automated end-to-end test suite for Galeries Lafayette Psychogeographical Pipeline
-Tests Prolog ontology output, Haskell trajectory generation, R dimension decompression,
-Python Data Import Engine, and WebGL HTML asset integrity.
+Tests Prolog ontology output, Haskell trajectory generation with CLI parameters, R dimension decompression,
+Python Data Import Engine, README documentation, and WebGL HTML asset integrity.
 """
 
 import json
@@ -39,7 +39,7 @@ class TestGaleriaLafayettePipeline(unittest.TestCase):
         self.assertEqual(data["verification"]["manifold_status"], "PROVED_CONSISTENT")
 
     def test_02_haskell_trajectory_engine(self):
-        """Test Haskell TrajectoryEngine binary compilation and trajectory output."""
+        """Test Haskell TrajectoryEngine binary compilation and CLI argument execution."""
         engine_hs = os.path.join(BASE_DIR, "TrajectoryEngine.hs")
         engine_bin = os.path.join(BASE_DIR, "TrajectoryEngine")
         csv_out = os.path.join(BASE_DIR, "high_dim_trajectories.csv")
@@ -49,8 +49,8 @@ class TestGaleriaLafayettePipeline(unittest.TestCase):
         compile_res = subprocess.run(compile_cmd, capture_output=True, text=True, cwd=BASE_DIR)
         self.assertEqual(compile_res.returncode, 0, f"GHC compile failed: {compile_res.stderr}")
 
-        # Run binary
-        run_res = subprocess.run([engine_bin], capture_output=True, text=True, cwd=BASE_DIR)
+        # Run binary with CLI parameters (resolution 0.2, custom csv)
+        run_res = subprocess.run([engine_bin, "0.2", csv_out], capture_output=True, text=True, cwd=BASE_DIR)
         self.assertEqual(run_res.returncode, 0, f"TrajectoryEngine execution failed: {run_res.stderr}")
         self.assertTrue(os.path.exists(csv_out), "high_dim_trajectories.csv missing")
 
@@ -147,6 +147,7 @@ class TestGaleriaLafayettePipeline(unittest.TestCase):
             "chk-ext-pivot-sphere",
             "chk-ext-cross-section",
             "file-import-input",
+            "btn-export-session",
             "import-status",
             "prolog-verification-panel",
             "info-panel"
@@ -154,6 +155,16 @@ class TestGaleriaLafayettePipeline(unittest.TestCase):
 
         for req_id in required_ids:
             self.assertIn(f'id="{req_id}"', html_content, f"Missing DOM element id='{req_id}' in index.html")
+
+    def test_06_readme_documentation(self):
+        """Test presence and content of README.md documentation."""
+        readme_path = os.path.join(BASE_DIR, "README.md")
+        self.assertTrue(os.path.exists(readme_path), "README.md missing")
+        with open(readme_path, "r", encoding="utf-8") as f:
+            content = f.read()
+        self.assertIn("Galeries Lafayette", content)
+        self.assertIn("drift_ontology.pl", content)
+        self.assertIn("TrajectoryEngine.hs", content)
 
 if __name__ == "__main__":
     unittest.main()

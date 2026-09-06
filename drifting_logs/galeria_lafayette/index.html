@@ -316,11 +316,16 @@
             <label class="checkbox-item"><input type="checkbox" id="chk-ext-cross-section" checked>Cross-Section Plane</label>
         </div>
 
-        <h2>Data Import Engine</h2>
+        <h2>Data Import & Export Engine</h2>
         <div class="control-group">
             <label for="file-import-input">Import Psychogeographical Data (.json / .csv)</label>
             <input type="file" id="file-import-input" accept=".json,.csv">
             <div id="import-status" style="font-size:0.7rem; color:#00ffaa; margin-top:4px;">Ready to import custom drift data.</div>
+        </div>
+        <div class="control-group" style="margin-top: 8px;">
+            <button id="btn-export-session" style="background: rgba(0,240,255,0.15); border:1px solid #00f0ff; color:#00f0ff; cursor:pointer; font-weight:bold;">
+                Export Visualizer Session (.json)
+            </button>
         </div>
 
         <h2>Trajectories</h2>
@@ -898,6 +903,32 @@
 
             ['tourist', 'worker', 'resident', 'surveillance'].forEach(arch => {
                 document.getElementById(`chk-${arch}`).addEventListener('change', updateVisibility);
+            });
+
+            document.getElementById('btn-export-session').addEventListener('click', () => {
+                const sessionExport = {
+                    timestamp: new Date().toISOString(),
+                    projection: currentProjection,
+                    pivotNodeId: pivotNodeId,
+                    gammaWarp: gammaWarp,
+                    spatialCurvature: curvature,
+                    weights: weights,
+                    flowSettings: {
+                        speed: flowSpeed,
+                        turbulence: flowTurbulence,
+                        particleCount: particleCount
+                    },
+                    datasetCount: dataset.length,
+                    activeDataset: dataset
+                };
+
+                const blob = new Blob([JSON.stringify(sessionExport, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `psychogeographical_session_${Date.now()}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
             });
 
             document.getElementById('file-import-input').addEventListener('change', (e) => {
