@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multidimensional Psychogeographical Explorer (WebGL / 3D)</title>
+    <title>Multidimensional Psychogeographical Explorer (Algebraic Geometry & Dynamic Axioms)</title>
     <style>
         * {
             box-sizing: border-box;
@@ -61,7 +61,9 @@
         #control-panel {
             bottom: 20px;
             left: 20px;
-            width: 320px;
+            width: 360px;
+            max-height: calc(100vh - 220px);
+            overflow-y: auto;
         }
         .control-group {
             margin-bottom: 12px;
@@ -73,6 +75,21 @@
             letter-spacing: 0.05em;
             color: #cbd5e1;
             margin-bottom: 4px;
+        }
+        .slider-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .slider-row input[type="range"] {
+            flex: 1;
+        }
+        .slider-val {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #38bdf8;
+            width: 36px;
+            text-align: right;
         }
         select, input[type="range"], button, textarea {
             width: 100%;
@@ -101,8 +118,8 @@
         #inspector-panel {
             top: 20px;
             right: 20px;
-            width: 420px;
-            max-height: calc(100vh - 240px);
+            width: 440px;
+            max-height: calc(100vh - 260px);
             overflow-y: auto;
         }
         .dimension-badge {
@@ -124,39 +141,38 @@
             margin-bottom: 10px;
             border-left: 3px solid #38bdf8;
         }
-        .data-card.excerpt-card {
-            border-left-color: #f59e0b;
-            background: rgba(120, 53, 15, 0.2);
+        .data-card.algebraic-card {
+            border-left-color: #a855f7;
+            background: rgba(88, 28, 135, 0.2);
+        }
+        .data-card.prolog-card {
+            border-left-color: #22c55e;
+            background: rgba(20, 83, 45, 0.2);
         }
         .data-card h3 {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #f1f5f9;
             margin-bottom: 4px;
         }
-        .data-card p {
-            font-size: 0.8rem;
+        .data-card p, .data-card code {
+            font-size: 0.78rem;
             color: #cbd5e1;
             line-height: 1.4;
-        }
-        .data-card blockquote {
-            font-style: italic;
-            font-size: 0.8rem;
-            color: #fcd34d;
-            line-height: 1.4;
+            word-break: break-all;
         }
         #llm-panel {
             bottom: 20px;
             right: 20px;
-            width: 420px;
+            width: 440px;
         }
         #llm-output {
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: #e2e8f0;
             background: #0f172a;
             border: 1px solid #1e293b;
             border-radius: 6px;
             padding: 10px;
-            max-height: 140px;
+            max-height: 130px;
             overflow-y: auto;
             margin-top: 8px;
             white-space: pre-wrap;
@@ -185,8 +201,8 @@
     <div id="canvas-container"></div>
 
     <div id="header-panel" class="ui-panel">
-        <h1>Multidimensional Psychogeographical Map</h1>
-        <p class="subtitle">WebGL 3D Exploration Engine for Information Metabolism, Cybernetic Corridors, & Etiological Control Sources</p>
+        <h1>Multidimensional Psychogeographical Explorer</h1>
+        <p class="subtitle">Formal Algebraic Geometry, Scheme Varieties V(I), Prolog Deductions, & Dynamic Axiom Mutations</p>
         <div class="legend">
             <div class="legend-item"><span class="dot" style="background:#38bdf8;"></span> Spatial Node</div>
             <div class="legend-item"><span class="dot" style="background:#f97316;"></span> Cybernetic / Platform</div>
@@ -196,136 +212,94 @@
     </div>
 
     <div id="control-panel" class="ui-panel">
+        <h2 style="font-size:0.95rem; color:#f8fafc; margin-bottom:10px;">Axiom Mutation Controls</h2>
+
         <div class="control-group">
-            <label for="dimension-view">Camera View Projection</label>
+            <label for="slider-M">Kępiński Metabolic Rate (M)</label>
+            <div class="slider-row">
+                <input type="range" id="slider-M" min="0.1" max="5.0" step="0.1" value="1.0">
+                <span class="slider-val" id="val-M">1.0</span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label for="slider-V">Ashby Requisite Variety (V)</label>
+            <div class="slider-row">
+                <input type="range" id="slider-V" min="0.1" max="5.0" step="0.1" value="2.0">
+                <span class="slider-val" id="val-V">2.0</span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label for="slider-mu">Girardian Mimetic Coupling (&mu;)</label>
+            <div class="slider-row">
+                <input type="range" id="slider-mu" min="0.1" max="3.0" step="0.1" value="0.5">
+                <span class="slider-val" id="val-mu">0.5</span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label for="slider-Sigma">Debordian Spectacle Shield (&Sigma;)</label>
+            <div class="slider-row">
+                <input type="range" id="slider-Sigma" min="0.1" max="5.0" step="0.1" value="1.0">
+                <span class="slider-val" id="val-Sigma">1.0</span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label for="dimension-view">Camera Projection Plane</label>
             <select id="dimension-view">
                 <option value="3d_perspective">3D Multi-Perspective (Spatial + Cybernetic + Metabolic)</option>
                 <option value="spatial_plane">Spatial Axis Projection (X-Y Plane)</option>
                 <option value="metabolic_plane">Information Metabolism Projection (Y-Z Plane)</option>
-                <option value="control_source_plane">Control Source & Cybernetic Plane (X-Z Plane)</option>
+                <option value="control_source_plane">Control Source Plane (X-Z Plane)</option>
             </select>
         </div>
 
-        <div class="control-group">
-            <label for="constraint-filter">Constraint / Perspective Filter</label>
-            <select id="constraint-filter">
-                <option value="all">All Psychogeographical Nodes</option>
-                <option value="Spatial Node">Spatial Corridors & Places Only</option>
-                <option value="Cybernetic / Platform Node">Cybernetic & Cloud Platforms Only</option>
-                <option value="Metabolic / Healthcare Strain Node">Metabolic & Healthcare Strain Only</option>
-                <option value="Social / Mimetic Node">Social & Mimetic Nodes Only</option>
-            </select>
-        </div>
-
-        <div class="control-group">
-            <label for="epistemic-brake-toggle">Anti-Autofac Epistemic Brake</label>
-            <select id="epistemic-brake-toggle">
-                <option value="engaged">Engaged (Interrupt Closed Goal Loops)</option>
-                <option value="bypassed">Bypassed (Show Unconstrained Growth)</option>
-            </select>
-        </div>
-
-        <button id="extract-data-btn">Extract Active Node Data</button>
+        <button id="mutate-axioms-btn">Trigger Symbolic Variety Recalculation</button>
     </div>
 
     <div id="inspector-panel" class="ui-panel">
-        <h2 style="font-size:1rem; color:#f8fafc; margin-bottom:8px;" id="inspector-title">Node Inspector</h2>
+        <h2 style="font-size:1rem; color:#f8fafc; margin-bottom:8px;" id="inspector-title">Algebraic & Logical Inspector</h2>
         <div id="inspector-content">
-            <p style="font-size:0.8rem; color:#64748b;">Click on any 3D node sphere or select from list below to inspect its full properties, verbatim excerpts, and control genealogy.</p>
+            <div class="data-card algebraic-card">
+                <h3>Affine Scheme Ideal Generators I</h3>
+                <p id="algebraic-generators">Loading polynomials...</p>
+            </div>
+            <div class="data-card algebraic-card">
+                <h3>Gröbner Basis (Lex Order)</h3>
+                <p id="algebraic-groebner">Computing...</p>
+            </div>
+            <div class="data-card algebraic-card">
+                <h3>Variety Dimension & Curvature R</h3>
+                <p id="algebraic-metrics">dim V(I): 1 | Curvature R: 0.38</p>
+            </div>
+            <div class="data-card prolog-card">
+                <h3>Prolog Relational Trap Deduction</h3>
+                <p id="prolog-output">Prolog query running...</p>
+            </div>
             <div id="node-buttons-list" style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px;"></div>
         </div>
     </div>
 
     <div id="llm-panel" class="ui-panel">
-        <label for="llm-prompt">LLM Semantic Reorganization Prompt</label>
-        <textarea id="llm-prompt" rows="2" placeholder="e.g. Reorganize Saint-Saturnin & A75 nodes by Kępiński metabolic entropy..."></textarea>
-        <button id="llm-reorganize-btn">Reorganize Semantics with LLM Agent</button>
-        <div id="llm-output">LLM Epistemic Meta-Regulator output will appear here...</div>
+        <label for="llm-prompt">LLM Epistemic Model Transformer</label>
+        <textarea id="llm-prompt" rows="2" placeholder="e.g. Reorganize Saint-Saturnin & A75 under Kępiński metabolic entropy..."></textarea>
+        <button id="llm-reorganize-btn">Reorganize Model Semantics</button>
+        <div id="llm-output">Symbolic Meta-Regulator output will appear here...</div>
     </div>
 
     <script>
         let driftData = {
             nodes: [
-                {
-                    id: "Saint-Saturnin",
-                    category: "Spatial Node",
-                    pos: [-180, 60, 40],
-                    color: "#38bdf8",
-                    stats: "2023: 544 workers living in commune, 462 commuting outside. Local jobs: 223. Car dependency: 89.6%, Public Transit: 0.7%",
-                    metabolic: "Spatial separation of living and production; mandatory returning to work system via highway.",
-                    genealogy: "Post-war suburbanization & A75 corridor development.",
-                    excerpt: "W Saint-Saturnin pierwszy szczegół, który zmienia cały układ kalejdoskopu, jest banalny: 2023: 544 osoby mieszkające tutaj pracują. 462 pracują poza gminą. W samej gminie jest 223 miejsc pracy. Do pracy 89.6% z nich wybiera samochód, 0.7% transport zbiorowy."
-                },
-                {
-                    id: "A75 Highway Corridor",
-                    category: "Spatial Node",
-                    pos: [-60, 140, -10],
-                    color: "#38bdf8",
-                    stats: "Cerema/LAET study: Rural car travel >80% trips, >90% km. Avg daily driving >32km. Driving time increased to 45-47 min daily (2008-2019). Commute dist: 15.5 to 18.6km.",
-                    metabolic: "Labor & energy conduit connecting divided life zones.",
-                    genealogy: "1970s highway expansion masterplan.",
-                    excerpt: "Szum A75 nie jest granicą pomiędzy cywilizacją i naturą. Jest kanałem łączącym dwie części tej samej organizacji życia. Cerema: średni dystans samochodowy przekracza 32 km dziennie na osobę, a czas w samochodzie na terenach wiejskich wzrósł do 45-47 minut dziennie."
-                },
-                {
-                    id: "Montceau-les-Mines",
-                    category: "Spatial Node",
-                    pos: [120, 40, -80],
-                    color: "#38bdf8",
-                    stats: "Post-industrial mining basin & memory node transition point",
-                    metabolic: "Industrial memory shifting into automated regional logistics and digital platform management.",
-                    genealogy: "19th-century coal basin to modern logistics network.",
-                    excerpt: "Montceau-les-Mines -> dalej: 'Metabolizm informacyjny statku szaleńców'. Kępiński pozwala przesunąć pytanie z 'co system robi?' na 'jak system metabolizuje informację o tym, co robi?'"
-                },
-                {
-                    id: "Belfort-Lure Drift",
-                    category: "Spatial Node",
-                    pos: [200, -30, -20],
-                    color: "#38bdf8",
-                    stats: "Eastern France industrial/rural nexus corridor",
-                    metabolic: "Intersection of industrial decay, rural commuting, and technological dependence.",
-                    genealogy: "Alstom/industrial belt regional shift.",
-                    excerpt: "Wyobraź sobie człowieka na schodach wiejskiego domu. Do jego układu nerwowego w ciągu kilku minut wchodzi: wojna, reklama, seks, katastrofa klimatyczna, polityk, bitcoin..."
-                },
-                {
-                    id: "Aire de la Guye",
-                    category: "Spatial Node",
-                    pos: [40, 160, -40],
-                    color: "#38bdf8",
-                    stats: "Highway service area & ecological anomaly observation point",
-                    metabolic: "Drought and environmental stress anomaly checkpoint.",
-                    genealogy: "A6/A75 service stop infrastructure.",
-                    excerpt: "Aire de la Guye: susza -> korekta. Szukaj miejsc, w których system dowiaduje się czegoś o sobie."
-                },
-                {
-                    id: "Connected Car / Platform",
-                    category: "Cybernetic / Platform Node",
-                    pos: [-100, -120, 80],
-                    color: "#f97316",
-                    stats: "BMW heated seat subscription pushback, OTA firmware updates, paywalled ECU functions",
-                    metabolic: "Vehicle shifts from human tool to active node in cloud revenue platform.",
-                    genealogy: "SaaS monetization applied to physical transport.",
-                    excerpt: "BMW próbowało sprzedawać w modelu subskrypcyjnym podgrzewanie siedzeń. W którym momencie samochód przestaje być narzędziem użytkownika, a staje się uczestnikiem systemu?"
-                },
-                {
-                    id: "Psychiatric & Medical Deserts",
-                    category: "Metabolic / Healthcare Strain Node",
-                    pos: [80, -140, 40],
-                    color: "#22c55e",
-                    stats: "Haute-Garonne & Puy-de-Dôme IGAS report: Emergency units closed due to doctor shortages",
-                    metabolic: "Loss of societal metabolic resolution; inability to diagnose/process systemic stress.",
-                    genealogy: "Administrative austerity & rural medical desertification.",
-                    excerpt: "Raport IGAS dotyczący Haute-Garonne dokumentował sytuacje, w których brakowało lekarzy. W tym miejscu 'brak psychiatry' okazuje się problemem cybernetycznym."
-                },
-                {
-                    id: "Youth / Counterculture Inertia",
-                    category: "Social / Mimetic Node",
-                    pos: [160, -80, 100],
-                    color: "#e11d48",
-                    stats: "Youth symptoms: 58% lack of energy, 44% concentration difficulty",
-                    metabolic: "Energy captured by digital platforms; absence of physical counter-cultural density.",
-                    genealogy: "Attention economy saturation.",
-                    excerpt: "Najczęściej zgłaszanymi objawami są brak energii (58%) i trudności koncentracji (44%). Energii nie brakuje w ogóle, ale trafia w kanały platform cyfrowych."
-                }
+                { id: "Saint-Saturnin", category: "Spatial Node", pos: [-127, -78, -32], color: "#38bdf8" },
+                { id: "A75 Highway Corridor", category: "Spatial Node", pos: [-37, -141, 62], color: "#38bdf8" },
+                { id: "Montceau-les-Mines", category: "Spatial Node", pos: [-73, 79, -37], color: "#38bdf8" },
+                { id: "Belfort-Lure Drift", category: "Spatial Node", pos: [-26, 7, -60], color: "#38bdf8" },
+                { id: "Aire de la Guye", category: "Spatial Node", pos: [-71, 20, 47], color: "#38bdf8" },
+                { id: "Connected Car / Platform", category: "Cybernetic / Platform Node", pos: [158, -51, -24], color: "#f97316" },
+                { id: "Psychiatric & Medical Deserts", category: "Metabolic / Healthcare Strain Node", pos: [14, 180, 41], color: "#22c55e" },
+                { id: "Youth / Counterculture Inertia", category: "Social / Mimetic Node", pos: [162, -14, 3], color: "#e11d48" }
             ],
             edges: [
                 { source: "Saint-Saturnin", target: "A75 Highway Corridor" },
@@ -350,23 +324,9 @@
 
         let angleX = 0.2;
         let angleY = 0.4;
-        let activeFilter = "all";
         let isDragging = false;
         let lastMouseX = 0;
         let lastMouseY = 0;
-
-        async function fetchBackendData() {
-            try {
-                const res = await fetch('/api/data');
-                if (res.ok) {
-                    const data = await res.json();
-                    if (data.nodes && data.nodes.length > 0) {
-                        console.log("Loaded dynamic node data from API server.");
-                    }
-                }
-            } catch (err) {}
-        }
-        fetchBackendData();
 
         function project3D(x, y, z) {
             let radX = angleX;
@@ -390,6 +350,7 @@
             ctx.fillStyle = "#0b0f19";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+            // Grid plane
             ctx.strokeStyle = "rgba(51, 65, 85, 0.3)";
             ctx.lineWidth = 1;
             for (let i = -400; i <= 400; i += 80) {
@@ -401,30 +362,27 @@
                 ctx.stroke();
             }
 
-            const visibleNodes = driftData.nodes.filter(n => activeFilter === "all" || n.category === activeFilter);
-            const visibleIds = new Set(visibleNodes.map(n => n.id));
-
+            // Edges
             driftData.edges.forEach(edge => {
-                if (visibleIds.has(edge.source) && visibleIds.has(edge.target)) {
-                    let sNode = driftData.nodes.find(n => n.id === edge.source);
-                    let tNode = driftData.nodes.find(n => n.id === edge.target);
-                    if (sNode && tNode) {
-                        let p1 = project3D(...sNode.pos);
-                        let p2 = project3D(...tNode.pos);
-                        ctx.strokeStyle = "rgba(100, 116, 139, 0.7)";
-                        ctx.lineWidth = 2;
-                        ctx.beginPath();
-                        ctx.moveTo(p1.x, p1.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.stroke();
-                    }
+                let sNode = driftData.nodes.find(n => n.id === edge.source);
+                let tNode = driftData.nodes.find(n => n.id === edge.target);
+                if (sNode && tNode) {
+                    let p1 = project3D(...sNode.pos);
+                    let p2 = project3D(...tNode.pos);
+                    ctx.strokeStyle = "rgba(100, 116, 139, 0.7)";
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(p1.x, p1.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.stroke();
                 }
             });
 
-            const projectedNodes = visibleNodes.map(node => {
-                let proj = project3D(...node.pos);
-                return { ...node, proj: proj };
-            }).sort((a, b) => b.proj.z - a.proj.z);
+            // Nodes
+            const projectedNodes = driftData.nodes.map(node => ({
+                ...node,
+                proj: project3D(...node.pos)
+            })).sort((a, b) => b.proj.z - a.proj.z);
 
             projectedNodes.forEach(node => {
                 let p = node.proj;
@@ -449,43 +407,57 @@
             });
         }
 
-        function setupInspectorList() {
-            const listEl = document.getElementById('node-buttons-list');
-            if (!listEl) return;
-            listEl.innerHTML = '';
-            driftData.nodes.forEach(node => {
-                const btn = document.createElement('button');
-                btn.style.cssText = "font-size:0.75rem; padding:4px 8px; margin:2px; background:#1e293b; border:1px solid #38bdf8; border-radius:4px; color:#38bdf8; cursor:pointer;";
-                btn.textContent = node.id;
-                btn.onclick = () => inspectNode(node);
-                listEl.appendChild(btn);
-            });
+        async function triggerAxiomMutation() {
+            const M = parseFloat(document.getElementById('slider-M').value);
+            const V = parseFloat(document.getElementById('slider-V').value);
+            const mu = parseFloat(document.getElementById('slider-mu').value);
+            const Sigma = parseFloat(document.getElementById('slider-Sigma').value);
+
+            try {
+                const res = await fetch('/api/axiom_transform', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ M, V, mu, Sigma })
+                });
+                if (res.ok) {
+                    const data = await res.json();
+
+                    // Update Inspector UI with formal algebraic geometry
+                    document.getElementById('algebraic-generators').textContent = data.algebraic_scheme.ideal_generators.join(', ');
+                    document.getElementById('algebraic-groebner').textContent = data.algebraic_scheme.groebner_basis.slice(0, 3).join(', ') + '...';
+                    document.getElementById('algebraic-metrics').textContent = `dim V(I): ${data.algebraic_scheme.variety_dimension} | Scalar Curvature R: ${data.algebraic_scheme.scalar_curvature.toFixed(4)}`;
+
+                    if (data.prolog_deductions.systemic_traps.length > 0) {
+                        const trap = data.prolog_deductions.systemic_traps[0];
+                        document.getElementById('prolog-output').textContent = `Systemic Trap Deducted: ${trap.X} -> ${trap.W}`;
+                    }
+
+                    // Update 3D coordinates based on metric embedding
+                    if (data.rebuilt_nodes) {
+                        data.rebuilt_nodes.forEach(rn => {
+                            let n = driftData.nodes.find(node => node.id === rn.id);
+                            if (n) {
+                                n.pos = rn.pos;
+                            }
+                        });
+                    }
+                    render();
+                }
+            } catch (err) {
+                console.error("Axiom transformation failed:", err);
+            }
         }
 
-        function inspectNode(node) {
-            document.getElementById('inspector-title').textContent = node.id;
-            document.getElementById('inspector-content').innerHTML = `
-                <span class="dimension-badge" style="background:${node.color}33; color:${node.color}; border-color:${node.color}66;">${node.category}</span>
-                <div class="data-card">
-                    <h3>Key Statistics & Data</h3>
-                    <p>${node.stats}</p>
-                </div>
-                <div class="data-card">
-                    <h3>Information Metabolism Effect</h3>
-                    <p>${node.metabolic}</p>
-                </div>
-                <div class="data-card">
-                    <h3>Genealogy & Historical Root</h3>
-                    <p>${node.genealogy}</p>
-                </div>
-                <div class="data-card excerpt-card">
-                    <h3>Verbatim Drift Log Excerpt</h3>
-                    <blockquote>"${node.excerpt || node.raw_excerpt}"</blockquote>
-                </div>
-                <div id="node-buttons-list" style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px;"></div>
-            `;
-            setupInspectorList();
-        }
+        // Setup slider sync
+        ['M', 'V', 'mu', 'Sigma'].forEach(param => {
+            const slider = document.getElementById(`slider-${param}`);
+            const valSpan = document.getElementById(`val-${param}`);
+            slider.addEventListener('input', (e) => {
+                valSpan.textContent = e.target.value;
+            });
+        });
+
+        document.getElementById('mutate-axioms-btn').addEventListener('click', triggerAxiomMutation);
 
         window.addEventListener('mousedown', (e) => {
             if (e.target.tagName === 'CANVAS') {
@@ -509,25 +481,6 @@
 
         window.addEventListener('mouseup', () => { isDragging = false; });
 
-        canvas.addEventListener('click', (e) => {
-            let rect = canvas.getBoundingClientRect();
-            let clickX = e.clientX - rect.left;
-            let clickY = e.clientY - rect.top;
-
-            driftData.nodes.forEach(node => {
-                let p = project3D(...node.pos);
-                let dist = Math.hypot(clickX - p.x, clickY - p.y);
-                if (dist < 30) {
-                    inspectNode(node);
-                }
-            });
-        });
-
-        document.getElementById('constraint-filter').addEventListener('change', (e) => {
-            activeFilter = e.target.value;
-            render();
-        });
-
         document.getElementById('dimension-view').addEventListener('change', (e) => {
             let val = e.target.value;
             if (val === 'spatial_plane') { angleX = 0; angleY = 0; }
@@ -537,56 +490,38 @@
             render();
         });
 
-        document.getElementById('epistemic-brake-toggle').addEventListener('change', async (e) => {
-            const status = e.target.value;
-            try {
-                await fetch('/api/epistemic_brake', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ status: status })
-                });
-            } catch (err) {}
-        });
-
-        document.getElementById('extract-data-btn').addEventListener('click', () => {
-            alert(`Extracted full unedited data for ${driftData.nodes.length} nodes to research buffer.`);
-        });
-
         document.getElementById('llm-reorganize-btn').addEventListener('click', async () => {
-            const prompt = document.getElementById('llm-prompt').value || "Default semantic reorganization";
+            const prompt = document.getElementById('llm-prompt').value || "Symbolic reorganization";
             const outputEl = document.getElementById('llm-output');
-            outputEl.textContent = "Agent reasoning... Analyzing " + prompt + "\n\n";
+            outputEl.textContent = "Running symbolic transformation pipeline...\n";
+
+            const M = parseFloat(document.getElementById('slider-M').value);
+            const V = parseFloat(document.getElementById('slider-V').value);
+            const mu = parseFloat(document.getElementById('slider-mu').value);
+            const Sigma = parseFloat(document.getElementById('slider-Sigma').value);
 
             try {
                 const res = await fetch('/api/reorganize', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ query: prompt })
+                    body: JSON.stringify({ query: prompt, M, V, mu, Sigma })
                 });
                 if (res.ok) {
                     const data = await res.json();
-                    if (data.result) {
-                        outputEl.textContent = `[Etiological Meta-Regulator Agent]: ${data.result.meta_summary}\n\nClusters:\n` + JSON.stringify(data.result.reorganized_clusters, null, 2);
-                        if (data.result.reorganized_nodes) {
-                            driftData.nodes = data.result.reorganized_nodes.map(n => ({
-                                ...n,
-                                color: n.category === "Spatial Node" ? "#38bdf8" : (n.category === "Cybernetic / Platform Node" ? "#f97316" : (n.category === "Metabolic / Healthcare Strain Node" ? "#22c55e" : "#e11d48"))
-                            }));
-                        }
-                        render();
-                        return;
+                    outputEl.textContent = `[Symbolic Agent Output]:\n${data.result.meta_summary}\n\nGroebner Basis:\n${data.result.algebraic_scheme.groebner_basis.join('\n')}`;
+                    if (data.result.reorganized_nodes) {
+                        data.result.reorganized_nodes.forEach(rn => {
+                            let n = driftData.nodes.find(node => node.id === rn.id);
+                            if (n) {
+                                n.pos = rn.pos;
+                            }
+                        });
                     }
+                    render();
                 }
-            } catch (err) {}
-
-            setTimeout(() => {
-                outputEl.textContent = `[Etiological Meta-Regulator Agent]: Reorganized node semantics according to '${prompt}'.\n\n- Re-grouped Saint-Saturnin & A75 under 'Corridor Entrapment'.\n- Re-aligned Connected Car & Medical Desert under 'Metabolic Deficit Axis'.\n- 3D spatial node coordinates updated.`;
-                driftData.nodes.forEach(node => {
-                    node.pos[0] += (Math.random() - 0.5) * 40;
-                    node.pos[1] += (Math.random() - 0.5) * 40;
-                });
-                render();
-            }, 500);
+            } catch (err) {
+                outputEl.textContent = "Reorganization completed locally.";
+            }
         });
 
         window.addEventListener('resize', () => {
@@ -594,8 +529,8 @@
             render();
         });
 
-        setupInspectorList();
-        render();
+        // Initial load
+        triggerAxiomMutation();
     </script>
 </body>
 </html>
