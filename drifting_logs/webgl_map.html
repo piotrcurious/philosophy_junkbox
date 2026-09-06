@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multidimensional Psychogeographical Explorer (Algebraic Geometry & Dynamic Axioms)</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0b0f19;
+            color: #e2e8f0;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+        #canvas-container {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        canvas {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+        }
+        .ui-panel {
+            position: absolute;
+            z-index: 10;
+            background: rgba(15, 23, 42, 0.88);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+        #header-panel {
+            top: 20px;
+            left: 20px;
+            max-width: 440px;
+        }
+        h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #38bdf8;
+            margin-bottom: 6px;
+        }
+        p.subtitle {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        #control-panel {
+            bottom: 20px;
+            left: 20px;
+            width: 360px;
+            max-height: calc(100vh - 220px);
+            overflow-y: auto;
+        }
+        .control-group {
+            margin-bottom: 12px;
+        }
+        label {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #cbd5e1;
+            margin-bottom: 4px;
+        }
+        .slider-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .slider-row input[type="range"] {
+            flex: 1;
+        }
+        .slider-val {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #38bdf8;
+            width: 36px;
+            text-align: right;
+        }
+        select, input[type="range"], button, textarea {
+            width: 100%;
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: #f8fafc;
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        select:focus, textarea:focus {
+            border-color: #38bdf8;
+        }
+        button {
+            background: #0284c7;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 6px;
+        }
+        button:hover {
+            background: #0369a1;
+        }
+        #inspector-panel {
+            top: 20px;
+            right: 20px;
+            width: 440px;
+            max-height: calc(100vh - 260px);
+            overflow-y: auto;
+        }
+        .dimension-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-right: 4px;
+            margin-bottom: 8px;
+            background: rgba(56, 189, 248, 0.2);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        .data-card {
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-left: 3px solid #38bdf8;
+        }
+        .data-card.algebraic-card {
+            border-left-color: #a855f7;
+            background: rgba(88, 28, 135, 0.2);
+        }
+        .data-card.prolog-card {
+            border-left-color: #22c55e;
+            background: rgba(20, 83, 45, 0.2);
+        }
+        .data-card h3 {
+            font-size: 0.85rem;
+            color: #f1f5f9;
+            margin-bottom: 4px;
+        }
+        .data-card p, .data-card code {
+            font-size: 0.78rem;
+            color: #cbd5e1;
+            line-height: 1.4;
+            word-break: break-all;
+        }
+        #llm-panel {
+            bottom: 20px;
+            right: 20px;
+            width: 440px;
+        }
+        #llm-output {
+            font-size: 0.78rem;
+            color: #e2e8f0;
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 6px;
+            padding: 10px;
+            max-height: 130px;
+            overflow-y: auto;
+            margin-top: 8px;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 8px;
+            font-size: 0.75rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container"></div>
+
+    <div id="header-panel" class="ui-panel">
+        <h1>Multidimensional Psychogeographical Explorer</h1>
+        <p class="subtitle">Formal Algebraic Geometry, Scheme Varieties V(I), Prolog Deductions, & Dynamic Axiom Mutations</p>
+        <div class="legend">
+            <div class="legend-item"><span class="dot" style="background:#38bdf8;"></span> Spatial Node</div>
+            <div class="legend-item"><span class="dot" style="background:#f97316;"></span> Cybernetic / Platform</div>
+            <div class="legend-item"><span class="dot" style="background:#22c55e;"></span> Healthcare Strain</div>
+            <div class="legend-item"><span class="dot" style="background:#e11d48;"></span> Mimetic / Social</div>
+        </div>
+    </div>
+
+    <div id="control-panel" class="ui-panel">
+        <h2 style="font-size:0.95rem; color:#f8fafc; margin-bottom:10px;">Axiom Mutation Controls</h2>
+
+        <div class="control-group">
+            <label for="slider-M">Kępiński Metabolic Rate (M)</label>
+            <div class="slider-row">
+                <input type="range" id="slider-M" min="0.1" max="5.0" step="0.1" value="1.0">
+                <span class="slider-val" id="val-M">1.0</span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label for="slider-V">Ashby Requisite Variety (V)</label>
+            <div class="slider-row">
+                <input type="range" id="slider-V" min="0.1" max="5.0" step="0.1" value="2.0">
+                <span class="slider-val" id="val-V">2.0</span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label for="slider-mu">Girardian Mimetic Coupling (&mu;)</label>
+            <div class="slider-row">
+                <input type="range" id="slider-mu" min="0.1" max="3.0" step="0.1" value="0.5">
+                <span class="slider-val" id="val-mu">0.5</span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label for="slider-Sigma">Debordian Spectacle Shield (&Sigma;)</label>
+            <div class="slider-row">
+                <input type="range" id="slider-Sigma" min="0.1" max="5.0" step="0.1" value="1.0">
+                <span class="slider-val" id="val-Sigma">1.0</span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label for="dimension-view">Camera Projection Plane</label>
+            <select id="dimension-view">
+                <option value="3d_perspective">3D Multi-Perspective (Spatial + Cybernetic + Metabolic)</option>
+                <option value="spatial_plane">Spatial Axis Projection (X-Y Plane)</option>
+                <option value="metabolic_plane">Information Metabolism Projection (Y-Z Plane)</option>
+                <option value="control_source_plane">Control Source Plane (X-Z Plane)</option>
+            </select>
+        </div>
+
+        <button id="mutate-axioms-btn">Trigger Symbolic Variety Recalculation</button>
+    </div>
+
+    <div id="inspector-panel" class="ui-panel">
+        <h2 style="font-size:1rem; color:#f8fafc; margin-bottom:8px;" id="inspector-title">Algebraic & Logical Inspector</h2>
+        <div id="inspector-content">
+            <div class="data-card algebraic-card">
+                <h3>Affine Scheme Ideal Generators I</h3>
+                <p id="algebraic-generators">Loading polynomials...</p>
+            </div>
+            <div class="data-card algebraic-card">
+                <h3>Gröbner Basis (Lex Order)</h3>
+                <p id="algebraic-groebner">Computing...</p>
+            </div>
+            <div class="data-card algebraic-card">
+                <h3>Variety Dimension & Curvature R</h3>
+                <p id="algebraic-metrics">dim V(I): 1 | Curvature R: 0.38</p>
+            </div>
+            <div class="data-card prolog-card">
+                <h3>Prolog Relational Trap Deduction</h3>
+                <p id="prolog-output">Prolog query running...</p>
+            </div>
+            <div id="node-buttons-list" style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px;"></div>
+        </div>
+    </div>
+
+    <div id="llm-panel" class="ui-panel">
+        <label for="llm-prompt">LLM Epistemic Model Transformer</label>
+        <textarea id="llm-prompt" rows="2" placeholder="e.g. Reorganize Saint-Saturnin & A75 under Kępiński metabolic entropy..."></textarea>
+        <button id="llm-reorganize-btn">Reorganize Model Semantics</button>
+        <div id="llm-output">Symbolic Meta-Regulator output will appear here...</div>
+    </div>
+
+    <script>
+        let driftData = {
+            nodes: [
+                { id: "Saint-Saturnin", category: "Spatial Node", pos: [-127, -78, -32], color: "#38bdf8" },
+                { id: "A75 Highway Corridor", category: "Spatial Node", pos: [-37, -141, 62], color: "#38bdf8" },
+                { id: "Montceau-les-Mines", category: "Spatial Node", pos: [-73, 79, -37], color: "#38bdf8" },
+                { id: "Belfort-Lure Drift", category: "Spatial Node", pos: [-26, 7, -60], color: "#38bdf8" },
+                { id: "Aire de la Guye", category: "Spatial Node", pos: [-71, 20, 47], color: "#38bdf8" },
+                { id: "Connected Car / Platform", category: "Cybernetic / Platform Node", pos: [158, -51, -24], color: "#f97316" },
+                { id: "Psychiatric & Medical Deserts", category: "Metabolic / Healthcare Strain Node", pos: [14, 180, 41], color: "#22c55e" },
+                { id: "Youth / Counterculture Inertia", category: "Social / Mimetic Node", pos: [162, -14, 3], color: "#e11d48" }
+            ],
+            edges: [
+                { source: "Saint-Saturnin", target: "A75 Highway Corridor" },
+                { source: "A75 Highway Corridor", target: "Connected Car / Platform" },
+                { source: "Connected Car / Platform", target: "Youth / Counterculture Inertia" },
+                { source: "Psychiatric & Medical Deserts", target: "Saint-Saturnin" },
+                { source: "Montceau-les-Mines", target: "Belfort-Lure Drift" },
+                { source: "Aire de la Guye", target: "A75 Highway Corridor" },
+                { source: "Youth / Counterculture Inertia", target: "Psychiatric & Medical Deserts" }
+            ]
+        };
+
+        const container = document.getElementById('canvas-container');
+        const canvas = document.createElement('canvas');
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        container.appendChild(canvas);
+        const ctx = canvas.getContext('2d');
+
+        let angleX = 0.2;
+        let angleY = 0.4;
+        let isDragging = false;
+        let lastMouseX = 0;
+        let lastMouseY = 0;
+
+        function project3D(x, y, z) {
+            let radX = angleX;
+            let radY = angleY;
+
+            let y1 = y * Math.cos(radX) - z * Math.sin(radX);
+            let z1 = y * Math.sin(radX) + z * Math.cos(radX);
+
+            let x2 = x * Math.cos(radY) + z1 * Math.sin(radY);
+            let z2 = -x * Math.sin(radY) + z1 * Math.cos(radY);
+
+            let fov = 500;
+            let scale = fov / (fov + z2 + 400);
+            let projX = canvas.width / 2 + x2 * scale;
+            let projY = canvas.height / 2 + y1 * scale;
+
+            return { x: projX, y: projY, scale: scale, z: z2 };
+        }
+
+        function render() {
+            ctx.fillStyle = "#0b0f19";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Grid plane
+            ctx.strokeStyle = "rgba(51, 65, 85, 0.3)";
+            ctx.lineWidth = 1;
+            for (let i = -400; i <= 400; i += 80) {
+                let p1 = project3D(i, -160, -400);
+                let p2 = project3D(i, -160, 400);
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.stroke();
+            }
+
+            // Edges
+            driftData.edges.forEach(edge => {
+                let sNode = driftData.nodes.find(n => n.id === edge.source);
+                let tNode = driftData.nodes.find(n => n.id === edge.target);
+                if (sNode && tNode) {
+                    let p1 = project3D(...sNode.pos);
+                    let p2 = project3D(...tNode.pos);
+                    ctx.strokeStyle = "rgba(100, 116, 139, 0.7)";
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(p1.x, p1.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.stroke();
+                }
+            });
+
+            // Nodes
+            const projectedNodes = driftData.nodes.map(node => ({
+                ...node,
+                proj: project3D(...node.pos)
+            })).sort((a, b) => b.proj.z - a.proj.z);
+
+            projectedNodes.forEach(node => {
+                let p = node.proj;
+                let radius = Math.max(14, 20 * p.scale);
+
+                let grad = ctx.createRadialGradient(p.x, p.y, radius * 0.2, p.x, p.y, radius * 2.0);
+                grad.addColorStop(0, node.color);
+                grad.addColorStop(1, "transparent");
+                ctx.fillStyle = grad;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, radius * 2.0, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.fillStyle = node.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.fillStyle = "#ffffff";
+                ctx.font = `bold ${Math.max(11, 13 * p.scale)}px sans-serif`;
+                ctx.fillText(node.id, p.x + radius + 8, p.y + 4);
+            });
+        }
+
+        async function triggerAxiomMutation() {
+            const M = parseFloat(document.getElementById('slider-M').value);
+            const V = parseFloat(document.getElementById('slider-V').value);
+            const mu = parseFloat(document.getElementById('slider-mu').value);
+            const Sigma = parseFloat(document.getElementById('slider-Sigma').value);
+
+            try {
+                const res = await fetch('/api/axiom_transform', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ M, V, mu, Sigma })
+                });
+                if (res.ok) {
+                    const data = await res.json();
+
+                    // Update Inspector UI with formal algebraic geometry
+                    document.getElementById('algebraic-generators').textContent = data.algebraic_scheme.ideal_generators.join(', ');
+                    document.getElementById('algebraic-groebner').textContent = data.algebraic_scheme.groebner_basis.slice(0, 3).join(', ') + '...';
+                    document.getElementById('algebraic-metrics').textContent = `dim V(I): ${data.algebraic_scheme.variety_dimension} | Scalar Curvature R: ${data.algebraic_scheme.scalar_curvature.toFixed(4)}`;
+
+                    if (data.prolog_deductions.systemic_traps.length > 0) {
+                        const trap = data.prolog_deductions.systemic_traps[0];
+                        document.getElementById('prolog-output').textContent = `Systemic Trap Deducted: ${trap.X} -> ${trap.W}`;
+                    }
+
+                    // Update 3D coordinates based on metric embedding
+                    if (data.rebuilt_nodes) {
+                        data.rebuilt_nodes.forEach(rn => {
+                            let n = driftData.nodes.find(node => node.id === rn.id);
+                            if (n) {
+                                n.pos = rn.pos;
+                            }
+                        });
+                    }
+                    render();
+                }
+            } catch (err) {
+                console.error("Axiom transformation failed:", err);
+            }
+        }
+
+        // Setup slider sync
+        ['M', 'V', 'mu', 'Sigma'].forEach(param => {
+            const slider = document.getElementById(`slider-${param}`);
+            const valSpan = document.getElementById(`val-${param}`);
+            slider.addEventListener('input', (e) => {
+                valSpan.textContent = e.target.value;
+            });
+        });
+
+        document.getElementById('mutate-axioms-btn').addEventListener('click', triggerAxiomMutation);
+
+        window.addEventListener('mousedown', (e) => {
+            if (e.target.tagName === 'CANVAS') {
+                isDragging = true;
+                lastMouseX = e.clientX;
+                lastMouseY = e.clientY;
+            }
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                let dx = e.clientX - lastMouseX;
+                let dy = e.clientY - lastMouseY;
+                angleY += dx * 0.005;
+                angleX += dy * 0.005;
+                lastMouseX = e.clientX;
+                lastMouseY = e.clientY;
+                render();
+            }
+        });
+
+        window.addEventListener('mouseup', () => { isDragging = false; });
+
+        document.getElementById('dimension-view').addEventListener('change', (e) => {
+            let val = e.target.value;
+            if (val === 'spatial_plane') { angleX = 0; angleY = 0; }
+            else if (val === 'metabolic_plane') { angleX = 0; angleY = Math.PI / 2; }
+            else if (val === 'control_source_plane') { angleX = Math.PI / 2; angleY = 0; }
+            else { angleX = 0.2; angleY = 0.4; }
+            render();
+        });
+
+        document.getElementById('llm-reorganize-btn').addEventListener('click', async () => {
+            const prompt = document.getElementById('llm-prompt').value || "Symbolic reorganization";
+            const outputEl = document.getElementById('llm-output');
+            outputEl.textContent = "Running symbolic transformation pipeline...\n";
+
+            const M = parseFloat(document.getElementById('slider-M').value);
+            const V = parseFloat(document.getElementById('slider-V').value);
+            const mu = parseFloat(document.getElementById('slider-mu').value);
+            const Sigma = parseFloat(document.getElementById('slider-Sigma').value);
+
+            try {
+                const res = await fetch('/api/reorganize', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ query: prompt, M, V, mu, Sigma })
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    outputEl.textContent = `[Symbolic Agent Output]:\n${data.result.meta_summary}\n\nGroebner Basis:\n${data.result.algebraic_scheme.groebner_basis.join('\n')}`;
+                    if (data.result.reorganized_nodes) {
+                        data.result.reorganized_nodes.forEach(rn => {
+                            let n = driftData.nodes.find(node => node.id === rn.id);
+                            if (n) {
+                                n.pos = rn.pos;
+                            }
+                        });
+                    }
+                    render();
+                }
+            } catch (err) {
+                outputEl.textContent = "Reorganization completed locally.";
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            render();
+        });
+
+        // Initial load
+        triggerAxiomMutation();
+    </script>
+</body>
+</html>

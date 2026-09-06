@@ -1,0 +1,240 @@
+{
+  "title": "Multidimensional Psychogeographical & Epistemic Map of Drifting Logs",
+  "full_text_length": 119517,
+  "etiological_diagnosis": {
+    "title": "Etiological Listening Center Diagnosis (Ośrodek Etiologicznego Słuchania)",
+    "raw_text_processed_bytes": 127757,
+    "agent_perspectives": {
+      "Kępiński Metabolism Agent": {
+        "model_name": "Kępiński Information Metabolism Engine",
+        "full_context_length": 119517,
+        "metabolic_state": "Entropic information overload without structural integration capacity",
+        "verbatim_concepts": [
+          "Człowiek jako układ otwarty wymieniający z otoczeniem energię i informację",
+          "Metabolizm informacyjny przestrzeni: wymiana bodźców i tworzenie porządku",
+          "Patologia przeciążenia: nadmiar sygnałów medialnych i platformowych przy ubóstwie struktur wartościowania"
+        ],
+        "diagnostic": "System nieustannie pobiera informację o cudzych pragnieniach, ale jego zdolność do ich wspólnego zmetabolizowania w zmianę funkcji celu uległa zablokowaniu."
+      },
+      "Ashby Variety Agent": {
+        "model_name": "Ashby Law of Requisite Variety",
+        "gap": "Regulator dysponuje znacznie mniejszą różnorodnością niż otoczenie",
+        "positive_feedback_chain": "Rozproszenie mieszkań -> Wzrost kilometrów -> Potrzeby motoryzacyjne -> Brak transportu zbiorowego -> Dalsza infrastruktura drogowa",
+        "epistemic_brake": "Konieczność zatrzymania automatycznej optymalizacji funkcji celu (Anti-Autofac)"
+      },
+      "Girardian Mimesis Agent": {
+        "model_name": "Girardian Mimetic Desire Engine",
+        "triangular_model": "Pragnienie zapośredniczone przez model (reklama, algorytm, sąsiad, influencer)",
+        "materialization": "Mimesis materializuje się bezpośrednio w krajobrazie (SUV-y, osiedla, drogi, domki podmiejskie)"
+      },
+      "Debordian Spectacle Agent": {
+        "model_name": "Debordian Spectacle & Genealogy Engine",
+        "illusion": "Spektakl ukrywa genealogię i przedstawia historyczny wynik decyzji jako 'naturalną rzeczywistość'",
+        "counter_task": "Ośrodek etiologicznego słuchania Odbudowuje genealogię sił i wyborów infrastrukturalnych"
+      },
+      "Cybernetic Infrastructure Agent": {
+        "model_name": "Cybernetic Infrastructure & Connected Systems",
+        "platform_node_shift": "Samochód przestaje być narzędziem użytkownika, a staje się uczestnikiem chmurowego systemu ekonomicznego (OTA, abonamenty, ECU)"
+      },
+      "Anomaly Collector Agent": {
+        "model_name": "Anomaly Collector Engine",
+        "exact_statistics": [
+          "Saint-Saturnin: 544 mieszkających pracujących, 462 poza gminą, 89.6% samochód, 0.7% transport zbiorowy",
+          "Cerema/LAET: średni dystans samochodowy >32 km/dzień, czas w aucie wzrósł do 45-47 min/dzień",
+          "Młodzież: 58% brak energii, 44% trudności koncentracji",
+          "Haute-Garonne / Puy-de-Dôme: zamykanie oddziałów z braku lekarzy i psychiatrów"
+        ]
+      }
+    },
+    "voices_identified": {
+      "Engine / Infrastructure": "A75 Corridor, Mond'Arverne mobility plan, rural road network, commuting requirements (18.6km avg)",
+      "Market / Platform": "Paywalled subscriptions (BMW seat heating), OTA software updates, dynamic pricing, SaaS vehicles",
+      "Mimesis / Advertising": "Desire for suburban housing & SUV lifestyle, copied consumption models, mimetic rivalry",
+      "Algorithm / Cloud": "Objective function optimization (throughput, engagement, connectivity, speed)",
+      "Metabolic Strain": "Psychiatric overburden, closed emergency units (Haute-Garonne, Puy-de-Dôme), anhedonia, fatigue (58%)",
+      "Anomalies / Counter-signals": "Local mobility demand in Mond'Arverne, user pushback against vehicle subscriptions, ecological drought at Aire de la Guye"
+    },
+    "anti_autofac_meta_regulator": {
+      "meta_pipeline": "Goal -> Optimization -> Observation -> Value Assessment -> Goal Revision (Meta-Metabolism)",
+      "metric_vs_goal_confusions": [
+        "Confusing 'number of kilometers driven / road throughput' with 'spatial autonomy and life quality'",
+        "Confusing 'number of medical consultations / consultation speed' with 'population mental health'",
+        "Confusing 'data transmission volume & connectedness' with 'richness of information metabolism'"
+      ],
+      "epistemic_brake_status": "ENGAGED",
+      "epistemic_brake_reasons": [
+        "Second-order side effects (spatial fragmentation, medical deserts, anhedonia) outweigh primary optimization gains.",
+        "Goal functions were inherited from historical infrastructure choices rather than chosen by inhabitants.",
+        "Siloed specialists lack a shared cockpit / meta-metabolism."
+      ],
+      "meta_goal_revision_proposal": "Shift primary target function from maximizing throughput/mobility to maximizing local information metabolism capacity, spatial autonomy, and ecological feedback resolution."
+    },
+    "summary_conclusion": "The system is not a ship of fools, but a ship of specialists without a shared cockpit. The Etiological Listening Center reconstructs the genealogy of forces and applies an epistemic brake to prevent optimizing in the wrong direction."
+  },
+  "extracted_drift_nodes": [
+    {
+      "id": "Saint-Saturnin",
+      "category": "Spatial Node",
+      "pos": [
+        -180,
+        60,
+        40
+      ],
+      "stats": "2023: 544 workers living in commune, 462 commuting outside. Local jobs: 223. Car dependency: 89.6%, Public Transit: 0.7%",
+      "metabolic_phenomenon": "Spatial separation of living and production; mandatory returning to work system via highway.",
+      "control_source": "Highway Infrastructure & Spatial Planning",
+      "raw_excerpt": "W Saint-Saturnin pierwszy szczegół, który zmienia cały układ kalejdoskopu, jest banalny: 2023: 544 osoby mieszkające tutaj pracują. 462 pracują poza gminą. W samej gminie jest 223 miejsc pracy. Do pracy 89.6% z nich wybiera samochód, 0.7% transport zbiorowy. To oznacza przestrzenne rozdzielenie życia od produkcji."
+    },
+    {
+      "id": "A75 Highway Corridor",
+      "category": "Spatial Node",
+      "pos": [
+        -60,
+        140,
+        -10
+      ],
+      "stats": "Cerema/LAET study: Rural car travel >80% trips, >90% km. Avg daily driving >32km. Driving time increased to 45-47 min daily (2008-2019). Commute dist: 15.5 to 18.6km.",
+      "metabolic_phenomenon": "Information & labor conduit connecting two sides of same life organization.",
+      "control_source": "Positive feedback loop: Housing sprawl <-> Road expansion <-> Car dependency",
+      "raw_excerpt": "Szum A75 nie jest granicą pomiędzy cywilizacją i naturą. Jest kanałem łączącym dwie części tej samej organizacji życia. Cerema: średni dystans samochodowy przekracza 32 km dziennie na osobę, a czas w samochodzie na terenach wiejskich wzrósł do 45-47 minut dziennie."
+    },
+    {
+      "id": "Montceau-les-Mines",
+      "category": "Spatial Node",
+      "pos": [
+        120,
+        40,
+        -80
+      ],
+      "stats": "Post-industrial mining basin & memory node transition point",
+      "metabolic_phenomenon": "Deindustrialization memory shifting into automated regional logistics and digital platform management.",
+      "control_source": "Historical industrial trajectory & regional restructuring",
+      "raw_excerpt": "Montceau-les-Mines -> dalej: 'Metabolizm informacyjny statku szaleńców'. Kępiński pozwala przesunąć pytanie z 'co system robi?' na 'jak system metabolizuje informację o tym, co robi?'"
+    },
+    {
+      "id": "Belfort-Lure Drift",
+      "category": "Spatial Node",
+      "pos": [
+        200,
+        -30,
+        -20
+      ],
+      "stats": "Eastern France industrial/rural nexus corridor",
+      "metabolic_phenomenon": "Intersection of industrial decay, rural commuting, and technological dependence.",
+      "control_source": "Regional logistics and industrial infrastructure",
+      "raw_excerpt": "Stwórz dryft Belfort Lure: Wyobraź sobie człowieka na schodach wiejskiego domu. Do jego układu nerwowego w ciągu kilku minut wchodzi: wojna, reklama, seks, katastrofa klimatyczna, polityk, bitcoin..."
+    },
+    {
+      "id": "Aire de la Guye",
+      "category": "Spatial Node",
+      "pos": [
+        40,
+        160,
+        -40
+      ],
+      "stats": "Highway service area & ecological anomaly observation point",
+      "metabolic_phenomenon": "Drought & environmental stress triggering feedback correction loops.",
+      "control_source": "Climatic & ecological constraints",
+      "raw_excerpt": "Aire de la Guye: susza -> korekta. Szukaj miejsc, w których system dowiaduje się czegoś o sobie."
+    },
+    {
+      "id": "Connected Car / Platform",
+      "category": "Cybernetic / Platform Node",
+      "pos": [
+        -100,
+        -120,
+        80
+      ],
+      "stats": "BMW heated seat subscription pushback, OTA firmware updates, paywalled ECU functions",
+      "metabolic_phenomenon": "Vehicle shifts from human tool to active node in cloud revenue platform.",
+      "control_source": "Cloud Platforms & Digital Monopolies",
+      "raw_excerpt": "BMW próbowało sprzedawać w modelu subskrypcyjnym podgrzewanie siedzeń. W którym momencie samochód przestaje być narzędziem użytkownika, a staje się uczestnikiem systemu?"
+    },
+    {
+      "id": "Psychiatric & Medical Deserts",
+      "category": "Metabolic / Healthcare Strain Node",
+      "stats": "Haute-Garonne & Puy-de-Dôme IGAS report: Emergency units closed due to doctor shortages",
+      "metabolic_phenomenon": "Loss of societal metabolic resolution; inability to diagnose/process systemic stress.",
+      "control_source": "Resource allocation & administrative silos",
+      "raw_excerpt": "Raport IGAS dotyczący Haute-Garonne dokumentował sytuacje, w których brakowało lekarzy. W tym miejscu 'brak psychiatry' okazuje się problemem cybernetycznym - spada rozdzielczość społecznego postrzegania."
+    },
+    {
+      "id": "Youth / Counterculture Inertia",
+      "category": "Social / Mimetic Node",
+      "pos": [
+        160,
+        -80,
+        100
+      ],
+      "stats": "Youth symptoms: 58% lack of energy, 44% concentration difficulty",
+      "metabolic_phenomenon": "Energy captured by digital platforms; absence of physical counter-cultural density.",
+      "control_source": "Attention economy & mimetic digital media",
+      "raw_excerpt": "Najczęściej zgłaszanymi objawami są brak energii (58%) i trudności koncentracji (44%). Energii nie brakuje w ogóle, ale trafia w kanały platform cyfrowych zamiast tworzyć fizyczną kontrkulturę."
+    }
+  ],
+  "extracted_feedback_edges": [
+    [
+      "Saint-Saturnin",
+      "A75 Highway Corridor",
+      {
+        "label": "Feeds 89.6% commuters into"
+      }
+    ],
+    [
+      "A75 Highway Corridor",
+      "Connected Car / Platform",
+      {
+        "label": "Requires automated/connected transit"
+      }
+    ],
+    [
+      "Connected Car / Platform",
+      "Youth / Counterculture Inertia",
+      {
+        "label": "Extracts attention & subscription capital"
+      }
+    ],
+    [
+      "Psychiatric & Medical Deserts",
+      "Saint-Saturnin",
+      {
+        "label": "Reduces regional metabolic support"
+      }
+    ],
+    [
+      "Montceau-les-Mines",
+      "Belfort-Lure Drift",
+      {
+        "label": "Historical industrial continuum"
+      }
+    ],
+    [
+      "Aire de la Guye",
+      "A75 Highway Corridor",
+      {
+        "label": "Ecological anomaly checkpoint"
+      }
+    ],
+    [
+      "Youth / Counterculture Inertia",
+      "Psychiatric & Medical Deserts",
+      {
+        "label": "Signals burnout & fatigue"
+      }
+    ]
+  ],
+  "completed_missing_feedback_loops": [
+    {
+      "loop_name": "Spatial Dispersion Feedback",
+      "description": "Housing dispersion -> Distance increase -> Car requirement -> Public transit deficit -> Highway expansion justification -> Further housing dispersion."
+    },
+    {
+      "loop_name": "Attention & Metabolic Exhaustion Feedback",
+      "description": "Digital stimulus overload -> Decreased metabolic value-integration -> Increased exhaustion/anhedonia -> Reliance on automated platforms -> Medical desert incapacity to diagnose."
+    },
+    {
+      "loop_name": "Anti-Autofac Epistemic Brake",
+      "description": "Goal Optimization -> Observation -> Value Assessment -> Epistemic Brake -> Target Function Revision."
+    }
+  ]
+}
