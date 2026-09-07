@@ -10,9 +10,11 @@ import numpy as np
 from drifting_logs.tools.quantization_engine import (
     ParameterQuantizer, SpatialGrain, SpatialGranulationEngine,
     RelationalQuantizer, DecisionQuantizer, QuantizedPsychogeographicalPipeline,
-    RelationType
+    RelationType, compose_discrete_relations, compose_relation_matrices,
+    OntologicalDomainMapper, OntologicalDomainType
 )
 from drifting_logs.tools.algebraic_model_transformer import AlgebraicModelTransformer
+from drifting_logs.tools.algebraic_geometry import AlgebraicVarietySystem
 from drifting_logs.tools.prolog_engine import PrologAxiomProgram
 
 
@@ -90,6 +92,18 @@ class TestRelationalQuantizer(unittest.TestCase):
         self.assertEqual(rel_neutral, RelationType.NEUTRAL)
         self.assertEqual(rel_barrier, RelationType.BARRIER)
 
+    def test_transitive_relation_matrix_composition(self):
+        # 2 ⊙ 1 = 1, 2 ⊙ -2 = -2, 0 ⊙ 2 = 0
+        self.assertEqual(compose_discrete_relations(2, 1), 1)
+        self.assertEqual(compose_discrete_relations(2, -2), -2)
+        self.assertEqual(compose_discrete_relations(0, 2), 0)
+
+        mat_a = np.array([[2, 0], [1, -2]])
+        mat_b = np.array([[1, -1], [0, 2]])
+        composed = compose_relation_matrices(mat_a, mat_b)
+        self.assertEqual(composed.shape, (2, 2))
+        self.assertEqual(composed[0, 0], 1)
+
 
 class TestDecisionQuantizer(unittest.TestCase):
     def setUp(self):
@@ -114,6 +128,34 @@ class TestDecisionQuantizer(unittest.TestCase):
         for step_info in traj:
             self.assertIn("decision_D", step_info)
             self.assertIn("jump_occurred", step_info)
+
+    def test_order_dependence_hysteresis(self):
+        order_res = self.quantizer.evaluate_order_dependence(val_a=2.8, val_b=1.8)
+        self.assertIn("is_non_commutative", order_res)
+        self.assertIn("hysteresis_memory_effect", order_res)
+
+
+class TestOntologicalDomainMapping(unittest.TestCase):
+    def test_domain_mapping(self):
+        mapper = OntologicalDomainMapper()
+        gdp_mapped = mapper.map_variable(OntologicalDomainType.GDP, 45000)
+        temp_mapped = mapper.map_variable(OntologicalDomainType.TEMPERATURE, 22.0)
+
+        self.assertEqual(gdp_mapped["domain"], "GDP")
+        self.assertEqual(gdp_mapped["spatial_scale"], "country")
+        self.assertGreater(gdp_mapped["quantized_domain_class"], 0)
+
+        self.assertEqual(temp_mapped["domain"], "TEMPERATURE")
+        self.assertEqual(temp_mapped["spatial_scale"], "field_point")
+
+
+class TestAlgebraicGeometryQuotientScheme(unittest.TestCase):
+    def test_quantized_quotient_scheme(self):
+        system = AlgebraicVarietySystem()
+        quotient_res = system.compute_quantized_quotient_scheme()
+        self.assertIn("quantum_polynomial_constraint", quotient_res)
+        self.assertIn("quantized_groebner_basis", quotient_res)
+        self.assertGreater(len(quotient_res["quantized_groebner_basis"]), 0)
 
 
 class TestPipelineAndIntegration(unittest.TestCase):

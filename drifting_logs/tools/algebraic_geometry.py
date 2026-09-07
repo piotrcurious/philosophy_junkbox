@@ -70,6 +70,27 @@ class AlgebraicVarietySystem:
             "affine_ambient_dimension": 4
         }
 
+    def compute_quantized_quotient_scheme(self, quantum_levels: List[float] = [0.0, 1.0, 2.0, 3.0, 4.0]) -> Dict[str, Any]:
+        """
+        Computes quantized coordinate ring quotient ideal C^4 / I_Q by imposing
+        the discrete quantum polynomial constraint P_Q(z) = prod_k (z - q_k) = 0.
+        """
+        q_poly = 1
+        for q_val in quantum_levels:
+            q_poly *= (z - sp.Rational(round(q_val, 2)))
+        q_poly = sp.expand(q_poly)
+
+        base_gens = self.get_ideal_generators()
+        quantized_gens = base_gens + [q_poly]
+        gb_quantized = sp.groebner(quantized_gens, x, y, z, w, order='lex')
+
+        return {
+            "quantum_polynomial_constraint": str(q_poly),
+            "base_generator_count": len(base_gens),
+            "quantized_generator_count": len(quantized_gens),
+            "quantized_groebner_basis": [str(g) for g in gb_quantized]
+        }
+
 if __name__ == "__main__":
     system = AlgebraicVarietySystem(M=1.5+0.8j, V=2.2-0.5j, mu=0.7+1.1j, Sigma=1.2+0.4j)
     print("Complex Ideal Generators:", system.get_ideal_generators())

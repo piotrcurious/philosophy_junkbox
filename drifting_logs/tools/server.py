@@ -226,6 +226,29 @@ class PsychogeographicalServer(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps(scale_res).encode())
             return
 
+        if self.path == '/api/evaluate_order_dependence':
+            val_a = float(req_data.get('val_a', 2.8))
+            val_b = float(req_data.get('val_b', 1.8))
+            order_res = transformer_engine.quantized_pipeline.decision_quantizer.evaluate_order_dependence(val_a, val_b)
+            self._set_headers(200)
+            self.wfile.write(json.dumps(order_res).encode())
+            return
+
+        if self.path == '/api/ontological_domain_map':
+            from drifting_logs.tools.quantization_engine import OntologicalDomainType
+            domain_str = req_data.get('domain', 'GDP')
+            raw_val = float(req_data.get('raw_value', 35000.0))
+
+            try:
+                domain_type = OntologicalDomainType[domain_str.upper()]
+            except KeyError:
+                domain_type = OntologicalDomainType.GDP
+
+            mapped = transformer_engine.quantized_pipeline.domain_mapper.map_variable(domain_type, raw_val)
+            self._set_headers(200)
+            self.wfile.write(json.dumps(mapped).encode())
+            return
+
         self._set_headers(404)
         self.wfile.write(json.dumps({"error": "Post Endpoint not found"}).encode())
 
