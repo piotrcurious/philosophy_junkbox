@@ -198,6 +198,15 @@ def build_psychogeographical_kb() -> KnowledgeBase:
     kb.assertz(Term("quantized_cost_threshold", [Term("2"), Term("7.0")]))
     kb.assertz(Term("quantized_cost_threshold", [Term("3"), Term("15.0")]))
 
+    # Transitive Quantized Relation Composition Facts & Rules
+    kb.assertz(Term("transitive_relation", [Term("saint_saturnin"), Term("connected_car"), Term("ATTRACTIVE")]))
+    kb.assertz(Term("transitive_relation", [Term("a75_corridor"), Term("youth_inertia"), Term("REPULSIVE")]))
+
+    # Ontological Domain Mapping Rules
+    kb.assertz(Term("ontological_domain", [Term("gdp"), Term("macroeconomic"), Term("country")]))
+    kb.assertz(Term("ontological_domain", [Term("temperature"), Term("physical_field"), Term("grid_point")]))
+    kb.assertz(Term("ontological_domain", [Term("flow"), Term("directed_pair"), Term("graph_edge")]))
+
     # Rules
     kb.assertz(Rule(
         Term("entropic_corridor", [Term("X"), Term("Z")]),

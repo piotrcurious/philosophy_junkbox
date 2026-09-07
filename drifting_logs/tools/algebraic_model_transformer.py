@@ -140,6 +140,7 @@ class AlgebraicModelTransformer:
         ideal_gens = [str(g) for g in variety_sys.get_ideal_generators()]
         groebner_basis = [str(g) for g in variety_sys.compute_grobner_basis()]
         variety_dim = variety_sys.compute_variety_dimension()
+        quantized_quotient = variety_sys.compute_quantized_quotient_scheme()
 
         # 3. Prolog Relational Logic Querying
         prolog_traps = self.prolog_program.kb.query(Term("systemic_trap", [Term("X"), Term("W")]))
@@ -209,7 +210,8 @@ class AlgebraicModelTransformer:
                 "variety_dimension": variety_dim,
                 "hermitian_metric_h": metric_info["hermitian_metric_h"],
                 "holomorphic_ricci_curvature": metric_info["holomorphic_ricci_curvature"],
-                "critical_points": metric_info["critical_points"]
+                "critical_points": metric_info["critical_points"],
+                "quantized_quotient_scheme": quantized_quotient
             },
             "prolog_deductions": {
                 "systemic_traps": prolog_traps,
