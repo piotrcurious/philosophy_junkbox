@@ -14,11 +14,15 @@ from drifting_logs.tools.statistical_geometry import StatisticalGeometryEngine
 from drifting_logs.tools.complex_axioms import ComplexAxiomField
 from drifting_logs.tools.prolog_engine import PrologAxiomProgram, Term
 from drifting_logs.tools.kepinski_neuropsychiatry import LocalizedNodeNeuropsychiatry
+from drifting_logs.tools.quantization_engine import (
+    QuantizedPsychogeographicalPipeline, RelationalQuantizer, DecisionQuantizer, ParameterQuantizer
+)
 
 class DirectedRelationalFlowEngine:
     """
     Calculates directed flow flux Q_ij, path metabolic dissipation D_ij, and edge capacity limits
-    between psychogeographical nodes driven by complex axiom fields and node metabolic potentials.
+    between psychogeographical nodes driven by complex axiom fields and node metabolic potentials
+    with Level II & III Quantized Interaction Functions and Level IV Decision Automata.
     """
     def __init__(self):
         self.edges = [
@@ -29,6 +33,8 @@ class DirectedRelationalFlowEngine:
             ("Montceau-les-Mines", "Belfort-Lure Belt", 10.0),
             ("Aire de la Guye", "A75 Highway Corridor", 9.5)
         ]
+        self.relational_quantizer = RelationalQuantizer()
+        self.decision_quantizer = DecisionQuantizer()
 
     def compute_relational_flows(
         self,
@@ -49,9 +55,21 @@ class DirectedRelationalFlowEngine:
             # Potential gradient delta_Phi = src_entropy - tgt_entropy
             delta_phi = src_entropy - tgt_entropy
 
-            # Flux Q_ij = (base_cap * flow_acceleration / global_impedance) * (1 + |M| * tanh(delta_phi))
+            # Compute Level II & III Quantized Relation R_ij
+            src_attr = 1.5 if "Saint" in src or "A75" in src else 0.8
+            tgt_attr = 1.2 if "Car" in tgt or "Desert" in tgt else 0.9
+            rel_info = self.relational_quantizer.compute_quantized_edge_relation(
+                {"attraction": src_attr}, {"attraction": tgt_attr}, base_cap
+            )
+
+            # Level IV Decision Quantization D_ij
+            utility = 3.0 - rel_info["quantized_cost_class"] + rel_info["relation_numeric"] + delta_phi
+            decision_D = self.decision_quantizer.quantize_decision(utility)
+
+            # Flux Q_ij modulated by quantized probability p_ij and decision choice D_ij
             phase_mod = math.cos(cmath.phase(M + V))
-            q_ij = (base_cap * flow_acceleration / max(0.1, global_impedance)) * (1.0 + abs(M) * 0.3 * np.tanh(delta_phi) + 0.2 * phase_mod)
+            p_ij = rel_info["quantized_probability"]
+            q_ij = (base_cap * flow_acceleration / max(0.1, global_impedance)) * (1.0 + abs(M) * 0.3 * p_ij + 0.2 * phase_mod)
             q_ij = max(0.1, round(float(q_ij), 3))
 
             # Dissipation D_ij = q_ij^2 * global_impedance / max(0.1, base_cap)
@@ -66,7 +84,12 @@ class DirectedRelationalFlowEngine:
                 "flow_flux_Q": q_ij,
                 "path_dissipation_D": dissipation,
                 "is_bottleneck": is_bottleneck,
-                "particle_speed": round(float(q_ij / 5.0), 3)
+                "particle_speed": round(float(q_ij / 5.0), 3),
+                "quantized_cost_class": rel_info["quantized_cost_class"],
+                "relation_type": rel_info["relation_type"],
+                "relation_numeric": rel_info["relation_numeric"],
+                "quantized_probability": p_ij,
+                "decision_choice_D": decision_D
             })
         return flows
 
@@ -75,6 +98,7 @@ class AlgebraicModelTransformer:
         self.stats_engine = StatisticalGeometryEngine()
         self.prolog_program = PrologAxiomProgram()
         self.flow_engine = DirectedRelationalFlowEngine()
+        self.quantized_pipeline = QuantizedPsychogeographicalPipeline()
         self.node_neuropsychiatry: Dict[str, LocalizedNodeNeuropsychiatry] = {}
 
     def get_or_create_node_neuropsychiatry(self, node_id: str) -> LocalizedNodeNeuropsychiatry:
@@ -167,6 +191,10 @@ class AlgebraicModelTransformer:
             node_evaluations, M, V, flow_acceleration, global_impedance
         )
 
+        # 6. Quantized Psychogeographical 4-Level Pipeline Processing
+        raw_edges_tuples = [(e["source"], e["target"], e["base_capacity"]) for e in relational_flows]
+        quantized_res = self.quantized_pipeline.process_pipeline(rebuilt_nodes, raw_edges_tuples)
+
         return {
             "complex_axioms": {
                 "M": {"real": M.real, "imag": M.imag, "magnitude": abs(M), "phase_rad": cmath.phase(M)},
@@ -191,7 +219,8 @@ class AlgebraicModelTransformer:
             },
             "rebuilt_nodes": rebuilt_nodes,
             "node_evaluations": node_evaluations,
-            "relational_flows": relational_flows
+            "relational_flows": relational_flows,
+            "quantized_psychogeography": quantized_res
         }
 
 if __name__ == "__main__":

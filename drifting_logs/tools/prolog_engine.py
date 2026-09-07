@@ -186,6 +186,18 @@ def build_psychogeographical_kb() -> KnowledgeBase:
     kb.assertz(Term("linked", [Term("connected_car"), Term("youth_inertia")]))
     kb.assertz(Term("linked", [Term("youth_inertia"), Term("medical_desert")]))
 
+    # Quantized Relation Classes and Cost Thresholds
+    kb.assertz(Term("relation_class", [Term("saint_saturnin"), Term("a75_corridor"), Term("STRONGLY_ATTRACTIVE")]))
+    kb.assertz(Term("relation_class", [Term("a75_corridor"), Term("connected_car"), Term("ATTRACTIVE")]))
+    kb.assertz(Term("relation_class", [Term("connected_car"), Term("youth_inertia"), Term("REPULSIVE")]))
+    kb.assertz(Term("relation_class", [Term("youth_inertia"), Term("medical_desert"), Term("BARRIER")]))
+    kb.assertz(Term("relation_class", [Term("aire_de_la_guye"), Term("a75_corridor"), Term("NEUTRAL")]))
+
+    kb.assertz(Term("quantized_cost_threshold", [Term("0"), Term("1.0")]))
+    kb.assertz(Term("quantized_cost_threshold", [Term("1"), Term("3.0")]))
+    kb.assertz(Term("quantized_cost_threshold", [Term("2"), Term("7.0")]))
+    kb.assertz(Term("quantized_cost_threshold", [Term("3"), Term("15.0")]))
+
     # Rules
     kb.assertz(Rule(
         Term("entropic_corridor", [Term("X"), Term("Z")]),
@@ -231,6 +243,16 @@ def build_psychogeographical_kb() -> KnowledgeBase:
             Term("systemic_trap", [Term("X"), Term("Y")]),
             Term("not", [Term("autonomous_counter_signal", [Term("X"), Term("Y")])])
         ]
+    ))
+
+    # Psychogeographical Phase Boundary Rule (NEUTRAL or BARRIER relation transition)
+    kb.assertz(Rule(
+        Term("psychogeographical_boundary", [Term("X"), Term("Y")]),
+        [Term("relation_class", [Term("X"), Term("Y"), Term("NEUTRAL")])]
+    ))
+    kb.assertz(Rule(
+        Term("psychogeographical_boundary", [Term("X"), Term("Y")]),
+        [Term("relation_class", [Term("X"), Term("Y"), Term("BARRIER")])]
     ))
 
     return kb
