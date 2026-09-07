@@ -7,43 +7,121 @@
     "agent_perspectives": {
       "Kępiński Metabolism Agent": {
         "model_name": "Kępiński Information Metabolism Engine",
-        "full_context_length": 119517,
-        "metabolic_state": "Entropic information overload without structural integration capacity",
-        "verbatim_concepts": [
-          "Człowiek jako układ otwarty wymieniający z otoczeniem energię i informację",
-          "Metabolizm informacyjny przestrzeni: wymiana bodźców i tworzenie porządku",
-          "Patologia przeciążenia: nadmiar sygnałów medialnych i platformowych przy ubóstwie struktur wartościowania"
-        ],
-        "diagnostic": "System nieustannie pobiera informację o cudzych pragnieniach, ale jego zdolność do ich wspólnego zmetabolizowania w zmianę funkcji celu uległa zablokowaniu."
+        "personality_profile": {
+          "openness": 0.9,
+          "conscientiousness": 0.7,
+          "extraversion": 0.5,
+          "agreeableness": 0.4,
+          "neuroticism": 0.8,
+          "confirmation_bias": 0.3,
+          "sunk_cost_fallacy": 0.4,
+          "availability_heuristic": 0.5,
+          "optimism_bias": 0.3
+        },
+        "quantitative_metrics": {
+          "raw_stimulus_density": 154,
+          "weighted_stimulus_density": 238.7,
+          "weighted_structural_capacity": 102.48,
+          "entropy_rate_H": 2.329,
+          "metabolic_deficit_index": 0.7
+        },
+        "diagnostic": "Metabolic Entropy H=2.329 (Neuroticism factor: 0.8). Higher strain sensitivity accelerates perceived informational collapse."
       },
       "Ashby Variety Agent": {
         "model_name": "Ashby Law of Requisite Variety",
-        "gap": "Regulator dysponuje znacznie mniejszą różnorodnością niż otoczenie",
-        "positive_feedback_chain": "Rozproszenie mieszkań -> Wzrost kilometrów -> Potrzeby motoryzacyjne -> Brak transportu zbiorowego -> Dalsza infrastruktura drogowa",
-        "epistemic_brake": "Konieczność zatrzymania automatycznej optymalizacji funkcji celu (Anti-Autofac)"
+        "personality_profile": {
+          "openness": 0.7,
+          "conscientiousness": 0.9,
+          "extraversion": 0.5,
+          "agreeableness": 0.4,
+          "neuroticism": 0.6,
+          "confirmation_bias": 0.3,
+          "sunk_cost_fallacy": 0.4,
+          "availability_heuristic": 0.5,
+          "optimism_bias": 0.3
+        },
+        "quantitative_metrics": {
+          "environment_variety_V_env": 125.44,
+          "regulator_variety_V_reg": 44.0,
+          "requisite_variety_ratio": 2.851
+        },
+        "gap": "Variety gap ratio=2.851. Conscientiousness & Sunk Cost bias modulate regulator adaptability."
       },
       "Girardian Mimesis Agent": {
         "model_name": "Girardian Mimetic Desire Engine",
-        "triangular_model": "Pragnienie zapośredniczone przez model (reklama, algorytm, sąsiad, influencer)",
-        "materialization": "Mimesis materializuje się bezpośrednio w krajobrazie (SUV-y, osiedla, drogi, domki podmiejskie)"
+        "personality_profile": {
+          "openness": 0.8,
+          "conscientiousness": 0.7,
+          "extraversion": 0.8,
+          "agreeableness": 0.7,
+          "neuroticism": 0.6,
+          "confirmation_bias": 0.3,
+          "sunk_cost_fallacy": 0.4,
+          "availability_heuristic": 0.5,
+          "optimism_bias": 0.3
+        },
+        "quantitative_metrics": {
+          "raw_triggers": 107,
+          "mimetic_coupling_index": 5.243
+        },
+        "diagnostic": "Mimetic index=5.243. Extraversion (0.8) amplifies social signal propagation."
       },
       "Debordian Spectacle Agent": {
-        "model_name": "Debordian Spectacle & Genealogy Engine",
-        "illusion": "Spektakl ukrywa genealogię i przedstawia historyczny wynik decyzji jako 'naturalną rzeczywistość'",
-        "counter_task": "Ośrodek etiologicznego słuchania Odbudowuje genealogię sił i wyborów infrastrukturalnych"
+        "model_name": "Debordian Spectacle Engine",
+        "personality_profile": {
+          "openness": 0.95,
+          "conscientiousness": 0.7,
+          "extraversion": 0.5,
+          "agreeableness": 0.2,
+          "neuroticism": 0.6,
+          "confirmation_bias": 0.3,
+          "sunk_cost_fallacy": 0.4,
+          "availability_heuristic": 0.5,
+          "optimism_bias": 0.3
+        },
+        "quantitative_metrics": {
+          "spectacle_density": 24,
+          "spectacle_alienation_index": 0.817
+        },
+        "diagnostic": "Spectacle Alienation=0.817. Openness (0.95) unveils historical genealogy."
       },
       "Cybernetic Infrastructure Agent": {
-        "model_name": "Cybernetic Infrastructure & Connected Systems",
-        "platform_node_shift": "Samochód przestaje być narzędziem użytkownika, a staje się uczestnikiem chmurowego systemu ekonomicznego (OTA, abonamenty, ECU)"
+        "model_name": "Cybernetic Infrastructure Engine",
+        "personality_profile": {
+          "openness": 0.8,
+          "conscientiousness": 0.85,
+          "extraversion": 0.5,
+          "agreeableness": 0.4,
+          "neuroticism": 0.6,
+          "confirmation_bias": 0.3,
+          "sunk_cost_fallacy": 0.4,
+          "availability_heuristic": 0.5,
+          "optimism_bias": 0.3
+        },
+        "quantitative_metrics": {
+          "commute_avg_km": 18.6,
+          "car_dependency_pct": 89.6,
+          "public_transit_pct": 0.7
+        }
       },
       "Anomaly Collector Agent": {
         "model_name": "Anomaly Collector Engine",
-        "exact_statistics": [
-          "Saint-Saturnin: 544 mieszkających pracujących, 462 poza gminą, 89.6% samochód, 0.7% transport zbiorowy",
-          "Cerema/LAET: średni dystans samochodowy >32 km/dzień, czas w aucie wzrósł do 45-47 min/dzień",
-          "Młodzież: 58% brak energii, 44% trudności koncentracji",
-          "Haute-Garonne / Puy-de-Dôme: zamykanie oddziałów z braku lekarzy i psychiatrów"
-        ]
+        "personality_profile": {
+          "openness": 0.85,
+          "conscientiousness": 0.7,
+          "extraversion": 0.5,
+          "agreeableness": 0.4,
+          "neuroticism": 0.5,
+          "confirmation_bias": 0.3,
+          "sunk_cost_fallacy": 0.4,
+          "availability_heuristic": 0.5,
+          "optimism_bias": 0.3
+        },
+        "quantitative_metrics": {
+          "youth_burnout_energy_lack_pct": 58.0,
+          "youth_concentration_difficulty_pct": 44.0,
+          "rural_daily_car_driving_min": 47.0
+        }
       }
     },
     "voices_identified": {
@@ -223,6 +301,155 @@
       }
     ]
   ],
+  "quantized_psychogeography": {
+    "spatial_grains_count": 8,
+    "quantized_edges": [
+      {
+        "source": "Saint-Saturnin",
+        "target": "A75 Highway Corridor",
+        "raw_cost": 12.5,
+        "quantized_cost_class": 3,
+        "relation_type": "BARRIER",
+        "relation_numeric": -2,
+        "quantized_probability": 0.0498,
+        "decision_choice_D": 0
+      },
+      {
+        "source": "A75 Highway Corridor",
+        "target": "Connected Car / Platform",
+        "raw_cost": 18.0,
+        "quantized_cost_class": 4,
+        "relation_type": "BARRIER",
+        "relation_numeric": -2,
+        "quantized_probability": 0.0183,
+        "decision_choice_D": 0
+      },
+      {
+        "source": "Connected Car / Platform",
+        "target": "Youth / Counterculture Inertia",
+        "raw_cost": 14.2,
+        "quantized_cost_class": 3,
+        "relation_type": "BARRIER",
+        "relation_numeric": -2,
+        "quantized_probability": 0.0498,
+        "decision_choice_D": 0
+      },
+      {
+        "source": "Psychiatric & Medical Deserts",
+        "target": "Saint-Saturnin",
+        "raw_cost": 8.4,
+        "quantized_cost_class": 3,
+        "relation_type": "BARRIER",
+        "relation_numeric": -2,
+        "quantized_probability": 0.0498,
+        "decision_choice_D": 0
+      },
+      {
+        "source": "Montceau-les-Mines",
+        "target": "Belfort-Lure Drift",
+        "raw_cost": 10.0,
+        "quantized_cost_class": 3,
+        "relation_type": "BARRIER",
+        "relation_numeric": -2,
+        "quantized_probability": 0.0498,
+        "decision_choice_D": 0
+      },
+      {
+        "source": "Aire de la Guye",
+        "target": "A75 Highway Corridor",
+        "raw_cost": 9.5,
+        "quantized_cost_class": 3,
+        "relation_type": "BARRIER",
+        "relation_numeric": -2,
+        "quantized_probability": 0.0498,
+        "decision_choice_D": 0
+      },
+      {
+        "source": "Youth / Counterculture Inertia",
+        "target": "Psychiatric & Medical Deserts",
+        "raw_cost": 11.0,
+        "quantized_cost_class": 3,
+        "relation_type": "BARRIER",
+        "relation_numeric": -2,
+        "quantized_probability": 0.0498,
+        "decision_choice_D": 0
+      }
+    ],
+    "psychogeographical_boundaries": [],
+    "emergent_psychogeographical_fields": {
+      "Saint-Saturnin": {
+        "Psi_emergent_field": -2.5,
+        "incident_edge_count": 2,
+        "avg_quantized_relation": -2.0
+      },
+      "A75 Highway Corridor": {
+        "Psi_emergent_field": -2.5,
+        "incident_edge_count": 3,
+        "avg_quantized_relation": -2.0
+      },
+      "Montceau-les-Mines": {
+        "Psi_emergent_field": -2.5,
+        "incident_edge_count": 1,
+        "avg_quantized_relation": -2.0
+      },
+      "Belfort-Lure Drift": {
+        "Psi_emergent_field": -2.5,
+        "incident_edge_count": 1,
+        "avg_quantized_relation": -2.0
+      },
+      "Aire de la Guye": {
+        "Psi_emergent_field": -2.5,
+        "incident_edge_count": 1,
+        "avg_quantized_relation": -2.0
+      },
+      "Connected Car / Platform": {
+        "Psi_emergent_field": -2.5,
+        "incident_edge_count": 2,
+        "avg_quantized_relation": -2.0
+      },
+      "Psychiatric & Medical Deserts": {
+        "Psi_emergent_field": -2.5,
+        "incident_edge_count": 2,
+        "avg_quantized_relation": -2.0
+      },
+      "Youth / Counterculture Inertia": {
+        "Psi_emergent_field": -2.5,
+        "incident_edge_count": 2,
+        "avg_quantized_relation": -2.0
+      }
+    },
+    "scale_dependency_analysis": {
+      "critical_scale_dx_star": 10.0,
+      "max_conflict_visibility": 3.95,
+      "scale_curve": [
+        {
+          "scale_dx": 1.0,
+          "conflict_visibility": 0.0,
+          "active_groups": 0
+        },
+        {
+          "scale_dx": 5.0,
+          "conflict_visibility": 0.0,
+          "active_groups": 0
+        },
+        {
+          "scale_dx": 10.0,
+          "conflict_visibility": 3.95,
+          "active_groups": 2
+        },
+        {
+          "scale_dx": 15.0,
+          "conflict_visibility": 3.4333,
+          "active_groups": 6
+        },
+        {
+          "scale_dx": 20.0,
+          "conflict_visibility": 2.5429,
+          "active_groups": 7
+        }
+      ]
+    }
+  },
   "completed_missing_feedback_loops": [
     {
       "loop_name": "Spatial Dispersion Feedback",

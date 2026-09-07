@@ -11,9 +11,11 @@ import networkx as nx
 try:
     from drifting_logs.tools.etiological_listening_center import EtiologicalListeningCenter
     from drifting_logs.tools.epistemic_agents import load_all_logs_text
+    from drifting_logs.tools.quantization_engine import QuantizedPsychogeographicalPipeline
 except ImportError:
     from etiological_listening_center import EtiologicalListeningCenter
     from epistemic_agents import load_all_logs_text
+    from quantization_engine import QuantizedPsychogeographicalPipeline
 
 def extract_drift_data():
     """
@@ -150,12 +152,26 @@ def build_multidimensional_map():
     plt.savefig(map_img_path, dpi=300, bbox_inches="tight")
     plt.close()
 
+    # Process 4-level quantization pipeline
+    pipeline = QuantizedPsychogeographicalPipeline()
+    sample_edges = [
+        ("Saint-Saturnin", "A75 Highway Corridor", 12.5),
+        ("A75 Highway Corridor", "Connected Car / Platform", 18.0),
+        ("Connected Car / Platform", "Youth / Counterculture Inertia", 14.2),
+        ("Psychiatric & Medical Deserts", "Saint-Saturnin", 8.4),
+        ("Montceau-les-Mines", "Belfort-Lure Drift", 10.0),
+        ("Aire de la Guye", "A75 Highway Corridor", 9.5),
+        ("Youth / Counterculture Inertia", "Psychiatric & Medical Deserts", 11.0)
+    ]
+    quantized_results = pipeline.process_pipeline(nodes, sample_edges)
+
     research_report = {
         "title": "Multidimensional Psychogeographical & Epistemic Map of Drifting Logs",
         "full_text_length": len(full_text),
         "etiological_diagnosis": diagnosis,
         "extracted_drift_nodes": nodes,
         "extracted_feedback_edges": edges,
+        "quantized_psychogeography": quantized_results,
         "completed_missing_feedback_loops": [
             {
                 "loop_name": "Spatial Dispersion Feedback",

@@ -85,6 +85,18 @@ class PsychogeographicalServer(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps(res).encode())
             return
 
+        if self.path == '/api/psychogeographical_boundaries':
+            self._set_headers(200)
+            prolog = transformer_engine.prolog_program
+            boundaries = prolog.parse_and_query_string("psychogeographical_boundary(?X, ?Y)")
+            transformed = transformer_engine.transform_model()
+            q_boundaries = transformed.get("quantized_psychogeography", {}).get("psychogeographical_boundaries", [])
+            self.wfile.write(json.dumps({
+                "prolog_deduced_boundaries": boundaries,
+                "pipeline_quantized_boundaries": q_boundaries
+            }).encode())
+            return
+
         self._set_headers(404)
         self.wfile.write(json.dumps({"error": "Endpoint not found"}).encode())
 
@@ -193,6 +205,25 @@ class PsychogeographicalServer(BaseHTTPRequestHandler):
             res = explorer_engine.execute_exploration_step(step_counter)
             self._set_headers(200)
             self.wfile.write(json.dumps(res).encode())
+            return
+
+        if self.path == '/api/quantized_transform':
+            threshold_c = float(req_data.get('threshold_c', 2.0))
+            transformed = transformer_engine.transform_model()
+            q_res = transformed.get("quantized_psychogeography", {})
+            self._set_headers(200)
+            self.wfile.write(json.dumps(q_res).encode())
+            return
+
+        if self.path == '/api/scale_dependency_analysis':
+            scale_steps = req_data.get('scale_steps', [1.0, 5.0, 10.0, 15.0, 20.0])
+            transformed = transformer_engine.transform_model()
+            edges_tuples = [(e["source"], e["target"], e["base_capacity"]) for e in transformed["relational_flows"]]
+            scale_res = transformer_engine.quantized_pipeline.granulation_engine.analyze_critical_scale(
+                scale_steps=scale_steps, raw_edges=edges_tuples
+            )
+            self._set_headers(200)
+            self.wfile.write(json.dumps(scale_res).encode())
             return
 
         self._set_headers(404)
