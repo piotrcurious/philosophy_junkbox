@@ -245,394 +245,52 @@
   "total_entities_extracted": 13,
   "relational_facts": [
     {
-      "predicate": "relates_to",
-      "subject": "Saint-Saturnin",
-      "object": "A75 Highway Corridor"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Saint-Saturnin",
-      "object": "Mond'Arverne Mobility Area"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Saint-Saturnin",
-      "object": "IGAS Medical Audit"
-    },
-    {
-      "predicate": "depends_on",
-      "subject": "Saint-Saturnin",
-      "object": "Over-The-Air Update ECU"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Saint-Saturnin",
-      "object": "Youth Energy Depletion (58%)"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Saint-Saturnin",
-      "object": "Haute-Garonne Region"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Saint-Saturnin",
-      "object": "Medical & Psychiatric Desert"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Saint-Saturnin",
-      "object": "Belfort-Lure Belt"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Saint-Saturnin",
-      "object": "Lure Zone"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Saint-Saturnin",
-      "object": "Aire de la Guye"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Saint-Saturnin",
-      "object": "Anti-Autofac Meta-Regulator"
-    },
-    {
-      "predicate": "depends_on",
-      "subject": "Saint-Saturnin",
-      "object": "BMW SaaS Platform"
-    },
-    {
-      "predicate": "relates_to",
+      "predicate": "co_occurs_with",
       "subject": "A75 Highway Corridor",
-      "object": "Mond'Arverne Mobility Area"
+      "object": "Mond'Arverne Mobility Area",
+      "co_occurrence_count": 1
     },
     {
-      "predicate": "relates_to",
+      "predicate": "co_occurs_with",
       "subject": "A75 Highway Corridor",
-      "object": "IGAS Medical Audit"
+      "object": "Saint-Saturnin",
+      "co_occurrence_count": 1
     },
     {
-      "predicate": "depends_on",
-      "subject": "A75 Highway Corridor",
-      "object": "Over-The-Air Update ECU"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "A75 Highway Corridor",
-      "object": "Youth Energy Depletion (58%)"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "A75 Highway Corridor",
-      "object": "Haute-Garonne Region"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "A75 Highway Corridor",
-      "object": "Medical & Psychiatric Desert"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "A75 Highway Corridor",
-      "object": "Belfort-Lure Belt"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "A75 Highway Corridor",
-      "object": "Lure Zone"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "A75 Highway Corridor",
-      "object": "Aire de la Guye"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "A75 Highway Corridor",
-      "object": "Anti-Autofac Meta-Regulator"
-    },
-    {
-      "predicate": "depends_on",
-      "subject": "A75 Highway Corridor",
-      "object": "BMW SaaS Platform"
-    },
-    {
-      "predicate": "relates_to",
+      "predicate": "co_occurs_with",
       "subject": "Mond'Arverne Mobility Area",
-      "object": "IGAS Medical Audit"
+      "object": "Saint-Saturnin",
+      "co_occurrence_count": 1
     },
     {
-      "predicate": "depends_on",
-      "subject": "Mond'Arverne Mobility Area",
-      "object": "Over-The-Air Update ECU"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Mond'Arverne Mobility Area",
-      "object": "Youth Energy Depletion (58%)"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Mond'Arverne Mobility Area",
-      "object": "Haute-Garonne Region"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Mond'Arverne Mobility Area",
-      "object": "Medical & Psychiatric Desert"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Mond'Arverne Mobility Area",
-      "object": "Belfort-Lure Belt"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Mond'Arverne Mobility Area",
-      "object": "Lure Zone"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Mond'Arverne Mobility Area",
-      "object": "Aire de la Guye"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Mond'Arverne Mobility Area",
-      "object": "Anti-Autofac Meta-Regulator"
-    },
-    {
-      "predicate": "depends_on",
-      "subject": "Mond'Arverne Mobility Area",
-      "object": "BMW SaaS Platform"
-    },
-    {
-      "predicate": "depends_on",
-      "subject": "IGAS Medical Audit",
-      "object": "Over-The-Air Update ECU"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "IGAS Medical Audit",
-      "object": "Youth Energy Depletion (58%)"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "IGAS Medical Audit",
-      "object": "Haute-Garonne Region"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "IGAS Medical Audit",
-      "object": "Medical & Psychiatric Desert"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "IGAS Medical Audit",
-      "object": "Belfort-Lure Belt"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "IGAS Medical Audit",
-      "object": "Lure Zone"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "IGAS Medical Audit",
-      "object": "Aire de la Guye"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "IGAS Medical Audit",
-      "object": "Anti-Autofac Meta-Regulator"
-    },
-    {
-      "predicate": "depends_on",
-      "subject": "IGAS Medical Audit",
-      "object": "BMW SaaS Platform"
-    },
-    {
-      "predicate": "relates_to",
+      "predicate": "co_occurs_with",
       "subject": "Over-The-Air Update ECU",
-      "object": "Youth Energy Depletion (58%)"
+      "object": "Saint-Saturnin",
+      "co_occurrence_count": 1
     },
     {
-      "predicate": "relates_to",
-      "subject": "Over-The-Air Update ECU",
-      "object": "Haute-Garonne Region"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Over-The-Air Update ECU",
-      "object": "Medical & Psychiatric Desert"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Over-The-Air Update ECU",
-      "object": "Belfort-Lure Belt"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Over-The-Air Update ECU",
-      "object": "Lure Zone"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Over-The-Air Update ECU",
-      "object": "Aire de la Guye"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Over-The-Air Update ECU",
-      "object": "Anti-Autofac Meta-Regulator"
-    },
-    {
-      "predicate": "depends_on",
-      "subject": "Over-The-Air Update ECU",
-      "object": "BMW SaaS Platform"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Youth Energy Depletion (58%)",
-      "object": "Haute-Garonne Region"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Youth Energy Depletion (58%)",
-      "object": "Medical & Psychiatric Desert"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Youth Energy Depletion (58%)",
-      "object": "Belfort-Lure Belt"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Youth Energy Depletion (58%)",
-      "object": "Lure Zone"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Youth Energy Depletion (58%)",
-      "object": "Aire de la Guye"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Youth Energy Depletion (58%)",
-      "object": "Anti-Autofac Meta-Regulator"
-    },
-    {
-      "predicate": "depends_on",
-      "subject": "Youth Energy Depletion (58%)",
-      "object": "BMW SaaS Platform"
-    },
-    {
-      "predicate": "relates_to",
+      "predicate": "co_occurs_with",
       "subject": "Haute-Garonne Region",
-      "object": "Medical & Psychiatric Desert"
+      "object": "IGAS Medical Audit",
+      "co_occurrence_count": 1
     },
     {
-      "predicate": "relates_to",
+      "predicate": "co_occurs_with",
       "subject": "Haute-Garonne Region",
-      "object": "Belfort-Lure Belt"
+      "object": "Medical & Psychiatric Desert",
+      "co_occurrence_count": 1
     },
     {
-      "predicate": "relates_to",
-      "subject": "Haute-Garonne Region",
-      "object": "Lure Zone"
+      "predicate": "co_occurs_with",
+      "subject": "IGAS Medical Audit",
+      "object": "Medical & Psychiatric Desert",
+      "co_occurrence_count": 1
     },
     {
-      "predicate": "relates_to",
-      "subject": "Haute-Garonne Region",
-      "object": "Aire de la Guye"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Haute-Garonne Region",
-      "object": "Anti-Autofac Meta-Regulator"
-    },
-    {
-      "predicate": "depends_on",
-      "subject": "Haute-Garonne Region",
-      "object": "BMW SaaS Platform"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Medical & Psychiatric Desert",
-      "object": "Belfort-Lure Belt"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Medical & Psychiatric Desert",
-      "object": "Lure Zone"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Medical & Psychiatric Desert",
-      "object": "Aire de la Guye"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Medical & Psychiatric Desert",
-      "object": "Anti-Autofac Meta-Regulator"
-    },
-    {
-      "predicate": "depends_on",
-      "subject": "Medical & Psychiatric Desert",
-      "object": "BMW SaaS Platform"
-    },
-    {
-      "predicate": "relates_to",
+      "predicate": "co_occurs_with",
       "subject": "Belfort-Lure Belt",
-      "object": "Lure Zone"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Belfort-Lure Belt",
-      "object": "Aire de la Guye"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Belfort-Lure Belt",
-      "object": "Anti-Autofac Meta-Regulator"
-    },
-    {
-      "predicate": "depends_on",
-      "subject": "Belfort-Lure Belt",
-      "object": "BMW SaaS Platform"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Lure Zone",
-      "object": "Aire de la Guye"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Lure Zone",
-      "object": "Anti-Autofac Meta-Regulator"
-    },
-    {
-      "predicate": "depends_on",
-      "subject": "Lure Zone",
-      "object": "BMW SaaS Platform"
-    },
-    {
-      "predicate": "relates_to",
-      "subject": "Aire de la Guye",
-      "object": "Anti-Autofac Meta-Regulator"
-    },
-    {
-      "predicate": "depends_on",
-      "subject": "Aire de la Guye",
-      "object": "BMW SaaS Platform"
-    },
-    {
-      "predicate": "depends_on",
-      "subject": "Anti-Autofac Meta-Regulator",
-      "object": "BMW SaaS Platform"
+      "object": "Lure Zone",
+      "co_occurrence_count": 1
     }
   ]
 }
