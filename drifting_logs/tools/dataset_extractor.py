@@ -1,15 +1,15 @@
 """
 Full Dataset Ingestion & Entity-Relation Extractor
-Parses all 4.8M+ characters of raw MHTML drift logs without truncation.
-Extracts hundreds of spatial, cybernetic, medical, social, and infrastructure entities,
-along with numerical metrics, verbatim log excerpts, and Prolog relational facts.
+Parses raw MHTML drift logs without truncation.
+Extracts spatial, cybernetic, medical, social, and infrastructure entities,
+along with numerical metrics, verbatim log excerpts, paragraph co-occurrences, and Prolog relational facts.
 """
 
 import os
 import re
 import json
 from bs4 import BeautifulSoup
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Tuple
 
 def extract_raw_text_from_mhtml(filepath: str) -> str:
     with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
@@ -31,9 +31,8 @@ def extract_raw_text_from_mhtml(filepath: str) -> str:
 
 def extract_full_dataset(log_paths: List[str]) -> Dict[str, Any]:
     nodes_map = {}
-    relational_facts = []
+    co_occurrence_map = {}
 
-    # Regex patterns for key entities and statistics
     spatial_patterns = [
         (r'Saint-Saturnin.*?(?=\.|\n)', "Saint-Saturnin", "Spatial Corridor"),
         (r'A75.*?(?=\.|\n)', "A75 Highway Corridor", "Spatial Corridor"),
@@ -66,12 +65,16 @@ def extract_full_dataset(log_paths: List[str]) -> Dict[str, Any]:
     all_patterns = spatial_patterns + cybernetic_patterns + metabolic_patterns
 
     for path in log_paths:
+        if not os.path.exists(path):
+            continue
         text = extract_raw_text_from_mhtml(path)
         paragraphs = [p.strip() for p in text.split('\n') if len(p.strip()) > 40]
 
         for p in paragraphs:
+            matching_entities_in_p = set()
             for pattern, entity_name, category in all_patterns:
                 if re.search(pattern, p, re.IGNORECASE):
+                    matching_entities_in_p.add(entity_name)
                     if entity_name not in nodes_map:
                         nodes_map[entity_name] = {
                             "id": entity_name,
@@ -82,26 +85,28 @@ def extract_full_dataset(log_paths: List[str]) -> Dict[str, Any]:
                         }
                     nodes_map[entity_name]["raw_count"] += 1
                     if len(nodes_map[entity_name]["excerpts"]) < 5:
-                        # Clean excerpt
                         clean_p = re.sub(r'\s+', ' ', p)[:300]
                         nodes_map[entity_name]["excerpts"].append(clean_p)
-                        # Check for numerical stats
                         nums = re.findall(r'\d+(?:\.\d+)?%?', clean_p)
                         if nums:
                             nodes_map[entity_name]["stats"].extend(nums)
 
-    # Derive relational Prolog facts between co-occurring entities
+            # Track explicit co-occurrences in the same paragraph
+            matching_list = sorted(list(matching_entities_in_p))
+            for i in range(len(matching_list)):
+                for j in range(i + 1, len(matching_list)):
+                    pair = (matching_list[i], matching_list[j])
+                    co_occurrence_map[pair] = co_occurrence_map.get(pair, 0) + 1
+
     node_list = list(nodes_map.values())
-    for i in range(len(node_list)):
-        for j in range(i + 1, len(node_list)):
-            n1 = node_list[i]["id"]
-            n2 = node_list[j]["id"]
-            # Look for shared paragraphs
-            relational_facts.append({
-                "predicate": "depends_on" if "Platform" in node_list[j]["category"] else "relates_to",
-                "subject": n1,
-                "object": n2
-            })
+    relational_facts = []
+    for (n1, n2), count in co_occurrence_map.items():
+        relational_facts.append({
+            "predicate": "co_occurs_with",
+            "subject": n1,
+            "object": n2,
+            "co_occurrence_count": count
+        })
 
     return {
         "nodes": node_list,

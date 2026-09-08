@@ -15,6 +15,8 @@ from drifting_logs.tools.quantization_engine import (
 )
 from drifting_logs.tools.algebraic_model_transformer import AlgebraicModelTransformer
 from drifting_logs.tools.algebraic_geometry import AlgebraicVarietySystem
+from drifting_logs.tools.statistical_geometry import StatisticalGeometryEngine
+from drifting_logs.tools.dataset_extractor import extract_full_dataset
 from drifting_logs.tools.prolog_engine import PrologAxiomProgram
 
 
@@ -203,6 +205,21 @@ class TestPipelineAndIntegration(unittest.TestCase):
         path_res = prolog.parse_and_query_string("custom_path(saint_saturnin, ?Y)")
         self.assertGreater(len(path_res), 0)
         self.assertEqual(path_res[0]["?Y"], "connected_car")
+
+    def test_quantized_mds_embedding(self):
+        engine = StatisticalGeometryEngine()
+        q_coords = engine.compute_quantized_mds_embedding()
+        self.assertEqual(q_coords.shape[0], 8)
+        self.assertEqual(q_coords.shape[1], 3)
+
+    def test_dataset_extractor_co_occurrences(self):
+        dataset = extract_full_dataset([
+            "drifting_logs/Dryf psychogeograficzny",
+            "drifting_logs/Stwórz dryft Belfort Lure"
+        ])
+        self.assertIn("nodes", dataset)
+        self.assertIn("relational_facts", dataset)
+        self.assertGreater(len(dataset["nodes"]), 0)
 
 
 if __name__ == "__main__":

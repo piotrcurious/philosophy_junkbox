@@ -68,6 +68,46 @@ class StatisticalGeometryEngine:
 
         return coords
 
+    def compute_quantized_mds_embedding(self, metric_tensor_weight: float = 1.0,
+                                         dim: int = 3,
+                                         thresholds: List[float] = [2.0, 5.0, 9.0]) -> np.ndarray:
+        """
+        Level II Quantized MDS Embedding:
+        Applies parameter quantization Q_1(d_ij) to continuous distance metrics before double centering,
+        reflecting discrete step-like manifold geometry transitions.
+        """
+        N = self.features.shape[0]
+        diffs = self.features[:, None, :] - self.features[None, :, :]
+        weight_matrix = np.diag([1.0, metric_tensor_weight, 1.0 / max(0.1, metric_tensor_weight), 1.0])
+
+        dist_matrix = np.zeros((N, N))
+        for i in range(N):
+            for j in range(N):
+                d = diffs[i, j]
+                raw_d = np.sqrt(np.dot(d, np.dot(weight_matrix, d)))
+
+                # Apply Level II Quantization Q_1(raw_d)
+                q_class = 0
+                for t in thresholds:
+                    if raw_d >= t:
+                        q_class += 1
+                dist_matrix[i, j] = float(q_class * 2.5)
+
+        H = np.eye(N) - np.ones((N, N)) / N
+        B = -0.5 * H.dot(dist_matrix ** 2).dot(H)
+
+        evals, evecs = np.linalg.eigh(B)
+        idx = np.argsort(evals)[::-1]
+        top_evals = np.maximum(0, evals[idx[:dim]])
+        top_evecs = evecs[:, idx[:dim]]
+
+        coords = top_evecs.dot(np.diag(np.sqrt(top_evals)))
+        coords_max = np.max(np.abs(coords))
+        if coords_max > 0:
+            coords = (coords / coords_max) * 180.0
+
+        return coords
+
     def compute_geodesic_flow_fields(self, M: float, V: float, mu: float, Sigma: float) -> List[Dict[str, Any]]:
         """
         Calculates vector flow fields representing psychogeographical drift velocities dx/dt
