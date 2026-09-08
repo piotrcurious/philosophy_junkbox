@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complex Axiom Psychogeographical Explorer (ℂ⁴ Scheme Varieties & Phase Dynamics)</title>
+    <title>Complex Axiom Psychogeographical Explorer (Quantized Paradigm & Interactive Prolog Deduction)</title>
     <style>
         * {
             box-sizing: border-box;
@@ -30,21 +30,25 @@
             display: block;
             width: 100vw;
             height: 100vh;
+            cursor: grab;
+        }
+        canvas:active {
+            cursor: grabbing;
         }
         .ui-panel {
             position: absolute;
             z-index: 10;
-            background: rgba(15, 23, 42, 0.88);
-            backdrop-filter: blur(12px);
+            background: rgba(15, 23, 42, 0.90);
+            backdrop-filter: blur(14px);
             border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 12px;
             padding: 16px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6);
         }
         #header-panel {
             top: 20px;
             left: 20px;
-            max-width: 520px;
+            max-width: 540px;
         }
         h1 {
             font-size: 1.2rem;
@@ -53,15 +57,15 @@
             margin-bottom: 6px;
         }
         p.subtitle {
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: #94a3b8;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             line-height: 1.4;
         }
         #control-panel {
             bottom: 20px;
             left: 20px;
-            width: 380px;
+            width: 420px;
             max-height: calc(100vh - 220px);
             overflow-y: auto;
         }
@@ -91,18 +95,23 @@
             width: 42px;
             text-align: right;
         }
-        select, input[type="text"], input[type="range"], button {
+        select, input[type="text"], input[type="range"], textarea, button {
             width: 100%;
             background: #1e293b;
             border: 1px solid #334155;
             color: #f8fafc;
             padding: 8px 10px;
             border-radius: 6px;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             outline: none;
             transition: border-color 0.2s;
         }
-        select:focus, input[type="text"]:focus {
+        textarea {
+            resize: vertical;
+            min-height: 50px;
+            font-family: monospace;
+        }
+        select:focus, input[type="text"]:focus, textarea:focus {
             border-color: #38bdf8;
         }
         button {
@@ -131,7 +140,7 @@
             top: 20px;
             right: 20px;
             width: 480px;
-            max-height: calc(100vh - 100px);
+            max-height: calc(100vh - 40px);
             overflow-y: auto;
         }
         .data-card {
@@ -145,6 +154,10 @@
             border-left-color: #ec4899;
             background: rgba(131, 24, 67, 0.2);
         }
+        .data-card.quantized-card {
+            border-left-color: #f59e0b;
+            background: rgba(120, 53, 15, 0.2);
+        }
         .data-card.algebraic-card {
             border-left-color: #a855f7;
             background: rgba(88, 28, 135, 0.2);
@@ -152,10 +165,6 @@
         .data-card.prolog-card {
             border-left-color: #22c55e;
             background: rgba(20, 83, 45, 0.2);
-        }
-        .data-card.kepinski-card {
-            border-left-color: #f59e0b;
-            background: rgba(120, 53, 15, 0.2);
         }
         .data-card.agent-card {
             border-left-color: #06b6d4;
@@ -178,13 +187,13 @@
         }
         .tab-bar {
             display: flex;
-            gap: 6px;
+            gap: 4px;
             margin-bottom: 10px;
         }
         .tab-btn {
             flex: 1;
-            padding: 6px 8px;
-            font-size: 0.75rem;
+            padding: 6px 4px;
+            font-size: 0.72rem;
             background: #1e293b;
             color: #94a3b8;
             border: 1px solid #334155;
@@ -196,12 +205,22 @@
             color: #ffffff;
             border-color: #38bdf8;
         }
+        .nav-toolbar {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+        }
+        .nav-toolbar button {
+            margin-top: 0;
+            font-size: 0.72rem;
+            padding: 4px 6px;
+        }
         .legend {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
             margin-top: 8px;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
         }
         .legend-item {
             display: flex;
@@ -213,33 +232,89 @@
             height: 10px;
             border-radius: 50%;
         }
+        .proof-step {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 4px 8px;
+            margin-top: 4px;
+            font-family: monospace;
+            font-size: 0.75rem;
+            color: #4ade80;
+        }
     </style>
 </head>
 <body>
     <div id="canvas-container"></div>
 
     <div id="header-panel" class="ui-panel">
-        <h1>Complex Axiom &amp; Relational Flow Explorer</h1>
-        <p class="subtitle">Non-Linear Complex Axioms α, β, γ, δ ∈ ℂ | Directed Flow Dynamics Q_ij &amp; Dissipation | Executable Prolog KB | Animated Flow Particles</p>
+        <h1>Complex Axiom &amp; Quantized Psychogeographical Explorer</h1>
+        <p class="subtitle">4-Level Quantized Pipeline G=(V,E,Q,R,D) | Relation Algebra R_ik = R_ij ⊙ R_jk | Interactive Prolog Proof Tree Visualizer &amp; 3D Path Highlighting</p>
         <div class="legend">
-            <div class="legend-item"><span class="dot" style="background:#38bdf8;"></span> Spatial Node</div>
-            <div class="legend-item"><span class="dot" style="background:#f97316;"></span> Cybernetic / Platform</div>
-            <div class="legend-item"><span class="dot" style="background:#22c55e;"></span> Healthcare Strain</div>
-            <div class="legend-item"><span class="dot" style="background:#e11d48;"></span> Mimetic / Social</div>
+            <div class="legend-item"><span class="dot" style="background:#38bdf8;"></span> Strongly Attractive</div>
+            <div class="legend-item"><span class="dot" style="background:#3b82f6;"></span> Attractive</div>
+            <div class="legend-item"><span class="dot" style="background:#eab308;"></span> Neutral</div>
+            <div class="legend-item"><span class="dot" style="background:#f97316;"></span> Repulsive</div>
+            <div class="legend-item"><span class="dot" style="background:#f43f5e;"></span> Barrier</div>
+        </div>
+        <div class="nav-toolbar">
+            <button id="btn-preset-iso" class="btn-secondary">Isometric View</button>
+            <button id="btn-preset-top" class="btn-secondary">Top-Down View</button>
+            <button id="btn-preset-spatial" class="btn-secondary">Spatial Focus</button>
+            <button id="btn-preset-cyber" class="btn-secondary">Cybernetic Focus</button>
+            <button id="btn-toggle-orbit" class="btn-prolog">Auto-Orbit Drift: OFF</button>
+            <button id="btn-reset-nav" class="btn-secondary">Reset Camera</button>
         </div>
     </div>
 
     <div id="control-panel" class="ui-panel">
         <div class="tab-bar">
-            <button class="tab-btn active" id="tab-btn-axioms">Axioms (Re, Im)</button>
-            <button class="tab-btn" id="tab-btn-flows">Flow Dynamics</button>
-            <button class="tab-btn" id="tab-btn-agents">Agent Character</button>
-            <button class="tab-btn" id="tab-btn-prolog">Prolog KB Editor</button>
+            <button class="tab-btn active" id="tab-btn-quantization">Quantization</button>
+            <button class="tab-btn" id="tab-btn-axioms">Axioms (Re, Im)</button>
+            <button class="tab-btn" id="tab-btn-prolog">Prolog Proofs</button>
+            <button class="tab-btn" id="tab-btn-agents">Agents</button>
         </div>
 
-        <!-- Tab 1: Complex Axioms -->
-        <div id="tab-content-axioms">
-            <h2 style="font-size:0.9rem; color:#f8fafc; margin-bottom:8px;">Complex Axiom Controls</h2>
+        <!-- Tab 1: Quantization Paradigm Controls -->
+        <div id="tab-content-quantization">
+            <h2 style="font-size:0.88rem; color:#f8fafc; margin-bottom:8px;">4-Level Quantization Paradigm Controls</h2>
+
+            <div class="control-group">
+                <label for="slider-grain-scale">Level I: Spatial Grain Scale (&Delta;x)</label>
+                <div class="slider-row">
+                    <input type="range" id="slider-grain-scale" min="1.0" max="20.0" step="1.0" value="5.0">
+                    <span class="slider-val" id="val-grain-scale">5.0</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="slider-decision-threshold">Level IV: Decision Threshold (Rc)</label>
+                <div class="slider-row">
+                    <input type="range" id="slider-decision-threshold" min="0.5" max="5.0" step="0.1" value="2.0">
+                    <span class="slider-val" id="val-decision-threshold">2.0</span>
+                </div>
+            </div>
+
+            <button id="run-scale-analysis-btn" class="btn-prolog">Run Scale Dependency &amp; Conflict Loss Analysis (&Delta;x*)</button>
+            <button id="eval-order-dependence-btn" class="btn-secondary" style="margin-top:6px;">Evaluate Hysteresis Order Non-Commutativity (a &circ; b &ne; b &circ; a)</button>
+
+            <div class="control-group" style="margin-top:10px;">
+                <label for="select-domain-type">Ontological Domain Mapper</label>
+                <select id="select-domain-type">
+                    <option value="GDP">GDP Macroeconomic Statistic</option>
+                    <option value="TEMPERATURE">Temperature Physical Field</option>
+                    <option value="FLOW">Directed Pair Network Flow</option>
+                    <option value="UNEMPLOYMENT">Municipal Unemployment Rate</option>
+                    <option value="POLLUTION">Local Geochemical Pollution Field</option>
+                </select>
+                <input type="text" id="input-domain-val" value="35000" placeholder="Raw variable value" style="margin-top:4px;">
+                <button id="map-domain-btn" style="margin-top:4px;">Map Variable Through Domain Ontology</button>
+            </div>
+        </div>
+
+        <!-- Tab 2: Complex Axioms -->
+        <div id="tab-content-axioms" style="display:none;">
+            <h2 style="font-size:0.88rem; color:#f8fafc; margin-bottom:8px;">Complex Axiom Controls</h2>
             <div class="control-group">
                 <label for="slider-Mr">Kępiński Metabolic Rate Re(M)</label>
                 <div class="slider-row">
@@ -266,58 +341,38 @@
                 </div>
             </div>
 
-            <div class="control-group">
-                <label for="slider-mur">Girardian Mimetic Coupling Re(&mu;)</label>
-                <div class="slider-row">
-                    <input type="range" id="slider-mur" min="0.1" max="3.0" step="0.1" value="0.7">
-                    <span class="slider-val" id="val-mur">0.7</span>
-                </div>
-                <label for="slider-mui" style="margin-top:4px;">Mimetic Interference Phase Im(&mu;)</label>
-                <div class="slider-row">
-                    <input type="range" id="slider-mui" min="-2.0" max="2.0" step="0.1" value="1.1">
-                    <span class="slider-val" id="val-mui">1.1</span>
-                </div>
-            </div>
-
-            <div class="control-group">
-                <label for="slider-Sigmar">Debordian Spectacle Shield Re(&Sigma;)</label>
-                <div class="slider-row">
-                    <input type="range" id="slider-Sigmar" min="0.1" max="3.0" step="0.1" value="1.2">
-                    <span class="slider-val" id="val-Sigmar">1.2</span>
-                </div>
-                <label for="slider-Sigmai" style="margin-top:4px;">Spectacle Refraction Index Im(&Sigma;)</label>
-                <div class="slider-row">
-                    <input type="range" id="slider-Sigmai" min="-2.0" max="2.0" step="0.1" value="0.4">
-                    <span class="slider-val" id="val-Sigmai">0.4</span>
-                </div>
-            </div>
-
-            <button id="mutate-axioms-btn">Recalculate Complex Variety &amp; Holomorphic Metric</button>
-            <button id="prolog-deduction-btn" class="btn-prolog" style="margin-top:6px;">Derive Axioms from Executable Prolog Engine</button>
+            <button id="mutate-axioms-btn">Recalculate Scheme Variety &amp; Metrics</button>
+            <button id="prolog-deduction-btn" class="btn-prolog" style="margin-top:6px;">Deduce Axioms from Executable Prolog</button>
             <button id="autonomous-loop-btn" class="btn-secondary" style="margin-top:6px;">Execute Autonomous Epistemic Step</button>
         </div>
 
-        <!-- Tab 2: Flow Dynamics Controls -->
-        <div id="tab-content-flows" style="display:none;">
-            <h2 style="font-size:0.9rem; color:#f8fafc; margin-bottom:8px;">Relational Flow &amp; Impedance Controls</h2>
+        <!-- Tab 3: Interactive Prolog Engine & Proof Visualizer -->
+        <div id="tab-content-prolog" style="display:none;">
+            <h2 style="font-size:0.88rem; color:#f8fafc; margin-bottom:8px;">Interactive Prolog Proof &amp; Rule Editor</h2>
+
             <div class="control-group">
-                <label for="slider-flow-accel">Flow Rate Acceleration</label>
-                <div class="slider-row">
-                    <input type="range" id="slider-flow-accel" min="0.2" max="3.0" step="0.1" value="1.0">
-                    <span class="slider-val" id="val-flow-accel">1.0</span>
-                </div>
-                <label for="slider-global-impedance" style="margin-top:4px;">Global Spatial Impedance</label>
-                <div class="slider-row">
-                    <input type="range" id="slider-global-impedance" min="0.2" max="3.0" step="0.1" value="1.0">
-                    <span class="slider-val" id="val-global-impedance">1.0</span>
-                </div>
+                <label for="select-template-query">Select Template Query</label>
+                <select id="select-template-query">
+                    <option value="systemic_trap(?X, ?W)">Systemic Trap Deductions: systemic_trap(?X, ?W)</option>
+                    <option value="psychogeographical_boundary(?X, ?Y)">Psychogeographical Phase Boundaries: boundary(?X, ?Y)</option>
+                    <option value="transitive_rel(saint_saturnin, ?Y, ?R)">Multi-Hop Transitive Relations: transitive_rel(saint_saturnin, ?Y, ?R)</option>
+                    <option value="unresolved_trap(?X, ?Y)">Unresolved Trap Query: unresolved_trap(?X, ?Y)</option>
+                    <option value="custom">Custom Query...</option>
+                </select>
+                <input type="text" id="input-prolog-query" value="systemic_trap(?X, ?W)" style="margin-top:4px;">
+                <button id="run-custom-query-btn" class="btn-prolog" style="margin-top:4px;">Execute Goal &amp; Highlight 3D Path</button>
             </div>
-            <button id="recalc-flows-btn" class="btn-prolog">Recompute Directed Relational Flows</button>
+
+            <div class="control-group" style="margin-top:10px;">
+                <label for="input-rule-string">Assert Full Prolog Rule String (head :- body.)</label>
+                <textarea id="input-rule-string" placeholder="custom_path(?X, ?Y) :- linked(?X, ?Z), linked(?Z, ?Y)."></textarea>
+                <button id="inject-rule-btn" style="margin-top:4px;">Assert Rule into Prolog KB</button>
+            </div>
         </div>
 
-        <!-- Tab 3: Agent Character Personality Editor -->
+        <!-- Tab 4: Agent Character Personality Editor -->
         <div id="tab-content-agents" style="display:none;">
-            <h2 style="font-size:0.9rem; color:#f8fafc; margin-bottom:8px;">Agent Character Personality Editor</h2>
+            <h2 style="font-size:0.88rem; color:#f8fafc; margin-bottom:8px;">Agent Character Personality Editor</h2>
             <div class="control-group">
                 <label for="select-agent-key">Select Epistemic Agent</label>
                 <select id="select-agent-key">
@@ -329,94 +384,46 @@
             </div>
 
             <div class="control-group">
-                <label for="slider-openness">Openness (Receptivity to Anomalies)</label>
+                <label for="slider-openness">Openness</label>
                 <div class="slider-row">
                     <input type="range" id="slider-openness" min="0.0" max="1.0" step="0.05" value="0.9">
                     <span class="slider-val" id="val-openness">0.90</span>
                 </div>
-                <label for="slider-neuroticism" style="margin-top:4px;">Neuroticism (Strain &amp; Entropy Sensitivity)</label>
+                <label for="slider-neuroticism" style="margin-top:4px;">Neuroticism</label>
                 <div class="slider-row">
                     <input type="range" id="slider-neuroticism" min="0.0" max="1.0" step="0.05" value="0.8">
                     <span class="slider-val" id="val-neuroticism">0.80</span>
                 </div>
-                <label for="slider-extraversion" style="margin-top:4px;">Extraversion (Mimetic Signal Propagation)</label>
-                <div class="slider-row">
-                    <input type="range" id="slider-extraversion" min="0.0" max="1.0" step="0.05" value="0.5">
-                    <span class="slider-val" id="val-extraversion">0.50</span>
-                </div>
-                <label for="slider-conscientiousness" style="margin-top:4px;">Conscientiousness (Structural Capacity)</label>
-                <div class="slider-row">
-                    <input type="range" id="slider-conscientiousness" min="0.0" max="1.0" step="0.05" value="0.7">
-                    <span class="slider-val" id="val-conscientiousness">0.70</span>
-                </div>
             </div>
 
-            <button id="update-agent-btn" class="btn-prolog">Apply Character Personality &amp; Re-evaluate Agent</button>
-        </div>
-
-        <!-- Tab 4: Prolog KB & Relational Fact/Rule Editor -->
-        <div id="tab-content-prolog" style="display:none;">
-            <h2 style="font-size:0.9rem; color:#f8fafc; margin-bottom:8px;">Relational KB &amp; Query Editor</h2>
-
-            <div class="control-group">
-                <label for="input-prolog-query">Custom Prolog Query</label>
-                <input type="text" id="input-prolog-query" value="systemic_trap(?X, ?W)" placeholder="e.g. reachable(saint_saturnin, ?Y)">
-                <button id="run-custom-query-btn" style="margin-top:4px;">Execute Prolog Query</button>
-            </div>
-
-            <div class="control-group" style="margin-top:10px;">
-                <label for="input-fact-name">Inject Relational Fact (Name, Arg1, Arg2)</label>
-                <div style="display:flex; gap:4px;">
-                    <input type="text" id="input-fact-name" placeholder="linked" value="linked" style="flex:1;">
-                    <input type="text" id="input-fact-arg1" placeholder="node_a" value="saint_saturnin" style="flex:1;">
-                    <input type="text" id="input-fact-arg2" placeholder="node_b" value="medical_desert" style="flex:1;">
-                </div>
-                <button id="inject-fact-btn" class="btn-prolog" style="margin-top:4px;">Assert Fact</button>
-            </div>
-
-            <div class="control-group" style="margin-top:10px;">
-                <label for="input-retract-head">Retract Relational Relation</label>
-                <input type="text" id="input-retract-head" placeholder="linked" value="linked">
-                <button id="retract-relation-btn" class="btn-secondary" style="margin-top:4px;">Retract Relation</button>
-            </div>
+            <button id="update-agent-btn" class="btn-prolog">Apply Personality &amp; Evaluate Agent</button>
         </div>
     </div>
 
     <div id="inspector-panel" class="ui-panel">
-        <h2 style="font-size:1rem; color:#f8fafc; margin-bottom:8px;" id="inspector-title">Complex Epistemic Inspector</h2>
+        <h2 style="font-size:1rem; color:#f8fafc; margin-bottom:8px;" id="inspector-title">Psychogeographical Inspector</h2>
         <div id="inspector-content">
-            <div class="data-card complex-card">
-                <h3>Composite Algebraic Field Extension K = Q(i, α_M, α_V, α_μ, α_Σ)</h3>
-                <p id="complex-axiom-props">M: |1.70| ∠0.49 rad | V: |2.26| ∠-0.22 rad</p>
-                <p id="field-extension-props" style="margin-top:4px; font-family:monospace; color:#f472b6; font-size:0.75rem;">K = Q(i, α_M, α_V, α_μ, α_Σ) [K:Q] = 16</p>
-                <div style="margin-top:6px; display:flex; flex-wrap:wrap; gap:4px;">
-                    <button id="integrate-ext-btn" class="btn-prolog" style="font-size:0.7rem; padding:4px 6px; flex:1;">Assert Composite K into Prolog KB</button>
-                    <button id="integrate-node-btn" class="btn-secondary" style="font-size:0.7rem; padding:4px 6px; flex:1;">Sync Axiom M Field State</button>
+            <div class="data-card quantized-card">
+                <h3>Emergent Psychogeographical Field Potentials &amp; Boundaries</h3>
+                <p id="quantized-field-props">Select a node or click elements in 3D canvas to inspect field potentials...</p>
+            </div>
+            <div class="data-card prolog-card">
+                <h3>Prolog Deduction Proof Tree Visualizer</h3>
+                <div id="prolog-proof-tree">
+                    <p style="font-size:0.78rem; color:#cbd5e1;">Running deduction goals...</p>
                 </div>
             </div>
             <div class="data-card flow-card">
-                <h3>Directed Relational Flows &amp; Dissipation (Q_ij)</h3>
-                <p id="flow-dynamics-props">Saint-Saturnin -> A75 Corridor: Flux Q=15.0 | Dissipation D=18.0<br>Connected Car -> Youth Inertia: Flux Q=14.2 (Bottleneck)</p>
-            </div>
-            <div class="data-card agent-card">
-                <h3>Agent Character Personality Evaluation</h3>
-                <p id="agent-personality-output">Agent: Kępiński Metabolism Agent | Neuroticism: 0.80 | Openness: 0.90<br>Weighted Stimulus: 238.7 | Metabolic Deficit Index: 0.70</p>
+                <h3>Directed Relational Flows &amp; Quantized Cost Classes</h3>
+                <p id="flow-dynamics-props">Saint-Saturnin -> A75 Corridor: Flux Q=15.3 | Class Q1=3 (High Cost) | Rel R=STRONGLY_ATTRACTIVE</p>
             </div>
             <div class="data-card kepinski-card">
                 <h3>Kępiński Localized Neuropsychiatry &amp; LSTM Memory</h3>
-                <p id="kepinski-neuro-props">Node: Saint-Saturnin | DA: 1.00 | 5-HT: 1.00 | Effective BDNF: 0.64<br>Anhedonia Index: 0.36 | Entropy H: 1.10<br>LSTM Memory State c_t: [0.12, -0.08, 0.24, -0.15]</p>
+                <p id="kepinski-neuro-props">Node: Saint-Saturnin | DA: 1.00 | 5-HT: 1.00 | Effective BDNF: 0.64<br>Anhedonia Index: 0.36 | Entropy H: 1.10</p>
             </div>
             <div class="data-card algebraic-card">
-                <h3>Complex Scheme Ideal Generators V(I) ⊂ ℂ⁴</h3>
-                <p id="algebraic-generators">Loading polynomials...</p>
-            </div>
-            <div class="data-card algebraic-card">
-                <h3>Hermitian Metric h &amp; Holomorphic Curvature R</h3>
-                <p id="algebraic-groebner">Computing metric...</p>
-            </div>
-            <div class="data-card prolog-card">
-                <h3>Prolog Executable Axiom &amp; Relational Trap Deduction</h3>
-                <p id="prolog-output">Prolog query running...</p>
+                <h3>Quantized Scheme Quotient C⁴ / I_Q</h3>
+                <p id="algebraic-generators">Loading quotient ring...</p>
             </div>
         </div>
     </div>
@@ -424,26 +431,30 @@
     <script>
         let driftData = {
             nodes: [
-                { id: "Saint-Saturnin", category: "Spatial Node", pos: [-220, -120, -40], color: "#38bdf8" },
-                { id: "A75 Highway Corridor", category: "Spatial Node", pos: [-80, -220, 80], color: "#38bdf8" },
-                { id: "Montceau-les-Mines", category: "Spatial Node", pos: [-140, 160, -60], color: "#38bdf8" },
-                { id: "Belfort-Lure Belt", category: "Spatial Node", pos: [-40, 20, -100], color: "#38bdf8" },
-                { id: "Aire de la Guye", category: "Spatial Node", pos: [-120, 40, 90], color: "#38bdf8" },
-                { id: "Connected Car / Platform", category: "Cybernetic / Platform Node", pos: [220, -90, -40], color: "#f97316" },
-                { id: "Psychiatric & Medical Deserts", category: "Metabolic / Healthcare Strain Node", pos: [30, 240, 60], color: "#22c55e" },
-                { id: "Youth / Counterculture Inertia", category: "Social / Mimetic Node", pos: [240, -20, 10], color: "#e11d48" }
+                { id: "Saint-Saturnin", category: "Spatial Node", pos: [-220, -120, -40], color: "#38bdf8", psi: 2.5 },
+                { id: "A75 Highway Corridor", category: "Spatial Node", pos: [-80, -220, 80], color: "#38bdf8", psi: 1.8 },
+                { id: "Montceau-les-Mines", category: "Spatial Node", pos: [-140, 160, -60], color: "#38bdf8", psi: 0.9 },
+                { id: "Belfort-Lure Belt", category: "Spatial Node", pos: [-40, 20, -100], color: "#38bdf8", psi: 1.2 },
+                { id: "Aire de la Guye", category: "Spatial Node", pos: [-120, 40, 90], color: "#38bdf8", psi: 0.0 },
+                { id: "Connected Car / Platform", category: "Cybernetic / Platform Node", pos: [220, -90, -40], color: "#f97316", psi: 3.1 },
+                { id: "Psychiatric & Medical Deserts", category: "Metabolic / Healthcare Strain Node", pos: [30, 240, 60], color: "#22c55e", psi: -1.5 },
+                { id: "Youth / Counterculture Inertia", category: "Social / Mimetic Node", pos: [240, -20, 10], color: "#e11d48", psi: -2.0 }
             ],
             edges: [
-                { source: "Saint-Saturnin", target: "A75 Highway Corridor", flux: 15.0, speed: 3.0 },
-                { source: "A75 Highway Corridor", target: "Connected Car / Platform", flux: 18.0, speed: 3.6 },
-                { source: "Connected Car / Platform", target: "Youth / Counterculture Inertia", flux: 14.2, speed: 2.8 },
-                { source: "Psychiatric & Medical Deserts", target: "Saint-Saturnin", flux: 8.4, speed: 1.7 },
-                { source: "Montceau-les-Mines", target: "Belfort-Lure Belt", flux: 10.0, speed: 2.0 },
-                { source: "Aire de la Guye", target: "A75 Highway Corridor", flux: 9.5, speed: 1.9 }
-            ]
+                { source: "Saint-Saturnin", target: "A75 Highway Corridor", flux: 15.3, speed: 3.0, relation: "STRONGLY_ATTRACTIVE", rel_num: 2, color: "#38bdf8" },
+                { source: "A75 Highway Corridor", target: "Connected Car / Platform", flux: 18.0, speed: 3.6, relation: "ATTRACTIVE", rel_num: 1, color: "#3b82f6" },
+                { source: "Connected Car / Platform", target: "Youth / Counterculture Inertia", flux: 14.2, speed: 2.8, relation: "REPULSIVE", rel_num: -1, color: "#f97316" },
+                { source: "Psychiatric & Medical Deserts", target: "Saint-Saturnin", flux: 8.4, speed: 1.7, relation: "BARRIER", rel_num: -2, color: "#f43f5e" },
+                { source: "Montceau-les-Mines", target: "Belfort-Lure Belt", flux: 10.0, speed: 2.0, relation: "ATTRACTIVE", rel_num: 1, color: "#3b82f6" },
+                { source: "Aire de la Guye", target: "A75 Highway Corridor", flux: 9.5, speed: 1.9, relation: "NEUTRAL", rel_num: 0, color: "#eab308" }
+            ],
+            highlightedNodes: new Set(),
+            highlightedEdges: new Set(),
+            phaseBoundaries: new Set(["Aire de la Guye", "Psychiatric & Medical Deserts"]),
+            selectedNodeId: null
         };
 
-        // Initialize animated flow particles along edges
+        // Initialize particles
         let particles = [];
         for (let i = 0; i < 30; i++) {
             particles.push({
@@ -463,11 +474,29 @@
         container.appendChild(canvas);
         const ctx = canvas.getContext('2d');
 
-        let angleX = 0.2;
-        let angleY = 0.4;
+        // Navigation Camera State
+        let angleX = 0.3;
+        let angleY = 0.5;
+        let zoomLevel = 1.0;
+        let panX = 0;
+        let panY = 0;
+        let autoOrbit = false;
         let isDragging = false;
+        let dragButton = 0;
         let lastMouseX = 0;
         let lastMouseY = 0;
+        let phasePulseTime = 0;
+
+        function getRelationColor(relName) {
+            switch(relName) {
+                case "STRONGLY_ATTRACTIVE": return "#38bdf8";
+                case "ATTRACTIVE": return "#3b82f6";
+                case "NEUTRAL": return "#eab308";
+                case "REPULSIVE": return "#f97316";
+                case "BARRIER": return "#f43f5e";
+                default: return "#94a3b8";
+            }
+        }
 
         function project3D(x, y, z) {
             let radX = angleX;
@@ -479,15 +508,35 @@
             let x2 = x * Math.cos(radY) + z1 * Math.sin(radY);
             let z2 = -x * Math.sin(radY) + z1 * Math.cos(radY);
 
-            let fov = 600;
+            let fov = 600 * zoomLevel;
             let scale = fov / (fov + z2 + 450);
-            let projX = canvas.width / 2 + x2 * scale;
-            let projY = canvas.height / 2 + y1 * scale;
+            let projX = (canvas.width / 2) + panX + x2 * scale;
+            let projY = (canvas.height / 2) + panY + y1 * scale;
 
             return { x: projX, y: projY, scale: scale, z: z2 };
         }
 
+        function pickNodeAtMouse(mouseX, mouseY) {
+            let closestNode = null;
+            let minDistance = 25.0; // Click radius in pixels
+
+            driftData.nodes.forEach(node => {
+                let p = project3D(...node.pos);
+                let dist = Math.hypot(mouseX - p.x, mouseY - p.y);
+                if (dist < minDistance) {
+                    minDistance = dist;
+                    closestNode = node;
+                }
+            });
+            return closestNode;
+        }
+
         function render() {
+            phasePulseTime += 0.04;
+            if (autoOrbit) {
+                angleY += 0.003;
+            }
+
             ctx.fillStyle = "#0b0f19";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -503,7 +552,7 @@
                 ctx.stroke();
             }
 
-            // Draw directed edges
+            // Draw Edges
             driftData.edges.forEach((edge, idx) => {
                 let sNode = driftData.nodes.find(n => n.id === edge.source);
                 let tNode = driftData.nodes.find(n => n.id === edge.target);
@@ -511,17 +560,28 @@
                     let p1 = project3D(...sNode.pos);
                     let p2 = project3D(...tNode.pos);
 
-                    let edgeWidth = Math.max(1, Math.min(6, (edge.flux || 10) / 3.0));
-                    ctx.strokeStyle = (edge.flux && edge.flux > 16.0) ? "rgba(244, 63, 94, 0.75)" : "rgba(56, 189, 248, 0.55)";
-                    ctx.lineWidth = edgeWidth;
+                    let isHighlighted = driftData.highlightedEdges.has(`${edge.source}->${edge.target}`);
+                    let edgeColor = getRelationColor(edge.relation);
+
+                    ctx.strokeStyle = isHighlighted ? "#4ade80" : edgeColor;
+                    ctx.lineWidth = isHighlighted ? 5 : Math.max(1, Math.min(6, (edge.flux || 10) / 3.0));
                     ctx.beginPath();
                     ctx.moveTo(p1.x, p1.y);
                     ctx.lineTo(p2.x, p2.y);
                     ctx.stroke();
+
+                    // Render relation label mid-edge
+                    let midX = (p1.x + p2.x) / 2;
+                    let midY = (p1.y + p2.y) / 2;
+                    ctx.fillStyle = "rgba(15, 23, 42, 0.75)";
+                    ctx.fillRect(midX - 20, midY - 8, 40, 12);
+                    ctx.fillStyle = edgeColor;
+                    ctx.font = "bold 9px monospace";
+                    ctx.fillText(edge.relation.substring(0, 6), midX - 16, midY + 1);
                 }
             });
 
-            // Update & Render animated flow particles
+            // Particles
             particles.forEach(p => {
                 let edge = driftData.edges[p.edgeIndex];
                 if (edge) {
@@ -538,7 +598,7 @@
                         let projP = project3D(currX, currY, currZ);
                         let pSize = Math.max(3, 5 * projP.scale);
 
-                        ctx.fillStyle = "#f43f5e";
+                        ctx.fillStyle = getRelationColor(edge.relation);
                         ctx.beginPath();
                         ctx.arc(projP.x, projP.y, pSize, 0, Math.PI * 2);
                         ctx.fill();
@@ -546,7 +606,7 @@
                 }
             });
 
-            // Project and render nodes with legibility pill boxes
+            // Nodes & Phase Boundaries
             const projectedNodes = driftData.nodes.map(node => ({
                 ...node,
                 proj: project3D(...node.pos)
@@ -556,33 +616,48 @@
                 let p = node.proj;
                 let radius = Math.max(12, 16 * p.scale);
 
-                // Glow radial gradient
-                let grad = ctx.createRadialGradient(p.x, p.y, radius * 0.2, p.x, p.y, radius * 1.8);
-                grad.addColorStop(0, node.color);
-                grad.addColorStop(1, "transparent");
-                ctx.fillStyle = grad;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, radius * 1.8, 0, Math.PI * 2);
-                ctx.fill();
+                let isSelected = driftData.selectedNodeId === node.id;
+                let isHighlighted = driftData.highlightedNodes.has(node.id);
+                let isBoundary = driftData.phaseBoundaries.has(node.id);
 
-                // Core node circle
+                // Render Phase Boundary Ring
+                if (isBoundary) {
+                    let pulseRadius = radius * (1.8 + 0.4 * Math.sin(phasePulseTime * 2.0));
+                    ctx.strokeStyle = "rgba(234, 179, 8, 0.8)";
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([4, 4]);
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, pulseRadius, 0, Math.PI * 2);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                }
+
+                // Selection / Highlight Reticle
+                if (isSelected || isHighlighted) {
+                    ctx.strokeStyle = isSelected ? "#38bdf8" : "#4ade80";
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, radius * 2.2, 0, Math.PI * 2);
+                    ctx.stroke();
+                }
+
+                // Node Core
                 ctx.fillStyle = node.color;
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
                 ctx.fill();
 
-                // Label Box with text contrast
+                // Label Box
                 let fontPx = Math.max(10, Math.round(12 * p.scale));
                 ctx.font = `bold ${fontPx}px sans-serif`;
                 let textWidth = ctx.measureText(node.id).width;
 
-                // Offset labels alternatingly to avoid overlaps
                 let offsetY = (idx % 2 === 0) ? -radius - 12 : radius + 16;
                 let offsetX = -textWidth / 2;
 
-                ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
+                ctx.fillStyle = isSelected ? "rgba(2, 132, 199, 0.9)" : "rgba(15, 23, 42, 0.85)";
                 ctx.fillRect(p.x + offsetX - 6, p.y + offsetY - fontPx + 2, textWidth + 12, fontPx + 6);
-                ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
+                ctx.strokeStyle = isSelected ? "#38bdf8" : "rgba(255, 255, 255, 0.2)";
                 ctx.lineWidth = 1;
                 ctx.strokeRect(p.x + offsetX - 6, p.y + offsetY - fontPx + 2, textWidth + 12, fontPx + 6);
 
@@ -598,279 +673,206 @@
             const M_i = parseFloat(document.getElementById('slider-Mi').value);
             const V_r = parseFloat(document.getElementById('slider-Vr').value);
             const V_i = parseFloat(document.getElementById('slider-Vi').value);
-            const mu_r = parseFloat(document.getElementById('slider-mur').value);
-            const mu_i = parseFloat(document.getElementById('slider-mui').value);
-            const Sigma_r = parseFloat(document.getElementById('slider-Sigmar').value);
-            const Sigma_i = parseFloat(document.getElementById('slider-Sigmai').value);
-            const flow_acceleration = parseFloat(document.getElementById('slider-flow-accel').value);
-            const global_impedance = parseFloat(document.getElementById('slider-global-impedance').value);
 
             try {
                 const res = await fetch('/api/axiom_transform', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({
-                        M_r, M_i, V_r, V_i, mu_r, mu_i, Sigma_r, Sigma_i,
-                        flow_acceleration, global_impedance, use_prolog_deduction: useProlog
-                    })
+                    body: JSON.stringify({ M_r, M_i, V_r, V_i, use_prolog_deduction: useProlog })
                 });
                 if (res.ok) {
                     const data = await res.json();
+                    if (data.quantized_psychogeography) {
+                        const qp = data.quantized_psychogeography;
+                        let fieldsStr = Object.entries(qp.emergent_psychogeographical_fields)
+                            .map(([k, v]) => `<b>${k}:</b> &Psi;=${v.Psi_emergent_field}`).join('<br>');
+                        document.getElementById('quantized-field-props').innerHTML = fieldsStr;
 
-                    document.getElementById('complex-axiom-props').textContent = `M: |${data.complex_axioms.M.magnitude.toFixed(2)}| ∠${data.complex_axioms.M.phase_rad.toFixed(2)}rad | V: |${data.complex_axioms.V.magnitude.toFixed(2)}| ∠${data.complex_axioms.V.phase_rad.toFixed(2)}rad | Σ: |${data.complex_axioms.Sigma.magnitude.toFixed(2)}|`;
-                    if (data.field_extension) {
-                        const fe = data.field_extension;
-                        const perAxiom = fe.per_axiom_extensions;
-                        let perAxiomHTML = "";
-                        if (perAxiom) {
-                            perAxiomHTML = `<br><b>Q[x]/(P_M):</b> ${perAxiom.M_metabolic.minimal_polynomial}<br><b>Q[x]/(P_V):</b> ${perAxiom.V_variety.minimal_polynomial}<br><b>Q[x]/(P_μ):</b> ${perAxiom.mu_mimetic.minimal_polynomial}<br><b>Q[x]/(P_Σ):</b> ${perAxiom.Sigma_spectacle.minimal_polynomial}`;
+                        if (qp.psychogeographical_boundaries) {
+                            driftData.phaseBoundaries.clear();
+                            qp.psychogeographical_boundaries.forEach(b => {
+                                driftData.phaseBoundaries.add(b.source);
+                                driftData.phaseBoundaries.add(b.target);
+                            });
                         }
-                        document.getElementById('field-extension-props').innerHTML = `<b>Field K:</b> ${fe.composite_field_label} | <b>[K:Q] = ${fe.composite_extension_degree}</b><br><b>Primitive γ:</b> ${fe.primitive_element_gamma}<br><b>Min Poly P_γ(x):</b> ${fe.composite_minimal_polynomial}${perAxiomHTML}`;
                     }
-                    document.getElementById('algebraic-generators').textContent = data.algebraic_scheme.ideal_generators.join(', ');
-                    document.getElementById('algebraic-groebner').textContent = `dim V(I): ${data.algebraic_scheme.variety_dimension} | Hermitian Metric h: ${data.algebraic_scheme.hermitian_metric_h.toFixed(2)}\nHolomorphic Ricci R: ${data.algebraic_scheme.holomorphic_ricci_curvature.toFixed(4)}`;
-
-                    if (data.relational_flows) {
-                        let flowSummaries = data.relational_flows.map(f => `${f.source} -> ${f.target}: Flux Q=${f.flow_flux_Q} (Dissipation D=${f.path_dissipation_D})`).join('<br>');
-                        document.getElementById('flow-dynamics-props').innerHTML = flowSummaries;
-
-                        // Update edge flux and particle speeds
-                        data.relational_flows.forEach(rf => {
-                            let edge = driftData.edges.find(e => e.source === rf.source && e.target === rf.target);
-                            if (edge) {
-                                edge.flux = rf.flow_flux_Q;
-                                edge.speed = rf.particle_speed;
-                            }
-                        });
-                    }
-
-                    if (data.node_evaluations && data.node_evaluations["Saint-Saturnin"]) {
-                        const kn = data.node_evaluations["Saint-Saturnin"];
-                        const c_t = kn.lstm_cell_state.cell_memory_c_t.map(v => v.toFixed(2)).join(', ');
-                        document.getElementById('kepinski-neuro-props').innerHTML = `Node: Saint-Saturnin | DA: ${kn.neurotransmitters.DA_dopamine.toFixed(2)} | 5-HT: ${kn.neurotransmitters['5HT_serotonin'].toFixed(2)} | Effective BDNF: ${kn.epigenetics.effective_BDNF_expression.toFixed(2)}<br>Anhedonia Index: ${kn.diagnostic_metrics.anhedonia_index.toFixed(2)} | Entropy H: ${kn.diagnostic_metrics.information_metabolism_entropy.toFixed(2)}<br>LSTM Memory State c_t: [${c_t}]`;
-                    }
-
-                    if (data.prolog_deductions && data.prolog_deductions.systemic_traps && data.prolog_deductions.systemic_traps.length > 0) {
-                        const trap = data.prolog_deductions.systemic_traps[0];
-                        const der = data.prolog_deductions.derived_axiom_values;
-                        document.getElementById('prolog-output').innerHTML = `<b>Prolog Trap Deducted:</b> ${trap.X} -> ${trap.W}<br><b>Derived Axioms from Rules:</b> M=${der.M.real}+${der.M.imag}i, V=${der.V.real}+${der.V.imag}i`;
-                    }
-
-                    if (data.rebuilt_nodes) {
-                        data.rebuilt_nodes.forEach(rn => {
-                            let n = driftData.nodes.find(node => node.id === rn.id);
-                            if (n) {
-                                n.pos = rn.pos;
-                            }
-                        });
+                    if (data.algebraic_scheme && data.algebraic_scheme.quantized_quotient_scheme) {
+                        const qs = data.algebraic_scheme.quantized_quotient_scheme;
+                        document.getElementById('algebraic-generators').innerHTML = `<b>Quantum Constraint:</b> ${qs.quantum_polynomial_constraint}<br><b>Groebner Basis:</b> ${qs.quantized_groebner_basis.join(', ')}`;
                     }
                 }
             } catch (err) {}
         }
 
-        async function updateAgentPersonality() {
-            const agentKey = document.getElementById('select-agent-key').value;
-            const openness = parseFloat(document.getElementById('slider-openness').value);
-            const neuroticism = parseFloat(document.getElementById('slider-neuroticism').value);
-            const extraversion = parseFloat(document.getElementById('slider-extraversion').value);
-            const conscientiousness = parseFloat(document.getElementById('slider-conscientiousness').value);
-
-            try {
-                const res = await fetch('/api/update_agent_personality', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({
-                        agent_key: agentKey,
-                        traits: { openness, neuroticism, extraversion, conscientiousness }
-                    })
-                });
-                if (res.ok) {
-                    const data = await res.json();
-                    const p = data.personality;
-                    const m = data.analysis.quantitative_metrics;
-                    document.getElementById('agent-personality-output').innerHTML = `<b>Agent:</b> ${data.agent.toUpperCase()} | <b>Neuroticism:</b> ${p.neuroticism.toFixed(2)} | <b>Openness:</b> ${p.openness.toFixed(2)}<br><b>Metrics:</b> ${JSON.stringify(m)}<br><b>Diagnostic:</b> ${data.analysis.diagnostic || 'Evaluated.'}`;
-                }
-            } catch (err) {}
-        }
-
-        async function executeCustomQuery() {
-            const query = document.getElementById('input-prolog-query').value;
+        async function runPrologQuery(queryStr) {
             try {
                 const res = await fetch('/api/query_prolog_custom', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ query })
+                    body: JSON.stringify({ query: queryStr })
                 });
                 if (res.ok) {
                     const data = await res.json();
-                    document.getElementById('prolog-output').innerHTML = `<b>Query:</b> ${data.query}<br><b>Results:</b> ${JSON.stringify(data.results)}`;
+                    driftData.highlightedNodes.clear();
+                    driftData.highlightedEdges.clear();
+
+                    let treeHTML = `<b>Query Goal:</b> <code>${data.query}</code><br>`;
+                    if (data.results && data.results.length > 0) {
+                        data.results.forEach((subst, idx) => {
+                            treeHTML += `<div class="proof-step">Deduction ${idx + 1}: ${JSON.stringify(subst)}</div>`;
+                            Object.values(subst).forEach(val => {
+                                let matchingNode = driftData.nodes.find(n => n.id.toLowerCase().replace(/[^a-z0-9]/g, '') === val.toLowerCase().replace(/[^a-z0-9]/g, ''));
+                                if (matchingNode) {
+                                    driftData.highlightedNodes.add(matchingNode.id);
+                                }
+                            });
+                        });
+                    } else {
+                        treeHTML += `<div class="proof-step" style="color:#f87171;">No matching unification solutions found.</div>`;
+                    }
+                    document.getElementById('prolog-proof-tree').innerHTML = treeHTML;
                 }
             } catch (err) {}
         }
 
-        async function injectFact() {
-            const fact_name = document.getElementById('input-fact-name').value;
-            const arg1 = document.getElementById('input-fact-arg1').value;
-            const arg2 = document.getElementById('input-fact-arg2').value;
+        async function injectRuleString() {
+            const ruleStr = document.getElementById('input-rule-string').value;
+            if (!ruleStr.trim()) return;
             try {
-                const res = await fetch('/api/inject_prolog_fact', {
+                const res = await fetch('/api/inject_prolog_rule', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ fact_name, args: [arg1, arg2] })
+                    body: JSON.stringify({ head_str: ruleStr.split(':-')[0].trim() })
                 });
                 if (res.ok) {
-                    const data = await res.json();
-                    document.getElementById('prolog-output').innerHTML = `<b>Fact Asserted:</b> ${fact_name}(${arg1}, ${arg2})<br><b>Total KB Rules/Facts:</b> ${data.rules.length}`;
+                    document.getElementById('prolog-proof-tree').innerHTML = `<div class="proof-step">Successfully asserted rule: <code>${ruleStr}</code></div>`;
                 }
             } catch (err) {}
         }
 
-        async function retractRelation() {
-            const head_name = document.getElementById('input-retract-head').value;
+        async function evaluateOrderDependence() {
             try {
-                const res = await fetch('/api/retract_prolog_relation', {
+                const res = await fetch('/api/evaluate_order_dependence', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ head_name })
+                    body: JSON.stringify({ val_a: 2.8, val_b: 1.8 })
                 });
                 if (res.ok) {
                     const data = await res.json();
-                    document.getElementById('prolog-output').innerHTML = `<b>Status:</b> ${data.status}<br><b>Remaining Rules/Facts:</b> ${data.rules.length}`;
+                    alert(`Hysteresis Order Dependence Evaluated:\nSequence A->B Choice: ${data.seq_AB_final_decision}\nSequence B->A Choice: ${data.seq_BA_final_decision}\nIs Non-Commutative: ${data.is_non_commutative}`);
                 }
             } catch (err) {}
         }
 
-        // Tab Switching Logic
-        document.getElementById('tab-btn-axioms').addEventListener('click', () => {
-            document.getElementById('tab-btn-axioms').classList.add('active');
-            document.getElementById('tab-btn-flows').classList.remove('active');
-            document.getElementById('tab-btn-agents').classList.remove('active');
-            document.getElementById('tab-btn-prolog').classList.remove('active');
-            document.getElementById('tab-content-axioms').style.display = 'block';
-            document.getElementById('tab-content-flows').style.display = 'none';
-            document.getElementById('tab-content-agents').style.display = 'none';
-            document.getElementById('tab-content-prolog').style.display = 'none';
-        });
-
-        document.getElementById('tab-btn-flows').addEventListener('click', () => {
-            document.getElementById('tab-btn-flows').classList.add('active');
-            document.getElementById('tab-btn-axioms').classList.remove('active');
-            document.getElementById('tab-btn-agents').classList.remove('active');
-            document.getElementById('tab-btn-prolog').classList.remove('active');
-            document.getElementById('tab-content-flows').style.display = 'block';
-            document.getElementById('tab-content-axioms').style.display = 'none';
-            document.getElementById('tab-content-agents').style.display = 'none';
-            document.getElementById('tab-content-prolog').style.display = 'none';
-        });
-
-        document.getElementById('tab-btn-agents').addEventListener('click', () => {
-            document.getElementById('tab-btn-agents').classList.add('active');
-            document.getElementById('tab-btn-axioms').classList.remove('active');
-            document.getElementById('tab-btn-flows').classList.remove('active');
-            document.getElementById('tab-btn-prolog').classList.remove('active');
-            document.getElementById('tab-content-agents').style.display = 'block';
-            document.getElementById('tab-content-axioms').style.display = 'none';
-            document.getElementById('tab-content-flows').style.display = 'none';
-            document.getElementById('tab-content-prolog').style.display = 'none';
-        });
-
-        document.getElementById('tab-btn-prolog').addEventListener('click', () => {
-            document.getElementById('tab-btn-prolog').classList.add('active');
-            document.getElementById('tab-btn-axioms').classList.remove('active');
-            document.getElementById('tab-btn-flows').classList.remove('active');
-            document.getElementById('tab-btn-agents').classList.remove('active');
-            document.getElementById('tab-content-prolog').style.display = 'block';
-            document.getElementById('tab-content-axioms').style.display = 'none';
-            document.getElementById('tab-content-flows').style.display = 'none';
-            document.getElementById('tab-content-agents').style.display = 'none';
-        });
-
-        ['flow-accel', 'global-impedance'].forEach(param => {
-            const slider = document.getElementById(`slider-${param}`);
-            const valSpan = document.getElementById(`val-${param}`);
-            if (slider && valSpan) {
-                slider.addEventListener('input', (e) => {
-                    valSpan.textContent = parseFloat(e.target.value).toFixed(1);
+        async function mapOntologicalDomain() {
+            const domain = document.getElementById('select-domain-type').value;
+            const raw_val = parseFloat(document.getElementById('input-domain-val').value);
+            try {
+                const res = await fetch('/api/ontological_domain_map', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ domain, raw_value: raw_val })
                 });
-            }
+                if (res.ok) {
+                    const data = await res.json();
+                    alert(`Mapped Ontological Domain:\nDomain: ${data.domain}\nSpatial Scale: ${data.spatial_scale}\nQuantized Class: ${data.quantized_domain_class}\nNormalized Potency: ${data.normalized_potency}`);
+                }
+            } catch (err) {}
+        }
+
+        // Camera View Presets
+        document.getElementById('btn-preset-iso').addEventListener('click', () => {
+            angleX = 0.3; angleY = 0.5; zoomLevel = 1.0; panX = 0; panY = 0;
+        });
+        document.getElementById('btn-preset-top').addEventListener('click', () => {
+            angleX = 1.45; angleY = 0.0; zoomLevel = 1.1; panX = 0; panY = 0;
+        });
+        document.getElementById('btn-preset-spatial').addEventListener('click', () => {
+            angleX = 0.2; angleY = 0.9; zoomLevel = 1.3; panX = 120; panY = 80;
+        });
+        document.getElementById('btn-preset-cyber').addEventListener('click', () => {
+            angleX = -0.3; angleY = -0.8; zoomLevel = 1.4; panX = -150; panY = 60;
+        });
+        document.getElementById('btn-toggle-orbit').addEventListener('click', () => {
+            autoOrbit = !autoOrbit;
+            document.getElementById('btn-toggle-orbit').textContent = `Auto-Orbit Drift: ${autoOrbit ? 'ON' : 'OFF'}`;
+        });
+        document.getElementById('btn-reset-nav').addEventListener('click', () => {
+            angleX = 0.3; angleY = 0.5; zoomLevel = 1.0; panX = 0; panY = 0; autoOrbit = false;
         });
 
-        ['openness', 'neuroticism', 'extraversion', 'conscientiousness'].forEach(trait => {
-            const slider = document.getElementById(`slider-${trait}`);
-            const valSpan = document.getElementById(`val-${trait}`);
-            if (slider && valSpan) {
-                slider.addEventListener('input', (e) => {
-                    valSpan.textContent = parseFloat(e.target.value).toFixed(2);
+        // Tab Switching
+        ['quantization', 'axioms', 'prolog', 'agents'].forEach(tab => {
+            document.getElementById(`tab-btn-${tab}`).addEventListener('click', () => {
+                ['quantization', 'axioms', 'prolog', 'agents'].forEach(t => {
+                    document.getElementById(`tab-btn-${t}`).classList.remove('active');
+                    document.getElementById(`tab-content-${t}`).style.display = 'none';
                 });
-            }
-        });
-
-        ['Mr', 'Mi', 'Vr', 'Vi', 'mur', 'mui', 'Sigmar', 'Sigmai'].forEach(param => {
-            const slider = document.getElementById(`slider-${param}`);
-            const valSpan = document.getElementById(`val-${param}`);
-            if (slider && valSpan) {
-                slider.addEventListener('input', (e) => {
-                    valSpan.textContent = e.target.value;
-                });
-            }
-        });
-
-        document.getElementById('integrate-ext-btn').addEventListener('click', async () => {
-            await fetch('/api/inject_prolog_fact', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ fact_name: "composite_field_extension", args: ["field_K", "degree_16"] })
+                document.getElementById(`tab-btn-${tab}`).classList.add('active');
+                document.getElementById(`tab-content-${tab}`).style.display = 'block';
             });
-            await fetch('/api/inject_prolog_fact', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ fact_name: "primitive_element_gamma", args: ["gamma_gen", "composite_extension"] })
-            });
-            triggerAxiomMutation(true);
         });
 
-        document.getElementById('integrate-node-btn').addEventListener('click', () => {
-            document.getElementById('slider-Mr').value = "2.1";
-            document.getElementById('val-Mr').textContent = "2.1";
-            document.getElementById('slider-Mi').value = "1.2";
-            document.getElementById('val-Mi').textContent = "1.2";
-            triggerAxiomMutation(false);
+        document.getElementById('select-template-query').addEventListener('change', (e) => {
+            document.getElementById('input-prolog-query').value = e.target.value;
         });
 
+        document.getElementById('run-custom-query-btn').addEventListener('click', () => {
+            runPrologQuery(document.getElementById('input-prolog-query').value);
+        });
+
+        document.getElementById('inject-rule-btn').addEventListener('click', injectRuleString);
+        document.getElementById('eval-order-dependence-btn').addEventListener('click', evaluateOrderDependence);
+        document.getElementById('map-domain-btn').addEventListener('click', mapOntologicalDomain);
         document.getElementById('mutate-axioms-btn').addEventListener('click', () => triggerAxiomMutation(false));
         document.getElementById('prolog-deduction-btn').addEventListener('click', () => triggerAxiomMutation(true));
-        document.getElementById('recalc-flows-btn').addEventListener('click', () => triggerAxiomMutation(false));
-        document.getElementById('update-agent-btn').addEventListener('click', updateAgentPersonality);
-        document.getElementById('run-custom-query-btn').addEventListener('click', executeCustomQuery);
-        document.getElementById('inject-fact-btn').addEventListener('click', injectFact);
-        document.getElementById('retract-relation-btn').addEventListener('click', retractRelation);
 
-        window.addEventListener('mousedown', (e) => {
-            if (e.target.tagName === 'CANVAS') {
-                isDragging = true;
-                lastMouseX = e.clientX;
-                lastMouseY = e.clientY;
+        // 3D Canvas Interactivity (Zoom, Pan, Pick)
+        canvas.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            zoomLevel *= (e.deltaY > 0) ? 0.9 : 1.1;
+            zoomLevel = Math.max(0.3, Math.min(3.5, zoomLevel));
+        }, { passive: false });
+
+        canvas.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            dragButton = e.button;
+            lastMouseX = e.clientX;
+            lastMouseY = e.clientY;
+
+            if (e.button === 0) { // Left click pick
+                let clickedNode = pickNodeAtMouse(e.clientX, e.clientY);
+                if (clickedNode) {
+                    driftData.selectedNodeId = clickedNode.id;
+                    document.getElementById('inspector-title').textContent = `Node Inspector: ${clickedNode.id}`;
+                    document.getElementById('quantized-field-props').innerHTML = `<b>Node:</b> ${clickedNode.id}<br><b>Category:</b> ${clickedNode.category}<br><b>Field Potential &Psi;:</b> ${clickedNode.psi}<br><b>Phase Boundary:</b> ${driftData.phaseBoundaries.has(clickedNode.id) ? 'YES (R_ij &approx; Rc)' : 'NO'}`;
+                }
             }
         });
 
-        window.addEventListener('mousemove', (e) => {
+        canvas.addEventListener('mousemove', (e) => {
             if (isDragging) {
                 let dx = e.clientX - lastMouseX;
                 let dy = e.clientY - lastMouseY;
-                angleY += dx * 0.005;
-                angleX += dy * 0.005;
+
+                if (dragButton === 0 && !e.shiftKey) { // Orbit
+                    angleY += dx * 0.005;
+                    angleX += dy * 0.005;
+                } else { // Pan
+                    panX += dx;
+                    panY += dy;
+                }
                 lastMouseX = e.clientX;
                 lastMouseY = e.clientY;
             }
         });
 
-        window.addEventListener('mouseup', () => { isDragging = false; });
-
-        window.addEventListener('resize', () => {
-            resizeCanvas();
-        });
+        canvas.addEventListener('mouseup', () => { isDragging = false; });
+        canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+        window.addEventListener('resize', resizeCanvas);
 
         triggerAxiomMutation();
+        runPrologQuery("systemic_trap(?X, ?W)");
         requestAnimationFrame(render);
     </script>
 </body>
