@@ -185,6 +185,25 @@ class TestPipelineAndIntegration(unittest.TestCase):
         boundaries = prolog.parse_and_query_string("psychogeographical_boundary(?X, ?Y)")
         self.assertGreater(len(boundaries), 0)
 
+    def test_prolog_builtin_arithmetic_and_compound_queries(self):
+        prolog = PrologAxiomProgram()
+        arith_res = prolog.parse_and_query_string("?X is 10 + 5, ?X > 12")
+        self.assertEqual(len(arith_res), 1)
+        self.assertEqual(arith_res[0]["?X"], "15.0")
+
+        trans_res = prolog.parse_and_query_string("transitive_rel(saint_saturnin, ?Y, ?R)")
+        self.assertGreaterEqual(len(trans_res), 2)
+        y_nodes = [r["?Y"] for r in trans_res]
+        self.assertIn("a75_corridor", y_nodes)
+        self.assertIn("connected_car", y_nodes)
+
+    def test_prolog_rule_string_injection(self):
+        prolog = PrologAxiomProgram()
+        prolog.inject_rule_string("custom_path(?X, ?Y) :- linked(?X, ?Z), linked(?Z, ?Y).")
+        path_res = prolog.parse_and_query_string("custom_path(saint_saturnin, ?Y)")
+        self.assertGreater(len(path_res), 0)
+        self.assertEqual(path_res[0]["?Y"], "connected_car")
+
 
 if __name__ == "__main__":
     unittest.main()
