@@ -1,2717 +1,814 @@
-The Total Invalidity of Treating Society as a Game
+# The Total Invalidity of Treating Society as a Game
 
-Diogenes, Bourdieu, Proudhon, Piketty, Russell, Whitney, Arrow, Braess, Peters, and the Failure of Proxy Rule
+*Diogenes, Bourdieu, Proudhon, Piketty, Russell, Whitney, Arrow, Braess, Peters, and the Failure of Proxy Rule*
 
-Executive Thesis
+## Executive thesis
 
-The dominant metaphor of contemporary institutional life is the game.
+The dominant metaphor of contemporary institutional life is the game. People are told to compete, optimize, accumulate points, improve their ranking, maximize productivity, manage their “human capital,” build a personal brand, increase engagement, maintain a credit profile, acquire credentials, invest early, become employable, and adapt continuously to changing rules.
 
-People are told to compete, optimize, accumulate points, improve their ranking, maximize productivity, manage their “human capital,” build a personal brand, increase engagement, maintain a credit profile, acquire credentials, invest early, become employable, and continuously adapt to changing rules.
+The language is so familiar that its underlying assumption is rarely examined: human beings are players standing outside the system, choosing strategies inside a common rule set, with sufficiently comparable freedom to make outcomes intelligible as the result of play.
 
-The language is so familiar that its underlying assumption is rarely examined:
+That assumption is false as a general description of human existence.
 
-«that human beings are players standing outside the system, choosing strategies inside a common rule set, with sufficiently comparable freedom to make the outcome intelligible as the result of play.»
+Human existence is not a game in the relevant philosophical sense. Survival is not voluntarily entered. Biological dependence is not a rule chosen by players. Physical resources are not resettable. Starting positions are unequal. Rules are products of institutions and power relations, and some participants possess vastly greater capacities to alter those rules, acquire the underlying assets, absorb losses, wait for opportunities, or exit particular transactions.
 
-That assumption is false.
+Most importantly, participants do not merely play the system. They constitute it. Their actions alter prices, infrastructures, ecological conditions, institutions, information environments, and the future feasible sets of other participants. A social order therefore behaves less like a board game than like a path-dependent, multi-agent dynamical system with endogenous rules, unequal initial conditions, feedback, externalities, and irreversible state changes.
 
-Human existence is not a game in the relevant philosophical sense. Survival is not voluntarily entered. Biological dependence is not a rule chosen by players. Physical resources are not resettable. Starting positions are unequal. The rules are themselves products of institutions and power relations. Some participants possess vastly greater capacities to alter those rules, acquire the underlying assets, absorb losses, wait for opportunities, or simply exit particular transactions.
+The intellectual mistake can be stated mathematically. Let the actual state of society be a high-dimensional state
 
-Most importantly, the participants do not merely play the system.
+$$x_t \in X,$$
 
-They constitute it.
+let institutions expose participants to measurable proxies
 
-Their actions alter prices, infrastructures, ecological conditions, institutions, information environments, and the future feasible set of other participants. A social order therefore behaves less like a board game than like a path-dependent multi-agent dynamical system with endogenous rules, unequal initial conditions, feedback, externalities, and irreversible state changes.
+$$m_i = f_i(x_t),$$
 
-The intellectual mistake can be formulated mathematically.
+and let each participant optimize an institutional objective
 
-Let the actual state of society be a high-dimensional state:
+$$a_i^\ast \in \arg\max_{a_i \in A_i(x_t)} J_i(x_t,a_i).$$
 
-[
-x_t\in X.
-]
+Nothing in this construction implies that the profile of local choices
 
-Let institutions expose participants to measurable proxies:
+$$a^\ast = (a_1^\ast,\ldots,a_N^\ast)$$
 
-[
-m_i=f_i(x_t).
-]
+maximizes any coherent social objective $W(x)$. Once externalities, asymmetric power, information differences, strategic adaptation, irreversible depletion, and conflicting objectives are introduced, there is no general reason for local optimization to produce system-level rationality.
 
-Let each participant optimize some institutional objective:
+The central failure is therefore not simply “greed.” It is **proxy rule**:
 
-[
-a_i^\ast
-
-\arg\max_{a_i}J_i(x_t,a_i).
-]
-
-Nothing in this construction implies that:
-
-[
-{a_i^\ast}_{i=1}^{N}
-]
-
-maximizes any coherent social objective
-
-[
-W(x).
-]
-
-Indeed, once externalities, asymmetrical power, information differences, strategic adaptation, irreversible depletion, and conflicting objectives are introduced, there is no general reason for local optimization to produce system-level rationality.
-
-The central failure is therefore not simply “greed.”
-
-It is proxy rule:
-
-[
+$$
 \boxed{
 \text{measurement}
-\rightarrow
+\longrightarrow
 \text{target}
-\rightarrow
+\longrightarrow
 \text{optimization}
-\rightarrow
+\longrightarrow
 \text{distortion}
 }
-]
+$$
 
-combined with symmetrism:
+combined with **symmetrism**:
 
-[
+$$
 \boxed{
 \text{unequal positions}
-\rightarrow
+\longrightarrow
 \text{represented as equal players}
 }
-]
+$$
 
 and followed by individualization:
 
-[
+$$
 \boxed{
 \text{structural outcome}
-\rightarrow
+\longrightarrow
 \text{individual responsibility}.
 }
-]
+$$
 
-This essay calls the second operation symmetrism: the systematic production of false symmetry by describing materially asymmetric relations as though they were interactions between equivalent, freely choosing agents.
+This essay calls the second operation *symmetrism*: the systematic production of false symmetry by describing materially asymmetric relations as though they were interactions between equivalent, freely choosing agents.
 
-Symmetrism is not neutrality.
+Symmetrism is not neutrality. A description is not neutral merely because it gives both sides a sentence. It is neutral only insofar as it preserves the causal asymmetries relevant to the phenomenon being described. Giving equal rhetorical weight to unequal capacities can be a form of information destruction.
 
-A description is not neutral merely because it gives both sides a sentence.
-
-It is neutral only insofar as it preserves the causal asymmetries relevant to the phenomenon being described.
-
-Giving equal rhetorical weight to unequal capacities can be a form of information destruction.
-
-The fundamental proposition of this essay is therefore:
-
-«The gamified model of social order is invalid as a general model of human existence because it mistakes a complex, unequal, recursively interacting and materially constrained system for voluntary competition among equivalent players.»
-
-The argument proceeds through philosophy, political economy, logic, control theory, combinatorial optimization, social choice theory, and contemporary wealth accounting.
+> **Fundamental proposition:** The gamified model of social order is invalid as a general model of human existence because it mistakes a complex, unequal, recursively interacting, and materially constrained system for voluntary competition among equivalent players.
 
 ---
 
-I. The First Category Error: Life Is Not a Game
+## I. The first category error: life is not a game
 
-Bernard Suits provides an unusually useful starting point.
+Bernard Suits provides a useful starting point. In *The Grasshopper*, game-playing is characterized as a voluntary attempt to overcome unnecessary obstacles. A game separates a goal from the rules and means through which the goal is pursued: the player accepts constraints that are unnecessary for attaining the underlying goal because those constraints constitute the activity.
 
-In The Grasshopper, Suits defines game-playing in terms of a voluntary attempt to overcome unnecessary obstacles. His analysis distinguishes a goal from the rules and means through which the goal is pursued: the player accepts constraints that are deliberately unnecessary for attaining the underlying objective because those constraints constitute the activity of playing.¹
+$$
+\text{game} = \text{goal} + \text{voluntarily accepted unnecessary constraint}.
+$$
 
-This definition exposes the absurdity of treating ordinary economic survival as merely another game.
+Suppose the goal is to put a ball into a hole. The physically simplest method is to pick up the ball and put it there. Golf becomes golf precisely because the player voluntarily accepts a less efficient route. The unnecessary obstacle is the point.
 
-Suppose the goal is to put a ball into a hole.
+But consider food. A human being does not voluntarily adopt metabolism. Consider shelter: changing strategy does not abolish dependence on a physical environment. Consider oxygen: there is no meaningful opt-out from respiration. Consider aging: there is no rule-setting committee to which an individual can submit an alternative constitution.
 
-The physically simplest method is to pick up the ball and put it there.
+$$
+\text{voluntary obstacle} \neq \text{material constraint}.
+$$
 
-Golf becomes golf precisely because the player voluntarily accepts a less efficient route.
+The first is constitutive of play. The second is constitutive of existence. Calling the latter a game does not make it one; it merely hides the difference.
 
-The unnecessary obstacle is the point.
+Markets and institutions can contain games. Negotiation, entrepreneurship, sport, elections, and reputation contests may be modeled as games under specified assumptions. The error occurs when a local model is exported into a total ontology and used to explain why everyone has the same practical freedom.
 
-Formally:
-
-[
-\text{game}
-
-\text{goal}
-+
-\text{deliberately accepted constraint}.
-]
-
-But consider food.
-
-A human being does not voluntarily adopt metabolism.
-
-Consider shelter.
-
-A person cannot abolish their dependence upon a physical environment by changing strategy.
-
-Consider oxygen.
-
-There is no meaningful “opt-out” from respiration.
-
-Consider aging.
-
-There is no rule-setting committee to which the individual can submit an alternative constitution.
-
-The distinction is therefore fundamental:
-
-[
-\text{voluntary obstacle}
-\neq
-\text{material constraint}.
-]
-
-The first is constitutive of play.
-
-The second is constitutive of existence.
-
-Calling the latter a game does not make it one.
-
-It merely hides the difference.
-
----
-
-II. The Fiction of the Universal Player
+## II. The fiction of the universal player
 
 The game metaphor produces a fictional social ontology:
 
-[
-\text{human being}
-\rightarrow
-\text{player}.
-]
+$$
+\text{human being} \longrightarrow \text{player}.
+$$
 
-The player is presumed to possess:
+The imagined player has a starting position, a strategy, available moves, information, incentives, an objective, and an outcome. This abstraction can be useful inside a carefully defined model. It becomes ideological when it is mistaken for the complete reality.
 
-- a starting position,
-- a strategy,
-- a set of available moves,
-- information,
-- incentives,
-- an objective,
-- and an outcome.
+A human being enters the world with an already existing state $x_0$, which may include health, family resources, education, location, social networks, property, language, citizenship, infrastructure, cultural capital, and ecological conditions:
 
-This abstraction can be useful inside a carefully defined model.
-
-It becomes ideological when the abstraction is mistaken for the complete reality.
-
-A human being enters the world with an already existing state:
-
-[
-x_0.
-]
-
-That state can include:
-
-[
-x_0=
-(
-\text{health},
-\text{family resources},
-\text{education},
-\text{location},
-\text{social networks},
-\text{property},
-\text{language},
-\text{citizenship},
-\text{infrastructure},
-\text{cultural capital},
-\text{ecological conditions},
-\ldots
-).
-]
+$$
+ x_0 = (h, f, e, \ell, n, p, \lambda, c, i, k, q,\ldots).
+$$
 
 The individual subsequently chooses actions from a feasible set:
 
-[
-a_t\in A(x_t).
-]
+$$
+ a_t \in A(x_t).
+$$
 
-But crucially:
+Crucially, $A(x_t)$ depends on the state into which the person was born and on institutional decisions that preceded them. “Everyone is free to optimize” tells us almost nothing unless we also ask: **from which feasible set is each person optimizing?**
 
-[
-A(x_t)
-]
+Two people can be formally free to make a choice while possessing radically unequal capacities to exercise it. That is not an anomaly. It is a property of the state space.
 
-depends upon the state into which the person was born and upon institutional decisions that preceded them.
-
-The proposition
-
-[
-\text{“everyone is free to optimize”}
-]
-
-therefore tells us almost nothing unless we also examine:
-
-[
-\text{“what is the feasible set from which each person is optimizing?”}
-]
-
-Two people can be formally free to make a choice while possessing radically unequal capacities to exercise it.
-
-That is not an anomaly.
-
-It is a property of the state space.
-
----
-
-III. Symmetrism: False Neutrality as Information Loss
-
-This is the central methodological problem.
+## III. Symmetrism: false neutrality as information loss
 
 Suppose two agents interact:
 
-[
-A\leftrightarrow B.
-]
+$$
+A \leftrightarrow B.
+$$
 
-A conventional description may call them:
+A conventional description may call them “two rational market participants.” That can be formally correct and substantively useless. To understand the interaction, we may need variables for bargaining power $P$, exit capacity $E$, information $I$, loss-absorption capacity $R$, and control over the relevant substrate $S$.
 
-«two rational market participants.»
+If
 
-That description may be formally correct and substantively useless.
+$$
+P_A \gg P_B, \qquad E_A \gg E_B, \qquad R_A \gg R_B,
+$$
 
-To understand the interaction we may need:
+then describing the transaction only as $A \leftrightarrow B$ has removed precisely the variables that determine its practical character.
 
-[
-P_A,P_B
-]
+A structurally asymmetric relation
 
-for bargaining power,
+$$
+A \xrightarrow{\,P_A \gg P_B\,} B
+$$
 
-[
-E_A,E_B
-]
+is rhetorically transformed into
 
-for exit capacity,
+$$
+A \leftrightarrow B.
+$$
 
-[
-I_A,I_B
-]
+The result is then attributed to “strategy,” and the winner is described as the better player while the loser becomes the worse player:
 
-for information,
-
-[
-R_A,R_B
-]
-
-for capacity to absorb loss,
-
-and
-
-[
-S_A,S_B
-]
-
-for control over the relevant substrate.
-
-If:
-
-[
-P_A\gg P_B,
-]
-
-[
-E_A\gg E_B,
-]
-
-and
-
-[
-R_A\gg R_B,
-]
-
-then describing the transaction simply as:
-
-[
-A\leftrightarrow B
-]
-
-has removed precisely the variables that determine its practical character.
-
-That is symmetrism.
-
-The abstraction has become false by omission.
-
-The false-neutrality transformation
-
-A structurally asymmetric relation:
-
-[
-A
-\overset{P_A\gg P_B}{\longrightarrow}
-B
-]
-
-is rhetorically transformed into:
-
-[
-A
-\leftrightarrow
-B.
-]
-
-Then the result of the interaction is attributed to:
-
-[
-\text{strategy}.
-]
-
-And once the structural variables disappear, the outcome can be moralized as:
-
-[
-\text{winner}
-
-\text{better player},
-]
-
-[
-\text{loser}
-
-\text{worse player}.
-]
-
-The complete transformation is:
-
-[
+$$
 \boxed{
 \text{power asymmetry}
-\rightarrow
+\longrightarrow
 \text{symmetry}
-\rightarrow
+\longrightarrow
 \text{strategy}
-\rightarrow
+\longrightarrow
 \text{merit}.
 }
-]
+$$
 
-That is the ideological sequence that has to be broken.
+A tenant and a large property owner may both sign a contract. A worker and a multinational company may both sign a contract. A patient and an insurer may both enter an agreement. Formal consent establishes that the transaction was not necessarily physically compelled; it does not establish equal bargaining power.
 
-A tenant and a large property owner may both sign a contract.
+Likewise,
 
-A worker and a multinational company may both sign a contract.
+$$
+\text{choice among employers} \neq \text{choice whether to sell labor},
+$$
 
-A patient and an insurer may both enter an agreement.
+and
 
-A small producer and a dominant platform may both transact.
+$$
+\text{choice among landlords} \neq \text{choice whether to require shelter}.
+$$
 
-Formal consent establishes one fact:
+The first member concerns a market arrangement. The second concerns material necessity. Conflating them is symmetrism.
 
-[
-\text{the transaction was not necessarily physically compelled}.
-]
+## IV. Diogenes: defacing the currency of social value
 
-It does not establish another:
+The Cynic tradition associated with Diogenes supplies an ancient method for attacking this confusion. The phrase *to nomisma paracharattein* is conventionally understood as altering or defacing the currency. Its philosophical use can be extended into a challenge to conventional valuations: the fact that society recognizes a token does not establish that the token possesses the value society attributes to it.
 
-[
-\text{the parties possessed equal bargaining power}.
-]
+Modern society manufactures tokens such as salary, wealth, credit score, credential, rank, followers, engagement, KPI, market capitalization, and productivity score. Each may be useful. None should be mistaken for the thing itself.
 
-Those are different propositions.
+The Diogenean operation is:
 
-Likewise:
+$$
+M \longrightarrow ?
+$$
 
-[
-\text{choice among employers}
-\neq
-\text{choice whether to sell labor},
-]
+What remains when a token’s socially granted authority is removed? Can the individual still eat, think, love, create, repair, teach, care for another person, and inhabit the world without the ranking mechanism? The lantern does not produce a competing metric. It reveals the absence of the object behind the metric.
 
-and:
+## V. Bourdieu: how the scoreboard enters the mind
 
-[
-\text{choice among landlords}
-\neq
-\text{choice whether to require shelter}.
-]
+Pierre Bourdieu supplies a mechanism through which external classifications become internal necessities. Symbolic domination does not depend entirely on direct physical coercion. Institutional classifications acquire power when people learn to perceive imposed categories as natural descriptions of themselves and their position.
 
-The second member of each pair concerns a material necessity.
-
-The first concerns a market arrangement.
-
-Conflating them is symmetrism.
-
----
-
-IV. Diogenes: Defacing the Currency of Social Value
-
-The Cynic tradition provides an ancient technique for attacking exactly this type of confusion.
-
-The phrase associated with Diogenes,
-
-[
-\textit{to nomisma paracharattein},
-]
-
-is conventionally understood as altering or defacing the currency. The historical details are uncertain, but the philosophical tradition transformed the image into a broader challenge to conventional valuations.
-
-The important insight is methodological:
-
-«The fact that society recognizes a token does not establish that the token possesses the value society attributes to it.»
-
-Modern society manufactures enormous numbers of such tokens:
-
-[
-M=
-{
-\text{salary},
-\text{wealth},
-\text{credit score},
-\text{credential},
-\text{rank},
-\text{followers},
-\text{engagement},
-\text{KPI},
-\text{market capitalization},
-\text{productivity score}
-}.
-]
-
-Each can be useful.
-
-None should be mistaken for the thing itself.
-
-The central Diogenean operation is therefore:
-
-[
-M\rightarrow ?
-]
-
-What happens when the token's socially granted authority is removed?
-
-Can the individual still eat?
-
-Can they still think?
-
-Can they still love?
-
-Can they still create?
-
-Can they still repair?
-
-Can they still teach?
-
-Can they still care for another person?
-
-Can they still inhabit the world without the ranking mechanism?
-
-That is the lantern.
-
-The lantern does not produce a competing metric.
-
-It reveals the absence of the object behind the metric.
-
----
-
-V. Bourdieu: How the Scoreboard Enters the Mind
-
-Pierre Bourdieu supplies the mechanism through which external classifications become internal necessities.
-
-Symbolic domination does not depend entirely upon direct physical coercion. Institutional classifications acquire power when people learn to perceive the categories imposed upon them as natural descriptions of themselves and their position.
-
-The movement is:
-
-[
+$$
 \text{institutional classification}
-\rightarrow
+\longrightarrow
 \text{social expectation}
-\rightarrow
+\longrightarrow
 \text{internalization}
-\rightarrow
+\longrightarrow
 \text{self-evaluation}.
-]
+$$
 
-This is why gamification is more powerful than an ordinary command.
+A command says, “Do this.” A gamified system teaches, “This is what a successful person naturally does.” Institutional failure is reclassified as personal inadequacy. A housing market can produce insecurity, after which the narrative becomes “You failed to buy early enough.” A labor market can restructure occupations, after which the narrative becomes “You failed to remain competitive.” A credential system can make degrees increasingly necessary, after which the narrative becomes “You did not invest enough in yourself.”
 
-A command says:
+The causal structure is inverted: the institution causes the condition, while the person is taught to interpret themselves as the cause.
 
-«Do this.»
+## VI. The metric becomes the master
 
-A gamified system teaches the person:
+Suppose an underlying human or social property is $Q$ and an institution constructs a measure
 
-«This is what a successful person naturally does.»
+$$
+M = f(Q).
+$$
 
-Failure is thereby reclassified.
+Initially, $M \approx Q$ may be a sensible approximation. Once rewards and penalties are attached to $M$, however, rational agents respond to the metric itself. The system changes from
 
-Instead of:
-
-[
-\text{institutional failure},
-]
-
-the system produces:
-
-[
-\text{personal inadequacy}.
-]
-
-A housing market can produce housing insecurity.
-
-The resulting cultural narrative can nevertheless become:
-
-«“You failed to buy early enough.”»
-
-A labor market can restructure entire occupational categories.
-
-The individual narrative becomes:
-
-«“You failed to remain competitive.”»
-
-An educational system can make credentials increasingly necessary.
-
-The narrative becomes:
-
-«“You did not invest enough in yourself.”»
-
-An algorithmic workplace can intensify surveillance and performance pressure.
-
-The narrative becomes:
-
-«“You need better time management.”»
-
-The causal structure has been inverted.
-
-The institution causes the condition.
-
-The person is taught to interpret themselves as the cause.
-
-That is the psychological completion of symmetrism.
-
----
-
-VI. The Metric Becomes the Master
-
-The next transformation is mathematical.
-
-Suppose an underlying social or human property is represented by:
-
-[
-Q.
-]
-
-An institution constructs a measure:
-
-[
-M=f(Q).
-]
-
-Initially:
-
-[
-M
-\approx
-Q
-]
-
-may be a perfectly sensible approximation.
-
-But once rewards and penalties are attached to M, rational agents begin responding to the metric itself.
-
-The system changes:
-
-[
+$$
 \max Q
-]
+$$
 
-into:
+to
 
-[
+$$
 \max M.
-]
+$$
 
-Then the relationship between M and Q becomes endogenous.
+The relationship between $M$ and $Q$ then becomes endogenous. Goodhart’s law and Campbell’s law describe related failures of consequential measurement. The general form is:
 
-In the language of Goodhart's law, a statistical indicator can lose its usefulness as it becomes a target. Campbell's law describes the corresponding vulnerability of heavily consequential quantitative indicators to distortion.² ³
+$$
+\boxed{\arg\max M \not\equiv \arg\max Q.}
+$$
 
-The general form is:
+The distinction is causal, not semantic. If schools are rewarded for test scores, they optimize test scores. If platforms reward engagement, participants optimize engagement. If hospitals reward throughput, organizational behavior changes around throughput. If employers reward measurable activity, employees optimize what the monitoring system can see. Perfectly rational agents can produce the distortion; the failure is located in the objective function.
 
-[
-\boxed{
-\arg\max M
-\not\equiv
-\arg\max Q.
-}
-]
+## VII. Scalarization: collapse of a state space
 
-The distinction is not semantic.
+A human or ecological system may be represented as
 
-It is causal.
+$$
+ x=(x_1,\ldots,x_n) \in \mathbb{R}^n,
+$$
 
-If an institution pays schools for test scores, schools have an incentive to optimize test scores.
+while an institution compresses it into
 
-If a platform rewards engagement, participants have incentives to optimize engagement.
+$$
+ m=f(x) \in \mathbb{R}.
+$$
 
-If a hospital rewards throughput, organizational behavior changes around throughput.
+Scalarization is not automatically illegitimate. Engineering uses it constantly. The rigorous question is whether $m$ preserves distinctions relevant to the decision. If not, there exist materially different states $x_1 \neq x_2$ such that
 
-If an employer rewards measurable activity, employees optimize what the monitoring system can see.
+$$
+ f(x_1)=f(x_2).
+$$
 
-The system does not require dishonest agents.
+The problem is especially severe when discarded coordinates affect future dynamics. Two landscapes may have identical short-term economic output,
 
-Perfectly rational agents can produce the distortion.
+$$
+ f(x_A)=f(x_B),
+$$
 
-The failure is located in the objective function.
+while one has healthy groundwater, intact soils, mature trees, and diverse biological communities and the other has degraded soils, depleted groundwater, and simplified ecosystems. Their transition functions differ:
 
----
+$$
+ F(x_A,u) \neq F(x_B,u).
+$$
 
-VII. Scalarization: The Collapse of a State Space
+The scalar has erased information not only about the present but about the future.
 
-A human or ecological system may be represented by:
+## VIII. Proudhon: the player does not create the board
 
-[
-x=(x_1,x_2,\ldots,x_n)\in\mathbb R^n.
-]
+Proudhon’s analysis of property becomes especially powerful through the game metaphor. His concept of *force collective* emphasizes that coordinated production can generate productive capacities not present in the isolated actions of the individuals composing an organization.
 
-An institution may compress it into:
+The economic system contains workers, owners, infrastructure, institutions, platforms, legal rights, knowledge, commons, public goods, and natural systems. Some participants own the board; some control access to it; some write the software governing it; some can change the rules; others occupy a square whose rent is determined elsewhere.
 
-[
-m=f(x)\in\mathbb R.
-]
+There is a decisive difference between playing inside a system and possessing control over the conditions under which others play. The latter is power over the state space itself.
 
-Scalarization is not automatically illegitimate.
+## IX. Piketty: differential accumulation without magical laws
 
-Engineering does it constantly.
+The useful interpretation of Piketty’s $r-g$ mechanism is not that $r>g$ makes inequality inevitably explode. The more rigorous claim is that $r>g$ creates a structural tendency toward differential accumulation when capital owners receive returns above aggregate income growth and countervailing mechanisms do not sufficiently offset the divergence.
 
-The rigorous question is:
+In a simplified model,
 
-«Does m preserve all distinctions relevant to the decision being made?»
+$$
+W_{t+1}=W_t(1+r), \qquad Y_{t+1}=Y_t(1+g),
+$$
 
-If not, there exist states
+so
 
-[
-x_1\neq x_2
-]
-
-such that:
-
-[
-f(x_1)=f(x_2).
-]
-
-They receive the same score despite being materially different states.
-
-The problem is especially severe when the discarded coordinates affect future dynamics.
-
-Consider two landscapes with identical short-term economic output:
-
-[
-f(x_A)=f(x_B).
-]
-
-One possesses healthy groundwater, intact soils, mature trees and diverse biological communities.
-
-The other possesses degraded soils, depleted groundwater and simplified ecosystems.
-
-If the metric records only current monetary output, the two states can appear equivalent.
-
-Dynamically they are not.
-
-Their future transition functions differ:
-
-[
-F(x_A,u)\neq F(x_B,u).
-]
-
-The scalar has erased not merely information about the present.
-
-It has erased information about the future.
-
-That is the decisive weakness of crude optimization.
-
----
-
-VIII. Proudhon: The Player Does Not Create the Board
-
-Proudhon's analysis of property becomes especially powerful when read through the game metaphor.
-
-The important concept is force collective.
-
-Coordinated human production can generate productive capacities that do not exist in the isolated actions of the individuals composing the organization. Proudhon's analysis therefore challenges the fiction that productive output can always be decomposed cleanly into isolated individual contributions.⁴
-
-This creates a fundamental problem for the universal-player model.
-
-The economic system contains not merely players.
-
-It contains:
-
-[
-\text{workers},
-\text{owners},
-\text{infrastructure},
-\text{institutions},
-\text{platforms},
-\text{legal rights},
-\text{knowledge},
-\text{commons},
-\text{public goods},
-\text{natural systems}.
-]
-
-Some participants own the board.
-
-Some control access to it.
-
-Some write software governing the board.
-
-Some can change the rules.
-
-Some merely occupy a square whose rent is determined elsewhere.
-
-The phrase “everyone participates in the market” therefore conceals a hierarchy of roles.
-
-There is a decisive difference between:
-
-[
-\text{playing inside a system}
-]
-
-and:
-
-[
-\text{possessing control over the conditions under which others play}.
-]
-
-The latter is power over the state space itself.
-
----
-
-IX. Piketty: Differential Accumulation Without Magical Laws
-
-The same asymmetry appears dynamically in wealth.
-
-The most useful interpretation of Piketty's r-g mechanism is not:
-
-[
-r>g
-\Rightarrow
-\text{inequality inevitably explodes}.
-]
-
-That would be too crude.
-
-The more rigorous proposition is:
-
-[
-r>g
-]
-
-creates a structural tendency toward differential accumulation when owners of capital receive returns that exceed the growth rate of aggregate income and when other mechanisms do not sufficiently counteract the divergence.
-
-A simple representation is:
-
-[
-W_{t+1}=W_t(1+r)
-]
-
-against:
-
-[
-Y_{t+1}=Y_t(1+g).
-]
-
-Then:
-
-[
+$$
 \frac{W_t}{Y_t}
-
+=
 \frac{W_0}{Y_0}
-\left(
-\frac{1+r}{1+g}
-\right)^t.
-]
+\left(\frac{1+r}{1+g}\right)^t.
+$$
 
-When:
-
-[
-r>g,
-]
-
-the ratio tends upward in the simplified model.
-
-Actual economies contain taxation, consumption, capital losses, inflation, inheritance, policy changes, productivity growth, dilution, redistribution, and many other mechanisms.
-
-Therefore r>g is not a perpetual inequality theorem.
-
-It is a powerful accumulation mechanism.
-
-And accumulation changes the optimization problem.
+When $r>g$, the ratio tends upward in this simplified model. Actual economies include taxes, consumption, capital losses, inflation, inheritance, policy, productivity growth, dilution, and redistribution. Thus $r>g$ is not a perpetual inequality theorem; it is a powerful accumulation mechanism.
 
 Wealth generates optionality:
 
-[
-W
-\rightarrow
-\text{risk-bearing capacity}
-\rightarrow
-\text{investment opportunities}
-\rightarrow
-\text{future wealth}.
-]
+$$
+W \longrightarrow \text{risk-bearing capacity}
+\longrightarrow \text{investment opportunities}
+\longrightarrow \text{future wealth}.
+$$
 
-Lack of wealth can produce the opposite feedback:
+Lack of wealth can generate the opposite feedback:
 
-[
+$$
 \text{income shock}
-\rightarrow
-\text{debt}
-\rightarrow
-\text{forced sale}
-\rightarrow
-\text{asset loss}
-\rightarrow
-\text{lower future optionality}.
-]
+\longrightarrow \text{debt}
+\longrightarrow \text{forced sale}
+\longrightarrow \text{asset loss}
+\longrightarrow \text{lower future optionality}.
+$$
 
-The phrase “play better” ignores this state dependence.
+“Play better” ignores this state dependence. The player’s state determines the strategy space.
 
-The player is not merely choosing a strategy.
+## X. The worker enters the control loop
 
-The player's state determines the strategy space.
+Algorithmic management makes the game metaphor still less adequate. The structure is no longer merely
 
----
+$$
+\text{worker} \longrightarrow \text{output}.
+$$
 
-X. The Worker Enters the Control Loop
+It becomes
 
-The game metaphor becomes still stranger when algorithmic management enters the workplace.
+$$
+ x_t \longrightarrow m_t \longrightarrow u_t \longrightarrow x_{t+1},
+$$
 
-The European Commission reported from its 2024–2025 AIM-WORK survey that 37% of workers said employers used AI or other tools to monitor working hours, while 24% reported that schedules were set automatically. The Commission describes algorithmic management as including automatic allocation or evaluation of work.
+where behavior is measured, the measurement determines incentives, incentives modify behavior, and modified behavior generates new measurements. This is a feedback controller.
 
-The structure is no longer simply:
+$$
+\boxed{\text{measurement becomes causal}.}
+$$
 
-[
-\text{worker}\rightarrow\text{output}.
-]
+The scoreboard is no longer simply observing the player; it participates in producing the next move. “Just optimize your score” is therefore not an innocent description. The score is part of the machinery generating the behavior it measures.
 
-It becomes:
+## XI. From game theory to control theory
 
-[
-x_t
-\rightarrow
-m_t
-\rightarrow
-u_t
-\rightarrow
-x_{t+1}.
-]
+For each actor $i$, write
 
-The worker generates measurable behavior.
+$$
+ a_i^\ast \in \arg\max_{a_i \in A_i(x_t)} J_i(x_t,a_i;\theta_t).
+$$
 
-The system measures it.
+The institutional system combines those responses through
 
-The measurement determines incentives.
+$$
+ x_{t+1}=F\bigl(x_t,a_1^\ast,\ldots,a_N^\ast,\theta_t,\varepsilon_t\bigr),
+$$
 
-The incentives modify behavior.
+where $x_t$ is the state, $\theta_t$ institutional parameters, and $\varepsilon_t$ shocks or noise. Because $F$ depends on the actions being optimized, agents alter the environment in which subsequent optimization occurs:
 
-The modified behavior generates new measurements.
-
-This is a feedback controller.
-
-The crucial transition is:
-
-[
-\boxed{
-\text{measurement becomes causal}.
-}
-]
-
-The scoreboard is no longer merely observing the player.
-
-The scoreboard is participating in the production of the next move.
-
-At that point, “just optimize your score” is no longer an innocent description.
-
-The score is part of the machinery generating the behavior it measures.
-
----
-
-XI. From Game Theory to Control Theory
-
-The contemporary social system is therefore often better described as a set of interacting controllers.
-
-For each actor i:
-
-[
-a_i^\ast
-
-\arg\max_{a_i}
-J_i(x_t,a_i).
-]
-
-The institutional system combines those actions:
-
-[
-x_{t+1}
-
-F(
-x_t,
-a_1^\ast,\ldots,a_N^\ast,
-\theta_t,
-\varepsilon_t
-).
-]
-
-Here:
-
-- x_t is the state;
-- a_i^\ast is each actor's optimized response;
-- \theta_t represents institutional parameters;
-- \varepsilon_t represents noise or shocks.
-
-The important point is that:
-
-[
-F
-]
-
-depends on the actions being optimized.
-
-The agents therefore alter the very environment in which subsequent optimization occurs.
-
-This produces recursive dynamics:
-
-[
-\boxed{
+$$
 \text{metric}
-\rightarrow
+\longrightarrow
 \text{optimization}
-\rightarrow
+\longrightarrow
 \text{behavior}
-\rightarrow
+\longrightarrow
 \text{changed metric}
-\rightarrow
+\longrightarrow
 \text{new optimization}.
-}
-]
+$$
 
-The resulting system may have equilibria.
+The system may have equilibria, but equilibrium does not mean desirability. It means only that responses are mutually consistent under specified incentives. A system can converge perfectly to an undesirable state.
 
-But equilibrium does not mean desirability.
+## XII. Whitney: when greedy optimization works
 
-It merely means that the agents' responses are mutually consistent under the specified incentives.
+Whitney’s matroid theory is relevant only under precise structural conditions. For a matroid $M=(E,\mathcal I)$, the independent sets satisfy heredity and the exchange axiom. With nonnegative weights, the greedy algorithm that repeatedly selects the highest-weight feasible element produces a maximum-weight independent set.
 
-A system can converge perfectly to an undesirable state.
+The lesson is not that greedy optimization is universally rational. It is that greedy optimality is a theorem about a particular feasible-set structure:
 
----
+$$
+\boxed{\text{greedy optimality is a theorem about structure, not intention}.}
+$$
 
-XII. Whitney: When Greedy Optimization Works — and When the Structure Matters
+If the feasible sets lack the relevant exchange property, if benefits are non-additive, if choices affect future feasibility, or if costs are coupled, no general theorem guarantees global optimality. Social systems commonly contain complementarities, congestion, path dependence, irreversible depletion, and strategic interaction. They should not be assumed to be matroids merely because individuals can rank their options.
 
-The invocation of Whitney's matroid theory is useful only if stated precisely.
+## XIII. Braess: more options can produce a worse system
 
-For a matroid
+Braess’s paradox demonstrates that individually rational route choices can produce an equilibrium with greater travel cost for everyone than another allocation. Adding an apparently beneficial connection can make the equilibrium worse.
 
-[
-\mathcal M=(E,\mathcal I),
-]
+The structural distinction is
 
-the independence structure possesses an augmentation property that supports the correctness of greedy optimization for maximum-weight independent-set problems.
-
-The corresponding Rado–Edmonds theory establishes the special status of matroidal structures for greedy optimization.
-
-The lesson is not:
-
-[
-\text{society is not a matroid}.
-]
-
-That statement would itself require a formal construction.
-
-The lesson is more fundamental:
-
-[
-\boxed{
-\text{greedy optimality is a theorem about structure, not about good intentions}.
-}
-]
-
-A greedy procedure works reliably because the underlying feasible sets have the right combinatorial properties.
-
-Remove those properties and there is no general theorem guaranteeing global optimality.
-
-That is precisely what should be asked of social optimization.
-
-What is the feasible-set structure?
-
-Are choices independent?
-
-Can today's choice reduce tomorrow's feasible options?
-
-Does adding one element preserve feasibility?
-
-Are benefits additive?
-
-Are costs separable?
-
-Can states be reversed?
-
-If the answers are negative, then the claim
-
-«“everyone should simply optimize locally”»
-
-has no mathematical basis for producing a global optimum.
-
----
-
-XIII. Braess: More Options Can Produce a Worse System
-
-Braess's paradox provides a particularly vivid demonstration.
-
-In certain congested networks, independently rational route choices can lead to an equilibrium in which every participant experiences greater travel cost than under a different allocation; adding an apparently beneficial connection can make the equilibrium worse.
-
-The structure is:
-
-[
+$$
 \text{individual cost minimization}
 \not\Rightarrow
 \text{system cost minimization}.
-]
+$$
 
-The result does not depend upon stupid participants.
+The result does not require stupid or dishonest participants. It can arise when each participant responds correctly to a network whose costs depend on everyone’s choices. The failure lies in the network, not in a defective morality of the users.
 
-It can occur when every participant acts according to the correct local incentive.
+## XIV. Euler: the network is the object
 
-The failure lies in the network.
+Euler’s bridges problem showed that the relevant question may concern structural relations rather than the physical appearance of a landscape. Represent a system as a graph
 
-This is precisely the point that individualist optimization rhetoric habitually misses.
+$$
+G=(V,E),
+$$
 
-Suppose:
+with nodes representing agents or institutions and edges representing dependence, ownership, credit, information, labor, supply, legal authority, or ecological interaction.
 
-[
-J_i(a_i)
-]
+The individual “player” may not be the correct unit of analysis. Sometimes the correct object is the network $G$. A worker can be formally free while occupying a node with one practical exit. A firm can be formally constrained while occupying a highly connected node capable of shifting costs through the network. Ignoring the graph and describing only individual choices is another form of symmetrism.
 
-is each participant's private objective.
+## XV. Arrow: there is no natural social objective
 
-The collective objective is:
+Arrow’s impossibility theorem adds a different constraint. For sufficiently rich domains of individual preference orderings, no social welfare function can satisfy all of the standard conditions simultaneously. This is not a proof that collective decision-making is impossible. It is a proof that aggregation requires explicit institutional choices and cannot be treated as a neutral mathematical operation.
 
-[
-W(a_1,\ldots,a_N)
+A gamified worldview often smuggles in a universal objective:
 
-\sum_i J_i(a_1,\ldots,a_N)
-]
+$$
+W(x)=\text{whatever produces the highest score}.
+$$
 
-or, in many real systems, something more complicated.
+But whose score, whose preferences, over which alternatives, with what rights protected, and with what treatment of future generations or ecological constraints? There is no naturally given scalar called “society’s utility.” A social objective must be constructed, its axioms declared, its exclusions made visible, and its distributive consequences examined.
 
-There is no reason generally for:
+## XVI. The social contract is not a single algorithm
 
-[
-\arg\max_{a_i}J_i
-]
+Modern societies contain overlapping rule systems: law, markets, bureaucracy, family, finance, property, technology, education, media, and ecological constraints. Each contains different objectives. A corporation may maximize profit, a household may minimize survival risk, a financial institution may maximize risk-adjusted return, a bureaucracy may minimize administrative deviation, and a platform may maximize engagement. An ecosystem has no contractual objective at all; it evolves according to physical and biological dynamics.
 
-to coincide with:
+There is no guarantee that these objectives are mutually compatible. Society is better modeled as a coupled system of partially incompatible objective functions than as a multiplayer board with one scoreboard.
 
-[
-\arg\max_{\mathbf a}W(\mathbf a).
-]
+## XVII. Housing: one object, different objective functions
 
-Local rationality is not global rationality.
+To an occupant, housing is shelter. To a leveraged asset owner, the same unit may be an asset plus collateral, capital gain, rental claim, and tax position:
 
-That is not a moral judgment.
+$$
+H_{\text{owner}}
+=\text{asset}+\text{collateral}+\text{capital gain}+\text{rental claim}.
+$$
 
-It is a theorem-sized fact about interacting optimization problems.
+A rise in housing prices can therefore produce
 
----
-
-XIV. Euler: The Network Is the Object
-
-Euler's Königsberg bridges problem is historically important precisely because it showed that the relevant question was not the physical appearance of a landscape but the structural relations between its elements.
-
-The problem becomes easier when the system is represented as a graph:
-
-[
-G=(V,E).
-]
-
-The exact geometry disappears.
-
-What matters are invariants of connectivity and degree.
-
-This is an instructive warning for economics.
-
-The individual “player” may not be the correct unit of analysis.
-
-Sometimes the correct object is:
-
-[
-G_{\text{social}},
-]
-
-with nodes representing agents or institutions and edges representing:
-
-- dependence,
-- ownership,
-- credit,
-- information,
-- labor,
-- infrastructure,
-- supply,
-- legal authority,
-- ecological interaction.
-
-Then the outcome cannot be understood by studying isolated vertices.
-
-The structure of the graph matters.
-
-A worker can be individually “free” while occupying a node with a single practical exit.
-
-A firm can be formally constrained while occupying a highly connected node capable of shifting costs throughout the network.
-
-The graph contains the asymmetry.
-
-Ignoring the graph and describing only individual choices is another form of symmetrism.
-
----
-
-XV. Arrow: There Is No Natural Social Objective Function
-
-Arrow's impossibility theorem adds a different constraint.
-
-For a sufficiently rich domain of individual preference orderings over more than two alternatives, no social welfare function can satisfy all of the standard conditions Arrow specifies simultaneously. The theorem is not a proof that collective decision-making is impossible; it establishes an incompatibility among particular desirable properties of an aggregation rule.
-
-This matters because the gamified worldview often smuggles in a fictional universal objective:
-
-[
-W(x)
-
-\text{whatever produces the highest score}.
-]
-
-But whose score?
-
-Whose preferences?
-
-Over what alternatives?
-
-With what rights protected independently of preference?
-
-How are future generations represented?
-
-How are ecological constraints represented?
-
-What happens when one person prefers an outcome that imposes an irreversible cost upon everyone else?
-
-There is no natural scalar called:
-
-[
-\text{“society's utility.”}
-]
-
-A social objective has to be constructed.
-
-Its axioms have to be declared.
-
-Its exclusions have to be visible.
-
-Its distributional consequences have to be examined.
-
-The supposed neutrality of a universal objective function is therefore itself a political and philosophical choice.
-
----
-
-XVI. The Social Contract Is Not a Single Algorithm
-
-This leads to a necessary correction of the phrase “the social contract.”
-
-There is no single algorithm executing a single coherent objective function.
-
-Modern societies contain overlapping rule systems:
-
-[
-\mathcal S
-
-{
-\text{law},
-\text{markets},
-\text{bureaucracy},
-\text{family},
-\text{finance},
-\text{property},
-\text{technology},
-\text{education},
-\text{media},
-\text{ecological constraints}
-}.
-]
-
-Each contains different objectives.
-
-A corporation may maximize:
-
-[
-\Pi_{\text{firm}}.
-]
-
-A household may minimize:
-
-[
-C_{\text{survival}}.
-]
-
-A financial institution may maximize:
-
-[
-R_{\text{risk-adjusted}}.
-]
-
-A bureaucratic unit may minimize:
-
-[
-K_{\text{administrative deviation}}.
-]
-
-A platform may maximize:
-
-[
-E_{\text{engagement}}.
-]
-
-An ecosystem, of course, has no contractual objective at all.
-
-It simply evolves according to its physical dynamics.
-
-These systems interact.
-
-There is no guarantee that their objectives are mutually compatible.
-
-Therefore “society” cannot safely be modeled as:
-
-[
-\max W
-]
-
-unless the construction of W is itself explained.
-
-The more accurate formulation is:
-
-[
-\boxed{
-\text{society is a coupled system of partially incompatible objective functions}.
-}
-]
-
-That is a coordination problem.
-
-It is not a multiplayer board game with a single scoreboard.
-
----
-
-XVII. Housing: One Object, Two Objective Functions
-
-Housing offers a clean example.
-
-To an occupant, housing is:
-
-[
-\text{shelter}.
-]
-
-To a leveraged asset owner, the same housing unit may be:
-
-[
-\text{asset}
-+
-\text{collateral}
-+
-\text{capital gain}
-+
-\text{rental claim}.
-]
-
-These are not equivalent descriptions.
-
-A rise in housing prices can therefore produce simultaneously:
-
-[
+$$
 \Delta W_{\text{owner}}>0
-]
+$$
 
-and:
+while producing
 
-[
+$$
 \Delta A_{\text{entrant}}<0,
-]
+$$
 
-where A_{\text{entrant}} denotes affordability or purchasing capacity for a new household.
+where $A_{\text{entrant}}$ denotes affordability or purchasing capacity for a new household. Both parties observe the same price, but from opposite causal positions in the system. Calling both simply “market participants” conceals the conflict.
 
-The contradiction is not that arithmetic has become inconsistent.
+## XVIII. Financial claims and physical reality
 
-The contradiction is between different positions in the system.
+Let financial claims grow at rate $r$ and real economic output at rate $g$:
 
-Calling both positions simply “market participants” conceals the conflict.
+$$
+C_{t+1}=(1+r)C_t, \qquad Y_{t+1}=(1+g)Y_t.
+$$
 
-Again:
+Then
 
-[
-\boxed{
-\text{formal symmetry}
-\neq
-\text{economic equivalence}.
-}
-]
-
-The person who owns an appreciating necessity experiences appreciation as an asset gain.
-
-The person who requires that necessity experiences the same appreciation as an entry barrier.
-
-The two agents are looking at the same price from opposite sides of the balance sheet.
-
-A neutral analysis has to preserve both causal positions.
-
----
-
-XVIII. Financial Claims and Physical Reality
-
-The same distinction appears at macroeconomic scale.
-
-Let financial claims grow at:
-
-[
-C_{t+1}=(1+r)C_t
-]
-
-and the underlying flow of real economic output at:
-
-[
-Y_{t+1}=(1+g)Y_t.
-]
-
-Then:
-
-[
+$$
 \frac{C_t}{Y_t}
+=\frac{C_0}{Y_0}
+\left(\frac{1+r}{1+g}\right)^t.
+$$
 
-\frac{C_0}{Y_0}
-\left(
-\frac{1+r}{1+g}
-\right)^t.
-]
+If $r>g$, claims grow faster than the underlying aggregate flow in this simplified representation. But a bond, equity share, or derivative is a claim on future resources, not an independent physical substrate. When claims outrun the capacity of the underlying economy, adjustment must occur through some combination of default, restructuring, losses, inflation, taxation, redistribution, growth, or asset repricing.
 
-If:
+A spreadsheet does not abolish physics. A claim is not the thing claimed.
 
-[
-r>g,
-]
+## XIX. GDP is a flow; wealth is a stock
 
-financial claims grow faster than the simple underlying aggregate.
+GDP measures production of goods and services during a period. Comprehensive wealth measures the asset base supporting future production and well-being, including produced capital, human capital, natural capital, and net foreign assets. The accounting distinction is:
 
-But a financial claim is not identical to physical output.
+$$
+\text{flow} \neq \text{stock}.
+$$
 
-A bond is a claim on future resources.
+Therefore,
 
-An equity share is a claim on future income and assets.
+$$
+\Delta GDP>0 \not\Rightarrow \Delta W_{\text{real}}>0.
+$$
 
-A derivative is a contract whose value depends on underlying variables.
+An economy can increase current output while degrading the assets that support future output. A scoreboard records a current flow; a civilization depends on the stock.
 
-None constitutes an independent physical substrate.
+## XX. The ecological state cannot be reset
 
-When claims outrun the capacity of the underlying economy to validate them, the system must adjust through some combination of:
+Let an ecological stock evolve as
 
-[
-\text{defaults},
-\text{restructuring},
-\text{losses},
-\text{inflation},
-\text{taxation},
-\text{redistribution},
-\text{growth},
-\text{asset repricing}.
-]
+$$
+K_{t+1}=K_t+R(K_t)-E_t,
+$$
 
-The spreadsheet does not abolish physics.
+where $R(K_t)$ is regeneration and $E_t$ extraction or disturbance. If extraction remains above regeneration,
 
-A claim is not the thing claimed.
-
-That distinction is foundational.
-
----
-
-XIX. GDP Is a Flow; Wealth Is a Stock
-
-The World Bank's Changing Wealth of Nations 2024 makes this distinction explicit.
-
-GDP measures production of goods and services during a period.
-
-Comprehensive wealth attempts to measure the asset base supporting future production and well-being, including produced capital, human capital, natural capital, and net foreign assets. The World Bank explicitly uses changes in real wealth per capita as a sustainability indicator alongside GDP.
-
-The accounting distinction can be represented as:
-
-[
-\text{flow}
-\neq
-\text{stock}.
-]
-
-Therefore:
-
-[
-\Delta GDP>0
-]
-
-does not logically imply:
-
-[
-\Delta W_{\text{real}}>0.
-]
-
-An economy can increase current output while degrading assets that support future output.
-
-The World Bank specifically notes that GDP does not reveal whether growth is achieved by accumulating or depleting the underlying productive base and highlights natural assets whose scarcity and limited substitutability complicate simplistic aggregation.
-
-This is an extremely important correction to gamified economic thinking.
-
-A scoreboard records the current flow.
-
-A civilization depends upon the stock.
-
----
-
-XX. The Ecological State Cannot Be Reset
-
-Suppose an ecological stock evolves according to:
-
-[
-K_{t+1}
-
-K_t+R(K_t)-E_t,
-]
-
-where:
-
-- K_t is the ecological stock,
-- R(K_t) is regeneration,
-- E_t is extraction or disturbance.
-
-If extraction remains above regeneration:
-
-[
+$$
 E_t>R(K_t),
-]
+$$
 
-then:
+then the stock declines. If regeneration depends on the stock itself, the process may contain thresholds:
 
-[
-K_{t+1}<K_t.
-]
+$$
+R=R(K), \qquad K_{t+1}<K_t.
+$$
 
-That seems trivial.
+Below a critical level, regeneration can change qualitatively. A numerical decline is therefore not always reversible by a numerical increase. There is no universal “undo” command. Irreversible or slowly reversible stocks must be treated as first-class constraints rather than scoreboard points.
 
-The nontrivial point is that R may itself depend upon K.
+## XXI. Peters: the ensemble is not the individual
 
-Then:
+For a multiplicative stochastic process,
 
-[
-R=R(K).
-]
+$$
+ dX_t=\mu X_t\,dt+\sigma X_t\,dW_t,
+$$
 
-The system may possess thresholds below which regeneration changes qualitatively.
+one has
 
-Consequently:
+$$
+ X_t=X_0\exp\left[\left(\mu-\frac{\sigma^2}{2}\right)t+\sigma W_t\right].
+$$
 
-[
-K_t\rightarrow K^\ast
-]
+The expected value and the long-run time-average growth rate are generally different:
 
-can represent more than a numerical decline.
+$$
+ g_{\text{ensemble}}=\mu, \qquad
+ g_{\text{time}}=\mu-\frac{\sigma^2}{2}.
+$$
 
-It can represent entry into a different dynamical regime.
+An increasing aggregate can coexist with highly unequal, repeatedly exposed, or path-dependent individual trajectories. “The economy grows” is not interchangeable with “your trajectory improves.” These are mathematically different claims.
 
-A financial accounting system may register:
+## XXII. Inequality is a state-space problem
 
-[
-+$X
-]
+Inequality is not merely a difference in results after equal play. It changes the feasible strategy space. A person with liquid assets can postpone employment, absorb a failed investment, or relocate. A person dependent on the next paycheck cannot indefinitely postpone income.
 
-of current production.
+Thus,
 
-The ecosystem may simultaneously have crossed a threshold that changes its future trajectory.
+$$
+\text{same formal choice} \not\Rightarrow \text{same practical choice}.
+$$
 
-There is no “undo” command.
+The difference lies in the state variable. “Equal opportunity to play” is meaningless without specifying the state from which play begins.
 
-This is why irreversible stocks must not be treated as ordinary scoreboard points.
+## XXIII. Inheritance and the transmission of starting conditions
 
----
+Wealth does not begin at zero for every new participant. A successor state is partly produced by the previous generation:
 
-XXI. Peters: The Ensemble Is Not the Individual
+$$
+ x_{0,\,t+1}=T\bigl(x_{T,t},z_t\bigr),
+$$
 
-Ole Peters' work on ergodicity provides another mathematical attack on the universal-player model.
+where $x_{T,t}$ is the prior generation’s terminal state and $z_t$ other transmission mechanisms. Property, education, networks, health, location, and financial resources cross generational boundaries. A genuine reset would require a common baseline:
 
-For a multiplicative stochastic process such as:
+$$
+ x_0^{(n+1)}=\bar{x}_0 \quad \text{for all }n,
+$$
 
-[
-dx=x(\mu,dt+\sigma,dW_t),
-]
+which actual societies do not possess. The “new game” begins inside an already running dynamic system.
 
-the solution is:
+## XXIV. Surveillance capitalism and the causal loop
 
-[
-x(t)
+Surveillance capitalism turns experience into data for prediction and intervention. A generalized loop is
 
-x(0)
-\exp
-\left[
-\left(
-\mu-\frac{\sigma^2}{2}
-\right)t
-+
-\sigma W_t
-\right].
-]
-
-The expectation value and the long-run time-average behavior are not generally the same.
-
-For logarithmic growth:
-
-[
-g_{\text{time}}
-
-\mu-\frac{\sigma^2}{2}.
-]
-
-The distinction is central to Peters' critique of treating ensemble averages as though they automatically represented the lived trajectory of an individual.
-
-The philosophical implication is devastating for simplistic “economic game” rhetoric.
-
-Suppose:
-
-[
-E[x_t]
-]
-
-increases.
-
-That tells us something about the ensemble.
-
-It does not automatically tell us what happens to a particular trajectory:
-
-[
-x(t).
-]
-
-A society can therefore become richer in aggregate while individual paths remain:
-
-- highly unequal,
-- repeatedly exposed to ruin,
-- path-dependent,
-- and radically different from the aggregate mean.
-
-The statement
-
-«“the economy grows”»
-
-cannot be substituted for:
-
-«“your trajectory through the economy will improve.”»
-
-Those are mathematically different claims.
-
----
-
-XXII. Inequality Is a State-Space Problem
-
-Contemporary inequality data make the difference between “players” especially visible.
-
-The World Inequality Report 2026 estimates that in 2025 the richest 10% held about three-quarters of global personal wealth while the bottom half held about 2%. At the extreme end, roughly 56,000 adults in the global top 0.001% held about three times as much wealth as the entire bottom half of the world's adult population.
-
-These figures do not, by themselves, establish a moral conclusion.
-
-They establish a structural fact:
-
-[
-W_{\text{initial}}
-]
-
-is radically heterogeneous.
-
-The feasible strategy space therefore varies with the initial state.
-
-A person possessing enormous liquid assets can survive a failed investment.
-
-A person whose entire wealth is one dwelling cannot necessarily survive a comparable percentage loss.
-
-A wealthy individual can postpone employment.
-
-A financially precarious individual cannot indefinitely postpone income.
-
-Thus:
-
-[
-\text{same formal choice}
-\not\Rightarrow
-\text{same practical choice}.
-]
-
-The difference lies in the state variable.
-
-That is why “equal opportunity to play” is meaningless without specifying the state space from which play begins.
-
----
-
-XXIII. Inheritance and the Transmission of Starting Conditions
-
-Wealth does not necessarily begin at zero for every new player.
-
-Cerulli Associates projects approximately $124 trillion of wealth transfers in the United States between 2024 and 2048, with more than half of the projected total originating from households classified as high-net-worth or ultra-high-net-worth, together representing approximately 2% of households.
-
-The significance is not that inheritance alone determines outcomes.
-
-It is that:
-
-[
-x_{0,\text{next generation}}
-]
-
-is partly produced by:
-
-[
-x_{T,\text{previous generation}}.
-]
-
-The supposed “new game” therefore begins with inherited state variables.
-
-Property, education, networks, health, geographic location, and financial resources can cross generational boundaries.
-
-The system contains memory.
-
-A genuine reset would require:
-
-[
-x_0^{(n+1)}
-
-x_{\text{common baseline}}.
-]
-
-Actual societies do not operate that way.
-
-The player enters an already running dynamical system.
-
----
-
-XXIV. Surveillance Capitalism: When Experience Becomes Training Data
-
-Shoshana Zuboff's concept of surveillance capitalism identifies another transformation: human behavior becomes an object of systematic extraction, prediction, and behavioral intervention.
-
-The generalized loop is:
-
-[
+$$
 \text{experience}
-\rightarrow
-\text{data}
-\rightarrow
-\text{prediction}
-\rightarrow
-\text{intervention}
-\rightarrow
-\text{new behavior}
-\rightarrow
-\text{new data}.
-]
-
-The important issue is not simply privacy.
-
-It is the transformation of the relationship between subject and system.
-
-The system observes:
-
-[
-x_t.
-]
-
-It predicts:
-
-[
-\hat{x}_{t+1}.
-]
-
-It modifies incentives:
-
-[
-u_t.
-]
-
-The subject changes:
-
-[
-x_{t+1}=F(x_t,u_t).
-]
-
-The resulting behavior is observed again.
-
-The measurement mechanism is now embedded inside the causal loop.
-
-This is the extreme form of the gamified order:
-
-[
-\boxed{
-\text{life becomes both the player and the training data for the scoreboard}.
-}
-]
-
----
-
-XXV. The Scoreboard Does Not Merely Measure Reality
-
-This allows the central structure to be stated more precisely.
-
-Let:
-
-[
-Q_t
-]
-
-be the underlying phenomenon.
-
-Let:
-
-[
-M_t=f(Q_t)
-]
-
-be the metric.
-
-Before optimization:
-
-[
-M_t
-]
-
-may correlate reasonably with:
-
-[
-Q_t.
-]
-
-After institutional targeting:
-
-[
-a_t
-
-\arg\max M_t,
-]
-
-and because a_t changes Q_{t+1},
-
-[
-Q_{t+1}=F(Q_t,a_t),
-]
-
-the metric becomes part of the mechanism producing future states.
-
-The system is now:
-
-[
-Q_t
-\rightarrow
-M_t
-\rightarrow
-a_t
-\rightarrow
-Q_{t+1}
-\rightarrow
-M_{t+1}.
-]
-
-Therefore the relationship between measure and reality is no longer passive.
-
-It is endogenous.
-
-That is why a metric can begin as a useful indicator and end as a source of distortion.
-
-The problem is not bad measurement alone.
-
-It is measurement inserted into a feedback loop.
-
----
-
-XXVI. The Deep Failure of “Merit”
-
-Once the system has been represented as a game, outcomes naturally become interpreted as rankings.
-
-The ranking then appears to reveal merit.
-
-But outcome is a function of many variables:
-
-[
-Y_i
-
-F(
-x_{0,i},
-a_i,
-I_i,
-P_i,
-N_i,
-\epsilon_i
-),
-]
-
-where:
-
-- x_{0,i} = initial state;
-- a_i = individual actions;
-- I_i = institutional environment;
-- P_i = power position;
-- N_i = network effects;
-- \epsilon_i = stochastic events.
-
-The equation does not eliminate individual agency.
-
-It places individual agency inside the actual causal system.
-
-The error is attributing:
-
-[
-Y_i
-]
-
-entirely to:
-
-[
-a_i.
-]
-
-That is mathematically indefensible unless the other variables are negligible.
-
-In highly structured environments, they obviously are not.
-
-The doctrine of universal optimization therefore performs a causal compression:
-
-[
-F(
-x_0,a,I,P,N,\epsilon
-)
 \longrightarrow
-a.
-]
+\text{data}
+\longrightarrow
+\text{prediction}
+\longrightarrow
+\text{intervention}
+\longrightarrow
+\text{new behavior}
+\longrightarrow
+\text{new data}.
+$$
 
-Everything else disappears.
+The system observes $x_t$, predicts $\widehat{x}_{t+1}$, selects an intervention $u_t$, and receives a new state
 
-Then the individual is blamed for the output of the compressed model.
+$$
+ x_{t+1}=F(x_t,u_t).
+$$
 
----
+The measurement mechanism is embedded in the causal loop. Life becomes both player and training data for the scoreboard.
 
-XXVII. The Moral Psychology of the Scoreboard
+## XXV. Why adding more metrics does not solve the problem
 
-This compression generates a distinctive psychological order.
+A common response to a defective scoreboard is to add more metrics:
 
-The individual learns to monitor:
+$$
+GDP+\text{well-being}+\text{health}+\text{biodiversity}.
+$$
 
-[
-\text{self}\rightarrow\text{score}.
-]
+A composite index then takes the form
 
-Then:
+$$
+S=\sum_{j=1}^{n} w_j M_j.
+$$
 
-[
-\text{score}\rightarrow\text{comparison}.
-]
+But scalarization returns immediately: who chooses the weights, what trade-offs do they encode, and which constraints should not be traded away? Some dimensions are preferences; others are thresholds or rights. Not everything important should become a number in the same optimization function.
 
-Then:
+$$
+\boxed{\text{Not everything important should become a commensurable score}.}
+$$
 
-[
-\text{comparison}\rightarrow\text{self-worth}.
-]
+## XXVI. From optimization to feasibility
 
-Then:
+A better architecture begins not with unconstrained maximization but with a feasible region:
 
-[
-\text{self-worth}\rightarrow\text{further optimization}.
-]
+$$
+ x\in\mathcal F,
+$$
 
-The loop is:
+where $\mathcal F$ is defined by hard constraints. For example,
 
-[
-\boxed{
-\text{metric}
-\rightarrow
-\text{comparison}
-\rightarrow
-\text{anxiety}
-\rightarrow
-\text{optimization}
-\rightarrow
-\text{metric}
-}.
-]
-
-The crucial philosophical consequence is that the person begins to experience themselves as a project whose legitimacy must constantly be demonstrated.
-
-Existence becomes a performance review.
-
-Time becomes an investment.
-
-Relationships become networking.
-
-Knowledge becomes credentials.
-
-Rest becomes recovery optimization.
-
-Exercise becomes quantified health management.
-
-Creativity becomes content production.
-
-Attention becomes a monetizable resource.
-
-Even rebellion can become a market niche.
-
-The game absorbs its own critics.
-
----
-
-XXVIII. Why Adding More Metrics Does Not Solve the Problem
-
-A common response is to replace one scoreboard with a better scoreboard.
-
-GDP becomes:
-
-[
-\text{GDP}+\text{well-being}.
-]
-
-Then:
-
-[
-+\text{happiness}.
-]
-
-Then:
-
-[
-+\text{health}.
-]
-
-Then:
-
-[
-+\text{biodiversity}.
-]
-
-Then a composite index is constructed:
-
-[
-S
-
-w_1M_1+
-w_2M_2+\cdots+w_nM_n.
-]
-
-The scalarization problem returns immediately.
-
-The question becomes:
-
-[
-\text{Who chose }w_1,\ldots,w_n?
-]
-
-What does one point of biodiversity mean relative to one point of housing security?
-
-What is the exchange rate between autonomy and GDP?
-
-What quantity of ecological damage is equivalent to one additional percentage point of growth?
-
-Some trade-offs are unavoidable.
-
-But some dimensions should not simply be folded into an aggregate score.
-
-A constraint can be categorically different from a preference.
-
-Hence:
-
-[
-\boxed{
-\text{not everything important should become a number in the same optimization function}.
-}
-]
-
----
-
-XXIX. From Optimization to Feasibility
-
-A better architecture begins not with:
-
-[
-\max W,
-]
-
-but with:
-
-[
-x\in\mathcal F,
-]
-
-where \mathcal F is the feasible region defined by hard constraints.
-
-For example:
-
-[
+$$
 K_{\text{ecological}}\ge K_{\min},
-]
-
-[
-H_{\text{essential}}
-\ge H_{\min},
-]
-
-[
-A_{\text{basic}}
-\ge A_{\min}.
-]
+\qquad
+H_{\text{essential}}\ge H_{\min},
+\qquad
+A_{\text{basic}}\ge A_{\min}.
+$$
 
 Only within that region should optimization occur:
 
-[
-\max W(x)
-\quad
-\text{subject to}
-\quad
-x\in\mathcal F.
-]
+$$
+\max_{x\in\mathcal F} W(x).
+$$
 
-This distinction matters because an optimization can select an outcome outside the domain required for the future existence of the system.
+If an optimizer is allowed to trade away the substrate required for future existence, it can produce a numerically optimal state that destroys the future feasible set. The system has optimized itself out of existence.
 
-If the optimizer is allowed to trade away its own substrate, it can produce a numerically optimal state that destroys the future feasible set.
+## XXVII. De-gamification
 
-The system has optimized itself out of existence.
+De-gamification does not mean abolishing measurement. It means reversing the hierarchy:
 
----
-
-XXX. De-Gamification
-
-De-gamification therefore does not mean abolishing measurement.
-
-It means reversing the hierarchy.
-
-Measurement becomes subordinate to reality.
-
-The sequence should be:
-
-[
+$$
+\boxed{
 \text{reality}
-\rightarrow
+\longrightarrow
 \text{model}
-\rightarrow
+\longrightarrow
 \text{measurement}
-\rightarrow
+\longrightarrow
 \text{decision}.
-]
+}
+$$
 
 Not:
 
-[
+$$
 \text{metric}
-\rightarrow
+\longrightarrow
 \text{institution}
-\rightarrow
+\longrightarrow
 \text{human}.
-]
+$$
 
-Several principles follow.
+Several principles follow:
 
-1. Preserve essential stocks
+1. Preserve essential stocks: natural capital, human capabilities, infrastructure, knowledge, and social capacity.
+2. Separate necessities from speculative claims. Shelter, water, nutrition, health care, education, and physical security do not have the same logical status as luxury consumption or asset appreciation.
+3. Make power variables explicit: bargaining power, exit, information, loss absorption, and control over the substrate.
+4. Treat collective production as genuinely collective without erasing individual contribution.
+5. Distinguish local from global optimization; prove equality rather than assuming it.
+6. Treat irreversibility as a first-class variable.
+7. Preserve plural objectives and rights instead of collapsing every value into a single score.
+8. Evaluate distributions and trajectories, not only aggregate flows.
 
-A civilization depends upon:
+## XXVIII. What Diogenes would do to the final scoreboard
 
-[
-\text{natural capital}
-+
-\text{human capabilities}
-+
-\text{infrastructure}
-+
-\text{knowledge}
-+
-\text{social capacity}.
-]
+The final Diogenean gesture is not destruction but disobedience toward the authority of the token. The modern person encounters salary, rank, followers, property, credentials, productivity, and visibility. The system says, “This is what you are worth.” Diogenes asks: according to whom?
 
-GDP is a flow.
+The system says, “This is what success looks like.” He asks: success at what?
 
-It cannot substitute for the balance sheet of civilization.
+The system says, “Everyone is competing.” He asks: who built the arena, who owns the substrate, and who began with what conditions?
 
-The World Bank's comprehensive-wealth framework provides an institutional example of precisely this shift from production flows toward underlying stocks.
+That questioning is not a refusal of reason. It is an insistence that the categories themselves remain available for examination.
 
-2. Separate necessities from speculative claims
+## XXIX. The fundamental proposition, formally stated
 
-Shelter, water, nutrition, healthcare, education, and physical security have a different logical status from luxury consumption or speculative assets.
+Let $x_t\in X$ be the state of a socio-economic system. Let actor $i$ choose
 
-The analysis should therefore distinguish:
+$$
+ a_i^\ast \in \arg\max_{a_i\in A_i(x_t)}J_i(x_t,a_i),
+$$
 
-[
-\text{necessity}
-]
+and let institutional metrics be
 
-from:
+$$
+ m_i=f_i(x_t).
+$$
 
-[
-\text{asset valuation}.
-]
+Assume that:
 
-Otherwise the price of access to a necessity can be mistaken for the intrinsic social importance of the asset.
-
-3. Make power variables explicit
-
-Every important institutional interaction should permit examination of:
-
-[
-P,E,I,R,S.
-]
-
-Power.
-
-Exit.
-
-Information.
-
-Risk capacity.
-
-Control over substrate.
-
-The analysis becomes more complicated.
-
-It also becomes more truthful.
-
-4. Treat collective production as genuinely collective
-
-Individual output is embedded in:
-
-[
-\text{language}
-+
-\text{education}
-+
-\text{infrastructure}
-+
-\text{science}
-+
-\text{law}
-+
-\text{prior labor}
-+
-\text{social cooperation}.
-]
-
-That does not make individual achievement unreal.
-
-It makes its production structurally intelligible.
-
-5. Distinguish local from global optimization
-
-Whenever a system contains interacting agents, ask:
-
-[
-\arg\max_iJ_i
-\stackrel{?}{=}
-\arg\max W.
-]
-
-Do not assume equality.
-
-Prove it.
-
-6. Treat irreversibility as a first-class variable
-
-A choice that can be reversed is not dynamically equivalent to one that permanently changes the state space.
-
-Therefore:
-
-[
-\text{reversibility}
-]
-
-must itself enter the analysis.
-
----
-
-XXXI. What Diogenes Would Do to the Final Scoreboard
-
-The final Diogenean gesture is not destruction.
-
-It is disobedience toward the authority of the token.
-
-The modern person encounters:
-
-[
-\text{salary},
-\text{rank},
-\text{followers},
-\text{property},
-\text{credentials},
-\text{productivity},
-\text{visibility}.
-]
-
-The system says:
-
-«This is what you are worth.»
-
-Diogenes asks:
-
-[
-\text{according to whom?}
-]
-
-The system says:
-
-«This is what success looks like.»
-
-Diogenes asks:
-
-[
-\text{success at what?}
-]
-
-The system says:
-
-«Everyone is competing.»
-
-Diogenes asks:
-
-[
-\text{who built the arena?}
-]
-
-The system says:
-
-«Everyone has the same opportunity to optimize.»
-
-Diogenes asks:
-
-[
-\text{with what starting conditions?}
-]
-
-The system says:
-
-«The market neutrally rewards performance.»
-
-Diogenes asks:
-
-[
-\text{who owns the substrate on which the performance occurs?}
-]
-
-That questioning is not a refusal of reason.
-
-It is an insistence that the categories themselves remain available for examination.
-
----
-
-XXXII. The Real Meaning of “Neutrality”
-
-The word “neutrality” deserves one final operation.
-
-There is a false conception of neutrality:
-
-[
-N_{\text{false}}
-
-\text{assign equal descriptive status to all sides}.
-]
-
-A better conception is:
-
-[
-N_{\text{analytic}}
-
-\text{preserve the variables necessary to explain the phenomenon}.
-]
-
-Suppose:
-
-[
-P_A=100
-]
-
-and:
-
-[
-P_B=1.
-]
-
-A model that replaces both with:
-
-[
-P_A=P_B=1
-]
-
-may look symmetrical.
-
-It is not neutral.
-
-It has deleted a causal variable.
-
-Likewise, when an analysis describes:
-
-[
-\text{owner}
-\leftrightarrow
-\text{dependent}
-]
-
-without recording ownership, dependence, exit costs, or bargaining power, it has not escaped ideology.
-
-It has hidden structure.
-
-Therefore:
-
-[
-\boxed{
-\text{false symmetry is not neutrality; it is model error}.
-}
-]
-
-This is the precise sense in which symmetrism matters.
-
-It is not a complaint that every conflict must have one morally pure side.
-
-It is a demand that asymmetry be represented when asymmetry is causally real.
-
-A good model does not equalize variables because equality looks fair.
-
-It preserves them because they exist.
-
----
-
-XXXIII. The Fundamental Proposition
-
-The entire argument can now be stated formally.
-
-Let:
-
-[
-x_t\in X
-]
-
-be the state of a socio-economic system.
-
-Let each actor i optimize:
-
-[
-a_i^\ast
-
-\arg\max_{a_i}
-J_i(x_t,a_i).
-]
-
-Let institutional metrics be:
-
-[
-m_i=f_i(x_t).
-]
-
-Suppose:
-
-1. the metrics are incomplete representations of the underlying state;
-2. agents can alter the relationship between metric and reality;
+1. metrics are incomplete representations of the underlying state;
+2. agents can alter the relationship between metrics and reality;
 3. actions generate externalities;
 4. initial states are unequal;
 5. some agents control resources or rules affecting others;
 6. the state contains irreversible or slowly reversible variables;
-7. different actors possess different objectives;
-8. the environment itself changes in response to aggregate behavior.
+7. actors possess different objectives; and
+8. the environment changes in response to aggregate behavior.
 
-Then:
+Then there is no general implication that
 
-[
-\boxed{
-{a_i^\ast}_{i=1}^{N}
-\not\Rightarrow
-\arg\max_xW(x).
-}
-]
+$$
+(a_1^\ast,\ldots,a_N^\ast)\in\arg\max_{a}W(x(a)).
+$$
 
-No contradiction in formal logic is required.
+No contradiction in formal logic is required. No evil player, stupid player, or dishonest player is required. The architecture itself is sufficient. Local rationality can coexist with global irrationality.
 
-The system can be perfectly rational locally and irrational globally.
-
-No evil player is required.
-
-No stupid player is required.
-
-No dishonest player is required.
-
-The architecture itself is sufficient.
-
-That is the deepest lesson of Goodhart, Campbell, Braess, Arrow, non-ergodic dynamics, and the theory of distributed optimization.
-
----
-
-XXXIV. The Final Reversal
+## XXX. Final reversal
 
 The gamified worldview begins with:
 
-[
-\text{reality}
-\rightarrow
-\text{game}.
-]
+$$
+\text{reality}\longrightarrow\text{game}\longrightarrow\text{players}\longrightarrow\text{strategies}\longrightarrow\text{scores}\longrightarrow\text{merit}.
+$$
 
-Then:
+The analysis must reverse that direction:
 
-[
-\text{game}
-\rightarrow
-\text{players}.
-]
+$$
+\boxed{\text{merit}\not\equiv\text{score}},
+$$
 
-Then:
+$$
+\boxed{\text{score}\not\equiv\text{reality}},
+$$
 
-[
-\text{players}
-\rightarrow
-\text{strategies}.
-]
+$$
+\boxed{\text{strategy}\not\equiv\text{causal explanation}},
+$$
 
-Then:
+and
 
-[
-\text{strategies}
-\rightarrow
-\text{scores}.
-]
+$$
+\boxed{\text{player}\not\equiv\text{complete description of a human being}.}
+$$
 
-Then:
+A market transaction is not automatically a symmetric power relation. GDP growth is not automatically wealth accumulation. Local rationality is not global rationality. Formal choice is not equal practical freedom. A flow is not a stock. A claim is not the thing claimed. A metric is not reality. A game is not existence.
 
-[
-\text{scores}
-\rightarrow
-\text{merit}.
-]
+## Conclusion: from the player back to the world
 
-And finally:
+The deepest error of gamification is not competition. Competition can be beautiful when voluntary: sport, chess, mathematics, argument, and play can make deliberately accepted difficulty meaningful.
 
-[
-\text{merit}
-\rightarrow
-\text{moral worth}.
-]
+The error begins when that structure is exported from voluntary play into existence itself. Survival is not a game. A human being does not choose their initial state. An ecosystem does not consent to an objective function imposed upon it. A worker does not define the complete set of alternatives available to them. A tenant does not determine whether shelter is scarce. A person cannot reset ten years of lost time. An aquifer cannot renegotiate its recharge rate. A forest cannot improve its return on investment. A child cannot optimize the inheritance into which they are born.
 
-The whole chain can therefore be inverted:
+When unequal actors are represented as equal players, power disappears. When power disappears, structure disappears. When structure disappears, outcomes become personal strategy. When outcomes become personal strategy, failure becomes personal fault. When personal fault becomes the universal explanation, the system itself becomes invisible.
 
-[
-\boxed{
-\text{moral worth}
-\neq
-\text{score}
-}
-]
+The antidote is not another scoreboard. It is a reversal of analysis:
 
-[
-\boxed{
-\text{score}
-\neq
-\text{reality}
-}
-]
+$$
+\boxed{\text{from players to systems}},
+$$
 
-[
-\boxed{
-\text{strategy}
-\neq
-\text{causal explanation of outcome}
-}
-]
+$$
+\boxed{\text{from scores to states}},
+$$
 
-[
-\boxed{
-\text{player}
-\neq
-\text{complete description of human being}
-}
-]
+$$
+\boxed{\text{from proxies to realities}},
+$$
 
-[
-\boxed{
-\text{market transaction}
-\neq
-\text{symmetrical power relation}
-}
-]
+$$
+\boxed{\text{from flows to stocks}},
+$$
 
-[
-\boxed{
-\text{GDP growth}
-\neq
-\text{wealth accumulation}
-}
-]
+$$
+\boxed{\text{from isolated production to collective force}},
+$$
 
-[
-\boxed{
-\text{local rationality}
-\neq
-\text{global rationality}
-}
-]
+$$
+\boxed{\text{from formal equality to actual power}},
+$$
 
-[
-\boxed{
-\text{formal choice}
-\neq
-\text{equal practical freedom}
-}
-]
+$$
+\boxed{\text{from local optimization to system dynamics}},
+$$
 
-And therefore:
+$$
+\boxed{\text{from reversible games to irreversible history}},
+$$
 
-[
-\boxed{
-\text{life is not a scoreboard}.
-}
-]
+and finally,
+
+$$
+\boxed{\text{from the scoreboard back to the world}.}
+$$
+
+Diogenes’ lantern is useful because it asks the question the scoreboard cannot answer: **what remains when artificial valuation is removed?** That is the point at which the game ends and the world begins.
 
 ---
 
-Conclusion: From the Player Back to the World
+## Selected references
 
-The deepest error of gamification is not competition.
-
-Competition can be beautiful when it is voluntary.
-
-A sport can be beautiful.
-
-Chess can be beautiful.
-
-A mathematical contest can be beautiful.
-
-An argument can be beautiful.
-
-A game can deliberately manufacture unnecessary difficulty and make that difficulty meaningful.
-
-The error begins when this structure is exported from voluntary play into the domain of existence itself.
-
-Survival is not a game.
-
-A human being does not choose their initial state.
-
-An ecosystem does not consent to the objective function imposed upon it.
-
-A worker does not define the complete set of alternatives available to them.
-
-A tenant does not determine whether shelter is scarce.
-
-A person cannot reset ten years of lost time.
-
-An aquifer cannot renegotiate its recharge rate.
-
-A forest cannot improve its KPI.
-
-A child cannot optimize the inheritance into which they are born.
-
-A platform worker may formally choose among employers while remaining materially dependent upon the sale of labor.
-
-An asset owner may profit from rising housing prices while a prospective resident experiences the same rise as an increased barrier to entry.
-
-Neither perspective should be erased.
-
-The task of analysis is to preserve the asymmetry and understand the system.
-
-That is why the concept of symmetrism is central.
-
-When unequal actors are represented as equal players, power disappears.
-
-When power disappears, structure disappears.
-
-When structure disappears, outcome becomes personal strategy.
-
-When outcome becomes personal strategy, failure becomes personal fault.
-
-And when personal fault becomes the universal explanation, the system itself becomes invisible.
-
-The antidote is not another scoreboard.
-
-It is a reversal of the entire direction of analysis:
-
-[
-\boxed{
-\text{from players to systems}
-}
-]
-
-[
-\boxed{
-\text{from scores to states}
-}
-]
-
-[
-\boxed{
-\text{from proxies to realities}
-}
-]
-
-[
-\boxed{
-\text{from flows to stocks}
-}
-]
-
-[
-\boxed{
-\text{from isolated production to collective force}
-}
-]
-
-[
-\boxed{
-\text{from formal equality to actual power}
-}
-]
-
-[
-\boxed{
-\text{from local optimization to system dynamics}
-}
-]
-
-[
-\boxed{
-\text{from reversible games to irreversible history}
-}
-]
-
-[
-\boxed{
-\text{from infinite abstraction to finite material substrate}
-}
-]
-
-and finally:
-
-[
-\boxed{
-\text{from the scoreboard back to the world}.
-}
-]
-
-Diogenes' lantern is useful precisely because it asks the question the scoreboard cannot answer:
-
-«What remains when the artificial valuation is removed?»
-
-That is the point at which the game ends.
-
-And the world begins.
-
-Selected References
-
-1. Bernard Suits, The Grasshopper: Games, Life and Utopia, 1978. Suits' central formulation treats game-playing as the voluntary attempt to overcome unnecessary obstacles.
-
-2. Charles Goodhart, “Problems of Monetary Management: The U.K. Experience,” 1975/1977; subsequent literature generalized the observation into what became known as Goodhart's law.
-
-3. Donald T. Campbell, “Assessing the Impact of Planned Social Change,” 1976, introducing the argument now widely summarized as Campbell's law. A useful review of the relationship between Campbell's and Goodhart's laws is available here.
-
-4. Pierre-Joseph Proudhon, Qu'est-ce que la propriété? (What Is Property?), 1840, particularly the discussion of collective force.
-
-5. Pierre Bourdieu, Language and Symbolic Power, 1991; Practical Reason, 1998.
-
-6. Thomas Piketty, Capital in the Twenty-First Century, 2014, especially the distinction between the r-g mechanism and a deterministic theory of permanently rising inequality.
-
-7. Hassler Whitney, “On the Abstract Properties of Linear Dependence,” American Journal of Mathematics, 1935.
-
-8. Kenneth J. Arrow, Social Choice and Individual Values, 1951. Arrow's theorem concerns the incompatibility of specified conditions for preference aggregation, not the impossibility of collective decision-making as such.
-
-9. Dietrich Braess, “Über ein Paradoxon aus der Verkehrsplanung,” Unternehmensforschung, 1968; the paradox is a canonical example of divergence between individually optimal routing and system-optimal routing.
-
-10. Ole Peters, “The Ergodicity Problem in Economics,” Nature Physics 15, 1216–1221 (2019).
-
-11. Shoshana Zuboff, The Age of Surveillance Capitalism, 2019.
-
-12. World Bank, The Changing Wealth of Nations 2024. The framework explicitly complements GDP with comprehensive wealth and emphasizes produced, human, natural, and financial assets and the importance of real wealth per capita for sustainability.
-
-13. World Inequality Lab, World Inequality Report 2026. The report's 2025 estimates put the top 10% at roughly three-quarters of global personal wealth and the bottom 50% at roughly 2%; it also estimates that the top 0.001%—about 56,000 adults—held roughly three times the wealth of the world's bottom half combined.
+1. Bernard Suits, *The Grasshopper: Games, Life and Utopia* (1978).
+2. Charles Goodhart, “Problems of Monetary Management: The U.K. Experience” (1975/1977).
+3. Donald T. Campbell, “Assessing the Impact of Planned Social Change” (1976).
+4. Pierre-Joseph Proudhon, *Qu’est-ce que la propriété?* (1840).
+5. Pierre Bourdieu, *Language and Symbolic Power* (1991); *Practical Reason* (1998).
+6. Thomas Piketty, *Capital in the Twenty-First Century* (2014).
+7. Hassler Whitney, “On the Abstract Properties of Linear Dependence” (1935).
+8. Kenneth J. Arrow, *Social Choice and Individual Values* (1951).
+9. Dietrich Braess, “Über ein Paradoxon aus der Verkehrsplanung” (1968).
+10. Ole Peters, “The Ergodicity Problem in Economics,” *Nature Physics* 15 (2019): 1218–1221.
+11. Shoshana Zuboff, *The Age of Surveillance Capitalism* (2019).
+12. World Bank, *The Changing Wealth of Nations 2024*.
+13. World Inequality Lab, *World Inequality Report 2026*.
